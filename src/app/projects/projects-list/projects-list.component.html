@@ -1,3 +1,9 @@
 <p>
   projects-list works!
 </p>
+
+<div>
+  {{ (projects | async)?.name }}
+</div>
+
+<div *ngFor="let key of (projects | async)"><a [routerLink]="['/projects', key._id]">Link</a>{{key.name}}</div>

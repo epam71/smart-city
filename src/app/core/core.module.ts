@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
 
 import { AuthServiceService } from './auth-service/auth-service.service';
 import { ContactServiceService } from './contact-service/contact-service.service';
@@ -9,7 +10,8 @@ import { UserServiceService } from './user-service/user-service.service';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    HttpModule
   ],
   declarations: [],
   providers: [
