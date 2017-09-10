@@ -5,11 +5,16 @@ import { ProjectsListComponent } from './projects-list/projects-list.component';
 
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ProjectAddComponent } from "./project-add/project-add.component";
 
 const routes: Routes = [
     {
-        path: 'myproject',
+        path: 'myprojects',
         component: MyProjectsComponent
+    },
+    {
+        path: 'new',
+        component: ProjectAddComponent
     },
     {
         path: ':id',

@@ -1,3 +1,9 @@
-<p>
-  project works!
-</p>
+<div class="container">
+    <p>
+        <a routerLink="/projects">back to projects</a>
+    </p>
+<div class="row">
+    Project name is {{(project | async)?.name }}
+</div>
+<a [routerLink]="['edit']">edit</a>
+</div>

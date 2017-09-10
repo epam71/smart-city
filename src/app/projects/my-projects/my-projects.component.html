@@ -1,3 +1,38 @@
-<p>
-  my-projects works!
-</p>
+<div class="container projects_block_main">
+    <div class="nav_block">
+      <ul class="nav nav-tabs">
+        <li role="presentatiom" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/projects">Home</a></li>
+        <li role="presentatiom" routerLinkActive="active"><a [routerLink]="['/projects/new']">Add project</a></li>
+        
+      </ul>
+    </div>
+    <div class="projects_block">
+      <div class="row">
+        <div class="col-md-4 col-sm-4">
+          <div class="project_block">
+            <div class="img_block">
+              <img src="" alt="">
+            </div>
+            <div class="project_name"></div>
+            <div class="project_desc"></div>
+            <div class="project_footer">
+              <div class="likes_block"></div>
+              <div class="category_block"></div>
+              <div class="my_project"></div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  
+    <div>
+      {{ (myProjects | async)?.name }}
+    </div>
+  
+    <div *ngFor="let key of (myProjects | async)">
+      <a [routerLink]="['/projects', key._id]">Link</a>
+      {{key.name}}
+      <a [routerLink]="['/projects', key._id, 'edit']">edit</a>
+    </div>
+  
