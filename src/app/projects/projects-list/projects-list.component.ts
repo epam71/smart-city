@@ -18,8 +18,8 @@ export class ProjectsListComponent implements OnInit {
     this.projectsData.getProjects()
     .subscribe(
           (response) => {
-            this.projects = response;
             console.log(this.projects);
+            return this.projects = response;
           },
           (error) => {
             console.log(error);

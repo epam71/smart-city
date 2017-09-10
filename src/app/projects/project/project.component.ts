@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from "rxjs/Subscription";
 import { ProjectServiceService } from "../../core/project-service/project-service.service";
 
 @Component({
@@ -14,13 +15,13 @@ export class ProjectComponent implements OnInit {
   tempId;
 
 
-  constructor(private ar: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
     private projectData: ProjectServiceService) {
 
-ar.params.subscribe( param => {
-this.tempId = param;
-});
-}
+    route.params.subscribe(param => {
+      this.tempId = param;
+    });
+  }
 
 
   // getProject(id){
@@ -36,9 +37,10 @@ this.tempId = param;
   //   )
   // }
 
-  ngOnInit() {
+  ngOnInit(): void {
     console.log(this.tempId.id);
     this.project = this.projectData.getProject(this.tempId.id);
+    console.log(this.project);
   }
 
 }

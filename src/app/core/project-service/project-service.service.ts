@@ -37,4 +37,46 @@ getProject(id): Observable<any> {
       });
 };
 
+postProject(project: any): Observable<any> {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    return this._http.post('https://cool-6d724.firebaseio.com/data.json', project, {headers: headers})
+    .map((response: Response) => {
+        console.log(response.json())
+        return <any>response.json();
+    })
+    .catch(error => {
+        console.log(error)
+        return error;
+    });
+};
+
+
+
+
+putProject(id, projectEdit): Observable<any> {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    return this._http.put('https://smart-city-lviv.herokuapp.com/api/users/' + id, projectEdit, {headers: headers})
+    .map((response: Response) => {
+        console.log(response.json())
+        return <any>response.json();
+    })
+    .catch(error => {
+        console.log(error)
+        return error;
+    });
+};
+
+deleteProject(id: number): Observable<any> {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    return this._http.delete('https://cool-6d724.firebaseio.com/data/data/' + id, {headers: headers})
+    .map((response: Response) => {
+        console.log(response.json())
+        return <any>response.json();
+    })
+    .catch(error => {
+        console.log(error);
+        return error;
+    });
+};
+
 }

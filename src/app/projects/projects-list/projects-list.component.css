@@ -1,0 +1,13 @@
+.projects_block_main {
+
+}
+
+.projects_block {
+
+}
+
+.project_block {
+    margin: 5px;
+    height: 100px;
+    background: red;
+}
