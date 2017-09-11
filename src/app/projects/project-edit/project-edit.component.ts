@@ -2,16 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectServiceService } from "../../core/project-service/project-service.service";
 import { Router } from '@angular/router';
+import { Project } from "../models/project.model";
 
-class Project{
+// class Project{
   
-    constructor(public projectName: string, public image: string, 
-                public shortDesc: any, public fullDesc: any,
-                public type: boolean, 
-                public budget: any, public approved: boolean = false) {
+//     constructor(public projectName: string, public image: string, 
+//                 public shortDesc: any, public fullDesc: any,
+//                 public goals: any, public result: any, public involved: any,
+//                 public type: boolean, 
+//                 public budget: any, public approved: boolean = false) {
   
-    }
-  }
+//     }
+//   }
 
 
 @Component({
@@ -32,9 +34,12 @@ export class ProjectEditComponent implements OnInit {
 
   }
 
-    editProject(event, projectName, linkImg, shortDesc, fullDesc, type, budget){
+    editProject(event, projectName, linkImg, shortDesc, fullDesc, goals, result, involved, budget, type){
       event.preventDefault();
-      let projectTemp: Project = new Project(projectName.value, linkImg.value, shortDesc.value, fullDesc.value, type.value, budget.value);
+      let projectTemp: Project = new Project(
+        projectName.value, linkImg.value, shortDesc.value, 
+        fullDesc.value, goals.value, result.value, involved.value, type.value, budget.value);
+
       let mock = {name: projectName.value}
 
       this.putProject.putProject(this.tempId.id, mock)
@@ -50,7 +55,9 @@ export class ProjectEditComponent implements OnInit {
     }
 
   ngOnInit() {
+    console.log(this.putProject.getProject(this.tempId.id));
     console.log(this.tempId.id);
+    this.project = this.putProject.getProject(this.tempId.id);
   }
 
 }

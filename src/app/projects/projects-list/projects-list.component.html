@@ -9,26 +9,43 @@
 
   <div class="projects_block">
     <div class="row">
-      <div class="col-md-4 col-sm-4">
+      <div class="col-md-4" *ngFor="let key of (projects | async)">
+
         <div class="project_block">
-          <div class="img_block">
-            <img src="" alt="">
-          </div>
-          <div class="project_name"></div>
-          <div class="project_desc"></div>
+          <a [routerLink]="['/projects', key._id]">
+            <div class="img_block">
+              <img src="http://arenalviv.com.ua/uploads/images/pages/461/750/img_7467small.jpg" alt="">
+            </div>
+            <div class="project_name">
+              {{key.projectName | uppercase}}
+            </div>
+            <!-- <a [routerLink]="['/projects', key._id, 'edit']">edit</a> -->
+            <div class="project_desc">{{ key.shortDesc }}</div>
+          </a>
           <div class="project_footer">
-            <div class="likes_block"></div>
-            <div class="category_block"></div>
-            <div class="my_project"></div>
+            <div class="row">
+              <div class="col-md-4">
+              <div class="likes_block">
+                <rating [ratingObj]="key"></rating>
+                <!-- <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" (click)="changeRating(key._id)">{{tempRating}}</span> -->
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="category_block">
+                <span>INFRASTRUCTURE</span>
+              </div>
+            </div>
+            </div>
           </div>
         </div>
+
       </div>
 
     </div>
   </div>
 
 
-  <div>
+  <!-- <div>
     {{ (projects | async)?.name }}
   </div>
 
@@ -36,4 +53,4 @@
     <a [routerLink]="['/projects', key._id]">Link</a>
     {{key.name}}
     <a [routerLink]="['/projects', key._id, 'edit']">edit</a>
-  </div>
+  </div> -->

@@ -1,0 +1,45 @@
+.project_block_main{
+
+}
+
+.project_block{
+/* background: red; */
+}
+
+.edit_block{
+
+}
+
+.img_block{
+    margin: auto;
+    text-align: center;
+    /* position: relative; */
+    /* background: red; */
+    /* padding: 0 0 calc(5/345*100%); */
+    /* padding: 0 0 calc(23/34*100%); */
+}
+
+.img_block img{
+    /* position: absolute; */
+    max-width: 100%;
+}
+
+.project_name{
+    text-align: center;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.project_info{
+    margin-bottom: 10px;
+
+}
+
+.article_header{
+    padding-left: 20px;
+    font-size: 20px;
+}
+
+.project_desc{
+    color: #777777;
+}
