@@ -9,27 +9,47 @@ import { ProjectServiceService } from "../../core/project-service/project-servic
 export class ProjectsListComponent implements OnInit {
 
   projects;
+  // rating;
 
   constructor(private projectsData: ProjectServiceService) {
 
   }
 
-  getProjects(){
-    this.projectsData.getProjects()
-    .subscribe(
-          (response) => {
-            console.log(this.projects);
-            return this.projects = response;
-          },
-          (error) => {
-            console.log(error);
-          }
-        )
-        console.log('test');
-  }
+  // tempRating = 2;
+
+  // getProjects(){
+  //   this.projectsData.getProjects()
+  //   .subscribe(
+  //         (response) => {
+  //           console.log(this.projects);
+  //           return this.projects = response;
+  //         },
+  //         (error) => {
+  //           console.log(error);
+  //         }
+  //       )
+  //       console.log('test');
+  // }
+
+  // changeRating(id){
+  //   this.tempRating++;
+  //   console.log(id);
+  //   // this.projectsData.putProject(id, number)
+  //   // .subscribe(
+  //   //   (response) => {
+  //   //     console.log(this.rating);
+  //   //     return this.rating = response;
+  //   //   },
+  //   //   (error) => {
+  //   //     console.log(error);
+  //   //   }
+  //   // )
+  //   console.log('test');
+  // }
 
   ngOnInit() {
     this.projects = this.projectsData.getProjects();
+    // this.rating = this.projectsData.getProjects();
   }
 
 }

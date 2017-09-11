@@ -14,7 +14,7 @@ export class ProjectServiceService {
   }
 
   getProjects(): Observable<any> {
-    return this._http.get('https://smart-city-lviv.herokuapp.com/api/users/')
+    return this._http.get('https://smart-city-lviv.herokuapp.com/api/projects')
         .map((response: Response) => {
             console.log('sadsafsa');
             console.log(response.json());
@@ -39,7 +39,7 @@ getProject(id): Observable<any> {
 
 postProject(project: any): Observable<any> {
     const headers = new Headers({'Content-Type': 'application/json'});
-    return this._http.post('https://cool-6d724.firebaseio.com/data.json', project, {headers: headers})
+    return this._http.post('https://smart-city-lviv.herokuapp.com/api/projects', project, {headers: headers})
     .map((response: Response) => {
         console.log(response.json())
         return <any>response.json();
@@ -55,7 +55,7 @@ postProject(project: any): Observable<any> {
 
 putProject(id, projectEdit): Observable<any> {
     const headers = new Headers({'Content-Type': 'application/json'});
-    return this._http.put('https://smart-city-lviv.herokuapp.com/api/users/' + id, projectEdit, {headers: headers})
+    return this._http.put('https://smart-city-lviv.herokuapp.com/api/projects/' + id, projectEdit, {headers: headers})
     .map((response: Response) => {
         console.log(response.json())
         return <any>response.json();
@@ -68,7 +68,7 @@ putProject(id, projectEdit): Observable<any> {
 
 deleteProject(id: number): Observable<any> {
     const headers = new Headers({'Content-Type': 'application/json'});
-    return this._http.delete('https://cool-6d724.firebaseio.com/data/data/' + id, {headers: headers})
+    return this._http.delete('https://smart-city-lviv.herokuapp.com/api/projects/' + id, {headers: headers})
     .map((response: Response) => {
         console.log(response.json())
         return <any>response.json();
