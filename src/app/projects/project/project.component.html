@@ -1,4 +1,4 @@
-<div class="container">
+
   <p>
     <a routerLink="/projects">back to projects</a>
   </p>
@@ -14,7 +14,8 @@
           <img src="http://arenalviv.com.ua/uploads/images/pages/461/750/img_7467small.jpg" alt="">
         </div>
         <div class="project_name">
-            {{ (project | async)?.name | uppercase }}
+            {{ (project | async)?.projectName | uppercase }}
+            <!-- {{ project?.projectName | uppercase }} -->
           </div>
         <!-- <a [routerLink]="['/projects', key._id, 'edit']">edit</a> -->
         <section class="project_info">
@@ -74,7 +75,9 @@
           <div class="row">
             <div class="col-md-4">
               <div class="likes_block">
-                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                  
+                  <!-- <rating [ratingObj]="project" ></rating> -->
+                <rating [ratingObj]="(project | async)" ></rating>
               </div>
             </div>
             <div class="col-md-8">
@@ -86,14 +89,6 @@
         </div>
       </div>
   </div>
-
-
-  <!-- <div>
-          {{ (projects | async)?.name }}
-        </div>
-      
-        <div *ngFor="let key of (projects | async)">
-          <a [routerLink]="['/projects', key._id]">Link</a>
-          {{key.name}}
-          <a [routerLink]="['/projects', key._id, 'edit']">edit</a>
-        </div> -->
+  <comments [commentsObj]="(project | async)?.comments">Comments loading...</comments>
+  </div>
+  

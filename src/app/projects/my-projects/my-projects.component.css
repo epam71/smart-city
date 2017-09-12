@@ -1,0 +1,73 @@
+:host a{
+    color: #777777;
+    text-decoration: none;
+}
+
+:host a:hover{
+
+}
+
+.projects_block_main {
+
+}
+
+.projects_block {
+padding: 50px;
+}
+
+.project_block {
+    margin-bottom: 10px;
+    padding: 10px;
+    text-align: center;
+    /* background: red; */
+    border: 1px solid #ccc;
+}
+
+.img_block{
+    /* position: relative; */
+    /* background: red; */
+    padding: 0 0 calc(5/345*100%);
+    /* padding: 0 0 calc(230/345*100%); */
+}
+
+.img_block img{
+    /* position: absolute; */
+    max-width: 100%;
+}
+
+.project_name{
+    color: black;
+    font-weight: 700;
+}
+
+.project_desc {
+}
+
+.project_footer {
+    margin-top: 10px;
+    padding-top: 5px;
+    padding: 5px 5px 0 10px;
+    margin-bottom: -5px;
+    border-top: 1px solid #ccc;
+}
+
+.likes_block{
+text-align: left;
+}
+
+.likes_block span{
+    padding: 5px;
+text-align: left;
+}
+
+.category_block{
+    padding-top: 5px;
+    font-size: 11px;
+text-align: right;
+}
+
+.category_block span {
+    color: white;
+    padding: 3px;
+    background: #cc2d00;
+}
