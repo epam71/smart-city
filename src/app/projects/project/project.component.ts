@@ -38,9 +38,12 @@ export class ProjectComponent implements OnInit {
   // }
 
   ngOnInit(): void {
-    console.log(this.tempId.id);
+
+
+    // console.log(this.tempId.id);
     this.project = this.projectData.getProject(this.tempId.id);
-    console.log(this.project);
+    
+  
   }
 
 }
