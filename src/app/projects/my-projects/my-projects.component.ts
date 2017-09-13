@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectServiceService } from "../../core/project-service/project-service.service";
+import { AuthService } from "../../core/auth-service/auth-service.service";
 
 @Component({
   selector: 'app-my-projects',
@@ -10,7 +11,8 @@ export class MyProjectsComponent implements OnInit {
 
   myProjects;
 
-  constructor(private myProjectsData: ProjectServiceService) { }
+  constructor(private myProjectsData: ProjectServiceService,
+              private authService: AuthService) { }
 
   // getProjects(){
   //   this.myProjectsData.getProjects()
@@ -28,6 +30,8 @@ export class MyProjectsComponent implements OnInit {
 
   ngOnInit() {
     this.myProjects = this.myProjectsData.getProjects();
+    console.log(this.authService.getNickname());
+    this.authService.handleAuthentication();
   }
 
 }
