@@ -5,6 +5,8 @@ import { NewsEditComponent } from './news-edit/news-edit.component';
 import { NewsListComponent } from './news-list/news-list.component';
 import { ProjectsListComponent } from './projects-list/projects-list.component';
 import { routing } from './admin.routes';
+import { FilterApprovalPipe } from "../pipes/filter-approval.pipe";
+import { ProjectsEditComponent } from './projects-edit/projects-edit.component';
 
 
 @NgModule({
@@ -12,6 +14,6 @@ import { routing } from './admin.routes';
     CommonModule,
     routing
   ],
-  declarations: [ContactsListComponent, NewsListComponent, NewsEditComponent, ProjectsListComponent]
+  declarations: [ContactsListComponent, NewsListComponent, NewsEditComponent, ProjectsListComponent, FilterApprovalPipe, ProjectsEditComponent]
 })
 export class AdminModule { }

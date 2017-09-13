@@ -1,0 +1,15 @@
+img {
+    max-width: 600px;
+}
+
+ul {
+    list-style: none;
+}
+
+.main-content {
+    margin-top: 20px;
+}
+
+.pending-projects, .active-projects {
+    width: 250px;
+}

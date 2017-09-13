@@ -1,3 +1,45 @@
-<p>
-  projects-list works!
-</p>
+<div class="container-fluid projects_block_main">
+   <div class="nav_block">
+      <ul class="nav nav-tabs">
+         <li role="presentatiom" routerLinkActive="active"><a routerLink="/admin/projects">Home</a></li>
+         <li role="presentatiom" routerLinkActive="active"><a routerLink="/admin/contacts">Messages</a></li>
+         <li role="presentatiom" routerLinkActive="active"><a routerLink="/admin/news">News</a></li>
+         <li role="presentatiom"><a routerLink="/">Main page</a></li>
+      </ul>
+   </div>
+
+   <div class="row main-content">
+      <div class=" col-sm-5 description_block">
+         <button class="btn btn-sm btn-outline-primary active-projects">Active projects</button>
+         <ul>
+            <li *ngFor="let key of (projects | async) | filterApproval:true" class="project_block">
+               <a [routerLink]="['/admin/projects', key._id]">
+               <span class="project_name">
+               {{key.projectName}}
+               </span>
+               </a>
+            </li>
+         </ul>
+         <button class="btn btn-sm btn-outline-primary pending-projects">Pending approval</button>
+         <ul>
+            <li *ngFor="let key of (projects | async) | filterApproval:false" class="project_block">
+               <a [routerLink]="['/admin/projects', key._id]">
+               <span class="project_name">
+               {{key.projectName}}
+               </span>
+               </a>
+            </li>
+         </ul>
+      </div>
+      
+<div class="container col-sm-5" *ngIf="router.url === '/admin/projects'">
+  <img class="img-fluid" src="https://www.petfinder.com/wp-content/uploads/2012/11/91615172-find-a-lump-on-cats-skin-632x475.jpg">
+  <div class="welcome">
+    <h3>Welcome to Admin Panel!</h3>
+    <p>Here you can edit and approve projects or news</p>
+  </div> 
+</div>
+      
+      <router-outlet></router-outlet>
+   </div>
+</div>

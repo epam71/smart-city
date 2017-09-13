@@ -4,37 +4,40 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import { Subject } from 'rxjs/Subject';
+
+
 
 @Injectable()
 export class ProjectServiceService {
   _http;
+  test: Subject <string> = new Subject <string>();
 
   constructor(private http: Http) {
     this._http = http;
   }
 
-  getProjects(): Observable<any> {
+private handlError(error: Response){
+    let message = `Error status ${error.status} at ${error.url}`;
+    return Observable.throw(message);
+}
+
+getProjects(): Observable<any> {
     return this._http.get('https://smart-city-lviv.herokuapp.com/api/projects')
         .map((response: Response) => {
             console.log('sadsafsa');
             console.log(response.json());
             return response.json();
-        }).catch(error => {
-            console.log(error)
-            return error;
-        });
+        }).catch(this.handlError);
 };
 
 getProject(id): Observable<any> {
-  return this._http.get('https://smart-city-lviv.herokuapp.com/api/users/'+id)
+  return this._http.get('https://smart-city-lviv.herokuapp.com/api/projects/'+id)
       .map((response: Response) => {
           console.log('sadsafsa');
           console.log(response.json());
           return response.json();
-      }).catch(error => {
-          console.log(error)
-          return error;
-      });
+      }).catch(this.handlError);
 };
 
 postProject(project: any): Observable<any> {
@@ -43,11 +46,8 @@ postProject(project: any): Observable<any> {
     .map((response: Response) => {
         console.log(response.json())
         return <any>response.json();
-    })
-    .catch(error => {
-        console.log(error)
-        return error;
-    });
+    }).do(response => console.log(response))
+    .catch(this.handlError);
 };
 
 
@@ -60,10 +60,7 @@ putProject(id, projectEdit): Observable<any> {
         console.log(response.json())
         return <any>response.json();
     })
-    .catch(error => {
-        console.log(error)
-        return error;
-    });
+    .catch(this.handlError);
 };
 
 deleteProject(id: number): Observable<any> {
@@ -73,10 +70,7 @@ deleteProject(id: number): Observable<any> {
         console.log(response.json())
         return <any>response.json();
     })
-    .catch(error => {
-        console.log(error);
-        return error;
-    });
+    .catch(this.handlError);
 };
 
 }

@@ -1,0 +1,27 @@
+img {
+    max-width:600px;
+    max-height: 300px;
+}
+
+.container {
+    max-width: 700px;
+}
+
+.header {
+    font-weight: bold;
+    text-align: center;
+}
+
+.project_name {
+    text-align: center;
+    font-weight: bold;
+    margin: 15px 0 15px 0;
+}
+
+.edit-block {
+    margin: 5px;
+}
+
+.img_block {
+    margin-top: 10px;
+}

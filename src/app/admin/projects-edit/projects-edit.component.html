@@ -1,0 +1,63 @@
+  
+<div class="container col-sm-5">
+  <div class="row">
+      <button class="edit_block" (click)="editProject()">edit project</button>
+      <button class="edit_block" (click)="deleteProject()"> delete project</button>
+      <button *ngIf="!(project | async)?.approved" class="edit_block" (click)="aproveProject">approve</button>
+      <button *ngIf="editable" class="edit_block" value="delete-project" (click)="saveChanges()"> save changes</button>
+      <div class="img_block">
+         <img src="http://www.personal.psu.edu/users/n/y/nys5290/Project-Image.jpg" alt="">
+      </div>
+         <form *ngIf="editable">
+            <label><br><input type="text" value="{{ (project | async)?.projectName | uppercase }}"></label><br>
+            <label>Project Description<br><textarea rows="10" cols="40" type="text" value="{{ (project | async)?.shortDesc | uppercase }}"></textarea></label><br>
+            <label>Goals<br><textarea rows="10" cols="40" value="{{ (project | async)?.goals | uppercase }}"></textarea></label><br>
+            <label>Budget<br><input type="text" value="{{ (project | async)?.budget | uppercase }}"></label><br>
+            <label>Author<br><input type="text" value="{{ (project | async)?.author | uppercase }}"></label><br>
+            <label>Category<br><input type="text" value="{{ (project | async)?.category | uppercase }}"></label><br>
+         </form>
+      <div *ngIf="!editable" class="project_name">
+         <span>{{ (project | async)?.projectName | uppercase }}</span>
+      </div>
+      <section *ngIf="!editable" class="project_info">
+         <p class="header">
+            <span>Project description</span>
+         </p>
+         <p class="project_desc">
+            {{ (project | async)?.shortDesc }}
+         </p>
+      </section>
+      <section *ngIf="!editable" class="project_info">
+         <p class="header">
+            <span>Goals</span>
+         </p>
+         <p class="project_desc">
+            <span>{{ (project | async)?.goals }}</span>
+         </p>
+      </section>        
+      <section *ngIf="!editable" class="project_info">
+         <p class="header">
+            <span>Budget</span>
+         </p>
+         <p class="project_desc">
+            <span>{{ (project | async)?.budget }}</span>
+         </p>
+      </section>
+      <section *ngIf="!editable" class="project_info">
+         <p class="header">
+            <span>Author</span>
+         </p>
+         <p class="project_desc">
+            <span>{{ (project | async)?.author }}</span>
+         </p>
+      </section>
+      <section *ngIf="!editable" class="project_info">
+         <p class="header">
+            <span>Category</span>
+         </p>
+         <p class="project_desc">
+            <span>{{ (project | async)?.category }}</span>
+         </p>
+      </section>
+   </div>
+</div>
