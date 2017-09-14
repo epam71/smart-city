@@ -25,7 +25,7 @@
             <li *ngFor="let key of (projects | async) | filterApproval:false" class="project_block">
                <a [routerLink]="['/admin/projects', key._id]">
                <span class="project_name">
-               {{key.projectName}}
+               <span class="circle" [class.new]="key.approved === false" [class.edited]="key.approved === true"></span> {{key.projectName}}
                </span>
                </a>
             </li>

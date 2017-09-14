@@ -7,13 +7,19 @@ import { ProjectsListComponent } from './projects-list/projects-list.component';
 import { routing } from './admin.routes';
 import { FilterApprovalPipe } from "../pipes/filter-approval.pipe";
 import { ProjectsEditComponent } from './projects-edit/projects-edit.component';
+import { ConfirmComponent } from './confirm/confirm.component';
+import { FormsModule } from '@angular/forms';
+
 
 
 @NgModule({
   imports: [
     CommonModule,
-    routing
+    routing,
+    FormsModule
   ],
-  declarations: [ContactsListComponent, NewsListComponent, NewsEditComponent, ProjectsListComponent, FilterApprovalPipe, ProjectsEditComponent]
+  declarations: [ContactsListComponent, NewsListComponent, NewsEditComponent, ProjectsListComponent, FilterApprovalPipe, ProjectsEditComponent, ConfirmComponent]
 })
 export class AdminModule { }
+
+

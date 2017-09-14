@@ -1,41 +1,90 @@
-  
 <div class="container col-sm-5">
-  <div class="row">
-      <button class="edit_block" (click)="editProject()">edit project</button>
-      <button class="edit_block" (click)="deleteProject()"> delete project</button>
-      <button *ngIf="!(project | async)?.approved" class="edit_block" (click)="aproveProject">approve</button>
-      <button *ngIf="editable" class="edit_block" value="delete-project" (click)="saveChanges()"> save changes</button>
-      <div class="img_block">
-         <img src="http://www.personal.psu.edu/users/n/y/nys5290/Project-Image.jpg" alt="">
+   <div class="row">
+      <p class="status col-sm-2 col-sm-offset-10">{{ (project | async)?.approved }}</p>
+      <div class="glyphicon glyphicon-trash" (click)="deleteProject()"></div>
+      <div *ngIf="!editable" class="edit_block glyphicon glyphicon-pencil" (click)="editProject()"></div>    
+      <button *ngIf="(project | async)?.approved === false" class="approve-project" (click)="approveProject()">approve</button>
+      <button *ngIf="(project | async)?.approved" class="close-project" (click)="closeProject()">close project</button>    
+      
+      
+      <div class="img_block col-sm-12">
+         <img class="img-responsive" src="http://www.personal.psu.edu/users/n/y/nys5290/Project-Image.jpg" alt="">
       </div>
-         <form *ngIf="editable">
-            <label><br><input type="text" value="{{ (project | async)?.projectName | uppercase }}"></label><br>
-            <label>Project Description<br><textarea rows="10" cols="40" type="text" value="{{ (project | async)?.shortDesc | uppercase }}"></textarea></label><br>
-            <label>Goals<br><textarea rows="10" cols="40" value="{{ (project | async)?.goals | uppercase }}"></textarea></label><br>
-            <label>Budget<br><input type="text" value="{{ (project | async)?.budget | uppercase }}"></label><br>
-            <label>Author<br><input type="text" value="{{ (project | async)?.author | uppercase }}"></label><br>
-            <label>Category<br><input type="text" value="{{ (project | async)?.category | uppercase }}"></label><br>
-         </form>
-      <div *ngIf="!editable" class="project_name">
+
+      <form class="form-horizontal" *ngIf="editable" #form="ngForm">
+
+      <div class="form-group">
+         <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+         <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Project name" #projectName [value]="(project | async)?.projectName">
+         </div>
+      </div>
+
+      <div class="form-group">
+         <label for="projectDesc" class="col-sm-2 control-label">Description</label>
+         <div class="col-sm-10">
+            <textarea class="form-control" rows="7" cols="40" placeholder="project description" #projectDesc [value]="(project | async)?.desc"></textarea>
+         </div>
+      </div>
+
+      <div class="form-group">
+         <label for="projectGoals" class="col-sm-2 control-label">Goals</label>
+         <div class="col-sm-10">
+            <textarea rows="4" cols="40" class="form-control" placeholder="project goals" #projectGoals [value]="(project | async)?.goals || ''"></textarea>
+         </div>
+      </div>
+
+      <div class="form-group">
+         <label for="projectAuthor" class="col-sm-2 control-label">Author</label>
+         <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="author" #projectAuthor [value]="(project | async)?.author || ''">
+         </div>
+      </div>
+
+      <div class="form-group">
+         <label for="projectBudget" class="col-sm-2 control-label">Budget</label>
+         <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="budget" #projectBudget [value]="(project | async)?.budget || ''">
+         </div>
+      </div>
+
+      <div class="form-group">
+         <label for="projectCategory" class="col-sm-2 control-label">Category</label>
+         <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="category" #projectCategory [value]="(project | async)?.category || ''">
+         </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button class="btn btn-default" (click)="saveChanges($event, projectName, linkImg, shortDesc, fullDesc, goals, result, involved, budget, type)">Save</button>
+          <button class="btn btn-default" (click)="cancelChanges()">Cancel</button>
+        </div>
+      </div>
+
+   </form>
+
+<article class="about_project" *ngIf="!editable">
+      <div class="project_name">
          <span>{{ (project | async)?.projectName | uppercase }}</span>
       </div>
-      <section *ngIf="!editable" class="project_info">
+      <section *ngIf="(project | async)?.desc" class="project_info">
          <p class="header">
             <span>Project description</span>
          </p>
          <p class="project_desc">
-            {{ (project | async)?.shortDesc }}
+            {{ (project | async)?.desc }}
          </p>
       </section>
-      <section *ngIf="!editable" class="project_info">
+      <section *ngIf="(project | async)?.goals" class="project_info">
          <p class="header">
             <span>Goals</span>
          </p>
          <p class="project_desc">
             <span>{{ (project | async)?.goals }}</span>
          </p>
-      </section>        
-      <section *ngIf="!editable" class="project_info">
+      </section>
+      <section *ngIf="(project | async)?.budget" class="project_info">
          <p class="header">
             <span>Budget</span>
          </p>
@@ -43,7 +92,7 @@
             <span>{{ (project | async)?.budget }}</span>
          </p>
       </section>
-      <section *ngIf="!editable" class="project_info">
+      <section *ngIf="(project | async)?.author" class="project_info">
          <p class="header">
             <span>Author</span>
          </p>
@@ -51,7 +100,7 @@
             <span>{{ (project | async)?.author }}</span>
          </p>
       </section>
-      <section *ngIf="!editable" class="project_info">
+      <section *ngIf="(project | async)?.category" class="project_info">
          <p class="header">
             <span>Category</span>
          </p>
@@ -59,5 +108,6 @@
             <span>{{ (project | async)?.category }}</span>
          </p>
       </section>
+    </article>
    </div>
 </div>

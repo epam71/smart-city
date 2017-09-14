@@ -1,7 +1,3 @@
-img {
-    max-width: 600px;
-}
-
 ul {
     list-style: none;
 }
@@ -13,3 +9,19 @@ ul {
 .pending-projects, .active-projects {
     width: 250px;
 }
+
+.circle {
+	border-radius: 50%;
+	width: 7px;
+    height: 7px; 
+    display: inline-block;
+}
+
+.new {
+    background-color: lightsalmon;
+}
+
+.edited {
+    background-color: lightskyblue
+}
+
