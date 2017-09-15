@@ -1,3 +1,321 @@
-<p>
-  static works!
-</p>
+
+<!-- Start Header Section -->
+<header class="clearfix fixed-header">
+
+  <!-- Start  Logo & Naviagtion  -->
+  <div id="navigation" class="navbar navbar-default navbar-top" role="navigation" data-spy="affix" data-offset-top="50">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- Stat Toggle Nav Link For Mobiles -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <i class="fa fa-bars"></i>
+        </button>
+        <!-- End Toggle Nav Link For Mobiles -->
+        <a class="navbar-brand" href="#">
+          <img alt="logo" src="#">
+        </a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <!-- Start Navigation List -->
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a class="active" href="">Home</a>
+          </li>
+          <li>
+            <a href="">About</a>
+          </li>
+          <li>
+            <a href="#">News</a>
+          </li>
+          <li>
+            <a href="#">Projects</a>
+          </li>
+          <li>
+            <a href="#">Events</a>
+          </li>
+          <li><a href="#">Contact</a>
+          </li>
+          <li><a href="#">Sign In</a>
+          </li>
+        </ul>
+        <!-- End Navigation List -->
+      </div>
+    </div>
+
+  </div>
+  <!--End Header Logo & Naviagtion -->
+</header>
+<!-- End Header Section -->
+<!--main video start-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12" id="video-block">
+      <div id="video">
+         <video id="my-video" width="320" height="240" loop autoplay muted plays-inline>
+            <source [src]="mainVideo" type="video/mp4">
+          </video>
+          <div class="text-center">
+                <h2 class="animated2">
+                  <span>Welcome to <strong>Lviv Smart City</strong></span>
+                </h2>
+                <h3 class="animated3">
+                   <span>Organizing impact on urban innovation</span>
+                </h3>
+              </div>
+        </div>
+    </div>
+  </div>
+</div>
+<!--main video end-->
+
+ <!--Start of news-->
+<section class="news">
+	<div class="container">
+		<div class="section-title">
+			<div class="row">
+				<div class="col-md-4 col-sm-5 col-xs-12">
+					<h2>Latest news</h2>
+					<span class="decor"></span>
+				</div>
+				<div class="col-md-8 col-sm-7 col-xs-12 font-20">
+					<p>We go to great lengths to identify impressive new talent—self-starters with specific <br>skill sets to produce truly amazing results.</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-sm-6 col-xs-12">
+				<div class="blogList_single_post clear_fix wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+					<div class="img_holder">
+						<img [src]="img1" alt="News" class="img-responsive">
+					</div> <!-- End of .img_holder -->
+					<div class="post">
+						<div class="news-date">
+							August 20, 2017
+						</div>
+						<div class="text">
+							<p class="author"><a href="#">by Mark Vilton</a></p>
+							<h4><a href="#">Design and Advanced Industry Materials of Innovation</a></h4>
+							<p>The increasing availability of productivity <br>information provides an opportunity for the products materials. </p>
+							<div class="link"><a href="#" class="tran3s">Read more</a></div>
+							
+						</div>
+						
+					</div> <!-- End of .post -->
+				</div>
+				
+			</div>
+			<div class="col-md-4 col-sm-6 col-xs-12">
+				<div class="blogList_single_post clear_fix wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+					<div class="img_holder">
+						<img [src]="img2" alt="News" class="img-responsive">
+					</div> <!-- End of .img_holder -->
+					<div class="post">
+						<div class="news-date">
+							August 25, 2017
+						</div>
+						<div class="text">
+							<p class="author"><a href="#">by Mark Thornton</a></p>
+							<h4><a href="#">Commercial and military space projects around the world.</a></h4>
+							<p>Our special grade steels are being used in commercial and military aerospace projects around the world.</p>
+							<div class="link"><a href="#" class="tran3s">Read more</a></div>
+							
+						</div>
+						
+					</div> <!-- End of .post -->
+				</div>
+				
+			</div>
+			<div class="col-md-4 col-sm-6 col-xs-12">
+				<div class="blogList_single_post clear_fix wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+					<div class="img_holder">
+						<img [src]="img3" alt="News" class="img-responsive">
+					</div> <!-- End of .img_holder -->
+					<div class="post">
+						<div class="news-date">
+							September 20, 2017
+						</div>
+						<div class="text">
+							<p class="author"><a href="#">by Mark Vilton</a></p>
+							<h4><a href="#">Design and Advanced Industry Materials of Innovation</a></h4>
+							<p>The increasing availability of productivity <br>information provides an opportunity for the products materials.  </p>
+							<div class="link"><a href="#" class="tran3s">Read more</a></div>
+							
+						</div>
+						
+					</div> <!-- End of .post -->
+				</div>
+				
+			</div>
+			
+		</div>
+	</div>
+</section>
+<!--End news section-->
+
+<!--Invest section-->
+  <section id="subscribe" [ngStyle]="{'background-image':'url(' + subscribeImg + ')'}">
+    <div class="subscribe-shadow">
+    <div class="container wow fadeInUp">
+      <div class="row">
+        <div class="col-md-8">
+          <h3 class="subscribe-title">Become Our Investor</h3>
+          <p class="subscribe-text">Join our 200+ projects and get access to the latest tools, freebies, product announcements and much more!</p>
+        </div>
+        <div class="col-md-4 subscribe-btn-container">
+          <a class="subscribe-btn" href="#">Join Us</a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+  <!--End of invest section-->
+
+<!--Project Section-->
+<section class="our-services">
+	<div class="container">
+		<div class="section-title">
+			<div class="row">
+				<div class="col-md-4 col-sm-5 col-xs-12">
+					<h2>Our Projects</h2>
+					<span class="decor"></span>
+				</div>
+				<div class="col-md-8 col-sm-7 col-xs-12 font-20">
+					<p>We have built an enviable reputation in consumer goods, heavy industry, high-tech, <br>manufacturing, medical, recreational vehicle, and transportation sectors.</p>
+				</div>
+			</div>
+		</div>		
+		<div class="row">
+			<div class="col-md-4 col-sm-6">
+				<div class="single-our-service">
+					<figure class="img-box">
+						<a href="#"><img src="" alt="Awesome Image"></a>
+					</figure>
+					<a href="#"><h4>Agricultural Engineering</h4></a>
+					<p>We develop and design new procedures, tools <br>
+					systems for agricultural products environments. </p>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-6">
+				<div class="single-our-service">
+					<figure class="img-box">
+						<a href="#"><img src="" alt="Awesome Image"></a>
+					</figure>
+					<a href="#"><h4>Chemical Research Engineering</h4></a>
+					<p>Chemical Research expertise in producing and <br>
+					manipulating chemicals to energy properties.</p>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-6">
+				<div class="single-our-service">
+					<figure class="img-box">
+						<a href="#"><img src="" alt="Awesome Image"></a>
+					</figure>
+					<a href="#"><h4>Material Science and Engineering</h4></a>
+					<p>Materials Engineering should include scientific and <br>
+					engineering strength relationships of materials. </p>
+				</div>
+			</div>
+			<div class="col-md-12"><div class="separet"></div></div>
+			<div class="col-md-4 col-sm-6">
+				<div class="single-our-service">
+					<figure class="img-box">
+						<a href="#"><img src="" alt="Awesome Image"></a>
+					</figure>
+					<a href="#"><h4>Mechanical Engineering</h4></a>
+					<p>Creating a dynamic company for the continuous <br>
+					exploration and develop opportunities. </p>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-6">
+				<div class="single-our-service">
+					<figure class="img-box">
+						<a href="#"><img src="" alt="Awesome Image"></a>
+					</figure>
+					<a href="#"><h4>Petroleum and Gas</h4></a>
+					<p>Petroleum Engineers are concerned with the <br>
+					 exploration, discovery and production.</p>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-6">
+				<div class="single-our-service">
+					<figure class="img-box">
+						<a href="#"><img src="" alt="Awesome Image"></a>
+					</figure>
+					<a href="#"><h4>Power and Energy</h4></a>
+					<p>Ensuring high reliability and optimal performance of <br>
+					rotating power equipment.</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+<!--Counters section-->
+<!--Contacts-->
+<section id="contact" [ngStyle]="{'background-image':'url(' + contactImg + ')'}">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="office">
+                            <div class="title">
+                                <h5>our office info</h5>
+                            </div>
+                            <div class="office_location">
+                                <div class="address">
+                                    <i class="fa fa-map-marker"><span>Oleny Stepanivny St, 45, L'viv, Lviv Oblast</span></i>
+                                </div>
+                                <div class="phone">
+                                    <i class="fa fa-phone"><span>+ 38096-0000000</span></i>
+                                </div>
+                                <div class="email">
+                                    <i class="fa fa-envelope"><span>youremail@mail.com</span></i>
+                                </div>
+                                <div id="map"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="msg">
+                            <div class="msg_title">
+                                <h5>Drop A Message</h5>
+                            </div>
+                            <div class="form_area">
+                                <!-- CONTACT FORM -->
+                                <div class="contact-form wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+                                    <div id="message"></div>
+                                    <form action="scripts/contact.php" class="form-horizontal contact-1" role="form" name="contactform" id="contactform">
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <input type="subject" class="form-control" id="subject" placeholder="Subject *">
+                                                <div class="text_area">
+                                                    <textarea name="contact-message" id="msg" class="form-control" cols="30" rows="8" placeholder="Message"></textarea>
+                                                </div>
+                                                <button type="submit" class="btn custom-btn" data-loading-text="Loading...">Send</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End of col-md-6-->
+        </div>
+    </div>
+</section>
+<!--End of contact-->
+<!--Footer-->
+<footer class="main-footer">
+  <div class="container">
+  <div class="footer-bottom">
+    <div class="auto-container"><div class="copyright">Copyright © 2017 All Rights Reserved</div></div>
+  </div>
+  </div>
+</footer>

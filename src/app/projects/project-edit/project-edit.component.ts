@@ -1,20 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProjectServiceService } from "../../core/project-service/project-service.service";
+import { ProjectServiceService } from '../../core/project-service/project-service.service';
 import { Router } from '@angular/router';
-import { Project } from "../models/project.model";
-
-// class Project{
-  
-//     constructor(public projectName: string, public image: string, 
-//                 public shortDesc: any, public fullDesc: any,
-//                 public goals: any, public result: any, public involved: any,
-//                 public type: boolean, 
-//                 public budget: any, public approved: boolean = false) {
-  
-//     }
-//   }
-
+import { Project } from '../models/project.model';
+import { EditProject } from '../models/project-edit.model';
+import { AuthService } from '../../core/auth-service/auth-service.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-project-edit',
@@ -23,41 +14,66 @@ import { Project } from "../models/project.model";
 })
 export class ProjectEditComponent implements OnInit {
 
+  @ViewChild('f') slForm: NgForm;
+
+  editMode;
   project;
   tempId;
-  constructor(private ar: ActivatedRoute,
-              private putProject: ProjectServiceService,
-              private router: Router) {
-                ar.params.subscribe( param => {
-                  this.tempId = param;
-                  });
+  errorMessage;
 
+  constructor(private route: ActivatedRoute,
+    private putProject: ProjectServiceService,
+    private authService: AuthService,
+    private router: Router) {
+    route.params.subscribe(param => {
+      this.tempId = param;
+    });
   }
 
-    editProject(event, projectName, linkImg, shortDesc, fullDesc, goals, result, involved, budget, type){
-      event.preventDefault();
-      let projectTemp: Project = new Project(
-        projectName.value, linkImg.value, shortDesc.value, 
-        fullDesc.value, goals.value, result.value, involved.value, type.value, budget.value);
+  actProject(form: NgForm) {
+    const value = form.value;
+    value.budget = value.budget || 0;
 
-      let mock = {name: projectName.value}
+    let projectTemp: Project = new Project(
+      this.authService.getNickname(),
+      value.projectName, value.image,
+      value.desc, value.goals, value.result, value.budget);
 
-      this.putProject.putProject(this.tempId.id, mock)
-      .subscribe(
+    let projectEdit: EditProject = new EditProject(
+      value.projectName, value.image,
+      value.desc, value.goals, value.result, value.budget);
+
+    if (this.tempId.id == null) {
+      this.putProject.postProject(projectTemp)
+        .subscribe(
         (response) => {
-          console.log(response);
           this.router.navigate(['/projects']);
         },
         (error) => {
-          console.log(error)
+          this.errorMessage = error;
         });
-        
+    } else {
+      this.putProject.patchProject(this.tempId.id, projectEdit)
+        .subscribe(
+        (response) => {
+          this.router.navigate(['/projects/' + this.tempId.id]);
+        },
+        (error) => {
+          this.errorMessage = error;
+        });
     }
+  }
+
+  test(){
+    this.slForm.reset();
+    this.editMode = false;
+  }
 
   ngOnInit() {
-    console.log(this.putProject.getProject(this.tempId.id));
-    console.log(this.tempId.id);
-    this.project = this.putProject.getProject(this.tempId.id);
+    if (this.tempId.id != null) {
+      this.editMode = true;
+      this.project = this.putProject.getProject(this.tempId.id);
+    }
   }
 
 }

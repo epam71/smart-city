@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from "@angular/forms";
 
 import { CoreModule } from './core/core.module';
 import { PipesModule } from './pipes/pipes.module';
@@ -38,6 +39,7 @@ import { AlertModule } from 'ngx-bootstrap';
     CoreModule,
     PipesModule,
     AppRoutes,
+    FormsModule,
     AlertModule.forRoot()
   ],
   providers: [],
