@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ProjectServiceService } from '../../core/project-service/project-service.service';
 import { Router } from '@angular/router';
 import { Project } from '../models/project.model';
-import { ProjectEdit } from '../models/project-edit.model';
 import { AuthService } from '../../core/auth-service/auth-service.service';
 import { NgForm } from '@angular/forms';
 
@@ -43,10 +42,9 @@ export class ProjectEditComponent implements OnInit {
       result: value.result,
       budget: value.budget,
       status: 'new',
-      rating: 0
     };
 
-    let projectEdit: ProjectEdit = {
+    let projectEdit: Project = {
       projectName: value.projectName,
       image: value.image,
       desc: value.desc,
