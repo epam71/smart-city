@@ -19,9 +19,6 @@ export class CommentsProjectComponent implements OnInit {
   }
 
 
-  ngOnInit() {
-    console.log(this.tempId);
-    // this.comments = this.commentsData.getProject(this.ratingObjInfo._id);
-  }
+  ngOnInit() {}
 
 }
