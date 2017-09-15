@@ -10,20 +10,19 @@ export class FilterUser implements PipeTransform {
     constructor(private authService: AuthService) { }
 
 
-    transform(value: any, arg): any {
-
+    transform(value: any): any {
+        let resultArr = [];
+        console.log(this.authService.getNickname() + 'USEEER');
         if (value != null) {
-            if (arg === true) {
-                let resultArr = [];
-                for (let key of value) {
-                    if (this.authService.getNickname() === key.author) {
-                        resultArr.push(key);
-                    }
+            for (let key of value) {
+                if (this.authService.getNickname() === key.author) {
+                    resultArr.push(key);
                 }
-                return resultArr;
-            } else {
-                return value;
             }
+
+            console.log(resultArr);
+            return resultArr;
+
         }
 
     }

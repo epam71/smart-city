@@ -1,77 +1,94 @@
-<div class="container project_block_main">
-  <div class="row">
-    <div class="nav_block">
-      <button type="submit" class="btn btn-default" routerLink="/projects">Back to projects</button>
-      <button type="submit" class="btn btn-default" [routerLink]="['edit']">Edit Project</button>
-      <button type="submit" class="btn btn-default" [routerLink]="['/projects/new']">Add Project</button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="project_block">
-      <div class="img_block">
-        <!-- <img src="(project | async)?.image" alt=""> -->
-        <img src="http://arenalviv.com.ua/uploads/images/pages/461/750/img_7467small.jpg" alt="">
-      </div>
-      <div class="project_name">
-        {{ (project | async)?.projectName | uppercase }}
-      </div>
-      <section class="project_info">
-        <article class="article_header">
-          <span class="glyphicon glyphicon-chevron-right"></span>
-          <span>Project description</span>
-        </article>
-        <article class="project_desc">
-          {{ (project | async)?.desc }}
-        </article>
-      </section>
-      <section class="project_info" *ngIf="(project | async)?.goals">
-        <article class="article_header">
-          <span class="glyphicon glyphicon-chevron-right"></span>
-          <span>What is the goal of the project?</span>
-        </article>
-        <article class="project_desc">
-          {{ (project | async)?.goals }}
-        </article>
-      </section>
-      <section class="project_info" *ngIf="(project | async)?.result">
-        <article class="article_header">
-          <span class="glyphicon glyphicon-chevron-right"></span>
-          <span>What is the result of the project? </span>
 
-        </article>
-        <article class="project_desc">
-          {{ (project | async)?.result }}
-        </article>
-      </section>
-      <section class="project_info" *ngIf="(project | async)?.budget">
-        <article class="article_header">
-          <span class="glyphicon glyphicon-chevron-right"></span>
-          <span>Finance information</span>
-        </article>
-        <article class="project_desc">
-          <span>Project budget: {{ (project | async)?.budget }}$</span>
-        </article>
-      </section>
-      <div class="project_footer">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="likes_block">
-              <rating [ratingObj]="(project | async)"></rating>
-            </div>
+  <p>
+    <a routerLink="/projects">back to projects</a>
+  </p>
+
+  <div class="container project_block_main">
+
+    <div class="row">
+        <div class="project_block">
+          <div class="edit_block">
+              <a [routerLink]="['edit']">edit</a>
           </div>
-          <div class="col-md-5">
-            <div class="category_block">
-              Date: {{ (project | async)?.date | date:'short' }}
-            </div>
+        <div class="img_block">
+          <img src="http://arenalviv.com.ua/uploads/images/pages/461/750/img_7467small.jpg" alt="">
+        </div>
+        <div class="project_name">
+            {{ (project | async)?.projectName | uppercase }}
+            <!-- {{ project?.projectName | uppercase }} -->
           </div>
-          <div class="col-md-3">
-            <div class="category_block">
-              Author: {{ (project | async)?.author }}
+        <!-- <a [routerLink]="['/projects', key._id, 'edit']">edit</a> -->
+        <section class="project_info">
+            <article class="article_header">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+              <span>Project description</span>
+            </article>
+            <article class="project_desc">
+                We hope our collaboration between public and private parties inspires other cities and stadiums. All Amsterdam Innovation Arena products and services that are thoroughly tested and scalable can be delivered to municipalities or stadiums around the world.
+            </article>
+          </section>
+        <section class="project_info">
+            <article class="article_header">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span>What is the goal of the project?</span>
+            </article>
+            <article class="project_desc">
+                We aim to become the leading Smart City area where we accelerate the
+                creation and market introduction of new unique Smart City and Smart Stadium applications to improve profitability, sustainability, safety and customer experience. The Amsterdam Innovation Arena supports global leading players in creating their newest innovations for smart experience and smarter living environments on a global scale.
+            </article>
+          </section>
+          <section class="project_info">
+              <article class="article_header">
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                  <span>What is the result of the project? </span>
+
+              </article>
+              <article class="project_desc">
+                  Our initiative is both technological and social and designed to facilitate future forward innovations. We are keen on connecting stakeholders and combining forces of both multinationals and SME’s, students and fans, farmers and start-ups. Our 6 themes are our beacons for innovation. If you want to join, you have to develop ideas around:
+                  •	Fan experience
+                  •	Customer journey
+                  •	Safety & security
+                  •	Sustainability & Circular economy
+                  •	Facility management
+                  •	Digital connectivity
+              </article>
+            </section>
+            <section class="project_info">
+                <article class="article_header">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                  <span>Who initiated the project and which organizations are involved?</span>
+                </article>
+                <article class="project_desc">
+                    Amsterdam ArenA, Microsoft, TNO, KPN, KPMG, Nissan, EATON, Philips Lighting, Huawei, Honeywell, BAM, Amsterdam Smart City and the municipality of Amsterdam join forces to develop a platform for state-of-the-art Smart City and Smart Stadium solutions.
+                </article>
+              </section>
+              <section class="project_info">
+                  <article class="article_header">
+                      <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span>Finance information</span>
+                  </article>
+                  <article class="project_desc">
+                      <span>Project budget: 10000$</span>
+                  </article>
+                </section>
+        <div class="project_footer">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="likes_block">
+                  
+                  <!-- <rating [ratingObj]="project" ></rating> -->
+                <rating [ratingObj]="(project | async)" ></rating>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="category_block">
+                <span>INFRASTRUCTURE</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
   </div>
   <comments [commentsObj]="(project | async)?.comments">Comments loading...</comments>
-</div>
+  </div>
+  

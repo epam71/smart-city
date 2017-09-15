@@ -1,56 +1,69 @@
 <div class="container">
-    <div class="nav_block">
-        <button type="submit" class="btn btn-default" routerLink="/projects">Back to projects</button>
-    </div>
-  <form class="form-horizontal" (ngSubmit)="actProject(f)" #f="ngForm">
-  {{ errorMessage }}
+  <p>
+      <a routerLink="/projects">back to projects</a>
+  </p>
+  <form class="form-horizontal" (submit)="editProject(
+    $event, projectName, linkImg, shortDesc, fullDesc, goals, result, involved, budget, type)" >
       <div class="form-group">
-        <label for="projectName" class="col-sm-2 control-label">Project name</label>
+        <label for="inputEmail3" class="col-sm-2 control-label">Project name</label>
         <div class="col-sm-10">
-          <input type="text" id="projectName" class="form-control" #projectName [ngModel]="(project | async)?.projectName"
-          name="projectName" required>
+          <input type="text" class="form-control" placeholder="Project name" #projectName [value]="(project | async)?.name" placeholder="Project name">
         </div>
       </div>
       <div class="form-group">
-          <label for="image" class="col-sm-2 control-label">Link to image</label>
+          <label for="inputPassword3" class="col-sm-2 control-label">Link to image</label>
           <div class="col-sm-10">
-            <input type="text" id="image" class="form-control" [ngModel]="(project | async)?.image"
-             name="image" required>
+            <input type="text" class="form-control" placeholder="Link to image" #linkImg>
           </div>
         </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label">Short Description</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" rows="2" #shortDesc></textarea>
+            </div>
+          </div>
           <div class="form-group">
-              <label for="desc" class="col-sm-2 control-label">Full Description</label>
+              <label for="inputPassword3" class="col-sm-2 control-label">Full Description</label>
               <div class="col-sm-10">
-                  <textarea id="desc" class="form-control" rows="3" [ngModel]="(project | async)?.desc"
-                  name="desc" required></textarea>
+                  <textarea class="form-control" rows="3" #fullDesc></textarea>
               </div>
             </div>
             <div class="form-group">
-                <label for="goals" class="col-sm-2 control-label">Project goals</label>
+                <label for="inputPassword3" class="col-sm-2 control-label">Project goals</label>
                 <div class="col-sm-10">
-                    <textarea id="goals" class="form-control" rows="3" [ngModel]="(project | async)?.goals"
-                    name="goals"></textarea>
+                    <textarea class="form-control" rows="3" #goals></textarea>
                 </div>
               </div>
               <div class="form-group">
-                  <label for="result" class="col-sm-2 control-label">Project result</label>
+                  <label for="inputPassword3" class="col-sm-2 control-label">Project result</label>
                   <div class="col-sm-10">
-                      <textarea id="result" class="form-control" rows="3" [ngModel]="(project | async)?.result"
-                      name="result"></textarea>
+                      <textarea class="form-control" rows="3" #result></textarea>
                   </div>
                 </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Involved</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" rows="3" #involved></textarea>
+                    </div>
+                  </div>
             <div class="form-group">
-                <label for="budget" class="col-sm-2 control-label">Project Budget</label>
+                <label for="inputPassword3" class="col-sm-2 control-label">Project Budget</label>
                 <div class="col-sm-10">
-                  <input type="number" id="budget" class="form-control" [ngModel]="(project | async)?.budget"
-                  name="budget"
-                  [pattern]="'^[0-9]+[0-9]*$'">
+                  <input type="text" class="form-control" placeholder="Project Budget" #budget>
                 </div>
               </div>
-      <div class="form-group buttons_block">
+      <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-success" [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add' }}</button>
-          <button type="button" class="btn btn-danger" (click)="test()">Clear</button>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" #type> Volunteer
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-default">Edit project</button>
         </div>
       </div>
     </form>
