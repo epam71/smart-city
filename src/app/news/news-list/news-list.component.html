@@ -1,3 +1,29 @@
-<p>
-  news-list works!
-</p>
+<div class="container">
+  <div class="row">
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{errorMessage}}
+    </div>
+    <a [routerLink]="['add']">Add project</a>
+
+    <div class="col-md-4 service-block " *ngFor="let key of (news | async)">
+
+      <div class="news_block">
+          <input type="button" (click)="deleteNews(key._id)" value="DELETE">
+          <a [routerLink]="['/news', key._id]">
+            <div class="img_block">
+              <img class="img img-responsive" src= {{key.image}} alt= {{key.title}}>
+            </div>
+            <div class="news_date">{{key.date | date:'medium' }}</div>
+          <div class="news_name">{{key.title | uppercase}} </div>
+          <div class="news_desc">{{ key.desc }}</div>
+        </a>
+            <div class="col-md-8">
+              <div class="category_block">
+                <span>{{key.author}}</span>
+                <span>{{key.approved}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
