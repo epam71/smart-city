@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ProjectServiceService } from "../../core/project-service/project-service.service";
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ProjectServiceService } from '../../core/project-service/project-service.service';
 
 @Component({
   selector: 'app-projects-list',
@@ -10,22 +10,27 @@ export class ProjectsListComponent implements OnInit {
 
   projects;
 
-  constructor(private projectsData: ProjectServiceService) {
+  constructor(private projectsData: ProjectServiceService) { }
 
+  userProjects = false;
+  sortList = ['all', 'rating', 'name', 'date'];
+  sort = this.sortList[0];
+  sortTypeValue = 'false';
+
+  selectSort(event) {
+    if (event === 'name') {
+      event = 'projectName';
+    }
+    this.sort = event;
   }
 
-  deleteProject(id){
+  sortType(event) {
+    this.sortTypeValue = event;
+  }
 
-        this.projectsData.deleteProject(id)
-        .subscribe(
-          (response) => {
-            console.log(response);
-            this.projects = this.projectsData.getProjects();
-          },
-          (error) => {
-            console.log(error)
-          });
-      }
+  showUserProjects(event) {
+    this.userProjects = event;
+  }
 
   ngOnInit() {
     this.projects = this.projectsData.getProjects();
