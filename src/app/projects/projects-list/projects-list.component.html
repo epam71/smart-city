@@ -1,6 +1,6 @@
 <div class="container projects_block_main">
   <div class="row sort_block">
-    <div class="col-md-2">
+    <div class="col-md-2 col-sm-2">
       <div class="my_projects">
         <button type="button" class="btn btn-default" (click)="showUserProjects($event.target.checked)" *ngIf="!userProjects else allProjects">My Projects</button>
         <ng-template #allProjects>
@@ -8,7 +8,7 @@
         </ng-template>
       </div>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-10 col-sm-10">
       <span class="sort_name">sort by: </span>
       <span class="select-style">
     <select class="sort_block_select" (change)="selectSort($event.target.value)">

@@ -55,7 +55,7 @@ export class ProjectEditComponent implements OnInit {
     }
 
     if (this.tempId.id == null) {
-      this.putProject.postProject(1)
+      this.putProject.postProject(projectTemp)
         .subscribe(
         (response) => {
           this.router.navigate(['/projects']);
@@ -83,7 +83,6 @@ export class ProjectEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.authService.handleAuthentication());
     if (this.tempId.id != null) {
       this.editMode = true;
       this.project = this.putProject.getProject(this.tempId.id);
