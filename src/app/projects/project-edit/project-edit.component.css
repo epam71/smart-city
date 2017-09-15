@@ -1,0 +1,20 @@
+.nav_block {
+  background: #FCFCFC;
+  color: #777777;
+  padding: 20px;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+  text-align: right;
+}
+
+.buttons_block {
+  text-align: center;
+}
+
+
+.help-block{
+  color: #BA0000;
+}
+
+input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched{
+  border: 2px solid #C70000;
+}

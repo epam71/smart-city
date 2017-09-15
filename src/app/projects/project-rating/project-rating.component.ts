@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProjectServiceService } from '../../core/project-service/project-service.service';
 import { Project } from '../models/project.model';
+import { AuthService } from '../../core/auth-service/auth-service.service';
 
 @Component({
   selector: 'rating',
@@ -10,22 +11,24 @@ import { Project } from '../models/project.model';
 export class RatingProjectComponent implements OnInit {
 
 
-  tempId;
+
+  
   @Input('ratingObj') ratingObjInfo;
   rating;
-  constructor(private ratingData: ProjectServiceService) {
+  constructor(private ratingData: ProjectServiceService,
+              private authService: AuthService) {
 
   }
 
   changeRating() {
 
     this.ratingData.putProject(this.ratingObjInfo._id, {
-      budget: ++this.ratingObjInfo.budget
+      rating: ++this.ratingObjInfo.rating
     })
       .subscribe(
       (response) => {
         console.log(response);
-        return this.ratingObjInfo.budget = response.budget;
+        return this.ratingObjInfo.rating = response.rating;
       },
       (error) => {
         console.log(error);
@@ -35,7 +38,7 @@ export class RatingProjectComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.tempId);
+    console.log(this.authService.getEmail());
     // this.rating = this.ratingData.getProject(this.ratingObjInfo._id);
   }
 
