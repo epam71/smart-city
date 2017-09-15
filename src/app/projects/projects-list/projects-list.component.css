@@ -1,73 +1,129 @@
-:host a{
-    color: #777777;
-    text-decoration: none;
+* {
+  outline: none;
 }
 
-:host a:hover{
-
+:host a {
+  color: #777777;
+  text-decoration: none;
 }
 
-.projects_block_main {
+:host a:hover {}
 
+.projects_block_main {}
+
+.sort_block {
+  background: #FCFCFC;
+  color: #777777;
+  padding: 20px;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+  text-align: right;
 }
+
+.sort_block_select {
+  padding: 5px;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: pointer;
+}
+
+.sort_block_select option {}
 
 .projects_block {
-padding: 50px;
+  padding: 50px;
+}
+
+.project_block_main {
+  padding: 0;
 }
 
 .project_block {
-    margin-bottom: 10px;
-    padding: 10px;
-    text-align: center;
-    /* background: red; */
-    border: 1px solid #ccc;
+  min-width: 250px;
+  /* max-width: 347px; */
+  margin-bottom: 10px;
+  margin: 5px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  float: left;
 }
 
-.img_block{
-    /* position: relative; */
-    /* background: red; */
-    padding: 0 0 calc(5/345*100%);
-    /* padding: 0 0 calc(230/345*100%); */
+.project_block:hover {
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 }
 
-.img_block img{
-    /* position: absolute; */
-    max-width: 100%;
+.img_block {
+  position: relative;
+  /* background: red; */
+  padding: 0 0 calc(5/345*100%);
+  /* padding: 0 0 calc(230/345*100%); */
 }
 
-.project_name{
-    color: black;
-    font-weight: 700;
+.img_block img {
+  /* position: absolute; */
+  max-width: 100%;
+}
+
+.info_block {
+  padding: 10px;
+}
+
+.project_name {
+  color: black;
+  font-weight: 700;
 }
 
 .project_desc {
+  padding: 5px;
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  min-height: 60px;
 }
 
 .project_footer {
-    margin-top: 10px;
-    padding-top: 5px;
-    padding: 5px 5px 0 10px;
-    margin-bottom: -5px;
-    border-top: 1px solid #ccc;
+  margin-top: 10px;
+  padding: 10px 10px 10px 20px;
+  margin-bottom: -5px;
 }
 
-.likes_block{
-text-align: left;
+.likes_block_main {
+  padding: 0;
 }
 
-.likes_block span{
-    padding: 5px;
-text-align: left;
+.likes_block {
+  text-align: left;
 }
 
-.category_block{
-    padding-top: 5px;
-    font-size: 11px;
-text-align: right;
+.likes_block span {
+  padding: 5px;
+  text-align: left;
 }
 
-.category_block span {
-    color: white;
-    padding: 3px;
-    background: #cc2d00;
+.project_date {
+  text-align: right;
+  color: #ccc;
+  font-style: italic;
+}
+
+.status_block {
+  position: absolute;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.7);
+  right: 0;
+  padding: 5px;
+  background: white;
+  font-size: 14px;
+  float: left;
+}
+
+.status_prop {
+  color: #ccc;
+}
+
+.status_text_yes {
+  font-weight: 700;
+  color: green;
+}
+
+.status_text_no {
+  font-weight: 700;
+  color: #cc2d00;
 }
