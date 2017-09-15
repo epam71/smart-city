@@ -9,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class StaticComponent implements OnInit {
   subscribeImg: string;
   mainVideo: string;
- 
+  aboutImg: string;
   constructor() {
     this.subscribeImg = '../assets/images/lviv-city.jpg',
+    this.aboutImg = '../assets/images/content_about.jpg',
     this.mainVideo = '../assets/media/LvivNightTimelapse.mp4'
   }
 
