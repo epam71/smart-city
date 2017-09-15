@@ -1,62 +1,49 @@
 <div class="container projects_block_main">
-  <div class="nav_block">
-    <ul class="nav nav-tabs">
-      <li role="presentatiom" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/projects">Home</a></li>
-      <li role="presentatiom" routerLinkActive="active"><a [routerLink]="['myprojects']">My projects</a></li>
-      <li role="presentatiom" routerLinkActive="active"><a [routerLink]="['new']">Add project</a></li>
-    </ul>
+  <div class="sort_block">
+    <select class="selectpicker sort_block_select" (change)="selectSort($event.target.value)">
+  <option *ngFor="let key of sortList" >{{key}}</option>
+</select>
+    <input type="checkbox" id="subscribeNews" name="subscribe" *ngIf="sort !== 'all'" (change)="sortType($event.target.checked)">
+    <label for="subscribeNews" *ngIf="sort !== 'all'">ascending order</label>
+    <input type="checkbox" id="filterUser" name="filterUser" (change)="showUserProjects($event.target.checked)">
+    <label for="filterUser">My projects</label>
+    <button type="submit" class="btn btn-success" [routerLink]="['new']">Add Project</button>
   </div>
-
   <div class="projects_block">
     <div class="row">
-      <div class="col-md-4" *ngFor="let key of (projects | async)">
+      <div class="col-md-4 col-sm-6 project_block_main" *ngFor="let key of (projects | async) | filterUserProjects:userProjects | sortBy:sort:sortTypeValue">
 
         <div class="project_block">
-            <a [routerLink]="['/projects', key._id, 'edit']">edit</a>
-            <input type="button" (click)="deleteProject(key._id)" value="DELETE">
           <a [routerLink]="['/projects', key._id]">
             <div class="img_block">
+              <div class="status_block" *ngIf="userProjects">
+                <span [ngClass]="key.approved ? 'status_text_yes' : 'status_text_no'"> {{ key.approved ? 'approved' : 'not approved' }}</span>
+              </div>
+              <!-- <img src="(project | async)?.image" alt=""> -->
               <img src="http://arenalviv.com.ua/uploads/images/pages/461/750/img_7467small.jpg" alt="">
             </div>
-            <div class="project_date">
-              {{key.date | date:'medium' }}
+            <div class="info_block">
+              <div class="project_name">
+                {{key.projectName | uppercase | shorten:20 }}
+              </div>
+              <div class="project_desc">{{ key.desc | shorten:60 }}</div>
             </div>
-            <div class="project_name">
-              {{key.projectName | uppercase}}
-            </div>
-            <!-- <a [routerLink]="['/projects', key._id, 'edit']">edit</a> -->
-            <div class="project_desc">{{ key.shortDesc }}</div>
           </a>
           <div class="project_footer">
             <div class="row">
-              <div class="col-md-4">
-              <div class="likes_block">
-                <rating [ratingObj]="key?.budget"></rating>
-                <!-- <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" (click)="changeRating(key._id)">{{tempRating}}</span> -->
+              <div class="col-md-3 col-sm-3 col-xs-3 likes_block_main">
+                <div class="likes_block">
+                  <rating [ratingObj]="key"></rating>
+                </div>
               </div>
-            </div>
-            <div class="col-md-8">
-              <div class="category_block">
-                <span>{{key.author}}</span>
-                <span>{{key.approved}}</span>
+              <div class="col-md-9 col-sm-9 col-xs-9">
+                <div class="project_date">
+                  date: {{key.date | date:'shortDate' }}
+                </div>
               </div>
-            </div>
             </div>
           </div>
         </div>
-
       </div>
-
     </div>
   </div>
-
-
-  <!-- <div>
-    {{ (projects | async)?.name }}
-  </div>
-
-  <div *ngFor="let key of (projects | async)">
-    <a [routerLink]="['/projects', key._id]">Link</a>
-    {{key.name}}
-    <a [routerLink]="['/projects', key._id, 'edit']">edit</a>
-  </div> -->
