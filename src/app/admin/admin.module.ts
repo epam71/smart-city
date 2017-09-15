@@ -6,6 +6,7 @@ import { NewsListComponent } from './news-list/news-list.component';
 import { ProjectsListComponent } from './projects-list/projects-list.component';
 import { routing } from './admin.routes';
 import { FilterApprovalPipe } from "../pipes/filter-approval.pipe";
+import { FilterStatusPipe } from "../pipes/filter-status.pipe";
 import { ProjectsEditComponent } from './projects-edit/projects-edit.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { FormsModule } from '@angular/forms';
@@ -18,7 +19,7 @@ import { FormsModule } from '@angular/forms';
     routing,
     FormsModule
   ],
-  declarations: [ContactsListComponent, NewsListComponent, NewsEditComponent, ProjectsListComponent, FilterApprovalPipe, ProjectsEditComponent, ConfirmComponent]
+  declarations: [ContactsListComponent, NewsListComponent, NewsEditComponent, ProjectsListComponent, FilterApprovalPipe, FilterStatusPipe, ProjectsEditComponent, ConfirmComponent]
 })
 export class AdminModule { }
 

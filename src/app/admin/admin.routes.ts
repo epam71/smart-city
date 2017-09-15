@@ -24,7 +24,13 @@ const routes: Routes = [
     },
     {
         path: 'news',
-        component: NewsListComponent
+        component: NewsListComponent,
+        children: [
+            {
+                path: ':id',
+                component: NewsEditComponent
+            }
+        ]
     },
     {
         path: '',

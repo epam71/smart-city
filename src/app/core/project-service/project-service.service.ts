@@ -10,7 +10,7 @@ import { Subject } from 'rxjs/Subject';
 export class ProjectServiceService {
     
   _http;
-  test: Subject <string> = new Subject <string>();
+  look: Subject <string> = new Subject <string>();
 
   constructor(private http: Http) {
     this._http = http;
@@ -24,8 +24,6 @@ private handlError(error: Response){
 getProjects(): Observable<any> {
     return this._http.get('https://smart-city-lviv.herokuapp.com/api/projects')
         .map((response: Response) => {
-            console.log('sadsafsa');
-            console.log(response.json());
             return response.json();
         }).catch(this.handlError);
 };
@@ -33,8 +31,6 @@ getProjects(): Observable<any> {
 getProject(id): Observable<any> {
   return this._http.get('https://smart-city-lviv.herokuapp.com/api/projects/'+id)
       .map((response: Response) => {
-          console.log('sadsafsa');
-          console.log(response.json());
           return response.json();
       }).catch(this.handlError);
 };
@@ -43,7 +39,6 @@ postProject(project: any): Observable<any> {
     const headers = new Headers({'Content-Type': 'application/json'});
     return this._http.post('https://smart-city-lviv.herokuapp.com/api/projects', project, {headers: headers})
     .map((response: Response) => {
-        console.log(response.json())
         return <any>response.json();
     }).do(response => console.log(response))
     .catch(this.handlError);
@@ -56,7 +51,6 @@ putProject(id, projectEdit): Observable<any> {
     const headers = new Headers({'Content-Type': 'application/json'});
     return this._http.put('https://smart-city-lviv.herokuapp.com/api/projects/' + id, projectEdit, {headers: headers})
     .map((response: Response) => {
-        console.log(response.json())
         return <any>response.json();
     })
     .catch(this.handlError);
@@ -66,7 +60,6 @@ deleteProject(id: number): Observable<any> {
     const headers = new Headers({'Content-Type': 'application/json'});
     return this._http.delete('https://smart-city-lviv.herokuapp.com/api/projects/' + id, {headers: headers})
     .map((response: Response) => {
-        console.log(response.json())
         return <any>response.json();
     })
     .catch(this.handlError);

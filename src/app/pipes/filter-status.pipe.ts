@@ -1,16 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'filterApproval'
+  name: 'filterStatus'
 })
-export class FilterApprovalPipe implements PipeTransform {
+export class FilterStatusPipe implements PipeTransform {
 
   transform(value: any, args: any): any {
   
       if (value != null) {
-        let approval = args;
+        let status = args;
       return value.filter(key => {
-        return key.approved === approval;
+        return key.status === status;
       });
     }
   }

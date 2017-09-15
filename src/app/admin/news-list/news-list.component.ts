@@ -9,7 +9,7 @@ export class NewsListComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+ngOnInit() {
   }
 
 }

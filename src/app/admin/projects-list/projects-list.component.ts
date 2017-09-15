@@ -9,23 +9,22 @@ import "rxjs/add/operator/takeWhile";
   styleUrls: ['./projects-list.component.css']
 })
 export class ProjectsListComponent implements OnInit {
-  
+
   private subscriber;
   public projects;
   private alive: boolean = true;
 
   constructor(private projectsData: ProjectServiceService,
-  private router: Router) { }
+    private router: Router) { }
 
   public ngOnInit() {
     this.projects = this.projectsData.getProjects();
-    this.subscriber = this.projectsData.test.asObservable().takeWhile(() => this.alive).subscribe(()=>{
-    setTimeout(()=>{this.projects = this.projectsData.getProjects()}, 200);
-    console.log(this.projects);
+    this.subscriber = this.projectsData.look.asObservable().takeWhile(() => this.alive).subscribe(() => {
+      setTimeout(() => { this.projects = this.projectsData.getProjects() }, 100);
     });
   }
 
   public ngOnDestroy() {
-    this.alive = false; 
+    this.alive = false;
   }
 }

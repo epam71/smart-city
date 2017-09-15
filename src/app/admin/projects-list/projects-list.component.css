@@ -25,3 +25,6 @@ ul {
     background-color: lightskyblue
 }
 
+.project_name {
+    max-width: 400px;
+}
