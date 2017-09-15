@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ProjectServiceService } from '../../core/project-service/project-service.service';
 import { Router } from '@angular/router';
 import { Project } from '../models/project.model';
-import { EditProject } from '../models/project-edit.model';
 import { AuthService } from '../../core/auth-service/auth-service.service';
 import { NgForm } from '@angular/forms';
 
@@ -34,22 +33,35 @@ export class ProjectEditComponent implements OnInit {
     const value = form.value;
     value.budget = value.budget || 0;
 
-    let projectTemp: Project = new Project(
-      this.authService.getNickname(),
-      value.projectName, value.image,
-      value.desc, value.goals, value.result, value.budget);
+    let projectTemp: any = {
+      author: this.authService.getNickname(),
+      projectName: value.projectName,
+      image: value.image,
+      desc: value.desc,
+      goals: value.goals,
+      result: value.result,
+      budget: value.budget,
+      status: 'new'
+    };
 
-    let projectEdit: EditProject = new EditProject(
-      value.projectName, value.image,
-      value.desc, value.goals, value.result, value.budget);
+    let projectEdit: any = {
+      projectName: value.projectName,
+      image: value.image,
+      desc: value.desc,
+      goals: value.goals,
+      result: value.result,
+      budget: value.budget,
+      status: 'edited'
+    }
 
     if (this.tempId.id == null) {
-      this.putProject.postProject(projectTemp)
+      this.putProject.postProject(1)
         .subscribe(
         (response) => {
           this.router.navigate(['/projects']);
         },
         (error) => {
+          console.error(error);
           this.errorMessage = error;
         });
     } else {
@@ -59,17 +71,19 @@ export class ProjectEditComponent implements OnInit {
           this.router.navigate(['/projects/' + this.tempId.id]);
         },
         (error) => {
+          console.error(error);
           this.errorMessage = error;
         });
     }
   }
 
-  test(){
+  test() {
     this.slForm.reset();
     this.editMode = false;
   }
 
   ngOnInit() {
+    console.log(this.authService.handleAuthentication());
     if (this.tempId.id != null) {
       this.editMode = true;
       this.project = this.putProject.getProject(this.tempId.id);

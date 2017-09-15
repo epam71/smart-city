@@ -1,4 +1,10 @@
-* {
+button,
+button:active,
+button:focus {
+  outline: none;
+}
+
+:focus {
   outline: none;
 }
 
@@ -17,6 +23,39 @@
   padding: 20px;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
   text-align: right;
+}
+
+.sort_name {
+  color: #ccc;
+}
+
+.select-style {
+  border: 1px solid #ccc;
+  padding: 7px;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-right: 5px;
+  background: #fafafa 90% 50%;
+  text-align: center;
+}
+
+.select-style select {
+  text-align: center;
+  padding: 5px 8px;
+  background: red;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  background-image: none;
+  -webkit-appearance: none;
+}
+
+.select-style select:focus {
+  outline: none;
+}
+
+.my_projects {
+  text-align: left;
 }
 
 .sort_block_select {
@@ -38,7 +77,6 @@
 
 .project_block {
   min-width: 250px;
-  /* max-width: 347px; */
   margin-bottom: 10px;
   margin: 5px;
   text-align: center;
@@ -53,13 +91,10 @@
 
 .img_block {
   position: relative;
-  /* background: red; */
   padding: 0 0 calc(5/345*100%);
-  /* padding: 0 0 calc(230/345*100%); */
 }
 
 .img_block img {
-  /* position: absolute; */
   max-width: 100%;
 }
 
@@ -74,7 +109,7 @@
 
 .project_desc {
   padding: 5px;
-  overflow: hidden; 
+  overflow: hidden;
   text-overflow: ellipsis;
   min-height: 60px;
 }
