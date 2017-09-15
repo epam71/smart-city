@@ -8,6 +8,9 @@ ul {
 
 .pending-projects, .active-projects {
     width: 250px;
+    border: 1px solid grey;
+    background-color: grey;
+    color: white;
 }
 
 .circle {
@@ -27,4 +30,20 @@ ul {
 
 .project_name {
     max-width: 400px;
+}
+
+div.glyphicon {
+    border-radius: 2px;
+    background-color: white;
+    border: 1px solid grey;
+    padding: 5px;
+    margin: 5px 0 5px 0;
+}
+
+div.glyphicon:hover {
+    box-shadow: 0 0 2px lightseagreen;
+}
+
+div.glyphicon:active {
+    text-shadow: 0 0 2px lightseagreen;
 }

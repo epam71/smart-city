@@ -6,7 +6,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../core/auth-service/auth-service.service';
-import { EditProject } from '../../projects/models/edit-project.model';
+
 
 
 @Component({
@@ -60,11 +60,16 @@ export class ProjectsEditComponent implements OnInit {
   saveChanges(form: NgForm) {
     const value = form.value;
 
-    let projectEdit: EditProject = new EditProject(
-      value.projectName, value.image,
-      value.desc, value.goals, value.result, value.budget);
-
-    this.projectData.putProject(this.projectId.id, projectEdit)
+    let project: any = {
+      projectName: value.projectName, 
+      image: value.image,
+      desc: value.desc, 
+      goals: value.goals, 
+      result: value.result, 
+      budget: value.budget
+    }
+    
+    this.projectData.putProject(this.projectId.id, project)
       .subscribe(
       () => {
         this.router.navigate(['/admin/projects/' + this.projectId.id]);

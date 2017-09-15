@@ -35,18 +35,32 @@
     width: 85px;
 }
 
-.glyphicon:hover {
-    text-shadow: 0 0 2px lightseagreen;
-}
-
-.glyphicon {
-    margin: 8px;
-}
-
 .ng-valid[required], .ng-valid.required  {
  border-left: 5px solid #42A948 ;
 }
 
 .ng-invalid:not(form)  {
  border-left: 5px solid #a94442 ;
+}
+
+.project_date {
+    color: darkgrey;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+div.glyphicon {
+    border-radius: 2px;
+    background-color: white;
+    border: 1px solid grey;
+    padding: 5px;
+    margin: 5px 0 5px 0;
+}
+
+div.glyphicon:hover {
+    box-shadow: 0 0 2px lightseagreen;
+}
+
+div.glyphicon:active {
+    text-shadow: 0 0 2px lightseagreen;
 }

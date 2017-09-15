@@ -2,7 +2,8 @@
    <div class="row">
       <p  class="status col-sm-2 col-sm-offset-10">{{ (project | async)?.status }}</p>
       <div class="glyphicon glyphicon-trash" (click)="deleteProject()"></div>
-      <div *ngIf="!editable" class="edit_block glyphicon glyphicon-pencil" (click)="editProject()"></div>    
+      <div *ngIf="!editable" class="edit_block glyphicon glyphicon-pencil" (click)="editProject()"></div>  
+      <div class="project_date">Created at: {{(project | async)?.date | date}}</div>  
       <button *ngIf="(project | async)?.approved === false" class="approve-project" (click)="approveProject()">approve</button>
       <button *ngIf="(project | async)?.approved" class="close-project" (click)="closeProject()">close</button>    
       
@@ -10,7 +11,7 @@
       <div class="img_block col-sm-12">
          <img class="img-responsive" src="http://www.personal.psu.edu/users/n/y/nys5290/Project-Image.jpg" alt="">
       </div>
-
+      
       <form class="form-horizontal" *ngIf="editable" (ngSubmit)="saveChanges(form)" #form="ngForm">
 
       <div class="form-group">
