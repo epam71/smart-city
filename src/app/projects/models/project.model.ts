@@ -6,9 +6,7 @@ export interface Project {
     desc: any,
     goals: string,
     result: string,
-    rating: number,
-    date: Date,
     budget: number,
     status: string,
-    approved: boolean;
+    rating: number
 }

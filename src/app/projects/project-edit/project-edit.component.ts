@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProjectServiceService } from '../../core/project-service/project-service.service';
 import { Router } from '@angular/router';
 import { Project } from '../models/project.model';
+import { ProjectEdit } from '../models/project-edit.model';
 import { AuthService } from '../../core/auth-service/auth-service.service';
 import { NgForm } from '@angular/forms';
 
@@ -33,7 +34,7 @@ export class ProjectEditComponent implements OnInit {
     const value = form.value;
     value.budget = value.budget || 0;
 
-    let projectTemp: any = {
+    let projectTemp: Project = {
       author: this.authService.getNickname(),
       projectName: value.projectName,
       image: value.image,
@@ -41,10 +42,11 @@ export class ProjectEditComponent implements OnInit {
       goals: value.goals,
       result: value.result,
       budget: value.budget,
-      status: 'new'
+      status: 'new',
+      rating: 0
     };
 
-    let projectEdit: any = {
+    let projectEdit: ProjectEdit = {
       projectName: value.projectName,
       image: value.image,
       desc: value.desc,
