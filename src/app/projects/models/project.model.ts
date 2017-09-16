@@ -1,13 +1,11 @@
 export interface Project {
-    author: string,
+    author?: string,
     projectName: string,
     image: string,
     desc: any,
     goals: string,
     result: string,
-    rating: number,
-    date: Date,
+    rating?: number,
     budget: number,
-    status: string,
-    approved: boolean;
+    status: string;
 }

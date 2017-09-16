@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ContactServiceService } from '../../core/contact-service/contact-service.service';
+import { Router } from '@angular/router';
+import { Messages } from '../../models/messages.model';
 
 @Component({
   selector: 'app-contacts-list',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactsListComponent implements OnInit {
 
-  constructor() { }
+  public messages;
+
+  constructor(private messageData: ContactServiceService,
+    private router: Router) { }
 
   ngOnInit() {
+    this.messages = this.messageData.getMessages();
   }
 
 }

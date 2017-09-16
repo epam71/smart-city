@@ -8,5 +8,42 @@
     </ul>
   </div> 
 
-<div>Here are contacts</div>
+<div class="row main-content">
+        <div class="col-sm-11 col-sm-offset-1 header">
+          <p>Admin Messages</p>
+        </div>
+
+        <div class="col-sm-11 col-sm-offset-1 header_block">
+          <p class="header_section">
+            <span>User</span>
+          </p>
+          <p class="header_section">
+            <span>Email</span>
+          </p>
+          <p class="header_section">
+            <span>Content</span>
+          </p>
+          <p class="header_section">
+            <span>Pub date</span>
+          </p>          
+        </div>
+
+        <div *ngFor="let key of (messages | async)" class="col-sm-11 col-sm-offset-1 messages_block">
+          <p class="header_section">
+            <span>{{ key.author }}</span>
+          </p>
+          <p class="header_section">
+            <span> {{ key.email }} </span>
+          </p>
+          <p class="header_section">
+            <span> {{ key.body }}</span>
+          </p>
+          <p class="header_section">
+            <span> date </span>
+          </p>
+          <p class="header_section edit"> Edit </p>
+          <p class="header_section delete"> Delete </p>
+        </div>
+
+</div>
 </div>

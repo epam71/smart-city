@@ -1,4 +1,5 @@
 <div class="container-fluid projects_block_main">
+
    <div class="nav_block">
       <ul class="nav nav-tabs">
          <li role="nav" routerLinkActive="active"><a routerLink="/admin/projects">Home</a></li>
@@ -12,24 +13,24 @@
       <div class=" col-sm-5 description_block">
         <div class="header-block">
          <div class="btn btn-sm btn-outline-primary active-projects">Active projects</div>
-         <div class="glyphicon glyphicon-sort-by-alphabet"></div>
-         <div class="glyphicon glyphicon-sort-by-order"></div>
+         <div class="glyphicon glyphicon-sort-by-alphabet" (click)="sortByName()"></div>
+         <div class="glyphicon glyphicon-sort-by-order" (click)="sortByDate()"></div>
         </div>
          <ul>
-            <li *ngFor="let key of (projects | async) | filterApproval:true | filterStatus:'active'" class="project_block">
+            <li *ngFor="let key of (projects | async) | filterApproval:true | filterStatus:'active' | sortBy:prop:'normal'" class="project_block">
                <a [routerLink]="['/admin/projects', key._id]">
                <span class="project_name">
-               {{key.projectName}}
+               {{key.projectName | uppercase }}
                </span>
                </a>
             </li>
          </ul>
          <button class="btn btn-sm btn-outline-primary pending-projects">Pending approval</button>
          <ul>
-            <li *ngFor="let key of (projects | async) | filterApproval:false" class="project_block">
+            <li *ngFor="let key of (projects | async) | filterApproval:false | sortBy:prop:'normal'" class="project_block">
                <a [routerLink]="['/admin/projects', key._id]">
                <span class="project_name">
-               <span class="circle" [class.new]="key.status === 'new'" [class.edited]="key.status === 'edited'"></span> {{key.projectName}}
+               <span class="circle" [class.new]="key.status === 'new'" [class.edited]="key.status === 'edited'"></span> {{key.projectName | uppercase }}
                </span>
                </a>
             </li>
@@ -45,4 +46,4 @@
 </div>    
       <router-outlet></router-outlet>
    </div>
-</div>
+  </div>

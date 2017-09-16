@@ -27,7 +27,9 @@ export class ProjectServiceService {
     }
 
     getProjects(): Observable<Project[]> {
-        return this.http.get(PATH)
+
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        return this.http.get(PATH, {headers: headers})
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);

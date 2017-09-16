@@ -1,0 +1,55 @@
+.header_section {
+    display: inline-block;
+    margin-right: 40px;
+    margin-top: 40px;
+  overflow: hidden;
+}
+
+
+.header_section:nth-child(3) {
+    margin-right: 300px;
+    max-width: 25%;
+    max-height: 50px;
+    text-overflow: ellipsis;
+    margin-bottom: 12px;
+    cursor: pointer;
+    word-break: break-all;
+    overflow:hidden;
+    white-space: nowrap;
+}
+
+.header_section:nth-child(3):hover {
+    overflow: visible; 
+    white-space: normal;
+    height:auto; 
+}
+
+.header_section:nth-child(2) {
+    margin-right: 100px;
+    max-width: 20%;
+    max-height: 40px;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+    overflow:hidden;
+}
+
+.header_section:nth-child(2):hover {
+    overflow: visible; 
+    white-space: normal;
+    width:auto;
+}
+
+.header-block {
+    margin: 0 auto;
+}
+
+.header {
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+.edit, .delete {
+    margin: 10px;
+}

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Messages } from '../../models/messages.model'
+import { AuthService } from '../../core/auth-service/auth-service.service';
+
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -13,7 +15,7 @@ const PATH = 'https://smart-city-lviv.herokuapp.com/api/messages/';
 @Injectable()
 export class ContactServiceService {
     
-    constructor(private http: Http) {
+    constructor(private http: Http, private auth: AuthService) {
         this.http = http;
     }
 
@@ -25,14 +27,18 @@ export class ContactServiceService {
     }
 
     getMessages(): Observable<Messages[]> {
-        return this.http.get(PATH)
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        this.auth.setAuthHeader(headers);
+        return this.http.get(PATH, { headers: headers })
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
     };
 
     getMessage(id): Observable<Messages> {
-        return this.http.get(PATH + id)
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        this.auth.setAuthHeader(headers);
+        return this.http.get(PATH + id, { headers: headers })
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
@@ -40,6 +46,7 @@ export class ContactServiceService {
 
     postMessage(message: any): Observable<Messages> {
         const headers = new Headers({ 'Content-Type': 'application/json' });
+        this.auth.setAuthHeader(headers);
         return this.http.post(PATH, message, { headers: headers })
             .map((response: Response) => {
                 return <any>response.json();
@@ -49,6 +56,8 @@ export class ContactServiceService {
 
     putMessage(id: number, messageEdit): Observable<Messages> {
         const headers = new Headers({ 'Content-Type': 'application/json' });
+        this.auth.setAuthHeader(headers);
+
         return this.http.put(PATH + id, messageEdit, { headers: headers })
             .map((response: Response) => {
                 return <any>response.json();
@@ -58,6 +67,8 @@ export class ContactServiceService {
 
     deleteMessage(id: number): Observable<Messages> {
         const headers = new Headers({ 'Content-Type': 'application/json' });
+        this.auth.setAuthHeader(headers);
+
         return this.http.delete(PATH + id, { headers: headers })
             .map((response: Response) => {
                 return <any>response.json();

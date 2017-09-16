@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Http,
+  Headers, 
+  RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import * as auth0 from 'auth0-js';
@@ -7,6 +10,17 @@ import * as auth0 from 'auth0-js';
 const rootRole = 'root';
 const investorRole = 'investor';
 const userRole = 'user'; 
+const GUEST_TOKEN = 'guest';
+const ACCESS_TOKEN = 'access_token'
+const mapKeyToStoreKey = {
+  'accessToken': 'access_token',
+  'idToken': 'id_token',
+  'name': 'user_name',
+  'nickname': 'user_nickname',
+  'role': 'user_role',
+  'email': 'user_email',
+};
+
 //--------------------------------------------------------------------------------
 @Injectable()
 export class AuthService {
@@ -29,7 +43,8 @@ export class AuthService {
     scope: 'openid'
   });   
   //--------------------------------------------------------------------------------  
-  constructor(private router: Router) {
+  constructor(private router: Router,
+    private http: Http) {
     this.restoreSession();
   }
   //--------------------------------------------------------------------------------  
@@ -60,12 +75,18 @@ export class AuthService {
   getEmail(): string {
     return this.email;
   } 
+  //--------------------------------------------------------------------------------
+  getAccesToken(): string {
+    return this.accessToken;
+  } 
   //-----------------------------------------------------------------------------
   login(): void {
     this.auth0.authorize();
   }
   //-----------------------------------------------------------------------------
   public handleAuthentication(): void {
+    let selfAuth0 = this.auth0;
+
     this.auth0.parseHash((err, authResult) => {
       if (err) {
         this.router.navigate(['/comp2']);
@@ -88,48 +109,53 @@ export class AuthService {
   }     
   //-----------------------------------------------------------------------------  
   private setSession() {
-    localStorage.setItem('access_token', this.accessToken);
-    localStorage.setItem('id_token', this.idToken);
-    localStorage.setItem('user_name', this.name);
-    localStorage.setItem('user_nickname', this.nickname);
-    localStorage.setItem('user_role', this.role);
-    localStorage.setItem('user_email', this.email);
+    for ( let prop in mapKeyToStoreKey) {
+      localStorage.setItem(mapKeyToStoreKey[prop], this[prop]);
+    }  
   }
   //-----------------------------------------------------------------------------  
   private restoreSession() {
-    let access_token = localStorage.getItem('access_token');
-
-    if (access_token) {
-      this.accessToken = access_token;
-      this.idToken = localStorage.getItem('id_token');
-      this.name = localStorage.getItem('user_name');
-      this.nickname = localStorage.getItem('user_nickname');
-      this.role = localStorage.getItem('user_role');
-      this.email = localStorage.getItem('user_email');
+    if (localStorage.getItem(ACCESS_TOKEN)) {
+      for ( let prop in mapKeyToStoreKey) {
+        this[prop] = localStorage.getItem(mapKeyToStoreKey[prop]);
+      }
       this.changeStatus();
     }
   }
   //-----------------------------------------------------------------------------  
   logout(): void {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('user_name');
-    localStorage.removeItem('user_nickname');
-    localStorage.removeItem('user_role');
-    localStorage.removeItem('user_email');
-    this.name = '';
-    this.nickname = '';
-    this.role = '';
-    this.email = '';
+    for ( let prop in mapKeyToStoreKey) {
+      this[prop] = '';
+      localStorage.removeItem(mapKeyToStoreKey[prop]);
+    }
     this.changeStatus();
   }
   //-----------------------------------------------------------------------------  
-  private changeStatus() {
+  private changeStatus(): void {
     this.eventEmmiter.next('');
   }
   //-----------------------------------------------------------------------------  
   getEventEmitter() {
     return this.eventEmmiter.asObservable();
+  }
+  //-----------------------------------------------------------------------------  
+  setAuthHeader(headers:Headers): void {
+    let innerToken = this.isLogedIn() ?
+      btoa(`${this.email}:${this.accessToken}`) :
+      btoa(`${GUEST_TOKEN}:${GUEST_TOKEN}`);
+
+    headers.append('Authorization', `Basic ${innerToken}`);    
+  }
+  //-----------------------------------------------------------------------------  
+  testServerAuth(): void {
+    let headers = new Headers();
+    this.setAuthHeader(headers);        
+    let options = new RequestOptions({ headers: headers });		
+    
+    this.http.get('http://localhost:8000/api/auth-test', options).subscribe(val => {
+      let t = val;
+    });
+
   }
   //-----------------------------------------------------------------------------  
 }
