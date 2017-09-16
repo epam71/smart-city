@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+// import Router from '@angular/router';
 
 @Component({
   selector: 'app-static',
@@ -6,10 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./static.component.css']
 })
 export class StaticComponent implements OnInit {
+  subscribeImg: string;
+  mainVideo: string;
+  aboutImg: string;
+  constructor() {
+    this.subscribeImg = '../assets/images/lviv-city.jpg',
+    this.aboutImg = '../assets/images/content_about.jpg',
+    this.mainVideo = '../assets/media/LvivNightTimelapse.mp4'
+  }
 
-  constructor() { }
+  // constructor(private router: Router){
+
+  // }
 
   ngOnInit() {
   }
 
+  // onLoadServers(){
+  //   this.router.navigate(['/news']);
+  // }
 }

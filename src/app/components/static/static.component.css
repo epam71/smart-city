@@ -1,0 +1,196 @@
+
+#video-block{
+	padding:0;
+}
+#video {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+}
+
+#my-video {
+    position: absolute;
+    z-index: 1;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+}
+
+.text-center {
+	position: relative;
+	z-index: 5;
+  padding: 170px 0;
+}
+
+.text-center h2 {
+    font-size: 60px;
+    font-weight: 100;
+    text-transform: uppercase;
+    color: #fff;
+}
+.text-center h3 {
+    font-size: 35px;
+    font-weight: 300;
+    margin-top: 60px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+}
+.text-center strong {
+    color: #f1505b;
+	font-weight: 600;
+}
+
+/*fact-counter*/
+
+h2 {
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 0 0 20px;
+}
+
+.about-us .fact-counter {
+  margin: 33px 0 0;
+  overflow: hidden;
+  text-align: center;
+}
+.about-us .fact-counter ul li.single-fact-counter {
+  display: inline-block;
+  text-align: center;
+  margin-right: 50px;
+  margin-top: 16px;
+}
+.about-us .fact-counter ul li.single-fact-counter:last-child {
+  margin-right: 0px;
+}
+.about-us .fact-counter ul li.single-fact-counter .icon-holder {
+  margin: 0 0 20px;
+}
+.about-us .fact-counter ul li.single-fact-counter .icon-holder span::before {
+  background: #fff none repeat scroll 0 0;
+  border-radius: 50%;
+  box-shadow: 0px 5px 8px 4px rgba(0, 0, 0, 0.28);
+  color: #292929;
+  display: inline-block;
+  font-size: 36px;
+  height: 70px;
+  line-height: 21px;
+  padding: 23px 0;
+  text-align: center;
+  width: 70px;
+  -webkit-transition: all 500ms ease;
+  transition: all 500ms ease;
+}
+.about-us .fact-counter ul li.single-fact-counter:hover .icon-holder span::before{
+  background: #ee3733;
+  color: #fff;
+}
+.about-us .fact-counter ul li.single-fact-counter .timer {
+  color: #ee3733;
+  font-size: 30px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+}
+.about-us .fact-counter ul li.single-fact-counter i.fa-plus {
+  color: #ee3733;
+  font-size: 17px;
+  font-weight: 100;
+  position: relative;
+  top: -3px;
+}
+.about-us .fact-counter ul li.single-fact-counter h3 {
+  color: #292929;
+  font-size: 14px;
+  text-transform: capitalize;
+  font-weight: 400;
+  margin: 2px 0 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.about-us {
+    background: rgba(248, 249, 249, 0.69);
+    position: relative;
+    padding: 70px 0 30px;
+}
+
+.about-us .decor {
+  position: relative;
+  display: block;
+  height: 3px;
+  width: 74px;
+  margin: 9px 0 30px 20px;
+}
+.about-us .decor:before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ee3733;
+}
+.fa-plus:before {
+  content: "\f067";
+}
+.flaticon-social:before {
+  content: "\f118";
+}
+
+.flaticon-landscape:before {
+  content: "\f114";
+}
+
+.flaticon-innovation:before {
+  content: "\f10c";
+}
+
+/* Subscribe Section
+--------------------------------*/
+#subscribe {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)) fixed center center;
+  background-size: cover;
+  /*padding: 80px 0;*/
+}
+
+#subscribe .subscribe-shadow{
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+    background-size: cover;
+    padding: 80px 0;
+}
+
+#subscribe .subscribe-title {
+  color: #ee3733;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+#subscribe .subscribe-text {
+  color: #fff;
+}
+
+#subscribe .subscribe-btn-container {
+  text-align: center;
+  padding-top: 20px;
+}
+
+#subscribe .subscribe-btn, .custom-btn{
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 2px;
+  transition: 0.5s;
+  margin: 10px;
+  border: 2px solid #fff;
+  background: none;
+  color: #fff;
+}
+
+#subscribe .subscribe-btn:hover, .custom-btn:hover {
+  background: #ee3733;
+  border: 2px solid #ee3733;
+}

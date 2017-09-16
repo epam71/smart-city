@@ -6,8 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./news.component.css']
 })
 export class NewsComponent implements OnInit {
-
-  constructor() { }
+  img1: string;
+  img2: string;
+  img3: string;
+  constructor() {
+    this.img1 = '../assets/images/news1.jpg',
+    this.img2 = '../assets/images/news2.jpg',
+    this.img3 = '../assets/images/news3.jpg'
+  }
 
   ngOnInit() {
   }
