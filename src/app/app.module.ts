@@ -15,9 +15,7 @@ import { AuthCallbackComponent } from './components/auth-callback/auth-callback.
 
 import { AppRoutes } from './app.routes';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
-import { SliderComponent } from './components/static/slider/slider.component';
-import { WhatWeBuildComponent } from './components/static/what-we-build/what-we-build.component';
-import { SignUpComponent } from './components/static/sign-up/sign-up.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
 
 import { AlertModule } from 'ngx-bootstrap';
 
@@ -31,9 +29,7 @@ import { AlertModule } from 'ngx-bootstrap';
     AuthCallbackComponent,
     StaticComponent,
     ContactUsComponent,
-    SliderComponent,
-    WhatWeBuildComponent,
-    SignUpComponent
+    NavigationComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,8 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contact-us.component.css']
 })
 export class ContactUsComponent implements OnInit {
-
-  constructor() { }
+  contactImg: string;
+  constructor() {
+    this.contactImg = '../assets/images/lviv-contact.jpg'
+   }
 
   ngOnInit() {
   }
