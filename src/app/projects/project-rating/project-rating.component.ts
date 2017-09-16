@@ -11,14 +11,12 @@ import { AuthService } from '../../core/auth-service/auth-service.service';
 export class RatingProjectComponent implements OnInit {
 
 
-
-  
   @Input('ratingObj') ratingObjInfo;
-  rating;
-  constructor(private ratingData: ProjectServiceService,
-              private authService: AuthService) {
 
-  }
+  rating;
+
+  constructor(private ratingData: ProjectServiceService,
+    private authService: AuthService) {}
 
   changeRating() {
 
@@ -27,19 +25,13 @@ export class RatingProjectComponent implements OnInit {
     })
       .subscribe(
       (response) => {
-        console.log(response);
         return this.ratingObjInfo.rating = response.rating;
       },
       (error) => {
-        console.log(error);
-      }
-      )
-    console.log('test');
+        console.error(error);
+      });
   }
 
-  ngOnInit() {
-    console.log(this.authService.getEmail());
-    // this.rating = this.ratingData.getProject(this.ratingObjInfo._id);
-  }
+  ngOnInit() { }
 
 }

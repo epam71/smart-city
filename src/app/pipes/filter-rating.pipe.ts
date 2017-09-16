@@ -7,7 +7,7 @@ import { AuthService } from "../core/auth-service/auth-service.service";
 })
 export class SortBy implements PipeTransform {
 
-    transform(data: any, value: any, reverse: boolean): any {
+    transform(data: any, value: any, reverse: string): any {
 
         if (data != null) {
             if (value === 'all') {
@@ -30,7 +30,7 @@ export class SortBy implements PipeTransform {
                     return 0;
                 });
 
-                if (reverse === true) {
+                if (reverse === 'reverse') {
                     return data.reverse();
                 }
                 return data;
