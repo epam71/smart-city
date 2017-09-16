@@ -10,12 +10,14 @@ import { CommentsProjectComponent } from './project-comments/project-comments.co
 import { SortBy } from '../pipes/filter-rating.pipe';
 import { FormsModule } from '@angular/forms';
 import { ShortenPipe } from '../pipes/shorten.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   imports: [
     CommonModule,
     routing,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   declarations: [RatingProjectComponent,
     CommentsProjectComponent,
