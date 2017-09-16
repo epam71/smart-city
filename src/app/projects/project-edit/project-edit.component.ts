@@ -77,7 +77,7 @@ export class ProjectEditComponent implements OnInit {
     }
   }
 
-  test() {
+  clearForm() {
     this.slForm.reset();
     this.editMode = false;
   }
