@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { NewsServiceService } from '../../core/news-service/news-service.service';
+
+import { News } from "../models/news.model";
 
 @Component({
   selector: 'app-news',
@@ -6,10 +10,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./news.component.css']
 })
 export class NewsComponent implements OnInit {
+  news;
+  newsId;
 
-  constructor() { }
+  constructor(private service: NewsServiceService,
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.route.params
+      .subscribe(
+        (params: Params) => {
+          this.newsId = params;
+         this.news= this.service.getNewsById(this.newsId.id);   
+        }
+      );
   }
 
 }
