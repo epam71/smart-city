@@ -6,10 +6,10 @@ import { Http,
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import * as auth0 from 'auth0-js';
-//--------------------------------------------------------------------------------
-const rootRole = 'root';
-const investorRole = 'investor';
-const userRole = 'user'; 
+
+const ROOT_ROLE = 'root';
+const INVESTOR_ROLE = 'investor';
+const USER_ROLE = 'user'; 
 const GUEST_TOKEN = 'guest';
 const ACCESS_TOKEN = 'access_token'
 const mapKeyToStoreKey = {
@@ -21,7 +21,7 @@ const mapKeyToStoreKey = {
   'email': 'user_email',
 };
 
-//--------------------------------------------------------------------------------
+
 @Injectable()
 export class AuthService {
 
@@ -33,7 +33,7 @@ export class AuthService {
   private role: string = '';
   private idToken: string = '';
   private accessToken: string = '';
-  //--------------------------------------------------------------------------------  
+
   auth0 = new auth0.WebAuth({
     clientID: 'C6LIYADABj55LTJMlwDjjtfb1147MnKi',
     domain: 'smart-city-lviv.eu.auth0.com',
@@ -42,48 +42,48 @@ export class AuthService {
     redirectUri: 'http://localhost:4200/auth/callback',
     scope: 'openid'
   });   
-  //--------------------------------------------------------------------------------  
+
   constructor(private router: Router,
     private http: Http) {
     this.restoreSession();
   }
-  //--------------------------------------------------------------------------------  
+
   isAdmin(): boolean {
-    return this.role === rootRole;
+    return this.role === ROOT_ROLE;
   }
-  //--------------------------------------------------------------------------------  
+
   isInvestor(): boolean {
-    return this.role === investorRole;
+    return this.role === INVESTOR_ROLE;
   }
-  //--------------------------------------------------------------------------------
+
   isLogedIn() {
     return this.role !== '';
   }
-  //--------------------------------------------------------------------------------
+
   getNickname(): string {
     return this.nickname;
   }
-  //--------------------------------------------------------------------------------
+
   getName(): string {
     return this.name;
   }
-  //--------------------------------------------------------------------------------
+
   getRole(): string {
     return this.role;
   }
-  //--------------------------------------------------------------------------------
+
   getEmail(): string {
     return this.email;
   } 
-  //--------------------------------------------------------------------------------
+
   getAccesToken(): string {
     return this.accessToken;
   } 
-  //-----------------------------------------------------------------------------
+
   login(): void {
     this.auth0.authorize();
   }
-  //-----------------------------------------------------------------------------
+
   public handleAuthentication(): void {
     let selfAuth0 = this.auth0;
 
@@ -107,13 +107,13 @@ export class AuthService {
       }
     });
   }     
-  //-----------------------------------------------------------------------------  
+
   private setSession() {
     for ( let prop in mapKeyToStoreKey) {
       localStorage.setItem(mapKeyToStoreKey[prop], this[prop]);
     }  
   }
-  //-----------------------------------------------------------------------------  
+
   private restoreSession() {
     if (localStorage.getItem(ACCESS_TOKEN)) {
       for ( let prop in mapKeyToStoreKey) {
@@ -122,7 +122,7 @@ export class AuthService {
       this.changeStatus();
     }
   }
-  //-----------------------------------------------------------------------------  
+
   logout(): void {
     for ( let prop in mapKeyToStoreKey) {
       this[prop] = '';
@@ -130,32 +130,30 @@ export class AuthService {
     }
     this.changeStatus();
   }
-  //-----------------------------------------------------------------------------  
+
   private changeStatus(): void {
     this.eventEmmiter.next('');
   }
-  //-----------------------------------------------------------------------------  
+
   getEventEmitter() {
     return this.eventEmmiter.asObservable();
   }
-  //-----------------------------------------------------------------------------  
+
   setAuthHeader(headers:Headers): void {
     let innerToken = this.isLogedIn() ?
       btoa(`${this.email}:${this.accessToken}`) :
       btoa(`${GUEST_TOKEN}:${GUEST_TOKEN}`);
 
-    headers.append('Authorization', `Basic ${innerToken}`);    
+    headers.set('Authorization', `Basic ${innerToken}`);    
   }
-  //-----------------------------------------------------------------------------  
+
   testServerAuth(): void {
     let headers = new Headers();
     this.setAuthHeader(headers);        
     let options = new RequestOptions({ headers: headers });		
     
-    this.http.get('http://localhost:8000/api/auth-test', options).subscribe(val => {
+    this.http.get('https://smart-city-lviv.herokuapp.com/api/projects/59bbd7f67ad34b000481c758', options).subscribe(val => {
       let t = val;
     });
-
   }
-  //-----------------------------------------------------------------------------  
 }
