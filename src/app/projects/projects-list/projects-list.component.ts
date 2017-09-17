@@ -8,14 +8,15 @@ import { ProjectServiceService } from '../../core/project-service/project-servic
 })
 export class ProjectsListComponent implements OnInit {
 
-  projects;
-
   constructor(private projectsData: ProjectServiceService) { }
 
+  projects;
   userProjects = false;
+  userLogin;
   sortList = ['all', 'rating', 'name', 'date'];
+  sortTypeList = ['normal', 'reverse'];
+  sortTypeValue;
   sort = this.sortList[0];
-  sortTypeValue = 'false';
 
   selectSort(event) {
     if (event === 'name') {
@@ -28,8 +29,12 @@ export class ProjectsListComponent implements OnInit {
     this.sortTypeValue = event;
   }
 
-  showUserProjects(event) {
-    this.userProjects = event;
+  showUserProjects() {
+    if (!this.userProjects){
+      this.userProjects = true;
+    } else {
+      this.userProjects = false;
+    }
   }
 
   ngOnInit() {

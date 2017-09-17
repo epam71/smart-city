@@ -2,64 +2,73 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { News } from '../../news/models/news.model';
+import { Subject } from 'rxjs/Subject';
+import { AuthService } from "../auth-service/auth-service.service";
+
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-
 import 'rxjs/add/operator/do';
-import { Subject } from 'rxjs/Subject';
+
+
+const HTTP_NEWS = 'https://smart-city-lviv.herokuapp.com/api/news/';
+const headers = new Headers({ 'Content-Type': 'application/json' });
 
 @Injectable()
 export class NewsServiceService {
 
   _http;
   look: Subject<string> = new Subject<string>();
-
-  constructor(private http: Http) {
-    this._http = http;
+ 
+  constructor(private http: Http, 
+    private authService: AuthService) {
+    this._http= http;
   }
 
-  private handlError(error: Response) {
+  private handlError(error: Response){
     let message = `Error status ${error.status} at ${error.url}`;
     return Observable.throw(message);
-  }
+}
+ 
+ getNews(): Observable<News[]> {
+  this.authService.setAuthHeader(headers);
+  return this.http.get(HTTP_NEWS, { headers: headers })
+  .map((response: Response) => {
+      return response.json();
+  }).catch(this.handlError);
+};
 
-  public getNews(): Observable<any> {
-    return this.http.get('https://smart-city-lviv.herokuapp.com/api/news')
+postNews(news: any): Observable<News> {
+  this.authService.setAuthHeader(headers);
+  return this.http.post(HTTP_NEWS, news, { headers: headers })
+  .map((response: Response) => {
+      return <any>response.json();
+  })
+  .catch(this.handlError);
+};
+
+getNewsById (id): Observable<News> {
+  this.authService.setAuthHeader(headers);
+  return this._http.get(HTTP_NEWS +id, { headers: headers })
       .map((response: Response) => {
-        return response.json();
+          return response.json();
       }).catch(this.handlError);
-  };
+};
 
-  getNewsById(id): Observable<any> {
-    return this._http.get('https://smart-city-lviv.herokuapp.com/api/news/' + id)
-      .map((response: Response) => {
-        return response.json();
-      }).catch(this.handlError);
-  };
+updateNews (id, newsEdit): Observable<News> {
+  this.authService.setAuthHeader(headers);
+  return this.http.put(HTTP_NEWS + id, newsEdit, { headers: headers }) 
+    .catch(this.handlError);
+}
 
-  postNews(news: any): Observable<any> {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    return this.http.post('https://smart-city-lviv.herokuapp.com/api/news', news, { headers: headers })
-      .map((response: Response) => {
-        return <any>response.json();
-      })
-      .catch(this.handlError);
-  };
-
-  public updateNews(id: number, newsEdit): Observable<any> {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    return this.http.put('https://smart-city-lviv.herokuapp.com/api/news/' + id, newsEdit, { headers: headers })
-      .catch(this.handlError);
-  }
-
-  deleteNews(id: number): Observable<any> {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    return this.http.delete('https://smart-city-lviv.herokuapp.com/api/news/' + id, { headers: headers })
-      .map((response: Response) => {
-        return <any>response.json();
-      })
-      .catch(this.handlError);
-  };
+deleteNews(id): Observable<News> {
+  this.authService.setAuthHeader(headers);
+  return this.http.delete(HTTP_NEWS + id, { headers: headers })
+  .map((response: Response) => {
+      return <any>response.json();
+  })
+  .catch(this.handlError);
+};
 
 }

@@ -15,6 +15,14 @@
   color: #BA0000;
 }
 
-input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched{
-  border: 2px solid #C70000;
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948;
 }
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442;
+}
+
+/* input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched{
+  border: 2px solid #C70000;
+} */

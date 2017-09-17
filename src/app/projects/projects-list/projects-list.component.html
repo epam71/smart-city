@@ -1,17 +1,32 @@
 <div class="container projects_block_main">
-  <div class="sort_block">
-    <select class="selectpicker sort_block_select" (change)="selectSort($event.target.value)">
+  <div class="row sort_block">
+    <div class="col-md-2 col-sm-2">
+      <div class="my_projects">
+        <button type="button" class="btn btn-default" (click)="showUserProjects($event.target.checked)" *ngIf="!userProjects else allProjects">My Projects</button>
+        <ng-template #allProjects>
+          <button type="button" class="btn btn-default" (click)="showUserProjects($event.target.checked)">All Projects</button>
+        </ng-template>
+      </div>
+    </div>
+    <div class="col-md-10 col-sm-10">
+      <span class="sort_name">sort by: </span>
+      <span class="select-style">
+    <select class="sort_block_select" (change)="selectSort($event.target.value)">
   <option *ngFor="let key of sortList" >{{key}}</option>
 </select>
-    <input type="checkbox" id="subscribeNews" name="subscribe" *ngIf="sort !== 'all'" (change)="sortType($event.target.checked)">
-    <label for="subscribeNews" *ngIf="sort !== 'all'">ascending order</label>
-    <input type="checkbox" id="filterUser" name="filterUser" (change)="showUserProjects($event.target.checked)">
-    <label for="filterUser">My projects</label>
-    <button type="submit" class="btn btn-success" [routerLink]="['new']">Add Project</button>
+        </span>
+      <span class="select-style" *ngIf="sort !== 'all'">
+        <select class="sort_block_select" (change)="sortType($event.target.value)">
+            <option *ngFor="let key of sortTypeList" >{{key}}</option>
+          </select>
+    </span>
+      <button type="submit" class="btn btn-success" routerLink="new">Add Project</button>
+    </div>
   </div>
   <div class="projects_block">
     <div class="row">
-      <div class="col-md-4 col-sm-6 project_block_main" *ngFor="let key of (projects | async) | filterUserProjects:userProjects | sortBy:sort:sortTypeValue">
+      <div class="col-md-4 col-sm-6 project_block_main" *ngFor="let key of (projects | async) |
+       filterUserProjects:userProjects | sortBy:sort:sortTypeValue | paginate: { itemsPerPage: 10, currentPage: p }">
 
         <div class="project_block">
           <a [routerLink]="['/projects', key._id]">
@@ -19,7 +34,6 @@
               <div class="status_block" *ngIf="userProjects">
                 <span [ngClass]="key.approved ? 'status_text_yes' : 'status_text_no'"> {{ key.approved ? 'approved' : 'not approved' }}</span>
               </div>
-              <!-- <img src="(project | async)?.image" alt=""> -->
               <img src="http://arenalviv.com.ua/uploads/images/pages/461/750/img_7467small.jpg" alt="">
             </div>
             <div class="info_block">
@@ -45,5 +59,8 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="pagination_block">
+      <pagination-controls class="pagination" (pageChange)="p =$event"></pagination-controls>
     </div>
   </div>

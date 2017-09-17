@@ -5,7 +5,7 @@ export interface Project {
     desc: any,
     goals: string,
     result: string,
-    rating?: number,
     budget: number,
-    status: string;
+    status: string,
+    rating?: number
 }
