@@ -16,24 +16,26 @@
          <div class="glyphicon glyphicon-sort-by-alphabet" (click)="sortByName()"></div>
          <div class="glyphicon glyphicon-sort-by-order" (click)="sortByDate()"></div>
         </div>
-         <ul>
-            <li *ngFor="let key of (projects | async) | filterApproval:true | filterStatus:'active' | sortBy:prop:'normal'" class="project_block">
+         <ul class="list_part">
+            <li *ngFor="let key of (projects | async) | filterApproval:true | filterStatus:'active' | slice:0:showActive | sortBy:prop:'normal'; let i=index" class="project_block">
                <a [routerLink]="['/admin/projects', key._id]">
                <span class="project_name">
                {{key.projectName | uppercase }}
                </span>
                </a>
             </li>
+            <div class="show_more" (click)="showMore('active')">Show more</div>
          </ul>
          <button class="btn btn-sm btn-outline-primary pending-projects">Pending approval</button>
-         <ul>
-            <li *ngFor="let key of (projects | async) | filterApproval:false | sortBy:prop:'normal'" class="project_block">
+         <ul class="list_part">
+            <li *ngFor="let key of (projects | async) | filterApproval:false | slice:0:showPending | sortBy:prop:'normal'; let i=index" class="project_block">
                <a [routerLink]="['/admin/projects', key._id]">
                <span class="project_name">
                <span class="circle" [class.new]="key.status === 'new'" [class.edited]="key.status === 'edited'"></span> {{key.projectName | uppercase }}
                </span>
                </a>
             </li>
+            <div class="show_more" (click)="showMore('pending')">Show more</div>
          </ul>
       </div>
       

@@ -12,7 +12,9 @@ import "rxjs/add/operator/takeWhile";
 
 export class ProjectsListComponent implements OnInit {
 
-  prop = 'all';
+  private showPending = 5;
+  private showActive = 5;
+  private prop = 'all';
   private subscriber;
   public projects;
   private alive: boolean = true;
@@ -23,9 +25,17 @@ export class ProjectsListComponent implements OnInit {
   }
 
   sortByDate() {
-    console.log('1');
     this.prop = 'date';
   }
+
+  showMore(att){
+    if (att === 'pending') {
+      this.showPending += 5;
+    } else if (att === 'active') {
+      this.showActive += 5;
+    }
+  }
+
 
   constructor(private projectsData: ProjectServiceService,
     private router: Router) { }
