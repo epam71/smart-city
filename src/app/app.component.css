@@ -2,3 +2,59 @@ body {
     background-image: url('https://gdb.rferl.org/947154A3-69C5-4365-A39A-742FA01C9FE1_w1023_r1_s.jpg');
 }
 
+/*General styles*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+p {
+    padding: 0;
+    margin: 0;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+html {
+    height: 100%
+}
+
+a,
+a:hover,
+a:focus,
+a:visited,
+a:hover {
+    text-decoration: none !important;
+}
+
+.fixed-header {
+    opacity: 0.95;
+    box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.2);
+    -o-box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.2);
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999999;
+    transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+}
+
+.clear {
+    clear: both
+}
+
+/*end og general styles*/

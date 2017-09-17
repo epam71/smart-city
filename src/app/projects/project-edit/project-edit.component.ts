@@ -33,37 +33,51 @@ export class ProjectEditComponent implements OnInit {
     const value = form.value;
     value.budget = value.budget || 0;
 
-    let project: any = {
-      projectName: value.projectName, 
+    let projectTemp: Project = {
+      author: this.authService.getNickname(),
+      projectName: value.projectName,
       image: value.image,
-      desc: value.desc, 
-      goals: value.goals, 
-      result: value.result, 
-      budget: value.budget
+      desc: value.desc,
+      goals: value.goals,
+      result: value.result,
+      budget: value.budget,
+      status: 'new',
+    };
+
+    let projectEdit: Project = {
+      projectName: value.projectName,
+      image: value.image,
+      desc: value.desc,
+      goals: value.goals,
+      result: value.result,
+      budget: value.budget,
+      status: 'edited'
     }
 
     if (this.tempId.id == null) {
-      this.putProject.postProject(project)
+      this.putProject.postProject(projectTemp)
         .subscribe(
         (response) => {
           this.router.navigate(['/projects']);
         },
         (error) => {
+          console.error(error);
           this.errorMessage = error;
         });
     } else {
-      this.putProject.patchProject(this.tempId.id, project)
+      this.putProject.patchProject(this.tempId.id, projectEdit)
         .subscribe(
         (response) => {
           this.router.navigate(['/projects/' + this.tempId.id]);
         },
         (error) => {
+          console.error(error);
           this.errorMessage = error;
         });
     }
   }
 
-  test(){
+  clearForm() {
     this.slForm.reset();
     this.editMode = false;
   }

@@ -1,14 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { AuthService } from "../core/auth-service/auth-service.service";
 
-
 @Pipe({
     name: 'filterUserProjects'
 })
 export class FilterUser implements PipeTransform {
 
-    constructor(private authService: AuthService) { }
-
+    constructor(private authService: AuthService) {}
 
     transform(value: any, arg): any {
 
@@ -25,7 +23,5 @@ export class FilterUser implements PipeTransform {
                 return value;
             }
         }
-
     }
-
 }
