@@ -8,6 +8,10 @@
         </ng-template>
       </div>
     </div>
+
+    <button (click)='authService.login()'>Login</button>
+    <button (click)='authService.logout()'>Logout</button>
+
     <div class="col-md-10 col-sm-10">
       <span class="sort_name">sort by: </span>
       <span class="select-style">
@@ -20,7 +24,7 @@
             <option *ngFor="let key of sortTypeList" >{{key}}</option>
           </select>
     </span>
-      <button type="submit" class="btn btn-success" routerLink="new">Add Project</button>
+      <button type="submit" class="btn btn-success" routerLink="new" *ngIf="authService.getRole() !== ''">Add Project</button>
     </div>
   </div>
   <div class="projects_block">

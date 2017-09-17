@@ -1,4 +1,6 @@
-.project_block_main {}
+.project_block_main {
+  font-size: 16px;
+}
 
 .nav_block {
   background: #FCFCFC;
@@ -8,26 +10,39 @@
   text-align: right;
 }
 
-.project_block {}
+.project_block {
+  margin: auto;
+  max-width: 900px;
+}
 
 .edit_block {}
 
 .img_block {
+  position: relative;
+  padding: 0 0 calc(200/350*100%);
+  top: 0;
+  left: 0;
   margin: auto;
   text-align: center;
-}
-
-.img_block img {
-  max-width: 100%;
+  background: url('http://arenalviv.com.ua/uploads/images/pages/461/750/img_7467small.jpg');
+  background-size: cover;
 }
 
 .project_name {
+  position: absolute;
+  color: white;
+  background: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  bottom: 0;
+  left: 0;
   text-align: center;
+  padding: 10px;
   font-size: 25px;
   font-weight: 700;
 }
 
 .project_info {
+  margin-top: 30px;
   margin-bottom: 10px;
 }
 
@@ -43,5 +58,29 @@
 .project_footer {
   color: #ccc;
   font-size: 18px;
-  margin-top: 30px;
+  margin: 25px 0 50px 0;
+  padding-top: 25px;
+  border-top: 1px solid #ccc;
+}
+
+.likes_block {
+  text-align: left;
+}
+
+.date_block {}
+
+.author_block {
+  text-align: right;
+}
+
+@media screen and (max-width: 768px) {
+  .likes_block {
+    text-align: center;
+  }
+  .date_block {
+    text-align: center;
+  }
+  .author_block {
+    text-align: center;
+  }
 }

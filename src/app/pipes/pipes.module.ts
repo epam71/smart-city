@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FilterCategoryPipe } from './filter-category.pipe';
 
 
 
@@ -8,6 +7,6 @@ import { FilterCategoryPipe } from './filter-category.pipe';
   imports: [
     CommonModule
   ],
-  declarations: [FilterCategoryPipe]
+  declarations: []
 })
 export class PipesModule { }
