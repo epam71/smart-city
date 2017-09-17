@@ -7,7 +7,7 @@ import { routing } from './projects.routes';
 import { RatingProjectComponent } from './project-rating/project-rating.component';
 import { FilterUser } from '../pipes/filter-user-projects.pipe';
 import { CommentsProjectComponent } from './project-comments/project-comments.component';
-import { SortBy } from '../pipes/filter-rating.pipe';
+import { SortBy } from '../pipes/sorting.pipe';
 import { FormsModule } from '@angular/forms';
 import { ShortenPipe } from '../pipes/shorten.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';

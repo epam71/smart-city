@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Project } from '../../projects/models/project.model';
 import { Subscription } from "rxjs/Subscription";
 import { ProjectServiceService } from "../../core/project-service/project-service.service";
 import { Router, ActivatedRoute } from "@angular/router";
