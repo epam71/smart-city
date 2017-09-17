@@ -8,7 +8,7 @@ import { routing } from './admin.routes';
 import { FilterApprovalPipe } from "../pipes/filter-approval.pipe";
 import { FilterStatusPipe } from "../pipes/filter-status.pipe";
 import { ShortenPipe } from '../pipes/shorten.pipe';
-import { SortBy } from '../pipes/filter-rating.pipe'
+import { SortBy } from '../pipes/sorting.pipe'
 import { ProjectsEditComponent } from './projects-edit/projects-edit.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { FormsModule } from '@angular/forms';

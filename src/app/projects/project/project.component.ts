@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { ProjectServiceService } from '../../core/project-service/project-service.service';
+import { AuthService } from '../../core/auth-service/auth-service.service';
 
 @Component({
   selector: 'app-project',
@@ -14,7 +15,8 @@ export class ProjectComponent implements OnInit {
   tempId;
 
   constructor(private route: ActivatedRoute,
-    private projectData: ProjectServiceService) {
+              private projectData: ProjectServiceService,
+              private authService:AuthService) {
 
     route.params.subscribe(param => {
       this.tempId = param;

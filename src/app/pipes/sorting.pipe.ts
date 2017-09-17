@@ -14,17 +14,14 @@ export class SortBy implements PipeTransform {
                 return data;
             } else {
                 
-                data = data.sort((item1, item2) => {
+                data.sort((item1, item2) => {
+                    let a = (value === 'projectName') ? item1[value].toUpperCase() : item1[value];
+                    let b = (value === 'projectName') ? item2[value].toUpperCase() : item2[value];
 
-                    if (value === 'projectName'){
-                        item1[value] = item1[value].toUpperCase();
-                        item2[value] = item2[value].toUpperCase();
-                    }
-
-                    if (item1[value] < item2[value]) {
+                    if (a < b) {
                         return -1;
                     }
-                    if (item1[value] > item2[value]) {
+                    if (a > b) {
                         return 1;
                     }
                     return 0;

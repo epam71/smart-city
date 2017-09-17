@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { Project } from '../../projects/models/project.model';
+import { Project } from '../../models/project.model';
 import { Subject } from 'rxjs/Subject';
 import { AuthService } from "../auth-service/auth-service.service";
 
@@ -38,7 +38,9 @@ export class ProjectServiceService {
     };
 
     getProject(id): Observable<Project> {
-        this.authService.setAuthHeader(headers);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        this.authService.setAuthHeader(headers);        	
+
         return this.http.get(PATH + id, { headers: headers })
             .map((response: Response) => {
                 return response.json();
