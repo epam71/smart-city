@@ -7,7 +7,7 @@
     text-align: center;
 }
 
-.news_title {
+.project_name {
     text-align: center;
     font-weight: bold;
     margin: 15px 0 15px 0;
@@ -30,7 +30,7 @@
     float: right;
 }
 
-.close-news, .approve-news {
+.close-project, .approve-project {
     float: right;
     width: 85px;
 }
@@ -43,7 +43,7 @@
  border-left: 5px solid #a94442 ;
 }
 
-.news_date {
+.project_date {
     color: darkgrey;
     display: inline-block;
     margin-left: 10px;

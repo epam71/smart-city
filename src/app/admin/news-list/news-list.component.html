@@ -1,3 +1,50 @@
-<p>
-  news-list works!
-</p>
+ <div class="container-fluid news_block_main">
+  <div class="nav_block">
+    <ul class="nav nav-tabs">
+      <li role="presentatiom"><a routerLink="../projects">Home</a></li>
+      <li role="presentatiom" routerLinkActive="active"><a routerLink="../news">News</a></li>      
+      <li role="presentatiom" routerLinkActive="active"><a routerLink="../contacts">Messages</a></li>
+      <li role="presentatiom"><a routerLink="/">Main page</a></li>
+    </ul>
+  </div> 
+
+   <div class="row main-content">
+      <div class=" col-sm-5 description_block">
+        <div class="header-block">
+         <div class="btn btn-sm btn-outline-primary active-news">Active news</div>
+         <div class="glyphicon glyphicon-sort-by-alphabet"></div>
+         <div class="glyphicon glyphicon-sort-by-order"></div>
+        </div>
+         <ul>
+            <li *ngFor="let key of (news | async) | filterApproval:true" class="news_block">
+               <a [routerLink]="['/admin/news', key._id]">
+               <span class="news_name">
+               {{key.title}}
+               </span>
+               </a>
+            </li>
+         </ul>
+         <button class="btn btn-sm btn-outline-primary pending-news">Pending approval</button>
+         <ul>
+            <li *ngFor="let key of (news | async) | filterApproval:false" class="news_block">
+               <a [routerLink]="['/admin/news', key._id]">
+               <span class="news_name">
+               <span class="circle" [class.new]="key.status === 'new'" [class.edited]="key.status === 'edited'"></span> {{key.title}}
+               </span>
+               </a>
+            </li>
+         </ul>
+      </div>
+
+      
+<div class="container col-sm-6" *ngIf="router.url === '/admin/news'">
+  <img class="img-responsive" src="assets/images/welcome.jpg">
+  <div class="welcome">
+    <h3>Welcome to Admin Panel!</h3>
+    <p>Here you can edit and approve projects or news</p>
+  </div> 
+</div>    
+      <router-outlet></router-outlet>
+</div>
+
+</div>

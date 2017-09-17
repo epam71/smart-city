@@ -1,3 +1,49 @@
-<p>
-  contacts-list works!
-</p>
+ <div class="container-fluid projects_block_main">
+  <div class="nav_block">
+    <ul class="nav nav-tabs">
+      <li role="presentatiom"><a routerLink="../projects">Home</a></li>
+      <li role="presentatiom" routerLinkActive="active"><a routerLink="../news">News</a></li>      
+      <li role="presentatiom" routerLinkActive="active"><a routerLink="../contacts">Messages</a></li>
+      <li role="presentatiom"><a routerLink="/">Main page</a></li>
+    </ul>
+  </div> 
+
+<div class="row main-content">
+        <div class="col-sm-11 col-sm-offset-1 header">
+          <p>Admin Messages</p>
+        </div>
+
+        <div class="col-sm-11 col-sm-offset-1 header_block">
+          <p class="header_section">
+            <span>User</span>
+          </p>
+          <p class="header_section">
+            <span>Email</span>
+          </p>
+          <p class="header_section">
+            <span>Content</span>
+          </p>
+          <p class="header_section">
+            <span>Pub date</span>
+          </p>          
+        </div>
+
+        <div *ngFor="let key of (messages | async)" class="col-sm-11 col-sm-offset-1 messages_block">
+          <p class="header_section">
+            <span>{{ key.author }}</span>
+          </p>
+          <p class="header_section">
+            <span> {{ key.email }} </span>
+          </p>
+          <p class="header_section">
+            <span> {{ key.body }}</span>
+          </p>
+          <p class="header_section">
+            <span> date </span>
+          </p>
+          <p class="header_section edit"> Edit </p>
+          <p class="header_section delete"> Delete </p>
+        </div>
+
+</div>
+</div>

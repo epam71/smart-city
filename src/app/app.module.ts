@@ -16,7 +16,6 @@ import { AuthCallbackComponent } from './components/auth-callback/auth-callback.
 import { AppRoutes } from './app.routes';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-
 import { AlertModule } from 'ngx-bootstrap';
 
 @NgModule({

@@ -1,5 +1,4 @@
 export interface Project {
-
     author?: string,
     projectName: string,
     image: string,
