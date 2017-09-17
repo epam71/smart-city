@@ -162,3 +162,14 @@ button:focus {
   font-weight: 700;
   color: #cc2d00;
 }
+
+.pagination_block {
+  padding-top: 50px;
+  text-align: center;
+}
+
+.pagination_block pagination-controls /deep/ .ngx-pagination {}
+
+.pagination_block pagination-controls /deep/ .ngx-pagination .current {
+  background: #ccc;
+}
