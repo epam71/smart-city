@@ -36,7 +36,7 @@ export class ProjectsEditComponent implements OnInit {
   approveProject() {
     this.projectData.putProject(this.projectId.id, { "approved": true, "status": "active" }).subscribe();
     this.projectData.look.next('test');
-    setTimeout(() => { this.project = this.projectData.getProject(this.projectId.id) }, 100);
+    this.router.navigate(['/admin/projects/']);
   }
 
   closeProject() {
@@ -71,14 +71,20 @@ export class ProjectsEditComponent implements OnInit {
 
     route.params.subscribe(param => {
       this.projectId = param;
+      this.projectData.getProject(this.projectId.id).subscribe((response)=>{this.project = response},
+        (error)=>{console.log(error)
+        });
+      
     });
     router.events.subscribe(() => {
-      this.project = this.projectData.getProject(this.projectId.id);
+    //       this.projectData.getProject(this.projectId.id).subscribe((response)=>{this.project = response},
+    // (error)=>{console.log(error)});
     });
   }
 
   ngOnInit(): void {
-    this.projectData.getProject(this.projectId.id);
+    // this.projectData.getProject(this.projectId.id).subscribe((response)=>{this.project = response},
+    // (error)=>{console.log(error)});
   }
 
 }

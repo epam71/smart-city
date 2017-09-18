@@ -14,6 +14,7 @@ import { Reply } from '../../models/reply.model';
 export class ContactsListComponent implements OnInit {
 
   public messages;
+  public message;
   private wasNotClicked: any;
   private fullList = false;
   public messageId;
@@ -33,6 +34,10 @@ export class ContactsListComponent implements OnInit {
     else {
       this.wasNotClicked = newValue;
     }
+  }
+
+  chooseMes(key) {
+    this.message = key;
   }
 
   deleteMessage(id) {
@@ -63,7 +68,13 @@ export class ContactsListComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.messages = this.messageData.getMessages();
+        //   this.messageData.getMessage(this.messageId.id).subscribe((response)=>{this.messages = response},
+        // (error)=>{console.log(error)
+        // });
+
+      this.messageData.getMessages().subscribe((response)=>{this.messages = response},
+        (error)=>{console.log(error)
+        });
   }
 
 }

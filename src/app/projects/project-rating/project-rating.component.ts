@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProjectServiceService } from '../../core/project-service/project-service.service';
-import { Project } from '../models/project.model';
+import { Project } from '../../models/project.model';
 import { AuthService } from '../../core/auth-service/auth-service.service';
 
 @Component({

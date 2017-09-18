@@ -28,7 +28,7 @@ export class ProjectsListComponent implements OnInit {
     this.prop = 'date';
   }
 
-  showMore(att){
+  showMore(att) {
     if (att === 'pending') {
       this.showPending += 5;
     } else if (att === 'active') {
@@ -41,9 +41,16 @@ export class ProjectsListComponent implements OnInit {
     private router: Router, private authService: AuthService) { }
 
   public ngOnInit() {
-    this.projects = this.projectsData.getProjects();
+    this.projectsData.getProjects().subscribe((response) => { this.projects = response },
+      (error) => {
+        console.log(error)
+      });
+
     this.subscriber = this.projectsData.look.asObservable().takeWhile(() => this.alive).subscribe(() => {
-      setTimeout(() => { this.projects = this.projectsData.getProjects() }, 100);
+      setTimeout(() => {
+        this.projectsData.getProjects().subscribe((response) => { this.projects = response },
+          (error) => { console.log(error) });
+      }, 100);
     });
   }
 

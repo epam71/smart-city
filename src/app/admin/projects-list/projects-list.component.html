@@ -8,7 +8,10 @@
          <li class="nav-item"><a routerLink="/">Main page</a></li>
         <li class="glyphicon glyphicon-lock tip"><span class="tiptext">configure access</span></li>
       </ul>
+    <!-- <button (click)='authService.login()'>Login</button>
+   <button (click)='authService.logout()'>Logout</button> -->
    </div>
+
    <div class="row main-content">
       <div class=" col-sm-4 description_block">
         <div class="sort_section" (click)="sortByName()"><div class="glyphicon glyphicon-sort-by-alphabet"></div><span>By name</span></div>
@@ -16,7 +19,7 @@
 
         <ul class="list_part list-group">
             <li class="list-group-item active-projects">Active</li>
-            <li *ngFor="let key of (projects | async) | filterApproval:true | filterStatus:'active' | slice:0:showActive | sortBy:prop:'normal'; let i=index" class="project_block list-group-item">
+            <li *ngFor="let key of projects | filterApproval:true | filterStatus:'active' | slice:0:showActive | sortBy:prop:'normal'; let i=index" class="project_block list-group-item">
                <a [routerLink]="['/admin/projects', key._id]">
                <span class="project_name">
                {{key.projectName }}
@@ -27,7 +30,7 @@
         </ul>
         <ul class="list_part list-group">
             <li class="list-group-item pending-projects">Pending</li>
-            <li *ngFor="let key of (projects | async) | filterApproval:false | slice:0:showPending | sortBy:prop:'normal'; let i=index" class="project_block list-group-item">
+            <li *ngFor="let key of projects | filterApproval:false | slice:0:showPending | sortBy:prop:'normal'; let i=index" class="project_block list-group-item">
                <a [routerLink]="['/admin/projects', key._id]">               
                {{key.projectName }} 
                <span *ngIf="key.status === 'new'" class="badge badge-default badge-pill">new</span>              
