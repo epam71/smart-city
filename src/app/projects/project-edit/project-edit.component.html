@@ -9,42 +9,42 @@
       <div class="form-group">
         <label for="projectName" class="col-sm-2 control-label">Project name</label>
         <div class="col-sm-10">
-          <input type="text" id="projectName" class="form-control" #projectName [ngModel]="(project | async)?.projectName"
+          <input type="text" id="projectName" class="form-control" #projectName [ngModel]="(project)?.projectName"
           name="projectName" required>
         </div>
       </div>
       <div class="form-group">
           <label for="image" class="col-sm-2 control-label">Link to image</label>
           <div class="col-sm-10">
-            <input type="text" id="image" class="form-control" [ngModel]="(project | async)?.image"
+            <input type="text" id="image" class="form-control" [ngModel]="(project)?.image"
              name="image" required>
           </div>
         </div>
           <div class="form-group">
               <label for="desc" class="col-sm-2 control-label">Full Description</label>
               <div class="col-sm-10">
-                  <textarea id="desc" class="form-control" rows="3" [ngModel]="(project | async)?.desc"
+                  <textarea id="desc" class="form-control" rows="3" [ngModel]="(project)?.desc"
                   name="desc" required></textarea>
               </div>
             </div>
             <div class="form-group">
                 <label for="goals" class="col-sm-2 control-label">Project goals</label>
                 <div class="col-sm-10">
-                    <textarea id="goals" class="form-control" rows="3" [ngModel]="(project | async)?.goals"
+                    <textarea id="goals" class="form-control" rows="3" [ngModel]="(project)?.goals"
                     name="goals"></textarea>
                 </div>
               </div>
               <div class="form-group">
                   <label for="result" class="col-sm-2 control-label">Project result</label>
                   <div class="col-sm-10">
-                      <textarea id="result" class="form-control" rows="3" [ngModel]="(project | async)?.result"
+                      <textarea id="result" class="form-control" rows="3" [ngModel]="(project)?.result"
                       name="result"></textarea>
                   </div>
                 </div>
             <div class="form-group">
                 <label for="budget" class="col-sm-2 control-label">Project Budget</label>
                 <div class="col-sm-10">
-                  <input type="number" id="budget" class="form-control" [ngModel]="(project | async)?.budget"
+                  <input type="number" id="budget" class="form-control" [ngModel]="(project)?.budget"
                   name="budget"
                   [pattern]="'^[0-9]+[0-9]*$'">
                 </div>

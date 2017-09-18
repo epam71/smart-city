@@ -9,10 +9,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/finally';
 
-
-const PATH = 'https://smart-city-lviv.herokuapp.com/api/projects/';
-const headers = new Headers({ 'Content-Type': 'application/json' });
+const PATH = 'https://smart-city-lviv-api.herokuapp.com/projects/';
 
 @Injectable()
 export class ProjectServiceService {
@@ -20,7 +19,7 @@ export class ProjectServiceService {
     look: Subject<string> = new Subject<string>();
 
     constructor(private http: Http,
-                private authService: AuthService) {}
+        private authService: AuthService) { }
 
     private handleError(error: Response) {
         let errMessage = JSON.parse(error['_body']).errorMessage;
@@ -30,26 +29,52 @@ export class ProjectServiceService {
     }
 
     getProjects(): Observable<Project[]> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
         this.authService.setAuthHeader(headers);
-        return this.http.get(PATH, { headers: headers })
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(PATH, options)
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
     };
 
     getProject(id): Observable<Project> {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        this.authService.setAuthHeader(headers);        	
 
-        return this.http.get(PATH + id, { headers: headers })
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        this.authService.setAuthHeader(headers);
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(PATH + id, options)
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
     };
 
     postProject(project: any): Observable<Project> {
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
         this.authService.setAuthHeader(headers);
-        return this.http.post(PATH, project, { headers: headers })
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(PATH, project, options)
+            .map((response: Response) => {
+                return <any>response.json();
+            })
+            .catch(this.handleError);
+    };
+
+    postLikes(id, user: any): Observable<Project> {
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        this.authService.setAuthHeader(headers);
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(PATH + id + '/likes', user, options)
             .map((response: Response) => {
                 return <any>response.json();
             })
@@ -57,17 +82,13 @@ export class ProjectServiceService {
     };
 
     putProject(id, projectEdit): Observable<Project> {
-        this.authService.setAuthHeader(headers);
-        return this.http.put(PATH + id, projectEdit, { headers: headers })
-            .map((response: Response) => {
-                return <any>response.json();
-            })
-            .catch(this.handleError);
-    };
 
-    patchProject(id, projectEdit): Observable<Project> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
         this.authService.setAuthHeader(headers);
-        return this.http.patch(PATH + id, projectEdit, { headers: headers })
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.put(PATH + id, projectEdit, options)
             .map((response: Response) => {
                 return <any>response.json();
             })
@@ -75,8 +96,13 @@ export class ProjectServiceService {
     };
 
     deleteProject(id): Observable<Project> {
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
         this.authService.setAuthHeader(headers);
-        return this.http.delete(PATH + id, { headers: headers })
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.delete(PATH + id, options)
             .map((response: Response) => {
                 return <any>response.json();
             })

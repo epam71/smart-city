@@ -9,28 +9,25 @@ import { AuthService } from '../../core/auth-service/auth-service.service';
 })
 export class RatingProjectComponent implements OnInit {
 
-
+userEmail;
   @Input('ratingObj') ratingObjInfo;
 
-  rating;
-
   constructor(private ratingData: ProjectServiceService,
-    private authService: AuthService) {}
+    private authService: AuthService) { }
 
   changeRating() {
 
-    this.ratingData.putProject(this.ratingObjInfo._id, {
-      rating: ++this.ratingObjInfo.rating
-    })
+    this.ratingData.postLikes(this.ratingObjInfo._id, { email: this.userEmail })
       .subscribe(
       (response) => {
-        return this.ratingObjInfo.rating = response.rating;
+        return this.ratingObjInfo.rating = response.currentRating;
       },
       (error) => {
         console.error(error);
       });
   }
 
-  ngOnInit() { }
-
+  ngOnInit() {
+this.userEmail = this.authService.getEmail();
+  }
 }

@@ -9,6 +9,9 @@ export class FilterApprovalPipe implements PipeTransform {
   
       if (value != null) {
         let approval = args;
+        if (approval === 'all'){
+          return value;
+        }
       return value.filter(key => {
         return key.approved === approval;
       });

@@ -1,5 +1,6 @@
 export interface Project {
     author?: string,
+    authorEmail?: string,
     projectName: string,
     image: string,
     desc: any,
@@ -7,5 +8,6 @@ export interface Project {
     result: string,
     budget: number,
     status: string,
-    rating?: number
+    rating?: number,
+    currentRating?: number
 }

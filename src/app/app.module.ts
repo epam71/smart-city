@@ -12,11 +12,11 @@ import { AchivementComponent } from './components/achivement/achivement.componen
 import { ProjectsComponent } from './components/projects/projects.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
-
 import { AppRoutes } from './app.routes';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { AlertModule } from 'ngx-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -36,6 +36,7 @@ import { AlertModule } from 'ngx-bootstrap';
     PipesModule,
     AppRoutes,
     FormsModule,
+    BrowserAnimationsModule,
     AlertModule.forRoot()
   ],
   providers: [],

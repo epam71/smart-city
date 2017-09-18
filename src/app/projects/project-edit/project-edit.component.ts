@@ -35,7 +35,8 @@ export class ProjectEditComponent implements OnInit {
 
     let projectTemp: Project = {
       author: this.authService.getNickname(),
-      projectName: value.projectName,
+      authorEmail: this.authService.getEmail(),
+      projectName: value.projectName.charAt(0).toUpperCase() + value.projectName.slice(1),
       image: value.image,
       desc: value.desc,
       goals: value.goals,
@@ -45,7 +46,7 @@ export class ProjectEditComponent implements OnInit {
     };
 
     let projectEdit: Project = {
-      projectName: value.projectName,
+      projectName: value.projectName.charAt(0).toUpperCase() + value.projectName.slice(1),
       image: value.image,
       desc: value.desc,
       goals: value.goals,
@@ -85,7 +86,14 @@ export class ProjectEditComponent implements OnInit {
   ngOnInit() {
     if (this.tempId.id != null) {
       this.editMode = true;
-      this.project = this.putProject.getProject(this.tempId.id);
+      this.putProject.getProject(this.tempId.id)
+      .subscribe(
+        (response) => {
+          this.project = response;
+        },
+        (error) => {
+          console.error(error);
+        });
     }
   }
 

@@ -1,17 +1,23 @@
+<div>
+    Nickname: {{nick}}
+    <br>
+    Email: {{email}}
+    <br>
+    Role: {{userCheck}}  
+    <br>
+    <button (click)='authService.login()'>Login</button>
+    <button (click)='authService.logout()'>Logout</button>
+  </div>
 <div class="container projects_block_main">
   <div class="row sort_block">
     <div class="col-md-2 col-sm-2">
-      <div class="my_projects">
+      <div class="my_projects" *ngIf="userCheck !== ''">
         <button type="button" class="btn btn-default" (click)="showUserProjects($event.target.checked)" *ngIf="!userProjects else allProjects">My Projects</button>
         <ng-template #allProjects>
           <button type="button" class="btn btn-default" (click)="showUserProjects($event.target.checked)">All Projects</button>
         </ng-template>
       </div>
     </div>
-
-    <button (click)='authService.login()'>Login</button>
-    <button (click)='authService.logout()'>Logout</button>
-
     <div class="col-md-10 col-sm-10">
       <span class="sort_name">sort by: </span>
       <span class="select-style">
@@ -24,13 +30,13 @@
             <option *ngFor="let key of sortTypeList" >{{key}}</option>
           </select>
     </span>
-      <button type="submit" class="btn btn-success" routerLink="new" *ngIf="authService.getRole() !== ''">Add Project</button>
+      <button type="submit" class="btn btn-success" routerLink="new">Add Project</button>
     </div>
   </div>
   <div class="projects_block">
     <div class="row">
       <div class="col-md-4 col-sm-6 project_block_main" *ngFor="let key of (projects | async) |
-       filterUserProjects:userProjects | sortBy:sort:sortTypeValue | paginate: { itemsPerPage: 10, currentPage: p }">
+       filterUserProjects:userProjects:approvedStatus | sortBy:sort:sortTypeValue | paginate: { itemsPerPage: 9, currentPage: p }">
 
         <div class="project_block">
           <a [routerLink]="['/projects', key._id]">
@@ -42,6 +48,7 @@
             </div>
             <div class="info_block">
               <div class="project_name">
+                {{key.approved}}
                 {{key.projectName | uppercase | shorten:20 }}
               </div>
               <div class="project_desc">{{ key.desc | shorten:60 }}</div>
@@ -65,6 +72,7 @@
       </div>
     </div>
     <div class="pagination_block">
-      <pagination-controls class="pagination" (pageChange)="p =$event"></pagination-controls>
-    </div>
+    <pagination-controls class="pagination" (pageChange)="p =$event">></pagination-controls>
   </div>
+</div> 
+</div>
