@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Messages } from '../../models/messages.model'
 import { AuthService } from '../../core/auth-service/auth-service.service';
@@ -10,14 +10,12 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/do';
 
-const PATH = 'https://smart-city-lviv.herokuapp.com/api/messages/';
+const PATH = 'https://smart-city-lviv-api.herokuapp.com/messages/';
 
 @Injectable()
 export class ContactServiceService {
     
-    constructor(private http: Http, private auth: AuthService) {
-        this.http = http;
-    }
+    constructor(private http: Http, private auth: AuthService) { }
 
     private handleError(error: Response) {
         let errMessage = JSON.parse(error['_body']).errorMessage;
@@ -27,27 +25,39 @@ export class ContactServiceService {
     }
 
     getMessages(): Observable<Messages[]> {
-        const headers = new Headers({ 'Content-Type': 'application/json' });
+        
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
         this.auth.setAuthHeader(headers);
-        return this.http.get(PATH, { headers: headers })
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(PATH, options)
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
     };
 
     getMessage(id): Observable<Messages> {
-        const headers = new Headers({ 'Content-Type': 'application/json' });
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
         this.auth.setAuthHeader(headers);
-        return this.http.get(PATH + id, { headers: headers })
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(PATH + id, options)
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
     };
 
     postMessage(message: any): Observable<Messages> {
-        const headers = new Headers({ 'Content-Type': 'application/json' });
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
         this.auth.setAuthHeader(headers);
-        return this.http.post(PATH, message, { headers: headers })
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(PATH, message, options)
             .map((response: Response) => {
                 return <any>response.json();
             })
@@ -55,21 +65,26 @@ export class ContactServiceService {
     };
 
     putMessage(id: number, messageEdit): Observable<Messages> {
-        const headers = new Headers({ 'Content-Type': 'application/json' });
-        this.auth.setAuthHeader(headers);
 
-        return this.http.put(PATH + id, messageEdit, { headers: headers })
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        this.auth.setAuthHeader(headers);
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.put(PATH + id, messageEdit, options)
             .map((response: Response) => {
                 return <any>response.json();
             })
             .catch(this.handleError);
     };
 
-    deleteMessage(id: number): Observable<Messages> {
-        const headers = new Headers({ 'Content-Type': 'application/json' });
+    deleteMessage(id): Observable<Messages> {        
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
         this.auth.setAuthHeader(headers);
+        let options = new RequestOptions({ headers: headers });
 
-        return this.http.delete(PATH + id, { headers: headers })
+        return this.http.delete(PATH + id, options)
             .map((response: Response) => {
                 return <any>response.json();
             })

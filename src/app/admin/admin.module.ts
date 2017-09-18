@@ -12,8 +12,7 @@ import { SortBy } from '../pipes/filter-rating.pipe'
 import { ProjectsEditComponent } from './projects-edit/projects-edit.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { FormsModule } from '@angular/forms';
-
-
+import { MessageStatusPipe } from '../pipes/message-status.pipe';
 
 @NgModule({
   imports: [
@@ -29,6 +28,7 @@ import { FormsModule } from '@angular/forms';
     FilterApprovalPipe,
     FilterStatusPipe,
     ShortenPipe,
+    MessageStatusPipe,
     ProjectsEditComponent,
     ConfirmComponent,
     SortBy

@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Project } from '../../projects/models/project.model';
+import { Project } from '../../models/project.model';
 import { Subscription } from "rxjs/Subscription";
 import { ProjectServiceService } from "../../core/project-service/project-service.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../core/auth-service/auth-service.service';
-
 
 
 @Component({
@@ -45,6 +44,27 @@ export class ProjectsEditComponent implements OnInit {
     this.router.navigate(['/admin/projects/']);
   }
 
+  saveChanges(form: NgForm) {
+    const value = form.value;
+
+    let project: any = {
+      projectName: value.projectName,
+      image: value.image,
+      desc: value.desc,
+      goals: value.goals,
+      result: value.result,
+      budget: value.budget
+    }
+
+    this.projectData.putProject(this.projectId.id, project)
+      .subscribe(
+      () => {
+        this.router.navigate(['/admin/projects/' + this.projectId.id]);
+        this.editable = false;
+        this.projectData.look.next('test');
+      });
+  }
+
   constructor(private route: ActivatedRoute,
     private router: Router,
     private projectData: ProjectServiceService) {
@@ -57,29 +77,8 @@ export class ProjectsEditComponent implements OnInit {
     });
   }
 
-  saveChanges(form: NgForm) {
-    const value = form.value;
-
-    let project: any = {
-      projectName: value.projectName, 
-      image: value.image,
-      desc: value.desc, 
-      goals: value.goals, 
-      result: value.result, 
-      budget: value.budget
-    }
-    
-    this.projectData.putProject(this.projectId.id, project)
-      .subscribe(
-      () => {
-        this.router.navigate(['/admin/projects/' + this.projectId.id]);
-        this.editable = false;
-        this.projectData.look.next('test');
-      });
-  }
-
   ngOnInit(): void {
-    this.project = this.projectData.getProject(this.projectId.id);
+    this.projectData.getProject(this.projectId.id);
   }
 
 }

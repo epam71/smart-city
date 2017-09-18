@@ -12,7 +12,7 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/do';
 
 
-const HTTP_NEWS = 'https://smart-city-lviv.herokuapp.com/api/news/';
+const HTTP_NEWS = 'https://smart-city-lviv-api.herokuapp.com/news/';
 const headers = new Headers({ 'Content-Type': 'application/json' });
 
 @Injectable()
