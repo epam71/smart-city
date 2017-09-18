@@ -13,6 +13,7 @@ export class ProjectComponent implements OnInit {
 
   project;
   tempId;
+  user;
 
   constructor(private route: ActivatedRoute,
               private projectData: ProjectServiceService,
@@ -24,6 +25,15 @@ export class ProjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.project = this.projectData.getProject(this.tempId.id);
+
+    this.projectData.getProject(this.tempId.id)
+    .subscribe(
+      (response) => {
+        this.user = this.authService.getEmail();
+        this.project = response;
+      },
+      (error) => {
+        console.error(error);
+      });
   }
 }
