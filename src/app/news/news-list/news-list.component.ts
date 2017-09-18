@@ -13,8 +13,24 @@ import { AuthService } from "../../core/auth-service/auth-service.service";
   
 })
 export class NewsListComponent implements OnInit {
-
+  private sort = 'all';
+  private sortKey;
   news;
+
+  sortByOldestDate() {
+    this.sort = 'date';
+    this.sortKey = 'normal';
+  }
+
+  sortByLatestDate() {
+    this.sort = 'date';
+    this.sortKey = 'reverse';
+  }
+
+  sortByAuthor() {
+    this.sort = 'author';
+    this.sortKey = 'normal';
+  }
 
   constructor(private service: NewsServiceService, private router: Router){  }
 
@@ -33,5 +49,7 @@ export class NewsListComponent implements OnInit {
         ngOnInit() {
           this.news= this.service.getNews()
         }
+
+       
 
 }

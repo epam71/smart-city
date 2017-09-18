@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { News } from '../../news/models/news.model';
 import { Subject } from 'rxjs/Subject';
 import { AuthService } from "../auth-service/auth-service.service";
-
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/do';
 
-
-const HTTP_NEWS = 'https://smart-city-lviv.herokuapp.com/api/news/';
+const HTTP_NEWS = 'https://smart-city-lviv-api.herokuapp.com/news/';
 const headers = new Headers({ 'Content-Type': 'application/json' });
 
 @Injectable()
@@ -33,7 +31,7 @@ export class NewsServiceService {
  
  getNews(): Observable<News[]> {
   this.authService.setAuthHeader(headers);
-  return this.http.get(HTTP_NEWS, { headers: headers })
+  return this.http.get(HTTP_NEWS, new RequestOptions({ headers: headers }))
   .map((response: Response) => {
       return response.json();
   }).catch(this.handlError);
@@ -41,7 +39,7 @@ export class NewsServiceService {
 
 postNews(news: any): Observable<News> {
   this.authService.setAuthHeader(headers);
-  return this.http.post(HTTP_NEWS, news, { headers: headers })
+  return this.http.post(HTTP_NEWS, news, new RequestOptions({ headers: headers }))
   .map((response: Response) => {
       return <any>response.json();
   })
@@ -50,7 +48,7 @@ postNews(news: any): Observable<News> {
 
 getNewsById (id): Observable<News> {
   this.authService.setAuthHeader(headers);
-  return this._http.get(HTTP_NEWS +id, { headers: headers })
+  return this._http.get(HTTP_NEWS +id, new RequestOptions({ headers: headers }))
       .map((response: Response) => {
           return response.json();
       }).catch(this.handlError);
@@ -58,13 +56,13 @@ getNewsById (id): Observable<News> {
 
 updateNews (id, newsEdit): Observable<News> {
   this.authService.setAuthHeader(headers);
-  return this.http.put(HTTP_NEWS + id, newsEdit, { headers: headers }) 
+  return this.http.put(HTTP_NEWS + id, newsEdit, new RequestOptions({ headers: headers })) 
     .catch(this.handlError);
 }
 
 deleteNews(id): Observable<News> {
   this.authService.setAuthHeader(headers);
-  return this.http.delete(HTTP_NEWS + id, { headers: headers })
+  return this.http.delete(HTTP_NEWS + id, new RequestOptions({ headers: headers }))
   .map((response: Response) => {
       return <any>response.json();
   })
