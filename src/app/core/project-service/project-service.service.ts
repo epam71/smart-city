@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/do';
-
+import 'rxjs/add/operator/finally';
 
 const PATH = 'https://smart-city-lviv-api.herokuapp.com/projects/';
 
@@ -67,6 +67,20 @@ export class ProjectServiceService {
             .catch(this.handleError);
     };
 
+    postLikes(id, user: any): Observable<Project> {
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        this.authService.setAuthHeader(headers);
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(PATH + id + '/likes', user, options)
+            .map((response: Response) => {
+                return <any>response.json();
+            })
+            .catch(this.handleError);
+    };
+
     putProject(id, projectEdit): Observable<Project> {
 
         let headers = new Headers();
@@ -82,7 +96,6 @@ export class ProjectServiceService {
     };
 
     deleteProject(id): Observable<Project> {
-        
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         this.authService.setAuthHeader(headers);

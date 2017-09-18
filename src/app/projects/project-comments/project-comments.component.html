@@ -1,3 +1,9 @@
-{{commentsObjInfo?.username}}
-{{commentsObjInfo?.message}}
-{{commentsObjInfo?.date}}
+<div class="comments_block">
+    <div class="comment" *ngFor="let key of commentsObjInfo?.comments">
+        {{key.username}}
+        {{key.message}}
+        {{key.date}}
+    </div>
+</div>
+
+<button (click)="addComment()" type="button">Add</button>

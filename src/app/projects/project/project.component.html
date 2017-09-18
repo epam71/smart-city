@@ -2,75 +2,73 @@
   <div class="row">
     <div class="nav_block">
       <button type="submit" class="btn btn-default" routerLink="/projects">Back to projects</button>
-      <button type="submit" class="btn btn-default" routerLink="edit">Edit Project</button>
-      <button type="submit" class="btn btn-default" routerLink="/projects/new">Add Project</button>
+      <button type="submit" class="btn btn-default" routerLink="edit" *ngIf="authService.getEmail() === project?.authorEmail">Edit Project</button>
+      <button type="submit" class="btn btn-default" routerLink="edit">Dev Edit Project</button>
+      <button type="submit" class="btn btn-default" routerLink="/projects/new" *ngIf="authService.getRole() !== ''">Add Project</button>
     </div>
   </div>
-  <div class="row">
     <div class="project_block">
       <div class="img_block">
-        <img src="http://arenalviv.com.ua/uploads/images/pages/461/750/img_7467small.jpg" alt="">
-      </div>
-      <div class="project_name">
-        {{ (project | async)?.projectName | uppercase }}
+       <div class="project_name">
+          {{ (project)?.projectName | uppercase }}
+        </div>
       </div>
       <section class="project_info">
         <article class="article_header">
-          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="glyphicon glyphicon-minus"></span>
           <span>Project description</span>
         </article>
         <article class="project_desc">
-          {{ (project | async)?.desc }}
+          {{ (project)?.desc }}
         </article>
       </section>
-      <section class="project_info" *ngIf="(project | async)?.goals">
+      <section class="project_info" *ngIf="(project)?.goals">
         <article class="article_header">
-          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="glyphicon glyphicon-minus"></span>
           <span>What is the goal of the project?</span>
         </article>
         <article class="project_desc">
-          {{ (project | async)?.goals }}
+          {{ (project)?.goals }}
         </article>
       </section>
-      <section class="project_info" *ngIf="(project | async)?.result">
+      <section class="project_info" *ngIf="(project)?.result">
         <article class="article_header">
-          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="glyphicon glyphicon-minus"></span>
           <span>What is the result of the project? </span>
 
         </article>
         <article class="project_desc">
-          {{ (project | async)?.result }}
+          {{ (project)?.result }}
         </article>
       </section>
-      <section class="project_info" *ngIf="(project | async)?.budget">
+      <section class="project_info" *ngIf="(project)?.budget">
         <article class="article_header">
-          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="glyphicon glyphicon-minus"></span>
           <span>Finance information</span>
         </article>
         <article class="project_desc">
-          <span>Project budget: {{ (project | async)?.budget }}$</span>
+          <span>Project budget: {{ (project)?.budget }}$</span>
         </article>
       </section>
       <div class="project_footer">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-4">
             <div class="likes_block">
-              <rating [ratingObj]="(project | async)"></rating>
+              <rating [ratingObj]="(project)"></rating>
             </div>
           </div>
-          <div class="col-md-5">
-            <div class="category_block">
-              Date: {{ (project | async)?.date | date:'short' }}
+          <div class="col-md-6 col-sm-5">
+            <div class="date_block">
+              Date: {{ (project)?.date | date:'short' }}
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="category_block">
-              Author: {{ (project | async)?.author }}
+          <div class="col-md-2 col-sm-3">
+            <div class="author_block">
+              Author: {{ (project)?.author }}
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <comments [commentsObj]="(project | async)?.comments">Comments loading...</comments>
+  <comments [commentsObj]="(project)">Comments loading...</comments>
 </div>

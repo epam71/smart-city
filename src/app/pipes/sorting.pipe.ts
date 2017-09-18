@@ -14,12 +14,7 @@ export class SortBy implements PipeTransform {
                 return data;
             } else {
                 
-                data = data.sort((item1, item2) => {
-
-                    if (value === 'projectName'){
-                        item1[value] = item1[value].toUpperCase();
-                        item2[value] = item2[value].toUpperCase();
-                    }
+                data.sort((item1, item2) => {
 
                     if (item1[value] < item2[value]) {
                         return -1;

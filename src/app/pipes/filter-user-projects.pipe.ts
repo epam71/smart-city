@@ -8,10 +8,10 @@ export class FilterUser implements PipeTransform {
 
     constructor(private authService: AuthService) {}
 
-    transform(value: any, arg): any {
+    transform(value: any, myProjects, approved): any {
 
         if (value != null) {
-            if (arg === true) {
+            if (myProjects === true) {
                 let resultArr = [];
                 for (let key of value) {
                     if (this.authService.getNickname() === key.author) {
@@ -20,7 +20,11 @@ export class FilterUser implements PipeTransform {
                 }
                 return resultArr;
             } else {
-                return value;
+                if (approved === 'all'){
+                    return value
+                } else {
+                    return value.filter((key) => { return key.approved === approved });
+                }
             }
         }
     }

@@ -1,24 +1,36 @@
 <div class="container">
   <div class="row">
-    <a class="add" [routerLink]="['add']">Add news</a>
-    <ng-container  *ngFor="let key of (news | async)">
-    <div class="col-md-6 service-block "  *ngIf="key.approved === false">
-      <div class="news_block">
+    <div class="col-md-12 news-attribute">
+      <div class="col-md-3 pull-left" >
+        <input type="text" [(ngModel)]="queryString" 
+               class="form-control" placeholder="Search news" />
+      </div>
          
+      <button class="btn btn-default pull-right" [routerLink]="['add']">Add news</button>
+      <div class="dropdown">
+        <button  class="dropbtn">Sort by <span class="caret"></span></button>
+          <div id="myDropdown" class="dropdown-content">
+            <li (click)="sortByLatestDate()">Sort by latest</li>
+            <li (click)="sortByOldestDate()">Sort by oldest</li>
+            <li (click)="sortByAuthor()">Sort by author</li>
+          </div>
+      </div>
+    </div>
+
+    <ng-container  *ngFor="let key of (news | async) | searchNews: queryString | sortingNews:sort:sortKey;">
+      <div class="col-md-6 service-block "  *ngIf="key.approved === false">
+        <div class="news_block">
           <p class="pull-left">{{key.author}}</p>
           <p class="news_date pull-right">{{key.date | date:'d MMMM y'}} </p>
-           
           <img class="img img-responsive" src="https://ichef.bbci.co.uk/news/1024/media/images/48351000/gif/_48351569_640x360-news.gif" alt="">
-      
           <h3 class="news_title">{{key.title }} </h3>
           <p class="news_desc">{{ key.desc | truncate: [250]  }}</p>
           <a class="read" [routerLink]="['/news', key._id]">Read more 
-            <span class="glyphicon glyphicon-menu-right">
-              </span>
-            </a>
-               <p> {{key.approved}}</p>
-            </div>
-          </div>
-        </ng-container>
+            <span class="glyphicon glyphicon-menu-right"></span>
+          </a>
+            <p> {{key.approved}}</p>
+        </div>
       </div>
-    </div>
+    </ng-container>
+  </div>
+</div>

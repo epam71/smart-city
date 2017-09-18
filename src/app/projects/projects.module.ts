@@ -7,17 +7,20 @@ import { routing } from './projects.routes';
 import { RatingProjectComponent } from './project-rating/project-rating.component';
 import { FilterUser } from '../pipes/filter-user-projects.pipe';
 import { CommentsProjectComponent } from './project-comments/project-comments.component';
-import { SortBy } from '../pipes/filter-rating.pipe';
+import { SortBy } from '../pipes/sorting.pipe';
 import { FormsModule } from '@angular/forms';
 import { ShortenPipe } from '../pipes/shorten.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PipesModule } from '../pipes/pipes.module';
+import { FilterApprovalPipe } from '../pipes/filter-approval.pipe';
+
 
 @NgModule({
   imports: [
     CommonModule,
     routing,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   declarations: [RatingProjectComponent,
     CommentsProjectComponent,
@@ -26,6 +29,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ProjectEditComponent,
     FilterUser,
     ShortenPipe,
-    SortBy]
+    SortBy,
+    FilterApprovalPipe
+  ]
 })
 export class ProjectsModule { }
