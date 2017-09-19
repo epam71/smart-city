@@ -20,7 +20,7 @@ export class NewsEditComponent implements OnInit {
 
   deleteNews() {
     this.newsData.deleteNews(this.newsId.id).subscribe();
-    this.router.navigate(['/admin/projects']);
+    this.router.navigate(['/admin/news']);
     this.newsData.look.next('test');
   }
 
