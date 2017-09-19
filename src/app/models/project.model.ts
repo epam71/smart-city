@@ -1,4 +1,5 @@
 export interface Project {
+    _id?: string,
     author?: string,
     authorEmail?: string,
     projectName: string,

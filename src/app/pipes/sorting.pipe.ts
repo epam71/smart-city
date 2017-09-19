@@ -10,7 +10,7 @@ export class SortBy implements PipeTransform {
     transform(data: any, value: any, reverse: string): any {
 
         if (data != null) {
-            if (value === 'all') {
+            if (value === 'unsorted') {
                 return data;
             } else {
                 
