@@ -6,11 +6,12 @@
          <li class="nav-item" routerLinkActive="active"><a routerLink="/admin/news">News</a></li>         
          <li class="nav-item" routerLinkActive="active"><a routerLink="/admin/contacts">Messages</a></li>
          <li class="nav-item"><a routerLink="/">Main page</a></li>
-        <li class="glyphicon glyphicon-lock tip"><span class="tiptext">configure access</span></li>
+        <li class="glyphicon glyphicon-lock tip" (click)="access.show()"><span class="tiptext">configure access</span></li>
       </ul>
     <!-- <button (click)='authService.login()'>Login</button>
    <button (click)='authService.logout()'>Logout</button> -->
    </div>
+   <app-set-acces #access></app-set-acces>
 
    <div class="row main-content">
       <div class=" col-sm-4 description_block">

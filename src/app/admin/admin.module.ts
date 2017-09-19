@@ -13,6 +13,7 @@ import { ProjectsEditComponent } from './projects-edit/projects-edit.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { FormsModule } from '@angular/forms';
 import { MessageStatusPipe } from '../pipes/message-status.pipe';
+import { SetAccesComponent } from './set-acces/set-acces.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { MessageStatusPipe } from '../pipes/message-status.pipe';
     MessageStatusPipe,
     ProjectsEditComponent,
     ConfirmComponent,
-    SortBy
+    SortBy,
+    SetAccesComponent
   ]
 })
 export class AdminModule { }
