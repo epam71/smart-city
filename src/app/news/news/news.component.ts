@@ -14,14 +14,17 @@ export class NewsComponent implements OnInit {
   newsId;
 
   constructor(private service: NewsServiceService,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute) {
+                route.params.subscribe(param => {
+                  this.newsId = param;
+                });
+              }
 
   ngOnInit() {
-    this.route.params
+    this.news= this.service.getNewsById(this.newsId.id)
       .subscribe(
-        (params: Params) => {
-          this.newsId = params;
-         this.news= this.service.getNewsById(this.newsId.id);   
+        (response) => {
+          this.news = response;   
         }
       );
   }

@@ -30,7 +30,7 @@
     margin: 5px 0;
     font-size: .9em;
     display: inline-block;
-    animation: 2s alertAnim forwards;
+    animation: 1s alertAnim forwards;
 }
 
 @keyframes alertAnim {
@@ -42,4 +42,14 @@
         opacity:1;
         transform: translateY(0);
     }
+}
+
+#modal{
+    animation: 1s alertAnim forwards;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index:99999;
 }
