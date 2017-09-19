@@ -19,6 +19,7 @@
 
 .img_block {
   position: relative;
+  width: 80%;
   padding: 0 0 calc(200/350*100%);
   top: 0;
   left: 0;

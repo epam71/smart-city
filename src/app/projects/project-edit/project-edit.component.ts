@@ -59,7 +59,7 @@ export class ProjectEditComponent implements OnInit {
       this.putProject.postProject(projectTemp)
         .subscribe(
         (response) => {
-          this.router.navigate(['/projects']);
+          this.router.navigate(['/projects/' + response._id]);
         },
         (error) => {
           console.error(error);
