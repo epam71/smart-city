@@ -96,7 +96,6 @@ export class ProjectServiceService {
     };
 
     deleteProject(id): Observable<Project> {
-
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         this.authService.setAuthHeader(headers);

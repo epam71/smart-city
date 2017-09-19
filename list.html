@@ -1,0 +1,8 @@
+<div>
+    {{ name }} {{ lastName }} <br>
+    <img width="200px" src="{{ img }}">
+    <button ng-click="edit()" ng-show="!editing">edit</button>
+    <button ng-click="save()" ng-show="editing">save</button>
+    <input ng-show="editing" ng-model="name"></input>
+    <input ng-show="editing" ng-model="lastName"></input>
+</div>

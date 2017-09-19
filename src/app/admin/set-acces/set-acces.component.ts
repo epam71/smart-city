@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './confirm.component.html',
-  styleUrls: ['./confirm.component.css']
+  selector: 'app-set-acces',
+  templateUrl: './set-acces.component.html',
+  styleUrls: ['./set-acces.component.css']
 })
-export class ConfirmComponent implements OnInit {
+export class SetAccesComponent implements OnInit {
+
 
   public visible = false;
   public visibleAnimate = false;

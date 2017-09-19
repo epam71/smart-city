@@ -7,6 +7,8 @@ import { ContactServiceService } from './contact-service/contact-service.service
 import { NewsServiceService } from './news-service/news-service.service';
 import { ProjectServiceService } from './project-service/project-service.service';
 import { UserServiceService } from './user-service/user-service.service';
+import { EmailServiceService } from './email-service/email-service.service';
+
 
 @NgModule({
   imports: [
@@ -19,7 +21,8 @@ import { UserServiceService } from './user-service/user-service.service';
     ContactServiceService,
     NewsServiceService,
     ProjectServiceService,
-    UserServiceService
+    UserServiceService,
+    EmailServiceService
   ]
 })
 export class CoreModule { }

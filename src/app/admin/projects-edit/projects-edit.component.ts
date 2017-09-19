@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Project } from '../../models/project.model';
 import { Subscription } from "rxjs/Subscription";
 import { ProjectServiceService } from "../../core/project-service/project-service.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../core/auth-service/auth-service.service';
-
 
 
 @Component({
@@ -36,7 +36,7 @@ export class ProjectsEditComponent implements OnInit {
   approveProject() {
     this.projectData.putProject(this.projectId.id, { "approved": true, "status": "active" }).subscribe();
     this.projectData.look.next('test');
-    setTimeout(() => { this.project = this.projectData.getProject(this.projectId.id) }, 100);
+    this.router.navigate(['/admin/projects/']);
   }
 
   closeProject() {
@@ -44,30 +44,18 @@ export class ProjectsEditComponent implements OnInit {
     this.router.navigate(['/admin/projects/']);
   }
 
-  constructor(private route: ActivatedRoute,
-    private router: Router,
-    private projectData: ProjectServiceService) {
-
-    route.params.subscribe(param => {
-      this.projectId = param;
-    });
-    router.events.subscribe(() => {
-      this.project = this.projectData.getProject(this.projectId.id);
-    });
-  }
-
   saveChanges(form: NgForm) {
     const value = form.value;
 
     let project: any = {
-      projectName: value.projectName, 
+      projectName: value.projectName,
       image: value.image,
-      desc: value.desc, 
-      goals: value.goals, 
-      result: value.result, 
+      desc: value.desc,
+      goals: value.goals,
+      result: value.result,
       budget: value.budget
     }
-    
+
     this.projectData.putProject(this.projectId.id, project)
       .subscribe(
       () => {
@@ -77,8 +65,26 @@ export class ProjectsEditComponent implements OnInit {
       });
   }
 
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private projectData: ProjectServiceService) {
+
+    route.params.subscribe(param => {
+      this.projectId = param;
+      this.projectData.getProject(this.projectId.id).subscribe((response)=>{this.project = response},
+        (error)=>{console.log(error)
+        });
+      
+    });
+    router.events.subscribe(() => {
+    //       this.projectData.getProject(this.projectId.id).subscribe((response)=>{this.project = response},
+    // (error)=>{console.log(error)});
+    });
+  }
+
   ngOnInit(): void {
-    this.project = this.projectData.getProject(this.projectId.id);
+    // this.projectData.getProject(this.projectId.id).subscribe((response)=>{this.project = response},
+    // (error)=>{console.log(error)});
   }
 
 }

@@ -1,12 +1,24 @@
-<div class="container col-sm-5">
+<div class="container col-sm-8">
    <div class="row">
-      <p  class="status col-sm-2 col-sm-offset-10">{{ (project | async)?.status }}</p>
-      <div class="glyphicon glyphicon-trash" (click)="deleteProject()"></div>
+      <p  class="status col-sm-2 col-sm-offset-10 badge badge-default">{{ project?.status }}</p>
+      <div class="glyphicon glyphicon-trash" (click)="modal.show()"></div>
       <div *ngIf="!editable" class="edit_block glyphicon glyphicon-pencil" (click)="editProject()"></div>  
-      <div class="project_date">Created at: {{(project | async)?.date | date}}</div>  
-      <button *ngIf="(project | async)?.approved === false" class="approve-project" (click)="approveProject()">approve</button>
-      <button *ngIf="(project | async)?.approved" class="close-project" (click)="closeProject()">close</button>    
+      <div class="project_date">Created at: {{ project?.date | date }}</div>  
+      <button *ngIf="project?.approved === false" type="button" class="btn btn-success approve-project" (click)="approveProject()">approve</button>
+      <button *ngIf="project?.approved" type="button" class="btn btn-secondary close-project" (click)="closeProject()">close</button>    
       
+        <app-modal #modal>
+          <div class="app-modal-header">
+            Admin
+          </div>
+          <div class="app-modal-body">
+            Are you sure you want to permanently delete this project?
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-default" (click)="modal.hide()">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="deleteProject()">Delete</button>
+          </div>
+        </app-modal>      
       
       <div class="img_block col-sm-12">
          <img class="img-responsive" src="http://www.personal.psu.edu/users/n/y/nys5290/Project-Image.jpg" alt="">
@@ -17,35 +29,35 @@
       <div class="form-group">
          <label for="projectName" class="col-sm-2 control-label">Name</label>
          <div class="col-sm-10">
-            <input type="text" class="form-control" name="projectName" [ngModel]="(project | async)?.projectName" #projectName="ngModel" required>
+            <input type="text" class="form-control" name="projectName" [ngModel]="project?.projectName" #projectName="ngModel" required>
          </div>
       </div>
 
       <div class="form-group">
          <label for="projectDesc" class="col-sm-2 control-label">Description</label>
          <div class="col-sm-10">
-            <textarea class="form-control" rows="7" cols="40" name="desc" [ngModel]="(project | async)?.desc" #desc="ngModel" required></textarea>
+            <textarea class="form-control" rows="7" cols="40" name="desc" [ngModel]="project?.desc" #desc="ngModel" required></textarea>
          </div>
       </div>
 
       <div class="form-group">
          <label for="projectGoals" class="col-sm-2 control-label">Goals</label>
          <div class="col-sm-10">
-            <textarea rows="4" cols="40" class="form-control" name="goals" [ngModel]="(project | async)?.goals || ''" #goals="ngModel" required></textarea>
+            <textarea rows="4" cols="40" class="form-control" name="goals" [ngModel]="project?.goals || ''" #goals="ngModel" required></textarea>
          </div>
       </div>
 
       <div class="form-group">
          <label for="projectAuthor" class="col-sm-2 control-label">Author</label>
          <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="author" name="projectAuthor" [ngModel]="(project | async)?.author || ''" #projectAuthor="ngModel" disabled>
+            <input type="text" class="form-control" placeholder="author" name="projectAuthor" [ngModel]="project?.author || ''" #projectAuthor="ngModel" disabled>
          </div>
       </div>
 
       <div class="form-group">
          <label for="projectBudget" class="col-sm-2 control-label">Budget</label>
          <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="budget" name="budget" [ngModel]="(project | async)?.budget || ''" #budget="ngModel" required>
+            <input type="text" class="form-control" placeholder="budget" name="budget" [ngModel]="project?.budget || ''" #budget="ngModel" required>
          </div>
       </div>
 
@@ -55,43 +67,42 @@
           <button class="btn btn-default" (click)="cancelChanges()">Cancel</button>
         </div>
       </div>
-
    </form>
 
 <article class="about_project" *ngIf="!editable">
       <div class="project_name">
-         <span>{{ (project | async)?.projectName | uppercase }}</span>
+         <span>{{ project?.projectName }}</span>
       </div>
-      <section *ngIf="(project | async)?.desc" class="project_info">
+      <section *ngIf="project?.desc" class="project_info">
          <p class="header">
             <span>Project description</span>
          </p>
          <p class="project_desc">
-            {{ (project | async)?.desc }}
+            {{ project?.desc }}
          </p>
       </section>
-      <section *ngIf="(project | async)?.goals" class="project_info">
+      <section *ngIf="project?.goals" class="project_info">
          <p class="header">
             <span>Goals</span>
          </p>
          <p class="project_desc">
-            <span>{{ (project | async)?.goals }}</span>
+            <span>{{ project?.goals }}</span>
          </p>
       </section>
-      <section *ngIf="(project | async)?.budget" class="project_info">
+      <section *ngIf="project?.budget" class="project_info">
          <p class="header">
             <span>Budget</span>
          </p>
          <p class="project_desc">
-            <span>{{ (project | async)?.budget }}</span>
+            <span>{{ project?.budget }}</span>
          </p>
       </section>
-      <section *ngIf="(project | async)?.author" class="project_info">
+      <section *ngIf="project?.author" class="project_info">
          <p class="header">
             <span>Author</span>
          </p>
          <p class="project_desc">
-            <span>{{ (project | async)?.author }}</span>
+            <span>{{ project?.author }}</span>
          </p>
       </section>
 

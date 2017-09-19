@@ -17,55 +17,97 @@ button:focus {
 
 .projects_block_main {}
 
-.sort_block {
+.panel_block {
   background: #FCFCFC;
   color: #777777;
   padding: 20px;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
-  text-align: right;
 }
 
-.sort_name {
-  color: #ccc;
+.projects_panel_left {
 }
 
-.select-style {
-  border: 1px solid #ccc;
-  padding: 7px;
-  border-radius: 3px;
-  overflow: hidden;
-  margin-right: 5px;
-  background: #fafafa 90% 50%;
-  text-align: center;
+.select_block_main{
+  margin-left: 5px;
 }
 
-.select-style select {
-  text-align: center;
-  padding: 5px 8px;
-  background: red;
-  border: none;
-  box-shadow: none;
-  background: transparent;
-  background-image: none;
-  -webkit-appearance: none;
-}
+.select_block {
 
-.select-style select:focus {
-  outline: none;
-}
-
-.my_projects {
-  text-align: left;
 }
 
 .sort_block_select {
-  padding: 5px;
-  box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
-  border: none;
-  cursor: pointer;
+  -webkit-appearance: button;
+  -webkit-border-radius: 2px;
+  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  -webkit-padding-end: 20px;
+  -webkit-padding-start: 2px;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(white, white 40%, white);
+  background-position: 90% center;
+  background-repeat: no-repeat;
+  border: 1px solid #AAA;
+  border-radius: 5px;
+  color: #555;
+  font-size: inherit;
+  overflow: hidden;
+  padding: 5px 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 110px;
 }
 
-.sort_block_select option {}
+.sort_block_select:focus {
+  outline: none;
+}
+
+.sort_block_select option {
+
+}
+
+.reverse_button{
+  
+}
+
+.reverse_button button {
+  -webkit-appearance: button;
+  -webkit-border-radius: 2px;
+  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  -webkit-padding-end: 20px;
+  -webkit-padding-start: 2px;
+  -webkit-user-select: none;
+  vertical-align: top;
+  background: -webkit-linear-gradient(white, white 40%, white);
+  background-position: 90% center;
+  background-repeat: no-repeat;
+  border: 1px solid #AAA;
+  border-radius: 5px;
+  color: #555;
+  font-size: inherit;
+  overflow: hidden;
+  padding: 8px 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search_block_main{
+
+}
+
+.add_block{
+  text-align: right;
+}
+
+
+@media screen and (max-width: 768px) {
+  .projects_panel_left {
+  text-align: center;
+  }
+
+  .add_block {
+    text-align: center;
+  }
+}
 
 .projects_block {
   padding: 50px;
