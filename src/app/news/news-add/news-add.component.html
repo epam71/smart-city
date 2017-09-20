@@ -1,13 +1,14 @@
 <div class="container add">
   <div class="row">
-        <a class="back" routerLink="/news">Back to news</a>
-    <div class="col-md-7 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <button class="btn btn-default pull-left" [routerLink]="['/news']">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Back to news</button>
+    <div class="col-md-9 col-sm-8 col-sm-offset-2">
       <div class="panel panel-info">
         <div class="panel-heading">
           <div class="panel-title">Add news</div>
         </div>
         <div class="panel-body">
-          <form class="form-horizontal" [formGroup]="rForm" (ngSubmit)="onAddNews(title.value, image.value, description.value); rForm.reset()">
+          <form class="form-horizontal" [formGroup]="rForm" (ngSubmit)="onAddNews(title.value, image.value, description.value)">
             <div class="form-group">
               <label for="title" class="col-sm-2 control-label">Title</label>
               <div class="col-sm-10">
@@ -41,7 +42,13 @@
   </div>
 </div>
 
-
-
-
-
+<div *ngIf="showModal" id="modal" class="modal-dialog ">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Thank you!</h4>
+    </div>
+    <div class="modal-body">
+      <p>Your news will be published after our administrator check it!</p>
+    </div>
+  </div>
+</div>

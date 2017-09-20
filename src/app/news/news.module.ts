@@ -8,13 +8,15 @@ import { TruncatePipe } from '../pipes/truncate-news.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { searchNews } from '../pipes/search-news.pipe';
 import { sortingNews } from '../pipes/sort-news.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   imports: [
     CommonModule,
     routing,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   declarations: [NewsListComponent, 
     NewsComponent, 
