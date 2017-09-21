@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsServiceService } from "../../core/news-service/news-service.service";
 import { Router } from "@angular/router";
-import "rxjs/add/operator/takeWhile";
+import { News } from '../../news/models/news.model';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-news-list',
@@ -10,9 +11,7 @@ import "rxjs/add/operator/takeWhile";
 })
 export class NewsListComponent implements OnInit {
 
-  private subscriber;
-  public news;
-  private alive: boolean = true;
+  public news:News[];
   private prop = 'all';
   private showPending = 3;
   private showActive = 3;
@@ -50,22 +49,22 @@ export class NewsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.newsData.getNews().subscribe((response) => {
-      this.news = response;
-      this.defineLength(response);
-    },
+    this.newsData.getNews().subscribe(
+      (response) => {
+        this.news = response
+      },
       (error) => {
         console.log(error)
       });
 
-    this.subscriber = this.newsData.look.asObservable().takeWhile(() => this.alive).subscribe(() => {
-      setTimeout(() => {
-        this.newsData.getNews().subscribe((response) => {
-          this.news = response;
-          this.defineLength(response);
-        },
-          (error) => { console.log(error) });
-      }, 100);
+    let saveData = this.newsData.look.asObservable();
+
+    let httpResult = saveData.switchMap(srcVal => {
+      return this.newsData.getNews();
+    });
+
+    httpResult.subscribe((response) => {
+      this.news = response;
     });
   }
 

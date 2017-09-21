@@ -40,6 +40,8 @@ export class ProjectServiceService {
             }).catch(this.handleError);
     };
 
+
+
     getProject(id): Observable<Project> {
 
         let headers = new Headers();

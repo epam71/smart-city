@@ -3,7 +3,7 @@ import { ProjectServiceService } from "../../core/project-service/project-servic
 import { AuthService } from '../../core/auth-service/auth-service.service';
 import { Router } from '@angular/router';
 import { Project } from '../../models/project.model';
-import "rxjs/add/operator/takeWhile";
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-projects-list',
@@ -16,10 +16,7 @@ export class ProjectsListComponent implements OnInit {
   private showPending: number = 3;
   private showActive: number = 3;
   private prop: string = 'all';
-  private subscriber: any;
   public projects: Project[];
-  private alive: boolean = true;
-
 
   sortByName() {
     this.prop = 'projectName';
@@ -41,26 +38,23 @@ export class ProjectsListComponent implements OnInit {
     private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
-    this.projectsData.getProjects().subscribe((response) => {
-      this.projects = response
-    },
+    this.projectsData.getProjects().subscribe(
+      (response) => {
+        this.projects = response
+      },
       (error) => {
         console.log(error)
       });
 
-    this.subscriber = this.projectsData.look.asObservable().takeWhile(() => this.alive).subscribe((response) => {
-      setTimeout(() => {
-        this.projectsData.getProjects().subscribe((response) => {
-          this.projects = response
-        },
-          (error) => {
-            console.log(error)
-          });
-      }, 100);
-    });
-  }
+    let saveData = this.projectsData.look.asObservable();
 
-  public ngOnDestroy() {
-    this.alive = false;
+    let httpResult = saveData.switchMap(srcVal => {
+      return this.projectsData.getProjects();
+    });
+
+    httpResult.subscribe((response) => {
+      this.projects = response;
+    });
+
   }
 }
