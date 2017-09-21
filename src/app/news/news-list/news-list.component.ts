@@ -16,7 +16,8 @@ export class NewsListComponent implements OnInit {
   private sort = 'all';
   private sortKey;
   news;
-
+  pagination: number[] = [];
+  
   sortByOldestDate() {
     this.sort = 'date';
     this.sortKey = 'normal';
@@ -33,23 +34,9 @@ export class NewsListComponent implements OnInit {
   }
 
   constructor(private service: NewsServiceService, private router: Router){  }
-
-  deleteNews(id){
-    if (confirm("Are you sure you want to delete this news?")) {
-            this.service.deleteNews(id)
-            .subscribe(
-              (response) => {
-               this.news = this.service.getNews();
-              },
-              (error) => { console.log(error)
-              });
-          }
-        }
-
-        ngOnInit() {
-          this.news= this.service.getNews()
-        }
-
-       
+  
+  ngOnInit() {
+    this.news= this.service.getNews()
+  }
 
 }

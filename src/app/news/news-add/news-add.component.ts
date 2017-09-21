@@ -15,6 +15,7 @@ export class NewsAddComponent implements OnInit {
   rForm: FormGroup;                   
   desc:string = '';
   title:string = '';
+  showModal;
  
 constructor(private service: NewsServiceService, 
   private router: Router, 
@@ -22,14 +23,10 @@ constructor(private service: NewsServiceService,
   private fb: FormBuilder) { 
     this.rForm = fb.group({
     'title' : [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(30)])],
-    'desc' : [null, Validators.compose([Validators.required, Validators.minLength(30), Validators.maxLength(1000)])],
+    'desc' : [null, Validators.compose([Validators.required, Validators.minLength(80), Validators.maxLength(1500)])],
     'validate' : ''
     });
   }
-
-  reset() {
-    this.rForm.reset(); 
- }
 
   onAddNews( title, image, desc) {
     let newsTemp: News = {  
@@ -44,9 +41,16 @@ constructor(private service: NewsServiceService,
 
     this.service.postNews(newsTemp)
     .subscribe(
-            (response) => console.log(response),
-            (error) => console.log(error)
-      );
+      (response) => console.log(response),
+      (error) => console.log(error)
+    );
+      
+    this.rForm.reset();
+
+    this.showModal = true;
+    setTimeout(()=>{    
+      this.showModal = false;
+    },6000);
   }
 
   ngOnInit() {}

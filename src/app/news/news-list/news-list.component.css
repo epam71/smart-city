@@ -94,3 +94,10 @@ news_desc{
 .read{
     font-weight: bold;
 }
+
+.pagination {
+    display: block;
+    text-align: center;
+    margin: 30px auto;
+}
+
