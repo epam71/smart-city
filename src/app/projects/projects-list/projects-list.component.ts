@@ -24,15 +24,34 @@ export class ProjectsListComponent implements OnInit {
   sortList = ['unsorted', 'rating', 'name', 'date'];
   sortTypeValue = 'normal';
   sort = 'unsorted';
+  search = '';
+  searchButton = true;
+
+  projectsValues = [{
+    key: 'name',
+    value: 'projectName'
+  }, {
+    key: 'rating',
+    value: 'rating'
+  }, {
+    key: 'date',
+    value: 'date'
+  }];
+
+  searchProject(){
+    this.searchButton = false;
+  }
 
   selectSort(event) {
 
     this.sortList = ['rating', 'name', 'date'];
-
-    if (event === 'name') {
-      event = 'projectName';
+    
+    for (let i = 0; i < this.projectsValues.length; i++){
+      if ( this.projectsValues[i].key === event) {
+        return this.sort = this.projectsValues[i].value;
+      }
     }
-    this.sort = event;
+    
   }
 
   sortType(event) {

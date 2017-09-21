@@ -1,9 +1,39 @@
-<div class="comments_block">
-    <div class="comment" *ngFor="let key of commentsObjInfo?.comments">
-        {{key.username}}
-        {{key.message}}
-        {{key.date}}
-    </div>
+<div class="add_comment_block">
+    <form class="form-horizontal" (ngSubmit)="addComment(f)" #f="ngForm">
+        <div class="alert alert-danger" *ngIf="errorMessage">
+            {{ errorMessage }}
+        </div>
+        <div class="form-group">
+            <label for="message" class="col-sm-2 control-label">Message</label>
+            <div class="col-sm-10">
+                <textarea rows="3" type="text" id="message" class="form-control" #message="ngModel" [ngModel]="(project)?.projectName" name="message"
+                    required [pattern]="'^.{5,}$'"></textarea>
+                <div [hidden]="message.valid || message.untouched" class="alert alert-danger">
+                    It can't be less then 5 symbols!
+                </div>
+            </div>
+        </div>
+        <div class="form-group buttons_block">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success comment_add" [disabled]="!f.valid">add</button>
+                <button type="button" class="btn btn-danger" (click)="clearForm()">Clear</button>
+            </div>
+        </div>
+    </form>
 </div>
 
-<button (click)="addComment()" type="button">Add</button>
+<div class="comments_block">
+    <div class="comment_block" *ngFor="let key of commentsObjInfo?.comments">
+        <div class="row">
+            <div class="col-md-10 comment_block_inside username">{{key.username}}</div>
+            <div class="col-md-2 comment_block_inside date">
+                Date: 21/09/2017 {{key.date}}
+            </div>
+        </div>
+
+            <div class="comment_block_inside comment">
+                {{key.message}}
+            </div>
+
+    </div>
+</div>

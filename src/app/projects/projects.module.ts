@@ -13,6 +13,7 @@ import { ShortenPipe } from '../pipes/shorten.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PipesModule } from '../pipes/pipes.module';
 import { FilterApprovalPipe } from '../pipes/filter-approval.pipe';
+import { SearchBy } from '../pipes/search.pipe';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { FilterApprovalPipe } from '../pipes/filter-approval.pipe';
     FilterUser,
     ShortenPipe,
     SortBy,
+    SearchBy,
     FilterApprovalPipe
   ]
 })

@@ -16,7 +16,7 @@ const PATH = 'https://smart-city-lviv-api.herokuapp.com/projects/';
 @Injectable()
 export class ProjectServiceService {
 
-    look: Subject<string> = new Subject<string>();
+    look: Subject<any> = new Subject<any>();
 
     constructor(private http: Http,
         private authService: AuthService) { }
@@ -75,6 +75,20 @@ export class ProjectServiceService {
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(PATH + id + '/likes', user, options)
+            .map((response: Response) => {
+                return <any>response.json();
+            })
+            .catch(this.handleError);
+    };
+
+    postComment(id, message: any): Observable<Project> {
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        this.authService.setAuthHeader(headers);
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(PATH + id + '/comments', message, options)
             .map((response: Response) => {
                 return <any>response.json();
             })
