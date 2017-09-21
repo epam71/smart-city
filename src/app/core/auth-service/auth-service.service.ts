@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import * as auth0 from 'auth0-js';
 
+const STORE_KEY_REDIRECT = 'authRedirectTo';
 const ROOT_ROLE = 'root';
 const INVESTOR_ROLE = 'investor';
 const USER_ROLE = 'user'; 
@@ -43,7 +44,8 @@ export class AuthService {
     scope: 'openid'
   });   
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private http: Http) {
     this.restoreSession();
   }
@@ -81,21 +83,19 @@ export class AuthService {
   } 
 
   login(): void {
+    localStorage.setItem(STORE_KEY_REDIRECT, this.router.url);
     this.auth0.authorize();
   }
 
   public handleAuthentication(): void {
-    let selfAuth0 = this.auth0;
-
     this.auth0.parseHash((err, authResult) => {
+      let pathRedirectTo: string;
+
       if (err) {
-        this.router.navigate(['/comp2']);
-        console.log(err);
+        this.router.navigate(['/']);
         return;
       }
       if (authResult && authResult.accessToken && authResult.idToken) {
-        window.location.hash = '';
-        
         this.accessToken = authResult.accessToken;
         this.idToken = authResult.idToken;
         this.name = authResult.idTokenPayload["https://name"];
@@ -104,6 +104,13 @@ export class AuthService {
         this.email = authResult.idTokenPayload["https://email"];
         this.setSession();
         this.changeStatus();
+
+        pathRedirectTo = localStorage.getItem(STORE_KEY_REDIRECT);
+        if (pathRedirectTo) {
+          this.router.navigate([pathRedirectTo]);
+        } else {
+          this.router.navigate(['/']);
+        }
       }
     });
   }     
