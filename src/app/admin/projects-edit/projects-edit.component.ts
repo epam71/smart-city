@@ -15,14 +15,15 @@ import { AuthService } from '../../core/auth-service/auth-service.service';
 })
 export class ProjectsEditComponent implements OnInit {
 
-  public project;
-  public projectId;
-  private editable = false;
+  public project:Project;
+  public projects: Project[];
+  public projectId:any;
+  private editable:boolean = false;
 
   deleteProject() {
     this.projectData.deleteProject(this.projectId.id).subscribe();
     this.router.navigate(['/admin/projects']);
-    this.projectData.look.next('test');
+    this.projectData.look.next('check');
   }
 
   cancelChanges() {
@@ -34,9 +35,13 @@ export class ProjectsEditComponent implements OnInit {
   }
 
   approveProject() {
-    this.projectData.putProject(this.projectId.id, { "approved": true, "status": "active" }).subscribe();
+    this.projectData.putProject(this.projectId.id, { "approved": true, "status": "active" }).subscribe(
+      (response) => {
+        this.project.approved = response.approved;
+        this.project.status = response.status;
+      }
+    );
     this.projectData.look.next('test');
-    this.router.navigate(['/admin/projects/']);
   }
 
   closeProject() {
@@ -58,10 +63,10 @@ export class ProjectsEditComponent implements OnInit {
 
     this.projectData.putProject(this.projectId.id, project)
       .subscribe(
-      () => {
-        this.router.navigate(['/admin/projects/' + this.projectId.id]);
+      (response) => {
+        this.project = response;
         this.editable = false;
-        this.projectData.look.next('test');
+        this.projectData.look.next('check');
       });
   }
 
@@ -71,20 +76,18 @@ export class ProjectsEditComponent implements OnInit {
 
     route.params.subscribe(param => {
       this.projectId = param;
-      this.projectData.getProject(this.projectId.id).subscribe((response)=>{this.project = response},
-        (error)=>{console.log(error)
+      this.projectData.getProject(this.projectId.id).subscribe(
+        (response) => {
+          this.project = response
+        },
+        (error) => {
+          console.log(error)
         });
-      
-    });
-    router.events.subscribe(() => {
-    //       this.projectData.getProject(this.projectId.id).subscribe((response)=>{this.project = response},
-    // (error)=>{console.log(error)});
     });
   }
 
   ngOnInit(): void {
-    // this.projectData.getProject(this.projectId.id).subscribe((response)=>{this.project = response},
-    // (error)=>{console.log(error)});
+
   }
 
 }

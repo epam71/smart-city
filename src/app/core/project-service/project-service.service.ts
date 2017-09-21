@@ -16,7 +16,7 @@ const PATH = 'https://smart-city-lviv-api.herokuapp.com/projects/';
 @Injectable()
 export class ProjectServiceService {
 
-    look: Subject<string> = new Subject<string>();
+    look: Subject<any> = new Subject<any>();
 
     constructor(private http: Http,
         private authService: AuthService) { }

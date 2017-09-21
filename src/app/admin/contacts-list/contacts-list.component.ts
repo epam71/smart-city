@@ -19,12 +19,13 @@ export class ContactsListComponent implements OnInit {
   private wasNotClicked: any;
   private fullList = false;
   public messageId;
+  private myParam = 'body';
 
   showAll() {
     this.fullList = true;
   }
 
-  showNew () {
+  showNew() {
     this.fullList = false;
   }
 
@@ -44,7 +45,13 @@ export class ContactsListComponent implements OnInit {
   deleteMessage(id) {
     this.messageData.deleteMessage(id).subscribe();
     setTimeout(() => {
-      this.messages = this.messageData.getMessages()
+      this.messageData.getMessages().subscribe(
+        (response) => {
+          this.messages = response;
+        },
+        (error) => {
+          console.log(error);
+        });
     }, 100);
   }
 
@@ -53,16 +60,28 @@ export class ContactsListComponent implements OnInit {
     let reply: any = {
       email: value.email,
       subject: value.subject,
+      html: value.body,
       text: value.body
     }
 
     this.emailData.postEmail(reply)
       .subscribe(
       () => {
-        this.router.navigate(['/admin/messages/']);
+        this.router.navigate(['/admin/contacts/']);
       });
     form.controls['subject'].reset();
     form.controls['body'].reset();
+
+    this.messageData.putMessage(this.message._id, { "new": false })
+      .subscribe(
+      (response) => {
+        this.message = response;
+      });
+
+    this.messageData.getMessages().subscribe((response) => { this.messages = response },
+      (error) => {
+        console.log(error)
+      });
   }
 
   constructor(private messageData: ContactServiceService,
@@ -70,13 +89,10 @@ export class ContactsListComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-        //   this.messageData.getMessage(this.messageId.id).subscribe((response)=>{this.messages = response},
-        // (error)=>{console.log(error)
-        // });
-
-      this.messageData.getMessages().subscribe((response)=>{this.messages = response},
-        (error)=>{console.log(error)
-        });
+    this.messageData.getMessages().subscribe((response) => { this.messages = response },
+      (error) => {
+        console.log(error)
+      });
   }
 
 }

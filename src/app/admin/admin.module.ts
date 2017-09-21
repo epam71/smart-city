@@ -13,6 +13,8 @@ import { ProjectsEditComponent } from './projects-edit/projects-edit.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { FormsModule } from '@angular/forms';
 import { MessageStatusPipe } from '../pipes/message-status.pipe';
+import { searchNews } from '../pipes/search-news.pipe';
+
 import { SetAccesComponent } from './set-acces/set-acces.component';
 
 @NgModule({
@@ -33,6 +35,7 @@ import { SetAccesComponent } from './set-acces/set-acces.component';
     ProjectsEditComponent,
     ConfirmComponent,
     SortBy,
+    searchNews,
     SetAccesComponent
   ]
 })
