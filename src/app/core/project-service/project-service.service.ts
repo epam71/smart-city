@@ -81,6 +81,20 @@ export class ProjectServiceService {
             .catch(this.handleError);
     };
 
+    postComment(id, message: any): Observable<Project> {
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        this.authService.setAuthHeader(headers);
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(PATH + id + '/comments', message, options)
+            .map((response: Response) => {
+                return <any>response.json();
+            })
+            .catch(this.handleError);
+    };
+
     putProject(id, projectEdit): Observable<Project> {
 
         let headers = new Headers();

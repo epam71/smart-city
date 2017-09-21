@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProjectServiceService } from '../../core/project-service/project-service.service';
 import { AuthService } from '../../core/auth-service/auth-service.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'comments',
@@ -19,28 +20,21 @@ export class CommentsProjectComponent implements OnInit {
 
   }
 
-  addComment() {
-    console.log(this.commentsObjInfo.comments);
+  addComment(form: NgForm) {
+    const value = form.value;
 
-    let temp = {
-        username: 'fsafsfsa',
-        message: 'sfafsfsa',
-      };
-      console.log(this.commentsObjInfo.comments);
-        this.commentsData.putProject(this.commentsObjInfo._id, this.commentsObjInfo.comments[1] = temp)
-          .subscribe(
-          (response) => {
-            console.log(response);
-          },
-          (error) => {
-            console.error(error);
-          });
+        this.commentsData.postComment(this.commentsObjInfo._id, {
+          username: this.authService.getNickname(),
+          message: value.message,
+          date: new Date()
+      }).subscribe(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          console.error(error);
+        });
       }
-
-
-test(){
-  console.log(this.commentsObjInfo);
-}
 
   ngOnInit() {
   }
