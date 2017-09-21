@@ -32,7 +32,7 @@
             <li *ngFor="let key of news | filterApproval:false | slice:0:showPending | sortBy:prop:'normal'; let i=index" class="project_block list-group-item">
                <a [routerLink]="['/admin/news', key._id]">               
                {{ key.title }} 
-               <span *ngIf="key.status === 'new'" class="badge badge-default badge-pill">new</span>              
+               <span *ngIf="key.approved === false" class="badge badge-default badge-pill">new</span>              
                </a>
             </li>
             <button type="button" class="list-group-item more" (click)="showMore('pending')">Show more</button>

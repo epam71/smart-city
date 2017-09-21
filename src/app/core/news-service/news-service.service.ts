@@ -18,55 +18,58 @@ export class NewsServiceService {
 
   _http;
   look: Subject<string> = new Subject<string>();
- 
-  constructor(private http: Http, 
+
+  constructor(private http: Http,
     private authService: AuthService) {
-    this._http= http;
+    this._http = http;
   }
 
-  private handlError(error: Response){
+  private handlError(error: Response) {
     let message = `Error status ${error.status} at ${error.url}`;
     return Observable.throw(message);
-}
- 
- getNews(): Observable<News[]> {
-  this.authService.setAuthHeader(headers);
-  return this.http.get(HTTP_NEWS, new RequestOptions({ headers: headers }))
-  .map((response: Response) => {
-      return response.json();
-  }).catch(this.handlError);
-};
+  }
 
-postNews(news: any): Observable<News> {
-  this.authService.setAuthHeader(headers);
-  return this.http.post(HTTP_NEWS, news, new RequestOptions({ headers: headers }))
-  .map((response: Response) => {
-      return <any>response.json();
-  })
-  .catch(this.handlError);
-};
-
-getNewsById (id): Observable<News> {
-  this.authService.setAuthHeader(headers);
-  return this._http.get(HTTP_NEWS +id, new RequestOptions({ headers: headers }))
+  getNews(): Observable<News[]> {
+    this.authService.setAuthHeader(headers);
+    return this.http.get(HTTP_NEWS, new RequestOptions({ headers: headers }))
       .map((response: Response) => {
-          return response.json();
+        return response.json();
       }).catch(this.handlError);
-};
+  };
 
-updateNews (id, newsEdit): Observable<News> {
-  this.authService.setAuthHeader(headers);
-  return this.http.put(HTTP_NEWS + id, newsEdit, new RequestOptions({ headers: headers })) 
-    .catch(this.handlError);
-}
+  postNews(news: any): Observable<News> {
+    this.authService.setAuthHeader(headers);
+    return this.http.post(HTTP_NEWS, news, new RequestOptions({ headers: headers }))
+      .map((response: Response) => {
+        return <any>response.json();
+      })
+      .catch(this.handlError);
+  };
 
-deleteNews(id): Observable<News> {
-  this.authService.setAuthHeader(headers);
-  return this.http.delete(HTTP_NEWS + id, new RequestOptions({ headers: headers }))
-  .map((response: Response) => {
-      return <any>response.json();
-  })
-  .catch(this.handlError);
-};
+  getNewsById(id): Observable<News> {
+    this.authService.setAuthHeader(headers);
+    return this._http.get(HTTP_NEWS + id, new RequestOptions({ headers: headers }))
+      .map((response: Response) => {
+        return response.json();
+      }).catch(this.handlError);
+  };
+
+  updateNews(id, newsEdit): Observable<News> {
+    this.authService.setAuthHeader(headers);
+    return this.http.put(HTTP_NEWS + id, newsEdit, new RequestOptions({ headers: headers }))
+      .map((response: Response) => {
+        return <any>response.json();
+      })
+      .catch(this.handlError);
+  }
+
+  deleteNews(id): Observable<News> {
+    this.authService.setAuthHeader(headers);
+    return this.http.delete(HTTP_NEWS + id, new RequestOptions({ headers: headers }))
+      .map((response: Response) => {
+        return <any>response.json();
+      })
+      .catch(this.handlError);
+  };
 
 }

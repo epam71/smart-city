@@ -6,7 +6,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../core/auth-service/auth-service.service';
-
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-projects-edit',
@@ -15,10 +15,10 @@ import { AuthService } from '../../core/auth-service/auth-service.service';
 })
 export class ProjectsEditComponent implements OnInit {
 
-  public project:Project;
+  public project: Project;
   public projects: Project[];
-  public projectId:any;
-  private editable:boolean = false;
+  public projectId: any;
+  private editable: boolean = false;
 
   deleteProject() {
     this.projectData.deleteProject(this.projectId.id).subscribe();
@@ -41,18 +41,19 @@ export class ProjectsEditComponent implements OnInit {
         this.project.status = response.status;
       }
     );
-    this.projectData.look.next('test');
+    this.projectData.look.next('change');
   }
 
   closeProject() {
     this.projectData.putProject(this.projectId.id, { "status": "closed" }).subscribe();
     this.router.navigate(['/admin/projects/']);
+    this.projectData.look.next('change');
   }
 
   saveChanges(form: NgForm) {
     const value = form.value;
 
-    let project: any = {
+    let project: Project = {
       projectName: value.projectName,
       image: value.image,
       desc: value.desc,
@@ -74,16 +75,17 @@ export class ProjectsEditComponent implements OnInit {
     private router: Router,
     private projectData: ProjectServiceService) {
 
-    route.params.subscribe(param => {
+    let myRoutes = route.params;
+
+    let httpResult = myRoutes.switchMap(param => {
       this.projectId = param;
-      this.projectData.getProject(this.projectId.id).subscribe(
-        (response) => {
-          this.project = response
-        },
-        (error) => {
-          console.log(error)
-        });
+      return this.projectData.getProject(this.projectId.id);
     });
+
+    httpResult.subscribe(
+      (response) => {
+        this.project = response;
+      });
   }
 
   ngOnInit(): void {

@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../core/auth-service/auth-service.service';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-news-edit',
@@ -38,7 +39,7 @@ export class NewsEditComponent implements OnInit {
         this.news.approved = response.approved;
         this.news.status = response.status;
       });
-    this.newsData.look.next('test');
+    this.newsData.look.next('check');
   }
 
   saveChanges(form: NgForm) {
@@ -53,7 +54,6 @@ export class NewsEditComponent implements OnInit {
     this.newsData.updateNews(this.newsId.id, news)
       .subscribe(
       (response) => {
-        console.log(response);
         this.news = response;
         this.editable = false;
         this.newsData.look.next('test');
@@ -64,21 +64,21 @@ export class NewsEditComponent implements OnInit {
     private router: Router,
     private newsData: NewsServiceService) {
 
-    route.params.subscribe(param => {
+    let myRoutes = route.params;
+
+    let httpResult = myRoutes.switchMap(param => {
       this.newsId = param;
-      this.newsData.getNewsById(this.newsId.id).subscribe((response) => {
-        this.news = response
-      },
-        (error) => {
-          console.log(error)
-        });
+      return this.newsData.getNewsById(this.newsId.id);
     });
+
+    httpResult.subscribe(
+      (response) => {
+        this.news = response;
+      });
   }
 
   ngOnInit() {
-    // this.newsData.getNewsById(this.newsId.id).subscribe((response) => {
-    //   this.news = response;
-    // });
+
   }
 
 }

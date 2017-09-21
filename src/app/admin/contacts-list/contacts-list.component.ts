@@ -42,22 +42,20 @@ export class ContactsListComponent implements OnInit {
     this.message = key;
   }
 
-  deleteMessage(id) {
-    this.messageData.deleteMessage(id).subscribe();
-    setTimeout(() => {
-      this.messageData.getMessages().subscribe(
-        (response) => {
-          this.messages = response;
-        },
-        (error) => {
-          console.log(error);
-        });
-    }, 100);
+  deleteMessage() {
+    let changed = this.messageData.deleteMessage(this.message._id);
+    let refresh = changed.switchMap(param => {
+      return this.messageData.getMessages();
+    });
+    refresh.subscribe(
+      (response) => {
+        this.messages = response;
+      });
   }
 
   sendMessage(form: NgForm) {
     const value = form.value;
-    let reply: any = {
+    let reply: Reply = {
       email: value.email,
       subject: value.subject,
       html: value.body,
@@ -66,21 +64,19 @@ export class ContactsListComponent implements OnInit {
 
     this.emailData.postEmail(reply)
       .subscribe(
-      () => {
+      (response) => {
         this.router.navigate(['/admin/contacts/']);
       });
     form.controls['subject'].reset();
     form.controls['body'].reset();
 
-    this.messageData.putMessage(this.message._id, { "new": false })
-      .subscribe(
+    let changes = this.messageData.putMessage(this.message._id, { "new": false });
+    let refresh = changes.switchMap(param => {
+      return this.messageData.getMessages();
+    });
+    refresh.subscribe(
       (response) => {
-        this.message = response;
-      });
-
-    this.messageData.getMessages().subscribe((response) => { this.messages = response },
-      (error) => {
-        console.log(error)
+        this.messages = response;
       });
   }
 
@@ -89,7 +85,10 @@ export class ContactsListComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.messageData.getMessages().subscribe((response) => { this.messages = response },
+    this.messageData.getMessages().subscribe(
+      (response) => {
+        this.messages = response
+      },
       (error) => {
         console.log(error)
       });
