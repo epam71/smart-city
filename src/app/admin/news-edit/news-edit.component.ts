@@ -14,14 +14,14 @@ import { AuthService } from '../../core/auth-service/auth-service.service';
 })
 export class NewsEditComponent implements OnInit {
 
-  public news;
-  public newsId;
-  private editable = false;
+  public news: News;
+  public newsId: any;
+  private editable: boolean = false;
 
   deleteNews() {
     this.newsData.deleteNews(this.newsId.id).subscribe();
     this.router.navigate(['/admin/news']);
-    this.newsData.look.next('test');
+    this.newsData.look.next('check');
   }
 
   cancelChanges() {
@@ -33,9 +33,12 @@ export class NewsEditComponent implements OnInit {
   }
 
   approveNews() {
-    this.newsData.updateNews(this.newsId.id, { "approved": true, "status": "active" }).subscribe();
+    this.newsData.updateNews(this.newsId.id, { "approved": true, "status": "active" }).subscribe(
+      (response) => {
+        this.news.approved = response.approved;
+        this.news.status = response.status;
+      });
     this.newsData.look.next('test');
-    setTimeout(() => { this.news = this.newsData.getNewsById(this.newsId.id) }, 100);
   }
 
   saveChanges(form: NgForm) {
@@ -49,8 +52,9 @@ export class NewsEditComponent implements OnInit {
 
     this.newsData.updateNews(this.newsId.id, news)
       .subscribe(
-      () => {
-        this.router.navigate(['/admin/news/' + this.newsId.id]);
+      (response) => {
+        console.log(response);
+        this.news = response;
         this.editable = false;
         this.newsData.look.next('test');
       });
@@ -62,14 +66,19 @@ export class NewsEditComponent implements OnInit {
 
     route.params.subscribe(param => {
       this.newsId = param;
-    });
-    router.events.subscribe(() => {
-      this.news = this.newsData.getNewsById(this.newsId.id);
+      this.newsData.getNewsById(this.newsId.id).subscribe((response) => {
+        this.news = response
+      },
+        (error) => {
+          console.log(error)
+        });
     });
   }
 
   ngOnInit() {
-    this.news = this.newsData.getNewsById(this.newsId.id);
+    // this.newsData.getNewsById(this.newsId.id).subscribe((response) => {
+    //   this.news = response;
+    // });
   }
 
 }

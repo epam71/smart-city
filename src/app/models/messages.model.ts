@@ -2,7 +2,8 @@ export interface Messages {
     author: string,
     email: any,
     subject: any,
-    body: any,
+    html: any,
     date: Date,
+    text: string,
     new: boolean;
 }
