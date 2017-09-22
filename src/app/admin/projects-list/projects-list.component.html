@@ -1,45 +1,47 @@
-<div class="container-fluid projects_block_main">
-
+<div class="content">
+<div class="container-fluid">
    <div class="nav_block">
       <ul class="nav nav-tabs">
-         <li role="nav" routerLinkActive="active"><a routerLink="/admin/projects">Home</a></li>
-         <li role="nav" routerLinkActive="active"><a routerLink="/admin/news">News</a></li>         
-         <li role="nav" routerLinkActive="active"><a routerLink="/admin/contacts">Messages</a></li>
-         <li role="nav"><a routerLink="/">Main page</a></li>
+         <li class="nav-item" routerLinkActive="active"><a routerLink="/admin/projects">Projects</a></li>
+         <li class="nav-item" routerLinkActive="active"><a routerLink="/admin/news">News</a></li>         
+         <li class="nav-item" routerLinkActive="active"><a routerLink="/admin/contacts">Messages</a></li>
+         <li class="nav-item"><a routerLink="/">Main page</a></li>
+        <li class="glyphicon glyphicon-lock tip" (click)="access.show()"><span class="tiptext">configure access</span></li>
       </ul>
+    <!-- <button (click)='authService.login()'>Login</button>
+   <button (click)='authService.logout()'>Logout</button> -->
    </div>
+   <app-set-acces #access></app-set-acces>
 
    <div class="row main-content">
-      <div class=" col-sm-5 description_block">
-        <div class="header-block">
-         <div class="btn btn-sm btn-outline-primary active-projects">Active projects</div>
-         <div class="glyphicon glyphicon-sort-by-alphabet" (click)="sortByName()"></div>
-         <div class="glyphicon glyphicon-sort-by-order" (click)="sortByDate()"></div>
-        </div>
-         <ul class="list_part">
-            <li *ngFor="let key of (projects | async) | filterApproval:true | filterStatus:'active' | slice:0:showActive | sortBy:prop:'normal'; let i=index" class="project_block">
+      <div class=" col-sm-4 description_block">
+        <div class="sort_section" (click)="sortByName()"><div class="glyphicon glyphicon-sort-by-alphabet"></div><span>By name</span></div>
+        <div class="sort_section" (click)="sortByDate()"><div class="glyphicon glyphicon-sort-by-order"></div><span>By date</span></div>
+
+        <ul class="list_part list-group">
+            <li class="list-group-item active-projects">Active</li>
+            <li *ngFor="let key of projects | filterApproval:true | filterStatus:'active' | slice:0:showActive | sortBy:prop:'normal'; let i=index" class="project_block list-group-item">
                <a [routerLink]="['/admin/projects', key._id]">
                <span class="project_name">
-               {{key.projectName | uppercase }}
+               {{key.projectName }}
                </span>
                </a>
             </li>
-            <div class="show_more" (click)="showMore('active')">Show more</div>
-         </ul>
-         <button class="btn btn-sm btn-outline-primary pending-projects">Pending approval</button>
-         <ul class="list_part">
-            <li *ngFor="let key of (projects | async) | filterApproval:false | slice:0:showPending | sortBy:prop:'normal'; let i=index" class="project_block">
-               <a [routerLink]="['/admin/projects', key._id]">
-               <span class="project_name">
-               <span class="circle" [class.new]="key.status === 'new'" [class.edited]="key.status === 'edited'"></span> {{key.projectName | uppercase }}
-               </span>
+          <button type="button" class="list-group-item more" (click)="showMore('active')">Show more</button>
+        </ul>
+        <ul class="list_part list-group">
+            <li class="list-group-item pending-projects">Pending</li>
+            <li *ngFor="let key of projects | filterApproval:false | slice:0:showPending | sortBy:prop:'normal'; let i=index" class="project_block list-group-item">
+               <a [routerLink]="['/admin/projects', key._id]">               
+               {{key.projectName }} 
+               <span *ngIf="key.status === 'new'" class="badge badge-default badge-pill">new</span>              
                </a>
             </li>
-            <div class="show_more" (click)="showMore('pending')">Show more</div>
+            <button type="button" class="list-group-item more" (click)="showMore('pending')">Show more</button>
          </ul>
       </div>
       
-<div class="container col-sm-6" *ngIf="router.url === '/admin/projects'">
+<div class="standard_mes container col-sm-8" *ngIf="router.url === '/admin/projects'">
   <img class="img-responsive" src="assets/images/welcome.jpg">
   <div class="welcome">
     <h3>Welcome to Admin Panel!</h3>
@@ -48,4 +50,6 @@
 </div>    
       <router-outlet></router-outlet>
    </div>
-  </div>
+
+</div>
+</div>

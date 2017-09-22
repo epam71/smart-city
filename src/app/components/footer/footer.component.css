@@ -1,0 +1,43 @@
+/*Footer*/
+.main-footer{
+    background-color: #151515;
+}
+.footer-bottom {
+    position: relative;
+    padding: 30px 0px;
+    text-align: center;
+}
+.auto-container {
+    position: static;
+    max-width: 1200px;
+    padding: 0px 15px;
+    margin: 0 auto;
+}
+.main-footer .footer-bottom .copyright {
+    color: #aaaaaa;
+    font-size: 14px;
+}
+
+
+.back-to-top {
+    position: fixed;
+    bottom: 18px;
+    right: 15px;
+  }
+  
+  .back-to-top i {
+    display: block;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    color: #fff;
+    border-radius: 2px;
+    text-align: center;
+    background-color: #444;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .back-to-top:hover i {
+    background-color: #ee3733;
+    z-index: 100;
+  }

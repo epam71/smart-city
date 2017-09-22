@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectServiceService } from "../../core/project-service/project-service.service";
-import { Router } from "@angular/router";
-
+import { AuthService } from '../../core/auth-service/auth-service.service';
+import { Router } from '@angular/router';
 import "rxjs/add/operator/takeWhile";
 
 @Component({
@@ -12,8 +12,8 @@ import "rxjs/add/operator/takeWhile";
 
 export class ProjectsListComponent implements OnInit {
 
-  private showPending = 5;
-  private showActive = 5;
+  private showPending = 3;
+  private showActive = 3;
   private prop = 'all';
   private subscriber;
   public projects;
@@ -28,7 +28,7 @@ export class ProjectsListComponent implements OnInit {
     this.prop = 'date';
   }
 
-  showMore(att){
+  showMore(att) {
     if (att === 'pending') {
       this.showPending += 5;
     } else if (att === 'active') {
@@ -38,12 +38,19 @@ export class ProjectsListComponent implements OnInit {
 
 
   constructor(private projectsData: ProjectServiceService,
-    private router: Router) { }
+    private router: Router, private authService: AuthService) { }
 
   public ngOnInit() {
-    this.projects = this.projectsData.getProjects();
+    this.projectsData.getProjects().subscribe((response) => { this.projects = response },
+      (error) => {
+        console.log(error)
+      });
+
     this.subscriber = this.projectsData.look.asObservable().takeWhile(() => this.alive).subscribe(() => {
-      setTimeout(() => { this.projects = this.projectsData.getProjects() }, 100);
+      setTimeout(() => {
+        this.projectsData.getProjects().subscribe((response) => { this.projects = response },
+          (error) => { console.log(error) });
+      }, 100);
     });
   }
 

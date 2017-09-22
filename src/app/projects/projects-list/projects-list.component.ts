@@ -14,16 +14,21 @@ export class ProjectsListComponent implements OnInit {
   constructor(private projectsData: ProjectServiceService,
     private authService: AuthService) { }
 
+    nick;
+    email;
+
   userCheck;
   projects;
   userProjects = false;
   approvedStatus: any = 'all';
-  sortList = ['all', 'rating', 'name', 'date'];
-  sortTypeList = ['normal', 'reverse'];
-  sortTypeValue;
-  sort = this.sortList[0];
+  sortList = ['unsorted', 'rating', 'name', 'date'];
+  sortTypeValue = 'normal';
+  sort = 'unsorted';
 
   selectSort(event) {
+
+    this.sortList = ['rating', 'name', 'date'];
+
     if (event === 'name') {
       event = 'projectName';
     }
@@ -31,7 +36,11 @@ export class ProjectsListComponent implements OnInit {
   }
 
   sortType(event) {
-    this.sortTypeValue = event;
+    if ( this.sortTypeValue === 'normal'){
+      this.sortTypeValue = 'reverse';
+    } else {
+      this.sortTypeValue = 'normal';
+    }
   }
 
   showUserProjects() {
@@ -40,11 +49,9 @@ export class ProjectsListComponent implements OnInit {
       this.approvedStatus = 'all';
     } else {
       this.userProjects = false;
-      this.approvedStatus = true;
+      this.approvedStatus = 'all';
     }
   }
-  nick;
-  email;
   
   ngOnInit() {
     this.projects = this.projectsData.getProjects();

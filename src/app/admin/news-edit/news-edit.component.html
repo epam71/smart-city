@@ -1,11 +1,23 @@
-<div class="container col-sm-5">
+<div class="container col-sm-8">
    <div class="row">
-      <p  class="status col-sm-2 col-sm-offset-10" *ngIf="(news | async)?.approved === false">NEW</p>
-      <div class="glyphicon glyphicon-trash" (click)="deleteNews()"></div>
+      <p  class="status col-sm-2 col-sm-offset-10 badge badge-default" *ngIf="(news | async)?.approved === false">NEW</p>
+      <div class="glyphicon glyphicon-trash" (click)="modal.show()"></div>
       <div *ngIf="!editable" class="edit_block glyphicon glyphicon-pencil" (click)="editNews()"></div>  
       <div class="news_date">Created at: {{(news | async)?.date | date}}</div>  
-      <button *ngIf="(news | async)?.approved === false" class="approve-news" (click)="approveNews()">approve</button>
-     
+      <button *ngIf="(news | async)?.approved === false" type="button" class="btn btn-success approve-news" (click)="approveNews()">approve</button>
+        
+      <app-modal #modal>
+          <div class="app-modal-header">
+            Admin
+          </div>
+          <div class="app-modal-body">
+            Are you sure you want to permanently delete this post?
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-default" (click)="modal.hide()">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="deleteNews()">Delete</button>
+          </div>
+        </app-modal>        
       
       <div class="img_block col-sm-12">
          <img class="img-responsive" src="http://ecdn.eu/wp-content/uploads/2017/07/news-3.jpg" alt="">

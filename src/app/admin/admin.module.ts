@@ -12,8 +12,8 @@ import { SortBy } from '../pipes/sorting.pipe'
 import { ProjectsEditComponent } from './projects-edit/projects-edit.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { FormsModule } from '@angular/forms';
-
-
+import { MessageStatusPipe } from '../pipes/message-status.pipe';
+import { SetAccesComponent } from './set-acces/set-acces.component';
 
 @NgModule({
   imports: [
@@ -29,9 +29,11 @@ import { FormsModule } from '@angular/forms';
     FilterApprovalPipe,
     FilterStatusPipe,
     ShortenPipe,
+    MessageStatusPipe,
     ProjectsEditComponent,
     ConfirmComponent,
-    SortBy
+    SortBy,
+    SetAccesComponent
   ]
 })
 export class AdminModule { }
