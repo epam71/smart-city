@@ -36,7 +36,51 @@ export class ProjectServiceService {
 
         return this.http.get(PATH, options)
             .map((response: Response) => {
+
                 return response.json();
+            }).catch(this.handleError);
+    };
+
+    getApprovedProjects(): Observable<Project[]> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        this.authService.setAuthHeader(headers);
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(PATH, options)
+            .map((response: Response) => {
+                return response.json().filter(el => {
+                    console.log(el.approved === true && el.status !== 'closed');
+                    return el.approved === true && el.status !== 'closed';
+                });
+            }).catch(this.handleError);
+    };
+
+    getUserProjects(username): Observable<Project[]> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        this.authService.setAuthHeader(headers);
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(PATH, options)
+            .map((response: Response) => {
+                return response.json().filter(el => {
+                    return el.author === username;
+                });
+            }).catch(this.handleError);
+    };
+
+    searchProjects(keyWord, property): Observable<Project[]> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        this.authService.setAuthHeader(headers);
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(PATH, options)
+            .map((response: Response) => {
+                return response.json().filter(el => {
+                    return el[property].toLowerCase().indexOf(keyWord.toLowerCase()) > -1;
+                });
             }).catch(this.handleError);
     };
 

@@ -18,7 +18,7 @@
       <span class="select_block_main">
         <span class="select_block">
       <select class="sort_block_select" (change)="selectSort($event.target.value)">
-    <option *ngFor="let key of sortList" >{{key}}</option>
+    <option *ngFor="let key of projectsValues" >{{key.key}}</option>
   </select>
       </span>
         <span class="reverse_button" *ngIf="sort !== 'unsorted'">
@@ -28,11 +28,11 @@
 
       <span class="search_block_main">
           <button class="glyphicon glyphicon-search" *ngIf="searchButton" (click)="searchProject($event)"></button>
-        <input type="text" placeholder="search" *ngIf="!searchButton" [(ngModel)]="search">
+        <input id="searchInput" type="text" placeholder="search" *ngIf="!searchButton" 
+        [(ngModel)]="searchData" (ngModelChange)="valueChange($event)">
       </span>
     </div>
-    <!-- <div class="col-lg-6 col-md-6 col-sm-6 projects_panel_center">
-    </div> -->
+
     <div class="col-lg-2 col-md-2 col-sm-2">
       <div class="add_block">
         <button type="submit" class="btn btn-success" routerLink="new">Add Project</button>
@@ -41,15 +41,14 @@
   </div>
   <div class="projects_block">
     <div class="row">
-      <div class="col-md-4 col-sm-6 project_block_main" *ngFor="let key of (projects | async) |
-       filterUserProjects:userProjects:approvedStatus | sortBy:sort:sortTypeValue 
-       | searchBy:'projectName':search | paginate: { itemsPerPage: 9, currentPage: p }">
+      <div class="col-md-4 col-sm-6 project_block_main" *ngFor="let key of (projects | async)
+       | sortBy:sort:sortTypeValue | paginate: { itemsPerPage: 9, currentPage: p }">
 
         <div class="project_block">
           <a [routerLink]="['/projects', key._id]">
             <div class="img_block">
               <div class="status_block" *ngIf="userProjects">
-                <span [ngClass]="key.approved ? 'status_text_yes' : 'status_text_no'"> {{ key.approved ? 'approved' : 'not approved' }}</span>
+                <span [ngClass]="key.approved ? 'status_text_yes' : 'status_text_no'">{{ key.status }} / {{ key.approved ? 'approved' : 'not approved' }}</span>
               </div>
               <img src="http://arenalviv.com.ua/uploads/images/pages/461/750/img_7467small.jpg" alt="{{key.image}}">
             </div>
