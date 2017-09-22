@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { ProjectServiceService } from '../../core/project-service/project-service.service';
 import { AuthService } from '../../core/auth-service/auth-service.service';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-project',
@@ -35,5 +36,6 @@ export class ProjectComponent implements OnInit {
       (error) => {
         console.error(error);
       });
+      
   }
 }
