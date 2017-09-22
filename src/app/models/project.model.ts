@@ -8,8 +8,9 @@ export interface Project {
     goals: string,
     result: string,
     budget: number,
-    status: string,
+    status?: string,
     comments?: string[],
     rating?: number,
+    approved?: boolean,
     currentRating?: number
 }

@@ -5,11 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 
 export class searchNews implements PipeTransform {
-    transform(value: any, input: any): any {
+    transform(value: any, input: any, param: string): any {
         if(input == null) return value;
     
         return value.filter(function(el){
-          return el.title.toLowerCase().indexOf(input.toLowerCase()) > -1;
+          return el[param].toLowerCase().indexOf(input.toLowerCase()) > -1;
         })
       }
 }

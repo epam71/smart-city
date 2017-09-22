@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../core/auth-service/auth-service.service';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-news-edit',
@@ -14,14 +15,14 @@ import { AuthService } from '../../core/auth-service/auth-service.service';
 })
 export class NewsEditComponent implements OnInit {
 
-  public news;
-  public newsId;
-  private editable = false;
+  public news: News;
+  public newsId: any;
+  private editable: boolean = false;
 
   deleteNews() {
     this.newsData.deleteNews(this.newsId.id).subscribe();
     this.router.navigate(['/admin/news']);
-    this.newsData.look.next('test');
+    this.newsData.look.next('check');
   }
 
   cancelChanges() {
@@ -33,9 +34,12 @@ export class NewsEditComponent implements OnInit {
   }
 
   approveNews() {
-    this.newsData.updateNews(this.newsId.id, { "approved": true, "status": "active" }).subscribe();
-    this.newsData.look.next('test');
-    setTimeout(() => { this.news = this.newsData.getNewsById(this.newsId.id) }, 100);
+    this.newsData.updateNews(this.newsId.id, { "approved": true, "status": "active" }).subscribe(
+      (response) => {
+        this.news.approved = response.approved;
+        this.news.status = response.status;
+      });
+    this.newsData.look.next('check');
   }
 
   saveChanges(form: NgForm) {
@@ -49,8 +53,8 @@ export class NewsEditComponent implements OnInit {
 
     this.newsData.updateNews(this.newsId.id, news)
       .subscribe(
-      () => {
-        this.router.navigate(['/admin/news/' + this.newsId.id]);
+      (response) => {
+        this.news = response;
         this.editable = false;
         this.newsData.look.next('test');
       });
@@ -60,16 +64,21 @@ export class NewsEditComponent implements OnInit {
     private router: Router,
     private newsData: NewsServiceService) {
 
-    route.params.subscribe(param => {
+    let myRoutes = route.params;
+
+    let httpResult = myRoutes.switchMap(param => {
       this.newsId = param;
+      return this.newsData.getNewsById(this.newsId.id);
     });
-    router.events.subscribe(() => {
-      this.news = this.newsData.getNewsById(this.newsId.id);
-    });
+
+    httpResult.subscribe(
+      (response) => {
+        this.news = response;
+      });
   }
 
   ngOnInit() {
-    this.news = this.newsData.getNewsById(this.newsId.id);
+
   }
 
 }

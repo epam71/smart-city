@@ -6,15 +6,16 @@
          <li class="nav-item" routerLinkActive="active"><a routerLink="/admin/news">News</a></li>         
          <li class="nav-item" routerLinkActive="active"><a routerLink="/admin/contacts">Messages</a></li>
          <li class="nav-item"><a routerLink="/">Main page</a></li>
-        <li class="glyphicon glyphicon-lock tip" (click)="access.show()"><span class="tiptext">configure access</span></li>
+         <button class="btn btn-default logout" (click)='authService.login()'>Login</button>
+
+         <li class="glyphicon glyphicon-lock tip" (click)="access.show()"><span class="tiptext">configure access</span></li>
       </ul>
-    <!-- <button (click)='authService.login()'>Login</button>
-   <button (click)='authService.logout()'>Logout</button> -->
+    <button (click)='authService.logout()'>Logout</button>  
    </div>
    <app-set-acces #access></app-set-acces>
 
    <div class="row main-content">
-      <div class=" col-sm-4 description_block">
+      <div class="col-xs-8 col-sm-4 description_block">
         <div class="sort_section" (click)="sortByName()"><div class="glyphicon glyphicon-sort-by-alphabet"></div><span>By name</span></div>
         <div class="sort_section" (click)="sortByDate()"><div class="glyphicon glyphicon-sort-by-order"></div><span>By date</span></div>
 
@@ -41,7 +42,7 @@
          </ul>
       </div>
       
-<div class="standard_mes container col-sm-8" *ngIf="router.url === '/admin/projects'">
+<div class="standard_mes container col-xs-12 col-sm-8" *ngIf="router.url === '/admin/projects'">
   <img class="img-responsive" src="assets/images/welcome.jpg">
   <div class="welcome">
     <h3>Welcome to Admin Panel!</h3>

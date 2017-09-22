@@ -32,7 +32,7 @@ body {
     background-color: #fcfcfc;
 	width: auto;
 }
-.panel .btn-group {
+.panel {
 	margin: 15px 0 30px;
 }
 .panel .btn-group .btn {
@@ -42,11 +42,12 @@ body {
 	background-color: #fff;
     border-bottom: 1px solid #eee;
     table-layout:fixed;
-    width: 100%;
+	width: 100%;
+	border-collapse: collapse;
 }
 .table-filter tbody tr:hover {
 	cursor: pointer;
-	background-color: #eee;
+	background-color: #fcfcfc;
 }
 .table-filter tbody tr td {
 	padding: 10px;
@@ -131,7 +132,7 @@ body {
 	background-color: #f7f7f7;
 }
 
-form input, form textarea {
+form input.form-group, form textarea {
   margin: 0 .25rem;
   min-width: 125px;
   border: 1px solid #eee;
@@ -157,4 +158,38 @@ form input.ng-invalid, form textarea.ng-invalid {
 	text-align: center;
 	background-color: #ddd;
 	pointer-events: none;
+}
+
+.newMessage {
+	outline: none;
+	border: 2px solid #dadada;
+	box-shadow: 0 0 10px #9ecaed;
+}
+
+focus-container{
+	height: 5em;
+	max-width: 300px;
+}
+
+focus-container:focus {
+	background-color: blue;	
+}
+
+.search-form {
+	max-width: 300px;
+	margin: 0 auto 15px auto;
+	text-align: center;
+}
+
+.btn-group {
+	margin: 0 auto 20px auto;
+}
+
+.black-styled {
+	background-color:#000000;
+	color:#ffffff;
+}
+
+.btn:focus {
+  outline: none;
 }
