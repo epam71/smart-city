@@ -36,7 +36,6 @@ export class CommentsProjectComponent implements OnInit {
 
        postCommet.switchMap(
            event => {
-             console.log(event);
             this.output.emit(event)
              return getComments;
            }
