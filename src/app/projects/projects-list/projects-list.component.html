@@ -46,12 +46,14 @@
 
         <div class="project_block">
           <a [routerLink]="['/projects', key._id]">
+            <div class="row">
             <div class="img_block">
               <div class="status_block" *ngIf="userProjects">
                 <span [ngClass]="key.approved ? 'status_text_yes' : 'status_text_no'">{{ key.status }} / {{ key.approved ? 'approved' : 'not approved' }}</span>
               </div>
-              <img src="http://arenalviv.com.ua/uploads/images/pages/461/750/img_7467small.jpg" alt="{{key.image}}">
+              <img src="{{ 'data:image/jpeg;base64,' + key?.image }}" alt="{{key.projectName}}">
             </div>
+          </div>
             <div class="info_block">
               <div class="project_name">
                 {{key.approved}} {{key.projectName | uppercase | shorten:20 }}
