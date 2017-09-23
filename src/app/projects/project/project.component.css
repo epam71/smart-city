@@ -2,6 +2,11 @@
   font-size: 16px;
 }
 
+.response_message{
+padding: 10px;
+top: 30%;
+}
+
 .nav_block {
   background: #FCFCFC;
   color: #777777;
@@ -20,13 +25,19 @@
 .img_block {
   position: relative;
   width: 80%;
-  padding: 0 0 calc(200/350*100%);
+  padding: 0 0 calc(170/350*100%);
   top: 0;
   left: 0;
   margin: auto;
   text-align: center;
-  background: url('http://arenalviv.com.ua/uploads/images/pages/461/750/img_7467small.jpg');
   background-size: cover;
+}
+
+.img_block img{
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
 
 .project_name {

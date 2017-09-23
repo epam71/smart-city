@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ProjectServiceService } from '../../core/project-service/project-service.service';
 import { AuthService } from '../../core/auth-service/auth-service.service';
 import { NgForm } from '@angular/forms';
@@ -13,7 +13,10 @@ import { Observable } from 'rxjs/Observable';
 export class CommentsProjectComponent implements OnInit {
 
   @Input('commentsObj') commentsObjInfo;
+  @Output() output: EventEmitter<any> = new EventEmitter();
   @ViewChild('f') slForm: NgForm;
+
+  responseMessage;
 
   constructor(private commentsData: ProjectServiceService,
               private authService: AuthService) {
@@ -33,6 +36,7 @@ export class CommentsProjectComponent implements OnInit {
 
        postCommet.switchMap(
            event => {
+            this.output.emit(event)
              return getComments;
            }
          )

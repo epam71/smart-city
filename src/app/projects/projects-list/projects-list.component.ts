@@ -3,6 +3,7 @@ import { ProjectServiceService } from '../../core/project-service/project-servic
 import { AuthService } from '../../core/auth-service/auth-service.service';
 import { trigger, state, transition, style, animate, group } from '@angular/animations';
 
+
 @Component({
   selector: 'app-projects-list',
   templateUrl: './projects-list.component.html',
@@ -16,11 +17,10 @@ export class ProjectsListComponent implements OnInit {
     private authService: AuthService) { }
 
   searchData = '';
-
   nick;
   email;
-
   userCheck;
+  
   projects;
   userProjects = false;
   sortTypeValue = 'normal';
@@ -51,12 +51,11 @@ export class ProjectsListComponent implements OnInit {
 
   selectSort(event) {
 
-    for (let i = 0; i < this.projectsValues.length; i++) {
+    return this.projectsValues.forEach((el, i) => {
       if (this.projectsValues[i].key === event) {
-        return this.sort = this.projectsValues[i].value;
-      }
-    }
-
+            return this.sort = this.projectsValues[i].value;
+          }
+    });
   }
 
   sortType(event) {
