@@ -31,6 +31,7 @@
                         <a class="pull-left">
                           <img src="https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Cat-512.png" class="media-photo">
                         </a>
+                        <span class="pull-right date-block">{{ key?.date | date:'dd MMM HH:mm' }}</span>
                         <p class="controls glyphicon glyphicon-share-alt" (click)="chooseMes(key); modal.show()"></p>
                         <br>
                         <p class="controls glyphicon glyphicon-trash" (click)="chooseMes(key); confirmation.show()"></p>

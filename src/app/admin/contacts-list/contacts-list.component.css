@@ -221,3 +221,8 @@ pagination-controls /deep/ a:hover, pagination-controls /deep/ li:hover, paginat
 .app-modal-footer button {
 	margin: 0 auto;
 }
+
+.date-block {
+	color: darkgrey;
+	margin-right: 5px;
+}

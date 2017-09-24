@@ -18,6 +18,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { SetAccesComponent } from './set-acces/set-acces.component';
 import { NavigationComponent } from './navigation/navigation.component';
 
+
 @NgModule({
   imports: [
     CommonModule,

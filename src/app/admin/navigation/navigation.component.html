@@ -10,21 +10,22 @@
             <i class="fa fa-bars"></i>
           </button>
           <!-- End Toggle Nav Link For Mobiles -->
-          <a class="navbar-brand" href="#">
-            <img alt="log out" src="#">
+          <a class="navbar-brand" (click)="logOut()">
+            <div class="glyphicon glyphicon-log-out"></div>
+            <span>log out</span>
           </a>
         </div>
         <div class="navbar-collapse collapse">
           <!-- Start Navigation List -->
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a routerLink="../projects" routerLinkActive="active" [routerLinkActiveOptions] = "{ exact: true }">Projects</a>
+              <a routerLink="../projects" routerLinkActive="active">Projects</a>
             </li>
             <li>
-              <a routerLink="../news" routerLinkActive="active" [routerLinkActiveOptions] = "{ exact: true }">News</a>
+              <a routerLink="../news" routerLinkActive="active">News</a>
             </li>
             <li>
-              <a routerLink="../contacts" routerLinkActive="active" [routerLinkActiveOptions] = "{ exact: true }">Contacts</a>
+              <a routerLink="../contacts" routerLinkActive="active">Contacts</a>
             </li>
             <li>
               <a routerLink="../../">Main</a>
