@@ -1,4 +1,29 @@
 <div class="container project_block_main">
+
+    <div class="modal response_message" [ngClass]="{'show' : commentsResponse !== '' }" 
+    *ngIf="commentsResponse !== ''" (click)="commentsResponse=''">
+          
+      <div class="modal-dialog alert">
+                    <div class="modal-header alert alert-success">
+                        <button type="button" class="close" data-dismiss="modal" 
+                        aria-hidden="true" (click)="commentsResponse=''">&times;</button>
+                        <h4 class="modal-title">{{ commentsResponse }}</h4>
+                    </div>
+            </div>
+    </div>
+
+    <div class="modal response_message" [ngClass]="{'show' : ratingResponse !== '' }" 
+    *ngIf="ratingResponse !== ''" (click)="ratingResponse=''">
+          
+      <div class="modal-dialog alert">
+                    <div class="modal-header alert alert-danger">
+                        <button type="button" class="close" data-dismiss="modal" 
+                        aria-hidden="true" (click)="ratingResponse=''">&times;</button>
+                        <h4 class="modal-title">{{ ratingResponse }}</h4>
+                    </div>
+            </div>
+    </div>
+
   <div class="row">
     <div class="nav_block">
       <button type="submit" class="btn btn-default" routerLink="/projects">Back to projects</button>
@@ -9,6 +34,7 @@
   </div>
     <div class="project_block">
       <div class="img_block">
+        <img [src]="_placeholderBase64" alt="">
        <div class="project_name">
           {{ (project)?.projectName | uppercase }}
         </div>
@@ -54,7 +80,7 @@
         <div class="row">
           <div class="col-md-4 col-sm-4">
             <div class="likes_block">
-              <rating [ratingObj]="(project)"></rating>
+              <rating [ratingObj]="(project)" (outputRating)="getRatingInfo($event)"></rating>
             </div>
           </div>
           <div class="col-md-6 col-sm-5">
@@ -70,5 +96,5 @@
         </div>
       </div>
     </div>
-  <comments [commentsObj]="(project)">Comments loading...</comments>
+  <comments [commentsObj]="(project)" (output)="getInfo($event)">Comments loading...</comments>
 </div>

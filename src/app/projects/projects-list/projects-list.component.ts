@@ -2,32 +2,34 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ProjectServiceService } from '../../core/project-service/project-service.service';
 import { AuthService } from '../../core/auth-service/auth-service.service';
 import { trigger, state, transition, style, animate, group } from '@angular/animations';
+
+
 @Component({
   selector: 'app-projects-list',
   templateUrl: './projects-list.component.html',
   styleUrls: ['./projects-list.component.css'],
-  animations: []
 })
+
 export class ProjectsListComponent implements OnInit {
 
 
   constructor(private projectsData: ProjectServiceService,
     private authService: AuthService) { }
 
-    nick;
-    email;
-
+  searchData = '';
+  nick;
+  email;
   userCheck;
+  
   projects;
   userProjects = false;
-  approvedStatus: any = 'all';
-  sortList = ['unsorted', 'rating', 'name', 'date'];
   sortTypeValue = 'normal';
   sort = 'unsorted';
-  search = '';
   searchButton = true;
-
   projectsValues = [{
+    key: 'unsorted',
+    value: 'unsorted'
+  }, {
     key: 'name',
     value: 'projectName'
   }, {
@@ -38,24 +40,26 @@ export class ProjectsListComponent implements OnInit {
     value: 'date'
   }];
 
-  searchProject(){
+  searchProject(event) {
     this.searchButton = false;
+  }
+
+  valueChange(newValue) {
+    this.searchData = newValue;
+    this.projects = this.projectsData.searchProjects(this.searchData, 'projectName');
   }
 
   selectSort(event) {
 
-    this.sortList = ['rating', 'name', 'date'];
-    
-    for (let i = 0; i < this.projectsValues.length; i++){
-      if ( this.projectsValues[i].key === event) {
-        return this.sort = this.projectsValues[i].value;
-      }
-    }
-    
+    return this.projectsValues.forEach((el, i) => {
+      if (this.projectsValues[i].key === event) {
+            return this.sort = this.projectsValues[i].value;
+          }
+    });
   }
 
   sortType(event) {
-    if ( this.sortTypeValue === 'normal'){
+    if (this.sortTypeValue === 'normal') {
       this.sortTypeValue = 'reverse';
     } else {
       this.sortTypeValue = 'normal';
@@ -65,17 +69,17 @@ export class ProjectsListComponent implements OnInit {
   showUserProjects() {
     if (!this.userProjects) {
       this.userProjects = true;
-      this.approvedStatus = 'all';
+      this.projects = this.projectsData.getUserProjects(this.authService.getNickname());
     } else {
       this.userProjects = false;
-      this.approvedStatus = 'all';
+      this.projects = this.projectsData.getApprovedProjects();
     }
   }
-  
+
   ngOnInit() {
     this.projects = this.projectsData.getProjects();
-    this.userCheck = this.authService.getRole();
 
+    this.userCheck = this.authService.getRole();
     this.nick = this.authService.getNickname();
     this.email = this.authService.getEmail();
   }
