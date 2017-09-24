@@ -13,8 +13,8 @@ import 'rxjs/add/operator/switchMap';
 
 export class ProjectsListComponent implements OnInit {
 
-  private showPending: number = 3;
-  private showActive: number = 3;
+  private showPending: number = 4;
+  private showActive: number = 4;
   private prop: string = 'all';
   public projects: Project[];
 

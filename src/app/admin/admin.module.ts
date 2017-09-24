@@ -14,14 +14,16 @@ import { ConfirmComponent } from './confirm/confirm.component';
 import { FormsModule } from '@angular/forms';
 import { MessageStatusPipe } from '../pipes/message-status.pipe';
 import { searchNews } from '../pipes/search-news.pipe';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 import { SetAccesComponent } from './set-acces/set-acces.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   imports: [
     CommonModule,
     routing,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   declarations: [
     ContactsListComponent,
@@ -36,7 +38,8 @@ import { SetAccesComponent } from './set-acces/set-acces.component';
     ConfirmComponent,
     SortBy,
     searchNews,
-    SetAccesComponent
+    SetAccesComponent,
+    NavigationComponent
   ]
 })
 export class AdminModule { }
