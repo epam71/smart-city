@@ -18,6 +18,8 @@ import { ContactUsComponent } from './components/contact-us/contact-us.component
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { AlertModule } from 'ngx-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminAuthGuardService } from './core/admin-auth-guard/admin-auth-guard.service';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +43,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     AlertModule.forRoot()
   ],
-  providers: [],
+  providers: [AdminAuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

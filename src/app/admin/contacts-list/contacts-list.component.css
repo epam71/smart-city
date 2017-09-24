@@ -1,38 +1,24 @@
-body {
-       width: 100%;
-       margin: 0%;    
-}
-
 .content{
-    background:#ffffff url('https://inassets1-internationsgmbh.netdna-ssl.com/image/static_2048_1152/static/bundles/internationsseo/frontend/images/localcommunityHero/250.jpg') no-repeat center center;
-	background-attachment: fixed;
-	min-height: 690px;
+	background-color: #fcfcfc;
+	max-width: 1200px;
+	margin: 10px auto;
+	border-radius: 5px;
 }
 
 .container-fluid {
-    max-width: 1000px;
-	background-color: white;
+	background:#ffffff url('https://rudolfo.com.ua/wp-content/uploads/2016/12/slider-1.jpg') no-repeat center center;
+	background-attachment: fixed;
+	background-size:     cover;
+	min-height: 1000px;
 	padding-top: 10px;
-	min-height: 600px;
-}
-body {
-	font-family: 'Open Sans', sans-serif;
-	color: #353535;
-}
-
-.nav_block {
-    margin-bottom: 20px;
 }
 
 /*	--------------------------------------------------
 	:: Table Filter
 	-------------------------------------------------- */
 .panel {
-	border: 1px solid #ddd;
     background-color: #fcfcfc;
 	width: auto;
-}
-.panel {
 	margin: 15px 0 30px;
 }
 .panel .btn-group .btn {
@@ -95,44 +81,16 @@ body {
         transform: scale(1.3);
 }
 
-.glyphicon-lock{
-	float: right;
-	margin-right: 20px;
-	font-size: 20px;
-	margin-top: 10px;
-}
-
-.tip {
-    position: relative;
-    display: inline-block;
-}
-
-.tip .tiptext {
-    visibility: hidden;
-	width: 110px;
-	font-size: 12px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-
-    /* Position the tooltip */
-	position: absolute;
-	right: 30px;
-    z-index: 1;
-}
-
-.tip:hover .tiptext {
-    visibility: visible;
-}
-
 .unchange {
 	pointer-events:none;
 	background-color: #f7f7f7;
 }
 
-form input.form-group, form textarea {
+.disabled-state {
+	pointer-events: none;
+}
+
+form input[type="text"], form textarea {
   margin: 0 .25rem;
   min-width: 125px;
   border: 1px solid #eee;
@@ -141,17 +99,35 @@ form input.form-group, form textarea {
   transition: border-color .2s ease-out;
 }
 
-.ng-valid[required], .ng-valid.required {
-  border-left-color: green;
+.ng-valid[required], .ng-valid.required, .ng-untouched {
+  border-left-color: lightgrey;
 }
 form input.ng-invalid, form textarea.ng-invalid {
-  border-left-color: darkred;
+  border-left-color: #ee3733;
 }
 .ng-valid[required]:focus, .ng-valid.required:focus {
  border: none;
 }
 .ng-invalid:not(form):focus {
  border: none;
+}
+
+.form-group {
+    margin-bottom: 7px;
+}
+
+label.control-label {
+    width:180px;
+    clear:left;
+    text-align:left;
+}
+
+input, label {
+    float:left;
+}
+
+textarea {
+    resize: none;
 }
 
 .noContent {
@@ -181,15 +157,72 @@ focus-container:focus {
 	text-align: center;
 }
 
+/*pagination*/
+
+.pagination_block {
+  padding-top: 5px;
+  text-align: center;
+}
+
+pagination-controls /deep/ .ngx-pagination {
+	padding: 0;
+    width: 250px;
+    font-size: 16px;
+}
+
+pagination-controls /deep/ .ngx-pagination .current {
+	background-color: #ee3733;
+}
+
+pagination-controls /deep/ a:hover, pagination-controls /deep/ li:hover, pagination-controls /deep/ .ngx-pagination .current {
+	text-decoration: none;
+	border-radius: 3px;
+
+}
+
+.custom-btn{
+    font-family: "Raleway", sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: 0.5s;
+    margin: 6px 0 6px 6px;
+	border: 2px solid #141414;
+    background: none;
+    color: #141414;
+  }
+.custom-btn:hover, .selected-btn {
+    background: #ee3733;
+    border: 2px solid #ee3733;
+    color: #fff;
+  }
+
+.btn.btn-all {
+	border-left: none;
+}
+
 .btn-group {
 	margin: 0 auto 20px auto;
 }
 
-.black-styled {
-	background-color:#000000;
-	color:#ffffff;
-}
-
 .btn:focus {
   outline: none;
+}
+
+.app-modal-footer {
+	text-align: center; 
+	padding: 8px;
+}
+
+.app-modal-footer button {
+	margin: 0 auto;
+}
+
+.date-block {
+	color: darkgrey;
+	margin-right: 5px;
 }

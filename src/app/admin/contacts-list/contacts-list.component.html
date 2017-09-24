@@ -1,31 +1,18 @@
-<div class="content">
-  <div class="container-fluid projects_block_main">
-    <div class="nav_block">
-      <ul class="nav nav-tabs">
-        <li role="presentatiom"><a routerLink="../projects">Projects</a>
-        </li>
-        <li role="presentatiom" routerLinkActive="active"><a routerLink="../news">News</a>
-        </li>
-        <li role="presentatiom" routerLinkActive="active"><a routerLink="../contacts">Messages</a>
-        </li>
-        <li role="presentatiom"><a routerLink="/">Main page</a>
-        </li>
-        <button class="btn btn-default logout pull-right" (click)='authService.login()'>Login</button>
-      </ul>
-    </div>
-    <div class="row">
-      <section class="content">
-        <div class="col-sm-10 col-sm-offset-1">
+<navigation></navigation>
+<div class="container-fluid projects_block_main">
+    <div class="row content">
+      <section>
+        <div class="col-sm-12">
           <div class="panel panel-default">
             <div class="panel-body">
               <form class="navbar-form search-form" role="search">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-filter" (click)="showNew()">New</button>
-                  <button type="button" class="btn btn-primary btn-filter black-styled" (click)="showAll()">All</button>
+                  <button type="button" class="btn custom-btn btn-filter" (click)="showNew()" [ngClass]="{'selected-btn': !fullList}">New</button>
+                  <button type="button" class="btn custom-btn btn-filter btn-all" (click)="showAll()" [ngClass]="{'selected-btn': fullList}">All</button>
                 </div>
                 <div class="focus-container" tabindex="-1">
                   <div class="input-group add-on">
-                    <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term" [(ngModel)]="queryString">
+                    <input type="search" class="form-control" placeholder="Search" name="srch-term" id="srch-term" [(ngModel)]="queryString">
                     <div class="input-group-btn">
                       <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i>
                       </button>
@@ -35,12 +22,16 @@
               </form>
               <table class="table table-filter">
                 <tbody>
-                  <tr *ngFor="let key of messages | messageStatus:fullList | searchNews:queryString:'body'; let i = index" [class.newMessage]="key.new">
+                  <div class="pagination_block">
+                    <pagination-controls class="pagination" (pageChange)="p =$event">></pagination-controls>
+                  </div>
+                  <tr *ngFor="let key of messages | messageStatus:fullList | searchNews:queryString:'body'  | paginate: { itemsPerPage: 5, currentPage: p }; let i = index" [class.newMessage]="key.new">
                     <td>
                       <div class="media">
-                        <a href="#" class="pull-left">
+                        <a class="pull-left">
                           <img src="https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Cat-512.png" class="media-photo">
                         </a>
+                        <span class="pull-right date-block">{{ key?.date | date:'dd MMM HH:mm' }}</span>
                         <p class="controls glyphicon glyphicon-share-alt" (click)="chooseMes(key); modal.show()"></p>
                         <br>
                         <p class="controls glyphicon glyphicon-trash" (click)="chooseMes(key); confirmation.show()"></p>
@@ -63,8 +54,8 @@
                       Are you sure you want to permanently delete this message?
                     </div>
                     <div class="app-modal-footer">
-                      <button type="button" class="btn btn-default" (click)="confirmation.hide()">Cancel</button>
-                      <button type="button" class="btn btn-primary" (click)="deleteMessage(); confirmation.hide()">Delete</button>
+                      <button type="button" class="btn custom-btn" (click)="confirmation.hide()">Cancel</button>
+                      <button type="button" class="btn custom-btn" (click)="deleteMessage(); confirmation.hide()">Delete</button>
                     </div>
                   </app-modal>
 
@@ -76,32 +67,32 @@
                       <form class="form-horizontal" (ngSubmit)="sendMessage(form)" #form="ngForm">
                         <div class="form-group">
                           <label for="email" class="col-sm-2 control-label">To</label>
-                          <div class="col-sm-10">
+                          <div class="col-sm-12">
                             <input type="text" class="form-control unchange" name="name" [ngModel]="message?.author" #name="ngModel">
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="email" class="col-sm-2 control-label">Email</label>
-                          <div class="col-sm-10">
+                          <div class="col-sm-12">
                             <input type="text" class="form-control unchange" name="email" [ngModel]="message?.email" #email="ngModel">
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="subject" class="col-sm-2 control-label">Subject</label>
-                          <div class="col-sm-10">
+                          <div class="col-sm-12">
                             <input type="text" class="form-control" name="subject" [ngModel]="" #subject="ngModel" required>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="email" class="col-sm-2 control-label">Message</label>
-                          <div class="col-sm-10">
+                          <div class="col-sm-12">
                             <textarea rows="5" cols="40" class="form-control" name="body" [ngModel]="" #body="ngModel" required></textarea>
                           </div>
                         </div>
 
                         <div class="app-modal-footer">
-                          <button type="button" class="btn btn-default" (click)="modal.hide()">Close</button>
-                          <button type="submit" class="btn btn-primary" (click)="modal.hide()" [disabled]="!form.valid">Send</button>
+                          <button type="button" class="btn custom-btn" (click)="modal.hide()">Close</button>
+                          <button type="submit" class="btn custom-btn" (click)="modal.hide()" [ngClass]="{'disabled-state': !form.valid}">Send</button>
                         </div>
                       </form>
                     </div>
@@ -114,4 +105,3 @@
         </div>
       </section>
     </div>
-  </div>
