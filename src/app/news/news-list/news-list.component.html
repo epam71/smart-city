@@ -20,17 +20,21 @@
           </div>
       </div>
     </div>
-    <ng-container  *ngFor="let key of (news | async) | searchNews: queryString | sortingNews:sort:sortKey | paginate: { itemsPerPage: 6, currentPage: pagination[i] }">
-      <div class="col-md-6 service-block" *ngIf="key.approved === false">
+    <ng-container  *ngFor="let key of (news | async) | searchNews: queryString:'title' | sortBy:sort:sortKey | paginate: { itemsPerPage: 6, currentPage: pagination[i] }">
+      <div class="col-md-4 col-sm-6 service-block" *ngIf="key.approved === false">
         <div class="news_block">
-          <p class="pull-left">{{key.author}}</p>
-          <p class="news_date pull-right">{{key.date | date:'d MMMM y'}} </p>
-          <img class="img img-responsive" src="https://ichef.bbci.co.uk/news/1024/media/images/48351000/gif/_48351569_640x360-news.gif" alt="">
+          <div class="news-img">
+          <img class="img img-responsive" [src]="domSanitizer.bypassSecurityTrustResourceUrl(key?.image)" alt="{{key.title }}">
+        </div>
+          <p class="news_date ">{{key.date | date:'dd MMMM y'}} </p>
+          <p class="author"> Written by: {{key.author}}</p>
           <h3 class="news_title">{{key.title }} </h3>
           <p class="news_desc">{{ key.desc | truncate: [150]  }}</p>
           <a class="read" [routerLink]="['/news', key._id]">Read more 
             <span class="glyphicon glyphicon-menu-right"></span>
           </a>
+
+          <news-like class="pull-right" [ratingObj]="key"></news-like>
         </div>
       </div>
     </ng-container> 
@@ -39,4 +43,3 @@
 <div class="pagination">
   <pagination-controls (pageChange)="pagination[i] = $event"></pagination-controls>
 </div>
-
