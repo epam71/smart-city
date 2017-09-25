@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Http,
+import {
   Headers, 
   RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -20,7 +20,10 @@ const mapKeyToStoreKey = {
   'nickname': 'user_nickname',
   'role': 'user_role',
   'email': 'user_email',
+  'expireAt': 'user_expireAt'
 };
+//milliseconds - one day
+const EXPIRATION_INTERVAL = ( 24 * 60 * 60 - 1) * 1000; 
 
 
 @Injectable()
@@ -34,32 +37,38 @@ export class AuthService {
   private role: string = '';
   private idToken: string = '';
   private accessToken: string = '';
+  private expireAt: number;
 
   auth0 = new auth0.WebAuth({
     clientID: 'C6LIYADABj55LTJMlwDjjtfb1147MnKi',
     domain: 'smart-city-lviv.eu.auth0.com',
     responseType: 'token id_token',
     audience: 'https://smart-city-lviv.eu.auth0.com/userinfo',
-    redirectUri: 'http://localhost:4200/auth/callback',
+    redirectUri: `${document.baseURI}auth/callback`,
     scope: 'openid'
   });   
 
-  constructor(
-    private router: Router,
-    private http: Http) {
+  constructor(private router: Router) {
     this.restoreSession();
+    if (this.isExpired()) {
+      this.logout();
+    }
+  }
+
+  isExpired(): boolean {
+    return this.expireAt < Date.now();
   }
 
   isAdmin(): boolean {
-    return this.role === ROOT_ROLE;
+    return this.role === ROOT_ROLE && !this.isExpired();
   }
 
   isInvestor(): boolean {
-    return this.role === INVESTOR_ROLE;
+    return this.role === INVESTOR_ROLE && !this.isExpired();
   }
 
-  isLogedIn() {
-    return this.role !== '';
+  isLogedIn(): boolean {
+    return this.role !== '' && !this.isExpired();
   }
 
   getNickname(): string {
@@ -102,6 +111,7 @@ export class AuthService {
         this.nickname = authResult.idTokenPayload["https://nickname"];
         this.role = authResult.idTokenPayload["https://role"];
         this.email = authResult.idTokenPayload["https://email"];
+        this.expireAt = Date.now() + EXPIRATION_INTERVAL;
         this.setSession();
         this.changeStatus();
 
@@ -115,13 +125,13 @@ export class AuthService {
     });
   }     
 
-  private setSession() {
+  private setSession(): void {
     for ( let prop in mapKeyToStoreKey) {
       localStorage.setItem(mapKeyToStoreKey[prop], this[prop]);
     }  
   }
 
-  private restoreSession() {
+  private restoreSession(): void {
     if (localStorage.getItem(ACCESS_TOKEN)) {
       for ( let prop in mapKeyToStoreKey) {
         this[prop] = localStorage.getItem(mapKeyToStoreKey[prop]);
@@ -142,7 +152,7 @@ export class AuthService {
     this.eventEmmiter.next('');
   }
 
-  getEventEmitter() {
+  getEventEmitter(): Observable<string> {
     return this.eventEmmiter.asObservable();
   }
 
@@ -152,15 +162,5 @@ export class AuthService {
       btoa(`${GUEST_TOKEN}:${GUEST_TOKEN}`);
 
     headers.set('Authorization', `Basic ${innerToken}`);    
-  }
-
-  testServerAuth(): void {
-    let headers = new Headers();
-    this.setAuthHeader(headers);        
-    let options = new RequestOptions({ headers: headers });		
-    
-    this.http.get('https://smart-city-lviv.herokuapp.com/api/projects/59bbd7f67ad34b000481c758', options).subscribe(val => {
-      let t = val;
-    });
   }
 }
