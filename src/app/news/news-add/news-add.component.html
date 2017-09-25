@@ -8,7 +8,7 @@
           <div class="panel-title">Add news</div>
         </div>
         <div class="panel-body">
-          <form class="form-horizontal" [formGroup]="rForm" (ngSubmit)="onAddNews(title.value, image.value, description.value)">
+          <form class="form-horizontal" [formGroup]="rForm" (ngSubmit)="onAddNews(title.value, description.value)">
             <div class="form-group">
               <label for="title" class="col-sm-2 control-label">Title</label>
               <div class="col-sm-10">
@@ -18,10 +18,11 @@
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <label for="img" class="col-sm-2 control-label">Image</label>
+
+            <div class="form-group ">
+              <label for="img" class="col-sm-2 control-label file-label">Choose image:</label>
               <div class="col-sm-10">
-               <input id="img" class="form-control" placeholder="Image" type="text" #image>
+               <input id="img" type="file" #image accept="image/*" (change)="changeListener($event)">
               </div>
             </div>
             <div class="form-group">
@@ -29,7 +30,7 @@
               <div class="col-sm-10">
                 <textarea class="form-control" formControlName="desc" required id="desc" rows="12" #description> </textarea>
                 <div class="alert" *ngIf="!rForm.controls['desc'].valid && 
-                rForm.controls['desc'].touched">You must specify a description that's between 30 and 1000 characters.
+                rForm.controls['desc'].touched">You must specify a description that's between 150 and 1500 characters.
                 </div>
               </div>
             </div>  

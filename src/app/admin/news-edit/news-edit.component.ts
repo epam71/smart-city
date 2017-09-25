@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { News } from '../../news/models/news.model';
+import { News } from '../../models/news.model';
 import { Subscription } from "rxjs/Subscription";
 import { NewsServiceService } from "../../core/news-service/news-service.service";
 import { Router, ActivatedRoute } from "@angular/router";
