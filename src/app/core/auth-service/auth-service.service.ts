@@ -163,4 +163,11 @@ export class AuthService {
 
     headers.set('Authorization', `Basic ${innerToken}`);    
   }
+
+  getAuthHeaderOpt(): RequestOptions {
+    let headers = new Headers();
+
+    this.setAuthHeader(headers);
+    return new RequestOptions({ headers: headers });
+  }
 }
