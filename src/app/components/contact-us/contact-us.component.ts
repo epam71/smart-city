@@ -12,20 +12,25 @@ export class ContactUsComponent implements OnInit {
   @ViewChild('f') sendMesForm: NgForm;
   contactImg: string;
   
-  constructor() {
+  constructor(private emailData: ContactServiceService) {
     this.contactImg = '../assets/images/lviv-contact.jpg'
    }
 
    onSubmit() {
-
     const value = this.sendMesForm.value;
-    // let messages: Messages = {
-    //   author: value.name,
-    //   email: value.email,
-    //   subject: value.subject,
-    //   text: value.message,
-    //   new: true
-    // }
+    let message: Messages = {
+      author: value.name,
+      email: value.email,
+      subject: value.subject,
+      text: value.message,
+      new: true
+    }
+
+    this.emailData.postMessage(message).subscribe(
+      (response) => {
+        console.log(response);
+      }
+    );
      
     this.sendMesForm.reset();
   }
