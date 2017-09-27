@@ -1,61 +1,75 @@
 <!--Contacts-->
 <section id="contact" [ngStyle]="{'background-image':'url(' + contactImg + ')'}">
-  <div class="container-fluid">
-      <div class="row">
-          <div class="col-md-6">
-              <div class="office">
-                  <div class="title">
-                      <h5>our office info</h5>
-                  </div>
-                  <div class="office_location">
-                      <div class="address">
-                          <i class="fa fa-map-marker"><span>Oleny Stepanivny St, 45, L'viv, Lviv Oblast</span></i>
-                      </div>
-                      <div class="phone">
-                          <i class="fa fa-phone"><span>+ 38096-0000000</span></i>
-                      </div>
-                      <div class="email">
-                          <i class="fa fa-envelope"><span>youremail@mail.com</span></i>
-                      </div>
-                      <div id="map"></div>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-6">
-              <div class="msg">
-                  <div class="msg_title">
-                      <h5>Drop A Message</h5>
-                  </div>
-                  <div class="form_area">
-                      <!-- CONTACT FORM -->
-                      <div class="contact-form wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-                          <div id="message"></div>
-                          <form action="scripts/contact.php" class="form-horizontal contact-1" role="form" name="contactform" id="contactform">
-                              <div class="form-group">
-                                  <div class="col-sm-6">
-                                      <input type="text" class="form-control" name="name" id="name" placeholder="Name">
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <input type="text" class="form-control" name="email" id="email" placeholder="Email">
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                  <div class="col-sm-12">
-                                      <input type="subject" class="form-control" id="subject" placeholder="Subject *">
-                                      <div class="text_area">
-                                          <textarea name="contact-message" id="msg" class="form-control" cols="30" rows="8" placeholder="Message"></textarea>
-                                      </div>
-                                      <button type="submit" class="btn custom-btn" data-loading-text="Loading...">Send</button>
-                                  </div>
-                              </div>
-                          </form>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <!--End of col-md-6-->
-</div>
-</div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="office">
+                    <div class="title">
+                        <h5>our office info</h5> </div>
+                    <div class="office_location">
+                        <div class="address"> <i class="fa fa-map-marker"><span>Oleny Stepanivny St, 45, L'viv, Lviv Oblast</span></i> </div>
+                        <div class="phone"> <i class="fa fa-phone"><span>+ 38096-0000000</span></i> </div>
+                        <div class="email"> <i class="fa fa-envelope"><span>youremail@mail.com</span></i> </div>
+                        <div id="map"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="msg">
+                    <div class="msg_title">
+                        <h5>Drop A Message</h5>
+                    </div>
+                    <div class="form_area">
+                        <!-- CONTACT FORM -->
+                        <div class="contact-form wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+                            <form role="form" id="contactForm" class="form-horizontal contact-1" class="form-horizontal contact-1" data-toggle="validator" class="shake" (ngSubmit)="onSubmit()" #f="ngForm">
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <input type="text" id="name" class="form-control" placeholder="Name" name="name" ngModel #name="ngModel" required>
+                                        <div class="help-block with-errors" *ngIf="!name.valid && name.touched">
+                                            <p>Please enter your name</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="Email" required email ngModel #email="ngModel">
+                                        <div class="help-block with-errors" *ngIf="!email.valid && email.touched">
+                                            <p>Please enter valid email</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required ngModel #subject="ngModel">
+                                        <div class="help-block with-errors" *ngIf="!subject.valid && subject.touched">
+                                            <p>Please enter your message subject</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <textarea name="message" id="msg" class="form-control" cols="30" rows="8" placeholder="Message" required ngModel #message="ngModel"></textarea>
+                                        <div class="help-block with-errors" *ngIf="!message.valid && message.touched">
+                                            <p>Write your message</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                <button type="submit" type="submit" class="btn custom-btn" data-loading-text="Loading..." [disabled]="!f.valid">Send</button>
+                                <div id="msgSubmit" class="text-center" [style.display]="f.submitted ? 'block' : 'none'">
+                                    <p>Your message has been sent!</p> </div>
+                                <div class="clearfix"></div>
+                                </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End of col-md-6-->
+        </div>
+    </div>
 </section>
 <!--End of contact-->
-

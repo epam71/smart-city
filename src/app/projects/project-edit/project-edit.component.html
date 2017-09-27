@@ -1,6 +1,6 @@
 <div class="container">
     <div class="nav_block">
-        <button type="submit" class="btn btn-default" routerLink="/projects">Back to projects</button>
+        <button type="submit" class="btn btn-default custom-btn" routerLink="/projects">Back to projects</button>
     </div>
   <form class="form-horizontal" (ngSubmit)="actProject(f)" #f="ngForm">
     <div class="alert alert-danger" *ngIf="errorMessage">
@@ -17,14 +17,18 @@
         </div>
       </div>
 
-      <div>
-        <label for="filePicker">Choose a file:</label><br>
-        <input type="file" id="filePicker" (change)="handleFileSelect($event)">
+      <div class="form-group">
+        <label for="filePicker" class="col-sm-2 control-label">Project image:</label>
+        <div class="col-sm-10">
+          <span class="btn btn-default btn-file"> Choose a file:
+        <input type="file" id="filePicker" accept="image/*" (change)="fileSelect($event)">
+      </span>
+        </div>
     </div>
           <div class="form-group">
               <label for="desc" class="col-sm-2 control-label">Full Description</label>
               <div class="col-sm-10">
-                  <textarea id="desc" class="form-control" rows="3" #desc="ngModel" [ngModel]="(project)?.desc"
+                  <textarea id="desc" class="form-control" rows="5" #desc="ngModel" [ngModel]="(project)?.desc"
                   name="desc" required [pattern]="'^.{5,}$'"></textarea>
                   <div [hidden]="desc.valid || desc.untouched" class="alert alert-danger">
                       Please, write minimum 10 symbols
@@ -55,8 +59,8 @@
               </div>
       <div class="form-group buttons_block">
         <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-success" [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add' }}</button>
-          <button type="button" class="btn btn-danger" (click)="clearForm()">Clear</button>
+          <button type="submit" class="btn btn-default custom-btn" [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add' }}</button>
+          <button type="button" class="btn btn-default custom-btn" (click)="clearForm()">Clear</button>
         </div>
       </div>
     </form>

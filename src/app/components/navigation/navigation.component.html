@@ -1,5 +1,5 @@
 <!-- Start Header Section -->
-<header class="clearfix fixed-header">
+<header class="clearfix fixed-header" *ngIf="!adminRoute">
   
     <!-- Start  Logo & Naviagtion  -->
     <div id="navigation" class="navbar navbar-default navbar-top" role="navigation" data-spy="affix" data-offset-top="50">
@@ -29,12 +29,14 @@
             <li>
               <a routerLink="/projects" routerLinkActive="active" [routerLinkActiveOptions] = "{ exact: true }">Projects</a>
             </li>
-            <li>
-              <a href="#">Events</a>
+            <li><a href="#">Contacts</a>
             </li>
-            <li><a href="#">Contact</a>
+            <li *ngIf="log"><a (click)='authService.login(); log = false'>Log In</a>
             </li>
-            <li><a href="#">Sign In</a>
+            <li *ngIf="!log"><a (click)='authService.logout(); log = true'>Log Out</a>
+            </li>
+            <li *ngIf="adminRole">
+              <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions] = "{ exact: true }">Admin</a>
             </li>
           </ul>
           <!-- End Navigation List -->
@@ -45,3 +47,4 @@
     <!--End Header Logo & Naviagtion -->
   </header>
   <!-- End Header Section -->
+

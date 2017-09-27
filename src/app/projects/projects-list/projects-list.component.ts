@@ -2,6 +2,8 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ProjectServiceService } from '../../core/project-service/project-service.service';
 import { AuthService } from '../../core/auth-service/auth-service.service';
 import { trigger, state, transition, style, animate, group } from '@angular/animations';
+import { Project } from '../../models/project.model';
+import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -14,13 +16,15 @@ export class ProjectsListComponent implements OnInit {
 
 
   constructor(private projectsData: ProjectServiceService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private sanitizer: DomSanitizer) { }
 
   searchData = '';
   nick;
   email;
   userCheck;
-  
+  private _placeHolderSafe: SafeUrl = '';
+
   projects;
   userProjects = false;
   sortTypeValue = 'normal';
@@ -53,8 +57,8 @@ export class ProjectsListComponent implements OnInit {
 
     return this.projectsValues.forEach((el, i) => {
       if (this.projectsValues[i].key === event) {
-            return this.sort = this.projectsValues[i].value;
-          }
+        return this.sort = this.projectsValues[i].value;
+      }
     });
   }
 
@@ -74,6 +78,7 @@ export class ProjectsListComponent implements OnInit {
       this.userProjects = false;
       this.projects = this.projectsData.getApprovedProjects();
     }
+
   }
 
   ngOnInit() {
