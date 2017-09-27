@@ -1,100 +1,135 @@
 <div class="container project_block_main">
 
-    <div class="modal response_message" [ngClass]="{'show' : commentsResponse !== '' }" 
-    *ngIf="commentsResponse !== ''" (click)="commentsResponse=''">
-          
-      <div class="modal-dialog alert">
-                    <div class="modal-header alert alert-success">
-                        <button type="button" class="close" data-dismiss="modal" 
-                        aria-hidden="true" (click)="commentsResponse=''">&times;</button>
-                        <h4 class="modal-title">{{ commentsResponse }}</h4>
-                    </div>
-            </div>
+  <div id="myModal" class="modal show" *ngIf="projectData.message !== ''" (click)="closeModalWindow()">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header modal_window">
+          <button type="button" class="close modal_close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Information</h4>
+        </div>
+        <div class="modal-body modal_msg">
+          <p *ngIf="projectData.message === 'new' else edited">Project has been successfully added. It won't be visible until moderator approves it.</p>
+          <ng-template #edited>
+            <p>Project has been successfully changed. It won't be visible until moderator approves it.</p>
+          </ng-template>
+        </div>
+        <div class="modal-footer modal_footer">
+          <button type="button" class="custom-btn" data-dismiss="modal">Close</button>
+        </div>
+      </div>
     </div>
-
-    <div class="modal response_message" [ngClass]="{'show' : ratingResponse !== '' }" 
-    *ngIf="ratingResponse !== ''" (click)="ratingResponse=''">
-          
-      <div class="modal-dialog alert">
-                    <div class="modal-header alert alert-danger">
-                        <button type="button" class="close" data-dismiss="modal" 
-                        aria-hidden="true" (click)="ratingResponse=''">&times;</button>
-                        <h4 class="modal-title">{{ ratingResponse }}</h4>
-                    </div>
-            </div>
-    </div>
+  </div>
 
   <div class="row">
     <div class="nav_block">
-      <button type="submit" class="btn btn-default" routerLink="/projects">Back to projects</button>
-      <button type="submit" class="btn btn-default" routerLink="edit" *ngIf="authService.getEmail() === project?.authorEmail">Edit Project</button>
-      <button type="submit" class="btn btn-default" routerLink="edit">Dev Edit Project</button>
-      <button type="submit" class="btn btn-default" routerLink="/projects/new" *ngIf="authService.getRole() !== ''">Add Project</button>
+      <button type="submit" class="btn btn-default customs-btn" routerLink="/projects">Back to projects</button>
+      <button type="submit" class="btn btn-default customs-btn" routerLink="edit" *ngIf="authService.getEmail() === project?.authorEmail">Edit Project</button>
+      <button type="submit" class="btn btn-default customs-btn" routerLink="edit">Dev Edit Project</button>
+      <button type="submit" class="btn btn-default customs-btn" routerLink="/projects/new" *ngIf="authService.getRole() !== ''">Add Project</button>
     </div>
   </div>
-    <div class="project_block">
-      <div class="img_block">
-        <img [src]="_placeholderBase64" alt="">
-       <div class="project_name">
-          {{ (project)?.projectName | uppercase }}
+
+  <div class="row">
+    <div class="col-md-8 left_side">
+      <div class="project_block">
+        <figure class="img_block">
+          <img [src]="sanitizer.bypassSecurityTrustResourceUrl(image)" alt="{{project?.projectName}}">
+          <h2 class="project_name">
+            {{ (project)?.projectName | uppercase }}
+          </h2>
+        </figure>
+        <section class="project_info">
+          <article class="article_header">
+            <span class="glyphicon glyphicon-minus"></span>
+            <span>Project description</span>
+          </article>
+          <article class="project_desc">
+            {{ (project)?.desc }}
+          </article>
+        </section>
+        <section class="project_info" *ngIf="(project)?.goals">
+          <article class="article_header">
+            <span class="glyphicon glyphicon-minus"></span>
+            <span>What is the goal of the project?</span>
+          </article>
+          <article class="project_desc">
+            {{ (project)?.goals }}
+          </article>
+        </section>
+        <section class="project_info" *ngIf="(project)?.result">
+          <article class="article_header">
+            <span class="glyphicon glyphicon-minus"></span>
+            <span>What is the result of the project? </span>
+
+          </article>
+          <article class="project_desc">
+            {{ (project)?.result }}
+          </article>
+        </section>
+        <section class="project_info" *ngIf="(project)?.budget">
+          <article class="article_header">
+            <span class="glyphicon glyphicon-minus"></span>
+            <span>Finance information</span>
+          </article>
+          <article class="project_desc">
+            <span>Project budget: {{ (project)?.budget }} UAH</span>
+          </article>
+        </section>
+        <div class="project_footer">
+          <div class="row">
+            <div class="col-md-4 col-sm-4">
+              <div class="likes_block">
+                <rating [ratingObj]="(project)" (outputRating)="getRatingInfo($event)"></rating>
+              </div>
+            </div>
+            <div class="col-md-5 col-sm-5">
+              <div class="date_block">
+                Date: {{ (project)?.date | date:'short' }}
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-3">
+              <div class="author_block">
+                Author: {{ (project)?.author }}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <section class="project_info">
-        <article class="article_header">
-          <span class="glyphicon glyphicon-minus"></span>
-          <span>Project description</span>
-        </article>
-        <article class="project_desc">
-          {{ (project)?.desc }}
-        </article>
-      </section>
-      <section class="project_info" *ngIf="(project)?.goals">
-        <article class="article_header">
-          <span class="glyphicon glyphicon-minus"></span>
-          <span>What is the goal of the project?</span>
-        </article>
-        <article class="project_desc">
-          {{ (project)?.goals }}
-        </article>
-      </section>
-      <section class="project_info" *ngIf="(project)?.result">
-        <article class="article_header">
-          <span class="glyphicon glyphicon-minus"></span>
-          <span>What is the result of the project? </span>
+      <comments [commentsObj]="(project)" [userInfo]="(user)">Comments loading...</comments>
+    </div>
 
-        </article>
-        <article class="project_desc">
-          {{ (project)?.result }}
-        </article>
-      </section>
-      <section class="project_info" *ngIf="(project)?.budget">
-        <article class="article_header">
-          <span class="glyphicon glyphicon-minus"></span>
-          <span>Finance information</span>
-        </article>
-        <article class="project_desc">
-          <span>Project budget: {{ (project)?.budget }}$</span>
-        </article>
-      </section>
-      <div class="project_footer">
-        <div class="row">
-          <div class="col-md-4 col-sm-4">
-            <div class="likes_block">
-              <rating [ratingObj]="(project)" (outputRating)="getRatingInfo($event)"></rating>
+    <div class="col-md-4 hidden-sm hidden-xs">
+      <div class="projects_list">
+        <header><h3>The most popular projects:</h3></header>
+        <article class="project_item_list" *ngFor="let key of projects">
+          <a [routerLink]="['/projects', key._id]" (click)="goProject(key)">
+            <div class="img_block">
+              <img class="img-responsive" [src]="sanitizer.bypassSecurityTrustResourceUrl(key?.image)" alt="{{key.projectName}}">
+              <div class="projects_date">
+                  {{key.date | date:'dd MMMM y' }}
+                </div>
             </div>
-          </div>
-          <div class="col-md-6 col-sm-5">
-            <div class="date_block">
-              Date: {{ (project)?.date | date:'short' }}
+            <div class="name_list">
+              {{key.projectName | uppercase | shorten:20 }}
             </div>
+            <div class="desc_list">{{ key.desc | shorten:120 }}</div>
+          </a>
+          <div class="row footer_project_list">
+
+              <div class="col-md-3">
+                <div class="likes_block_list">
+                  <rating [ratingObj]="key"></rating>
+                </div>
+              </div>
+              <div class="col-md-3 col-md-push-6 comments_block_main">
+                <span class="comments_block">
+                      <span class="glyphicon glyphicon-comment comments_info"></span>
+                <span class="comments_info_text">{{key.comments.length}}</span>
+                </span>
+              </div>
           </div>
-          <div class="col-md-2 col-sm-3">
-            <div class="author_block">
-              Author: {{ (project)?.author }}
-            </div>
-          </div>
-        </div>
+        </article>
       </div>
     </div>
-  <comments [commentsObj]="(project)" (output)="getInfo($event)">Comments loading...</comments>
+  </div>
 </div>

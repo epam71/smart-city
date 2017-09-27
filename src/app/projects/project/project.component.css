@@ -1,10 +1,35 @@
+:host a {
+  color: #777777;
+  text-decoration: none;
+}
+
+.customs-btn {
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 2px;
+  transition: 0.5s;
+  border: 1px solid #ccc;
+  ;
+  border-radius: 5px;
+  background: none;
+  color: #777777;
+  ;
+}
+
+.customs-btn:hover {
+  color: white;
+  background: #ee3733;
+  border: 1px solid #ee3733;
+}
+
 .project_block_main {
   font-size: 16px;
 }
 
-.response_message{
-padding: 10px;
-top: 30%;
+.response_message {
+  padding: 10px;
+  top: 30%;
 }
 
 .nav_block {
@@ -15,8 +40,9 @@ top: 30%;
   text-align: right;
 }
 
+.left_side {}
+
 .project_block {
-  margin: auto;
   max-width: 900px;
 }
 
@@ -24,20 +50,16 @@ top: 30%;
 
 .img_block {
   position: relative;
-  width: 80%;
-  padding: 0 0 calc(170/350*100%);
-  top: 0;
-  left: 0;
-  margin: auto;
-  text-align: center;
+  background: url('https://i.imgur.com/jIgKo8R.jpg');
+  background-position: -15px 0;
   background-size: cover;
+  padding: 0 0 calc(10/16*100%);
 }
 
-.img_block img{
+.img_block img {
   position: absolute;
   width: 100%;
-  top: 0;
-  left: 0;
+  height: 100%;
 }
 
 .project_name {
@@ -49,7 +71,8 @@ top: 30%;
   left: 0;
   text-align: center;
   padding: 10px;
-  font-size: 25px;
+  margin: 0;
+  /* font-size: 25px; */
   font-weight: 700;
 }
 
@@ -69,7 +92,7 @@ top: 30%;
 
 .project_footer {
   color: #ccc;
-  font-size: 18px;
+  font-size: 16px;
   margin: 25px 0 50px 0;
   padding-top: 25px;
   border-top: 1px solid #ccc;
@@ -79,7 +102,9 @@ top: 30%;
   text-align: left;
 }
 
-.date_block {}
+.date_block {
+  text-align: center;
+}
 
 .author_block {
   text-align: right;
@@ -96,3 +121,97 @@ top: 30%;
     text-align: center;
   }
 }
+
+.custom-btn {
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 2px;
+  transition: 0.5s;
+  margin: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background: none;
+  color: black;
+}
+
+.custom-btn:hover {
+  color: white;
+  font-weight: 700;
+  background: #ee3733;
+  border: 2px solid #ee3733;
+}
+
+.modal_window {
+  color: white;
+  background: #ee3733;
+}
+
+.modal_close {
+  color: white;
+}
+
+.modal_msg {
+  text-align: center;
+  font-weight: 700;
+}
+
+.modal_footer {
+  text-align: center;
+}
+
+
+/* list of project block */
+
+.projects_list {
+}
+
+.projects_list header {
+  text-align: center;
+}
+
+.projects_list header h3 {}
+
+.project_item_list {
+  padding: 10px;
+  margin-top: 5px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.name_list {
+  font-weight: 700;
+  padding: 5px 0;
+}
+
+.projects_date {
+  position: absolute;
+  left: -7px;
+  bottom: 10px;
+  font-weight: 700;
+  background: #ee3733;
+  padding: 6px 10px;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #fff;
+  z-index: 5;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.desc_list {
+  margin-bottom: 5px;
+}
+
+.footer_project_list {}
+
+.likes_block_list {}
+
+.comments_block_main {
+  text-align: right;
+}
+
+.comments_block {}

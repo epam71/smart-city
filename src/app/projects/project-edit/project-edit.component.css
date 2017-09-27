@@ -6,6 +6,43 @@
   text-align: right;
 }
 
+.btn-file {
+  position: relative;
+  overflow: hidden;
+
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 2px;
+  transition: 0.5s;
+  border: 1px solid #777777;;
+  border-radius: 5px;
+  background: none;
+  color: #777777;;
+}
+
+.btn-file:hover{
+    color: white;
+    background: #ee3733;
+    border: 1px solid #ee3733;
+}
+
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+
 .buttons_block {
   text-align: center;
 }
@@ -20,5 +57,23 @@
 }
 
 .ng-invalid:not(form)  {
-  border-left: 5px solid #a94442;
+  border-left: 5px solid #ccc;
+}
+
+.custom-btn{
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 2px;
+  transition: 0.5s;
+  border: 1px solid #777777;;
+  border-radius: 5px;
+  background: none;
+  color: #777777;;
+}
+
+.custom-btn:hover {
+  color: white;
+  background: #ee3733;
+  border: 1px solid #ee3733;
 }

@@ -10,6 +10,7 @@ export interface Project {
     budget: number,
     status?: string,
     comments?: string[],
+    likes?: string[],
     rating?: number,
     approved?: boolean,
     currentRating?: number

@@ -10,9 +10,9 @@
   <div class="row panel_block">
     <div class="col-lg-10 col-md-10 col-sm-10 projects_panel_left">
       <span class="my_projects_block" *ngIf="userCheck !== ''">
-        <button type="button" class="btn btn-default" (click)="showUserProjects($event.target.checked)" *ngIf="!userProjects else allProjects">My Projects</button>
+        <button type="button" class="btn btn-default custom-btn" (click)="showUserProjects($event.target.checked)" *ngIf="!userProjects else allProjects">My Projects</button>
         <ng-template #allProjects>
-          <button type="button" class="btn btn-default" (click)="showUserProjects($event.target.checked)">All Projects</button>
+          <button type="button" class="btn btn-default custom-btn" (click)="showUserProjects($event.target.checked)">All Projects</button>
         </ng-template>
       </span>
       <span class="select_block_main">
@@ -35,7 +35,7 @@
 
     <div class="col-lg-2 col-md-2 col-sm-2">
       <div class="add_block">
-        <button type="submit" class="btn btn-success" routerLink="new">Add Project</button>
+        <button type="submit" class="btn btn-success custom-btn" routerLink="new">Add Project</button>
       </div>
     </div>
   </div>
@@ -46,32 +46,36 @@
 
         <div class="project_block">
           <a [routerLink]="['/projects', key._id]">
-            <div class="row">
+            <div class="row customBlock">
             <div class="img_block">
               <div class="status_block" *ngIf="userProjects">
-                <span [ngClass]="key.approved ? 'status_text_yes' : 'status_text_no'">{{ key.status }} / {{ key.approved ? 'approved' : 'not approved' }}</span>
+                <span class="label" [ngClass]="key.approved ? 'label-success' : 'label-danger'">{{ key.approved ? 'approved' : 'not approved' }}</span>
               </div>
-              <img src="{{ 'data:image/jpeg;base64,' + key?.image }}" alt="{{key.projectName}}">
+              <img class="img-responsive" [src]="sanitizer.bypassSecurityTrustResourceUrl(key?.image)" alt="{{key.projectName}}">
+              <div class="projects_date">
+                {{key.date | date:'dd MMMM y' }}
+              </div>
             </div>
           </div>
             <div class="info_block">
               <div class="project_name">
-                {{key.approved}} {{key.projectName | uppercase | shorten:20 }}
+                {{key.projectName | uppercase | shorten:20 }}
               </div>
-              <div class="project_desc">{{ key.desc | shorten:60 }}</div>
+              <div class="project_desc">{{ key.desc | shorten:120 }}</div>
             </div>
           </a>
           <div class="project_footer">
             <div class="row">
-              <div class="col-md-3 col-sm-3 col-xs-3 likes_block_main">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 likes_block_main">
                 <div class="likes_block">
                   <rating [ratingObj]="key"></rating>
                 </div>
               </div>
-              <div class="col-md-9 col-sm-9 col-xs-9">
-                <div class="project_date">
-                  date: {{key.date | date:'shortDate' }}
-                </div>
+              <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 comments_block_main">
+                  <span class="comments_block">
+                    <span class="glyphicon glyphicon-comment comments_info"></span>
+                    <span class="comments_info_text">{{key.comments.length}}</span>
+                    </span>
               </div>
             </div>
           </div>
@@ -79,7 +83,15 @@
       </div>
     </div>
     <div class="pagination_block">
-      <pagination-controls class="pagination" (pageChange)="p =$event">></pagination-controls>
+      <pagination-controls class="pagination" (pageChange)="p =$event"
+      maxSize="9"
+      directionLinks="true"
+      autoHide="true"
+      previousLabel=""
+      nextLabel=""
+      screenReaderPaginationLabel="Pagination"
+      screenReaderPageLabel="page"
+      screenReaderCurrentLabel="You're on page"></pagination-controls>
     </div>
   </div>
 </div>

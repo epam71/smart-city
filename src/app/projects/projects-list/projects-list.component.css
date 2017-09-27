@@ -24,16 +24,13 @@ button:focus {
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
 }
 
-.projects_panel_left {
-}
+.projects_panel_left {}
 
-.select_block_main{
+.select_block_main {
   margin-left: 5px;
 }
 
-.select_block {
-
-}
+.select_block {}
 
 .sort_block_select {
   -webkit-appearance: button;
@@ -61,13 +58,9 @@ button:focus {
   outline: none;
 }
 
-.sort_block_select option {
+.sort_block_select option {}
 
-}
-
-.reverse_button{
-  
-}
+.reverse_button {}
 
 .reverse_button button {
   -webkit-appearance: button;
@@ -90,45 +83,62 @@ button:focus {
   white-space: nowrap;
 }
 
-.projects_panel_center{
-}
+.projects_panel_center {}
 
-.search_block_main{
+.search_block_main {
   margin-left: 5px;
   vertical-align: middle;
-  }
+}
 
-  .search_block_main button{
-    -webkit-appearance: button;
-    -webkit-border-radius: 2px;
-    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-    -webkit-padding-end: 20px;
-    -webkit-padding-start: 2px;
-    -webkit-user-select: none;
-    vertical-align: top;
-    background: -webkit-linear-gradient(white, white 40%, white);
-    background-position: 90% center;
-    background-repeat: no-repeat;
-    border: 1px solid #AAA;
-    border-radius: 5px;
-    color: #555;
-    font-size: inherit;
-    overflow: hidden;
-    padding: 8px 10px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    }
+.search_block_main button {
+  -webkit-appearance: button;
+  -webkit-border-radius: 2px;
+  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  -webkit-padding-end: 20px;
+  -webkit-padding-start: 2px;
+  -webkit-user-select: none;
+  vertical-align: top;
+  background: -webkit-linear-gradient(white, white 40%, white);
+  background-position: 90% center;
+  background-repeat: no-repeat;
+  border: 1px solid #AAA;
+  border-radius: 5px;
+  color: #555;
+  font-size: inherit;
+  overflow: hidden;
+  padding: 8px 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
-.add_block{
+.add_block {
   text-align: right;
 }
 
+.custom-btn {
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  border-radius: 2px;
+  transition: 0.5s;
+  border: 1px solid #ccc;
+  ;
+  border-radius: 5px;
+  background: none;
+  color: #777777;
+  ;
+}
+
+.custom-btn:hover {
+  color: white;
+  background: #ee3733;
+  border: 1px solid #ee3733;
+}
 
 @media screen and (max-width: 768px) {
   .projects_panel_left {
-  text-align: center;
+    text-align: center;
   }
-
   .add_block {
     text-align: center;
   }
@@ -142,14 +152,19 @@ button:focus {
   padding: 0;
 }
 
+.customBlock {
+  padding: 0;
+  margin: 0;
+}
+
 .project_block {
-  width: 95%;
+  width: 96%;
   overflow: hidden;
+  padding: 15px;
   min-width: 250px;
   margin-bottom: 10px;
   margin: 5px;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 3px rgba(107, 107, 107, 0.9);
   float: left;
 }
 
@@ -160,20 +175,42 @@ button:focus {
 
 .img_block {
   position: relative;
-  width: 100%;
-  /* height: 200px; */
-  padding: 0 0 calc(200/345*100%);
+  background: url('https://i.imgur.com/jIgKo8R.jpg');
+  background-position: -15px 0;
+  background-size: cover;
+  padding: 0 0 calc(10/16*100%);
 }
 
 .img_block img {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
+  height: 100%;
+}
+
+.img_block img[alt] {
+  color: #EEEEEE;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.projects_date {
+  position: absolute;
+  left: -7px;
+  bottom: 10px;
+  font-weight: 700;
+  background: #ee3733;
+  padding: 6px 10px;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #fff;
+  z-index: 5;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .info_block {
-  padding: 10px;
+  margin-top: 10px;
+  min-height: 110px;
 }
 
 .project_name {
@@ -182,45 +219,57 @@ button:focus {
 }
 
 .project_desc {
-  padding: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
   min-height: 60px;
 }
 
 .project_footer {
-  margin-top: 10px;
-  padding: 10px 10px 10px 20px;
-  margin-bottom: -5px;
+  margin-top: 2px;
+  padding-top: 8px;
+  border-top: 1px solid #ccc;
 }
 
-.likes_block_main {
-  padding: 0;
-}
+.likes_block_main {}
 
 .likes_block {
   text-align: left;
 }
 
 .likes_block span {
-  padding: 5px;
   text-align: left;
 }
 
-.project_date {
+.comments_block_main {
   text-align: right;
-  color: #ccc;
-  font-style: italic;
+  padding-top: 3px;
+}
+
+.comments_block {
+  font-weight: 500;
+  padding: 10px;
+  color: #777777;
+}
+
+.comments_info {
+  font-family: 'Glyphicons Halflings';
+  vertical-align: middle;
+}
+
+.comments_info_text {
+  vertical-align: middle;
 }
 
 .status_block {
   position: absolute;
-  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.7);
-  right: 0;
+  color: white;
+  top: -8px;
+  right: -6px;
   padding: 5px;
-  background: white;
   font-size: 14px;
-  float: left;
+  font-weight: 700;
+  font-size: 15px;
+  z-index: 5;
 }
 
 .status_prop {
@@ -229,12 +278,10 @@ button:focus {
 
 .status_text_yes {
   font-weight: 700;
-  color: green;
 }
 
 .status_text_no {
   font-weight: 700;
-  color: #cc2d00;
 }
 
 .pagination_block {
@@ -242,8 +289,37 @@ button:focus {
   text-align: center;
 }
 
-.pagination_block pagination-controls /deep/ .ngx-pagination {}
+.pagination_block pagination-controls /deep/ .ngx-pagination {
+  background: white;
+  padding: 1px;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.pagination_block pagination-controls /deep/ .ngx-pagination li {
+  border-right: 1px solid #ccc;
+  text-decoration: none;
+  border-radius: 0px;
+}
+
+.pagination_block pagination-controls /deep/ .ngx-pagination li:last-child {
+  border-right: none;
+}
+
+.pagination_block pagination-controls /deep/ .ngx-pagination .disabled {
+  padding: 5px;
+  text-decoration: none;
+}
+
+.pagination_block pagination-controls /deep/ .ngx-pagination a {
+  background: white;
+  text-decoration: none;
+  padding: 5px;
+}
 
 .pagination_block pagination-controls /deep/ .ngx-pagination .current {
+  padding: 5px;
   background: #ccc;
 }
+

@@ -17,6 +17,7 @@ export class ProjectEditComponent implements OnInit {
 
   editMode;
   project;
+  image = '';
   tempId;
   errorMessage;
   base64textString: string = '';
@@ -30,21 +31,19 @@ export class ProjectEditComponent implements OnInit {
     });
   }
 
-  handleFileSelect(evt){
-      var files = evt.target.files;
-      var file = files[0];
-    
-    if (files && file) {
-        var reader = new FileReader();
-        reader.onload =this._handleReaderLoaded.bind(this);
-        reader.readAsBinaryString(file);
-    }
+ fileSelect(event){
+  this.readThis(event.target);
   }
   
-  _handleReaderLoaded(readerEvt) {
-     var binaryString = readerEvt.target.result;
-            this.base64textString = btoa(binaryString);
+  readThis(inputValue: any): void {
+    var file: File = inputValue.files[0];
+    var myReader: FileReader = new FileReader();
+
+    myReader.onloadend = (e) => {
+      this.base64textString = myReader.result;
     }
+    myReader.readAsDataURL(file);
+  }
 
   actProject(form: NgForm) {
     const value = form.value;
@@ -52,7 +51,7 @@ export class ProjectEditComponent implements OnInit {
 
     let projectEdit: Project = {
       projectName: value.projectName.charAt(0).toUpperCase() + value.projectName.slice(1),
-      image: this.base64textString,
+      image: this.base64textString || this.image,
       desc: value.desc,
       goals: value.goals,
       result: value.result,
@@ -63,6 +62,7 @@ export class ProjectEditComponent implements OnInit {
     let projectTemp: Project = Object.assign({
       author: this.authService.getNickname(),
       authorEmail: this.authService.getEmail(),
+      image: this.base64textString,
       status: 'new',
     }, projectEdit);
 
@@ -70,6 +70,8 @@ export class ProjectEditComponent implements OnInit {
       this.putProject.postProject(projectTemp)
         .subscribe(
         (response) => {
+
+          this.putProject.message = 'new';
           this.router.navigate(['/projects/' + response._id]);
         },
         (error) => {
@@ -80,6 +82,8 @@ export class ProjectEditComponent implements OnInit {
       this.putProject.putProject(this.tempId.id, projectEdit)
         .subscribe(
         (response) => {
+
+          this.putProject.message = 'edit';
           this.router.navigate(['/projects/' + this.tempId.id]);
         },
         (error) => {
@@ -101,6 +105,7 @@ export class ProjectEditComponent implements OnInit {
       .subscribe(
         (response) => {
           this.project = response;
+          this.image = response.image;
         },
         (error) => {
           console.error(error);
