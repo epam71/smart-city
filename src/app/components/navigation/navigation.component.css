@@ -65,6 +65,7 @@ img{
 
 .navbar-default .navbar-nav > li {
   margin-left: 6px;
+  cursor: pointer;
 }
 
 .navbar-default .navbar-nav > li:first-child {
