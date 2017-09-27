@@ -41,17 +41,15 @@ export class ProjectServiceService {
 
     getApprovedProjects(): Observable<Project[]> {
 
-        return this.http.get(PATH, this.authService.getAuthHeaderOpt())
+        return this.http.get(PATH + '?query={"approved":"true"}', this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
-                return response.json().filter(el => {
-                    return el.approved === true && el.status !== 'closed';
-                });
+                return response.json();
             }).catch(this.handleError);
     };
 
     getRatingProjects(): Observable<Project[]> {
 
-        return this.http.get(PATH, this.authService.getAuthHeaderOpt())
+        return this.http.get(PATH + `?limit=3`, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json().filter(el => {
                     return el.approved === true && el.status !== 'closed';
@@ -63,17 +61,15 @@ export class ProjectServiceService {
                         return -1;
                     }
                     return 0;
-                }).slice(0, 3);
+                });
             }).catch(this.handleError);
     }
 
     getUserProjects(username): Observable<Project[]> {
 
-        return this.http.get(PATH, this.authService.getAuthHeaderOpt())
+        return this.http.get(PATH + `?query={"author": "${username}"}`, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
-                return response.json().filter(el => {
-                    return el.author === username;
-                });
+                return response.json();
             }).catch(this.handleError);
     };
 
