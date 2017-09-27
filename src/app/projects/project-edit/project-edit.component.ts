@@ -56,6 +56,7 @@ export class ProjectEditComponent implements OnInit {
       goals: value.goals,
       result: value.result,
       budget: value.budget,
+      approved: false,
       status: 'edited'
     }
 
