@@ -27,6 +27,9 @@
             <li>
               <a routerLink="../contacts" routerLinkActive="active">Contacts</a>
             </li>
+            <li class="settings">
+              <a (click)="access.show()">Settings</a>
+            </li>
             <li>
               <a routerLink="../../">Main</a>
             </li>
@@ -39,3 +42,5 @@
     <!--End Header Logo & Naviagtion -->
   </header>
   <!-- End Header Section -->
+
+  <app-set-acces #access></app-set-acces>

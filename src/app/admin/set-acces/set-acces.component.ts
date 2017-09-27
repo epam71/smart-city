@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SetAccesComponent implements OnInit {
 
-
-  public visible = false;
-  public visibleAnimate = false;
+  private right:String[] = ['*', 'admin', 'user', 'investor'];
+  public visible:boolean = false;
+  public visibleAnimate:boolean = false;
 
   public show(): void {
     this.visible = true;

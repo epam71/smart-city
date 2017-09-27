@@ -22,14 +22,14 @@
             Active</h3>
         </div>
         <ul class="list-group">
-          <li *ngFor="let key of projects | filterApproval:true | filterStatus:'active' | slice:0:showActive | sortBy:prop:'normal'; let i=index" class="project_block list-group-item sliding_bg">
+          <li *ngFor="let key of activeProjects | slice:0:showActive | sortBy:prop:'normal'; let i=index" class="project_block list-group-item sliding_bg">
             <a [routerLink]="['/admin/projects', key._id]">
               <span class="project_name">
                {{key.projectName }}
                </span>
             </a>
           </li>
-          <button type="button" class="list-group-item more" (click)="showMore('active')">Show more</button>
+          <button *ngIf="showMoreActiveButton" type="button" class="list-group-item more" (click)="showMore('active')">Show more</button>
         </ul>
       </div>
 
@@ -38,13 +38,13 @@
           <h3 class="panel-title">Pending</h3>
         </div>
         <ul class="list-group">
-          <li *ngFor="let key of projects | filterApproval:false | slice:0:showPending | sortBy:prop:'normal'; let i=index" class="project_block list-group-item sliding_bg">
+          <li *ngFor="let key of pendingProjects | slice:0:showPending | sortBy:prop:'normal'; let i=index" class="project_block list-group-item sliding_bg">
             <a [routerLink]="['/admin/projects', key._id]">               
                {{key.projectName }} 
                <span *ngIf="key.status === 'new'" class="badge badge-default badge-pill">new</span>              
                </a>
           </li>
-          <button type="button" class="list-group-item more" (click)="showMore('pending')">Show more</button>
+          <button *ngIf="showMorePendingButton" type="button" class="list-group-item more" (click)="showMore('pending')">Show more</button>
         </ul>
       </div>
 

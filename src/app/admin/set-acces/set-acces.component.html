@@ -6,40 +6,51 @@
           <span>Configure app access</span>
         </div>
         <div class="modal-body">
-          <div class="firstPath ">
-            <form class="form-inline">
+          <div class="secondPath">
+            <form class="form-horizontal">
               <div class="form-group">
-                <label for="one"></label>
-                  <input class="form-group" type="text" value="123" id="one">
+                <p>Projects</p>
+                <div class="logical-group">
+                <input class="path disabled-state" type="text" value="get/projects" id="one">
+                  <select class="selectpicker" name="type">
+                    <option value="admin">Admin</option>
+                    <option value="investor">Investor</option>
+                    <option value="user">User</option>
+                  </select>
+                  </div>
+                <div class="logical-group">
+                <input class="path disabled-state" type="text" value="post/projects" id="two">
+                  <select class="selectpicker" name="type">
+                    <option *ngFor="let role of rights" value = {{ role }}>{{ role }}</option>
+                  </select>
+                </div>
               </div>
-              <div class="form-group">  
-                <select class="selectpicker" name="type">
-                  <option value="admin">Admin</option>
-                  <option value="investor">Investor</option>
-                  <option value="user">User</option>
-                </select>
-              </div>
-            </form>
-          </div>
-          <div class="secondPath ">
-            <form class="form-inline">
+              <hr>
               <div class="form-group">
-                <label for="two"></label>
-                  <input class="form-group" type="text" value="123" id="two">
-              </div>
-              <div class="form-group">  
-                <select class="selectpicker" name="type">
-                  <option value="admin">Admin</option>
-                  <option value="investor">Investor</option>
-                  <option value="user">User</option>
-                </select>
+                <p>News</p>
+                <div class="logical-group">
+                <input class="path disabled-state" type="text" value="get/news" id="three">
+                  <select class="selectpicker" name="type">
+                    <option value="admin">Admin</option>
+                    <option value="investor">Investor</option>
+                    <option value="user">User</option>
+                  </select>
+                </div>  
+                <div class="logical-group">
+                <input class="path disabled-state" type="text" value="post/news" id="four">
+                  <select class="selectpicker" name="type">
+                    <option value="admin">Admin</option>
+                    <option value="investor">Investor</option>
+                    <option value="user">User</option>
+                  </select> 
+                  </div> 
               </div>
             </form>
           </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" (click)="hide()">Save</button>
-            <button type="button" class="btn btn-primary" (click)="hide()">Cancel</button>        </div>
+            <button type="button" class="btn custom-btn" (click)="hide()">Save</button>
+            <button type="button" class="btn custom-btn" (click)="hide()">Cancel</button>        </div>
       </div>
     </div>
   </div>
