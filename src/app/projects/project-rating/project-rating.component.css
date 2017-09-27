@@ -1,11 +1,45 @@
 .rating_block {
   font-family: sans-serif;
   color: #ccc;
-  padding: 0 0 0 5px;
   cursor: pointer;
 }
 
+.liked_block {
+  color: white;
+  font-weight: 700;
+  background: #ee3733;
+  border: 1px solid #ee3733;
+}
+
+
 .rating_info {
-    vertical-align: top;
-  font-size: 16px;
+    vertical-align: middle;
+  font-size: 12px;
+}
+
+.rating_info:focus {
+  outline: none;
+}
+
+
+.rating_icon{
+
+}
+
+.unliked_block{
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  border-radius: 2px;
+  transition: 0.5s;
+  border: 1px solid white;
+  border-radius: 5px;
+  background: none;
+  color: #777777;;
+}
+
+.unliked_block:hover {
+  color: white;
+  background: #ee3733;
+  border: 1px solid #ee3733;
 }

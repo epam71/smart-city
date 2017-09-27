@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { ProjectServiceService } from '../../core/project-service/project-service.service';
@@ -13,50 +13,50 @@ import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 })
 export class ProjectComponent implements OnInit {
 
-  project;
-  tempId;
-  user;
-  commentsResponse = '';
-  ratingResponse = '';
-
-
-  private _placeholderBase64 = ``;
-      private _imgSafe: SafeUrl;
-      private _placeHolderSafe: SafeUrl;
+  private projects;
+  private project;
+  private tempId;
+  private user;
+  private image = '';
 
   constructor(private route: ActivatedRoute,
-              private projectData: ProjectServiceService,
-              private authService:AuthService,
-              private sanitizer: DomSanitizer) {
+    private projectData: ProjectServiceService,
+    private authService: AuthService,
+    private sanitizer: DomSanitizer) {
+
 
     route.params.subscribe(param => {
       this.tempId = param;
     });
   }
 
-  getInfo(event){
-    this.commentsResponse = event.message;
+  goProject(event) {
+    this.project = event;
+    this.image = event.image
   }
 
-  getRatingInfo(event){
-    this.ratingResponse = event;
+  closeModalWindow() {
+
+    this.projectData.message = '';
   }
 
   ngOnInit(): void {
 
-    this.projectData.getProject(this.tempId.id)
-    .subscribe(
-      (response) => {
+    let getProjectData = this.projectData.getProject(this.tempId.id)
+    let getProjectsData = this.projectData.getRatingProjects();
+
+    getProjectData.switchMap(
+      response => {
         this.user = this.authService.getEmail();
         this.project = response;
-        this._placeholderBase64 = 'data:image/jpeg;base64,' + this.project.image;
-        this._placeHolderSafe = this.sanitizer.bypassSecurityTrustUrl(this._placeholderBase64);
-        
-        console.log(this._placeholderBase64);
-      },
-      (error) => {
-        console.error(error);
+        this.image = this.project.image
+        return getProjectsData;
+      }
+    )
+      .subscribe(
+      value => {
+        this.projects = value;
       });
-      
+
   }
 }

@@ -16,6 +16,8 @@ const PATH = 'https://smart-city-lviv-api.herokuapp.com/projects/';
 @Injectable()
 export class ProjectServiceService {
 
+
+    message: string = '';
     look: Subject<any> = new Subject<any>();
 
     constructor(private http: Http,
@@ -50,11 +52,32 @@ export class ProjectServiceService {
         return this.http.get(PATH, options)
             .map((response: Response) => {
                 return response.json().filter(el => {
-                    console.log(el.approved === true && el.status !== 'closed');
                     return el.approved === true && el.status !== 'closed';
                 });
             }).catch(this.handleError);
     };
+
+    getRatingProjects(): Observable<Project[]> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        this.authService.setAuthHeader(headers);
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(PATH, options)
+            .map((response: Response) => {
+                return response.json().filter(el => {
+                    return el.approved === true && el.status !== 'closed';
+                }).sort((a, b) => {
+                    if (a['rating'] < b['rating']) {
+                        return 1;
+                    }
+                    if (a['rating'] > b['rating']) {
+                        return -1;
+                    }
+                    return 0;
+                }).slice(0, 3);
+            }).catch(this.handleError);
+    }
 
     getUserProjects(username): Observable<Project[]> {
         let headers = new Headers();
@@ -117,7 +140,6 @@ export class ProjectServiceService {
         headers.append('Content-Type', 'application/json');
         this.authService.setAuthHeader(headers);
         let options = new RequestOptions({ headers: headers });
-
         return this.http.post(PATH + id + '/likes', user, options)
             .map((response: Response) => {
                 return <any>response.json();
@@ -133,6 +155,20 @@ export class ProjectServiceService {
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(PATH + id + '/comments', message, options)
+            .map((response: Response) => {
+                return <any>response.json();
+            })
+            .catch(this.handleError);
+    };
+
+    deleteComment(projectId, commentId): Observable<Project> {
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        this.authService.setAuthHeader(headers);
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.delete(PATH + projectId + '/comments/' + commentId, options)
             .map((response: Response) => {
                 return <any>response.json();
             })
