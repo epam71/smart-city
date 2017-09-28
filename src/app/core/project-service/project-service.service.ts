@@ -31,9 +31,17 @@ export class ProjectServiceService {
 
     getProjects(): Observable<Project[]> {
 
-        return this.http.get(config.PATH + '/projects/', this.authService.getAuthHeaderOpt())
+        return this.http.get(config.PATH + 'projects/', this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
 
+                return response.json();
+            }).catch(this.handleError);
+    };
+
+    getApprovedProjects(): Observable<Project[]> {
+
+        return this.http.get(config.PATH + 'projects/' + '?query={"approved":"true"}', this.authService.getAuthHeaderOpt())
+            .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
     };
@@ -44,7 +52,7 @@ export class ProjectServiceService {
         this.authService.setAuthHeader(headers);
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.get(PATH + '?select=projectName,_id,status,approved', options)
+        return this.http.get(config.PATH + 'projects/' + '?select=projectName,_id,status,approved', options)
             .map((response: Response) => {
 
                 return response.json();
@@ -57,15 +65,7 @@ export class ProjectServiceService {
         this.authService.setAuthHeader(headers);
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.get(PATH + 'count', options)
-            .map((response: Response) => {
-                return response.json();
-            }).catch(this.handleError);
-    };
-
-    getApprovedProjects(): Observable<Project[]> {
-
-        return this.http.get(config.PATH + '/projects/' + '?query={"approved":"true"}', this.authService.getAuthHeaderOpt())
+        return this.http.get(config.PATH + 'projects/' + 'count', options)
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
@@ -73,7 +73,7 @@ export class ProjectServiceService {
 
     getRatingProjects(): Observable<Project[]> {
 
-        return this.http.get(config.PATH + '/projects/' + `?limit=3`, this.authService.getAuthHeaderOpt())
+        return this.http.get(config.PATH + 'projects/' + `?limit=3`, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json().filter(el => {
                     return el.approved === true && el.status !== 'closed';
@@ -91,7 +91,7 @@ export class ProjectServiceService {
 
     getUserProjects(username): Observable<Project[]> {
 
-        return this.http.get(config.PATH + '/projects/' + `?query={"author": "${username}"}`, this.authService.getAuthHeaderOpt())
+        return this.http.get(config.PATH + 'projects/' + `?query={"author": "${username}"}`, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
@@ -99,7 +99,7 @@ export class ProjectServiceService {
 
     searchProjects(keyWord, property): Observable<Project[]> {
 
-        return this.http.get(config.PATH + '/projects/', this.authService.getAuthHeaderOpt())
+        return this.http.get(config.PATH + 'projects/', this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json().filter(el => {
                     return el[property].toLowerCase().indexOf(keyWord.toLowerCase()) > -1;
@@ -109,7 +109,7 @@ export class ProjectServiceService {
 
     getProject(id): Observable<Project> {
 
-        return this.http.get(config.PATH + '/projects/' + id, this.authService.getAuthHeaderOpt())
+        return this.http.get(config.PATH + 'projects/' + id, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
@@ -117,7 +117,7 @@ export class ProjectServiceService {
 
     postProject(project: any): Observable<Project> {
 
-        return this.http.post(config.PATH + '/projects/', project, this.authService.getAuthHeaderOpt())
+        return this.http.post(config.PATH + 'projects/', project, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })
@@ -126,7 +126,7 @@ export class ProjectServiceService {
 
     postLikes(id, user: any): Observable<Project> {
 
-        return this.http.post(config.PATH + '/projects/' + id + '/likes', user, this.authService.getAuthHeaderOpt())
+        return this.http.post(config.PATH + 'projects/' + id + '/likes', user, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })
@@ -135,7 +135,7 @@ export class ProjectServiceService {
 
     postComment(id, message: any): Observable<Project> {
 
-        return this.http.post(config.PATH + '/projects/' + id + '/comments', message, this.authService.getAuthHeaderOpt())
+        return this.http.post(config.PATH + 'projects/' + id + '/comments', message, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })
@@ -144,7 +144,7 @@ export class ProjectServiceService {
 
     deleteComment(projectId, commentId): Observable<Project> {
 
-        return this.http.delete(config.PATH + '/projects/' + projectId + '/comments/' + commentId, this.authService.getAuthHeaderOpt())
+        return this.http.delete(config.PATH + 'projects/' + projectId + '/comments/' + commentId, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })
@@ -153,7 +153,7 @@ export class ProjectServiceService {
 
     putProject(id, projectEdit): Observable<Project> {
 
-        return this.http.put(config.PATH + '/projects/' + id, projectEdit, this.authService.getAuthHeaderOpt())
+        return this.http.put(config.PATH + 'projects/' + id, projectEdit, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })

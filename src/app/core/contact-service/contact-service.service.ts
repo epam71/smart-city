@@ -3,14 +3,12 @@ import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Messages } from '../../models/messages.model'
 import { AuthService } from '../../core/auth-service/auth-service.service';
-
+import { config } from "../config";
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/do';
-
-const PATH = 'https://smart-city-lviv-api.herokuapp.com/messages/';
 
 @Injectable()
 export class ContactServiceService {
@@ -25,13 +23,8 @@ export class ContactServiceService {
     }
 
     getMessages(): Observable<Messages[]> {
-        
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        this.auth.setAuthHeader(headers);
-        let options = new RequestOptions({ headers: headers });
 
-        return this.http.get(PATH, options)
+        return this.http.get(config.PATH + 'messages/', this.auth.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
@@ -39,12 +32,7 @@ export class ContactServiceService {
 
     getMessage(id): Observable<Messages> {
 
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        this.auth.setAuthHeader(headers);
-        let options = new RequestOptions({ headers: headers });
-
-        return this.http.get(PATH + id, options)
+        return this.http.get(config.PATH + 'messages/' + id, this.auth.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
@@ -52,12 +40,7 @@ export class ContactServiceService {
 
     postMessage(message: any): Observable<Messages> {
 
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        this.auth.setAuthHeader(headers);
-        let options = new RequestOptions({ headers: headers });
-
-        return this.http.post(PATH, message, options)
+        return this.http.post(config.PATH + 'messages/', message, this.auth.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })
@@ -65,12 +48,8 @@ export class ContactServiceService {
     };
 
     getMessagesNumber(): Observable<any> {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        this.auth.setAuthHeader(headers);
-        let options = new RequestOptions({ headers: headers });
 
-        return this.http.get(PATH + 'count', options)
+        return this.http.get(config.PATH + 'messages/' + 'count/', this.auth.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
@@ -78,12 +57,7 @@ export class ContactServiceService {
 
     putMessage(id: number, messageEdit): Observable<Messages> {
 
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        this.auth.setAuthHeader(headers);
-        let options = new RequestOptions({ headers: headers });
-
-        return this.http.put(PATH + id, messageEdit, options)
+        return this.http.put(config.PATH + 'messages/' + id, messageEdit, this.auth.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })
@@ -91,12 +65,8 @@ export class ContactServiceService {
     };
 
     deleteMessage(id): Observable<Messages> {        
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        this.auth.setAuthHeader(headers);
-        let options = new RequestOptions({ headers: headers });
 
-        return this.http.delete(PATH + id, options)
+        return this.http.delete(config.PATH + 'messages/' + id, this.auth.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })

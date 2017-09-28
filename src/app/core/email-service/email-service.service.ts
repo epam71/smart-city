@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import { Reply } from '../../models/reply.model';
-import { AuthService } from "../auth-service/auth-service.service";
+import { AuthService } from '../../core/auth-service/auth-service.service';
 import { Observable } from 'rxjs/Observable';
-
+import { config } from "../config";
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -11,7 +11,6 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/do';
 
 
-const PATH = 'https://smart-city-lviv-api.herokuapp.com/notifications/';
 @Injectable()
 export class EmailServiceService {
 
@@ -27,12 +26,7 @@ export class EmailServiceService {
 
     postEmail(project: any): Observable<Reply> {
 
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        this.authService.setAuthHeader(headers);
-        let options = new RequestOptions({ headers: headers });
-
-        return this.http.post(PATH, project, options)
+        return this.http.post(config.PATH + 'notifications/', project, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })
