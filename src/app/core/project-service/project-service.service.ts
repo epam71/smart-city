@@ -4,14 +4,13 @@ import { Observable } from 'rxjs/Observable';
 import { Project } from '../../models/project.model';
 import { Subject } from 'rxjs/Subject';
 import { AuthService } from "../auth-service/auth-service.service";
+import { config } from "../config";
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/finally';
-
-const PATH = 'https://smart-city-lviv-api.herokuapp.com/projects/';
 
 @Injectable()
 export class ProjectServiceService {
@@ -32,7 +31,7 @@ export class ProjectServiceService {
 
     getProjects(): Observable<Project[]> {
 
-        return this.http.get(PATH, this.authService.getAuthHeaderOpt())
+        return this.http.get(config.PATH, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
 
                 return response.json();
@@ -41,7 +40,7 @@ export class ProjectServiceService {
 
     getApprovedProjects(): Observable<Project[]> {
 
-        return this.http.get(PATH + '?query={"approved":"true"}', this.authService.getAuthHeaderOpt())
+        return this.http.get(config.PATH + '?query={"approved":"true"}', this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
@@ -49,7 +48,7 @@ export class ProjectServiceService {
 
     getRatingProjects(): Observable<Project[]> {
 
-        return this.http.get(PATH + `?limit=3`, this.authService.getAuthHeaderOpt())
+        return this.http.get(config.PATH + `?limit=3`, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json().filter(el => {
                     return el.approved === true && el.status !== 'closed';
@@ -67,7 +66,7 @@ export class ProjectServiceService {
 
     getUserProjects(username): Observable<Project[]> {
 
-        return this.http.get(PATH + `?query={"author": "${username}"}`, this.authService.getAuthHeaderOpt())
+        return this.http.get(config.PATH + `?query={"author": "${username}"}`, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
@@ -75,7 +74,7 @@ export class ProjectServiceService {
 
     searchProjects(keyWord, property): Observable<Project[]> {
 
-        return this.http.get(PATH, this.authService.getAuthHeaderOpt())
+        return this.http.get(config.PATH, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json().filter(el => {
                     return el[property].toLowerCase().indexOf(keyWord.toLowerCase()) > -1;
@@ -85,7 +84,7 @@ export class ProjectServiceService {
 
     getProject(id): Observable<Project> {
 
-        return this.http.get(PATH + id, this.authService.getAuthHeaderOpt())
+        return this.http.get(config.PATH + id, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
@@ -93,7 +92,7 @@ export class ProjectServiceService {
 
     postProject(project: any): Observable<Project> {
 
-        return this.http.post(PATH, project, this.authService.getAuthHeaderOpt())
+        return this.http.post(config.PATH, project, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })
@@ -102,7 +101,7 @@ export class ProjectServiceService {
 
     postLikes(id, user: any): Observable<Project> {
 
-        return this.http.post(PATH + id + '/likes', user, this.authService.getAuthHeaderOpt())
+        return this.http.post(config.PATH + id + '/likes', user, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })
@@ -111,7 +110,7 @@ export class ProjectServiceService {
 
     postComment(id, message: any): Observable<Project> {
 
-        return this.http.post(PATH + id + '/comments', message, this.authService.getAuthHeaderOpt())
+        return this.http.post(config.PATH + id + '/comments', message, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })
@@ -120,7 +119,7 @@ export class ProjectServiceService {
 
     deleteComment(projectId, commentId): Observable<Project> {
 
-        return this.http.delete(PATH + projectId + '/comments/' + commentId, this.authService.getAuthHeaderOpt())
+        return this.http.delete(config.PATH + projectId + '/comments/' + commentId, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })
@@ -129,7 +128,7 @@ export class ProjectServiceService {
 
     putProject(id, projectEdit): Observable<Project> {
 
-        return this.http.put(PATH + id, projectEdit, this.authService.getAuthHeaderOpt())
+        return this.http.put(config.PATH + id, projectEdit, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })
@@ -138,7 +137,7 @@ export class ProjectServiceService {
 
     deleteProject(id): Observable<Project> {
 
-        return this.http.delete(PATH + id, this.authService.getAuthHeaderOpt())
+        return this.http.delete(config.PATH + id, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })
