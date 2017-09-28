@@ -21,7 +21,7 @@ export class ProjectsListComponent implements OnInit {
   public activeProjects: Project[];
   private showMorePendingButton;
   private showMoreActiveButton;
-
+ 
   sortByName() {
     this.prop = 'projectName';
   }
@@ -33,12 +33,12 @@ export class ProjectsListComponent implements OnInit {
   showMore(att) {
     if (att === 'pending') {
       this.showPending += 5;
-      if(this.showPending >= this.pendingProjects.length) {
+      if (this.showPending >= this.pendingProjects.length) {
         this.showMorePendingButton = false;
       }
     } else if (att === 'active') {
       this.showActive += 5;
-      if(this.showActive >= this.activeProjects.length) {
+      if (this.showActive >= this.activeProjects.length) {
         this.showMoreActiveButton = false;
       }
     }
@@ -48,7 +48,8 @@ export class ProjectsListComponent implements OnInit {
     private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
-    this.projectsData.getProjects().subscribe(
+
+    this.projectsData.getProjectsShort().subscribe(
       (response) => {
         this.projects = response;
         this.activeProjects = response.filter(el => {
@@ -57,10 +58,10 @@ export class ProjectsListComponent implements OnInit {
         this.pendingProjects = response.filter(el => {
           return el.approved === false && el.status !== 'closed';
         });
-        if(this.pendingProjects.length > this.showPending) {
+        if (this.pendingProjects.length > this.showPending) {
           this.showMorePendingButton = true;
         }
-        if(this.activeProjects.length > this.showActive) {
+        if (this.activeProjects.length > this.showActive) {
           this.showMoreActiveButton = true;
         }
       },
@@ -69,23 +70,23 @@ export class ProjectsListComponent implements OnInit {
       });
 
     let httpResult = this.projectsData.look.asObservable().switchMap(srcVal => {
-      return this.projectsData.getProjects();
+      return this.projectsData.getProjectsShort();
     });
 
     httpResult.subscribe((response) => {
-        this.projects = response;
-        this.activeProjects = response.filter(el => {
-          return el.approved === true && el.status !== 'closed';
-        });
-        this.pendingProjects = response.filter(el => {
-          return el.approved === false && el.status !== 'closed';
-        });
-        if(this.pendingProjects.length > this.showPending) {
-          this.showMorePendingButton = true;
-        }
-        if(this.activeProjects.length > this.showActive) {
-          this.showMoreActiveButton = true;
-        }
+      this.projects = response;
+      this.activeProjects = response.filter(el => {
+        return el.approved === true && el.status !== 'closed';
+      });
+      this.pendingProjects = response.filter(el => {
+        return el.approved === false && el.status !== 'closed';
+      });
+      if (this.pendingProjects.length > this.showPending) {
+        this.showMorePendingButton = true;
+      }
+      if (this.activeProjects.length > this.showActive) {
+        this.showMoreActiveButton = true;
+      }
     });
 
   }

@@ -55,7 +55,7 @@ form input, form textarea {
   border-left-color: lightgrey;
 }
 form input.ng-invalid, form textarea.ng-invalid {
-  border-left-color: darkred;
+  border-left-color: #ee3733;
 }
 .ng-valid[required]:focus, .ng-valid.required:focus {
  border: none;

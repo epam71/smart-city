@@ -43,6 +43,31 @@ export class ProjectServiceService {
             }).catch(this.handleError);
     };
 
+    getProjectsShort(): Observable<Project[]> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        this.authService.setAuthHeader(headers);
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(PATH + '?select=projectName,_id,status,approved', options)
+            .map((response: Response) => {
+
+                return response.json();
+            }).catch(this.handleError);
+    };
+
+    getProjectsNumber(): Observable<any> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        this.authService.setAuthHeader(headers);
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(PATH + 'count', options)
+            .map((response: Response) => {
+                return response.json();
+            }).catch(this.handleError);
+    };
+
     getApprovedProjects(): Observable<Project[]> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');

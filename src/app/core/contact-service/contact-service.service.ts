@@ -64,6 +64,18 @@ export class ContactServiceService {
             .catch(this.handleError);
     };
 
+    getMessagesNumber(): Observable<any> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        this.auth.setAuthHeader(headers);
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(PATH + 'count', options)
+            .map((response: Response) => {
+                return response.json();
+            }).catch(this.handleError);
+    };
+
     putMessage(id: number, messageEdit): Observable<Messages> {
 
         let headers = new Headers();

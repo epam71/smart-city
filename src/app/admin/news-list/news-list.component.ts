@@ -48,7 +48,7 @@ export class NewsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.newsData.getNews().subscribe(
+    this.newsData.getNewsShort().subscribe(
       (response) => {
         this.news = response;
         this.activeNews = response.filter(el => {
@@ -69,7 +69,7 @@ export class NewsListComponent implements OnInit {
       });
 
     let httpResult = this.newsData.look.asObservable().switchMap(srcVal => {
-      return this.newsData.getNews();
+      return this.newsData.getNewsShort();
     });
 
     httpResult.subscribe((response) => {
