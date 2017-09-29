@@ -23,10 +23,6 @@ const routes: Routes = [
         path: '',
         component: ProjectMainComponent
     }
-    // {
-    //     path: '',
-    //     component: ProjectsListComponent
-    // }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);
