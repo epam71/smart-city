@@ -1,9 +1,13 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
 import { ProjectServiceService } from '../../core/project-service/project-service.service';
 import { AuthService } from '../../core/auth-service/auth-service.service';
 import { trigger, state, transition, style, animate, group } from '@angular/animations';
 import { Project } from '../../models/project.model';
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
+
+import { UploadImage } from '../../models/image-models/image-upload';
+import { ImageServiceService } from '../../core/image-service/image-service.service';
+import 'rxjs/add/operator/switchMap';
 
 
 @Component({
@@ -13,17 +17,16 @@ import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 })
 
 export class ProjectMainComponent implements OnInit {
-
+  testik;
 
   constructor(private projectsData: ProjectServiceService,
-    private authService: AuthService,
-    private sanitizer: DomSanitizer) { }
+    private authService: AuthService) {}
 
   searchData = '';
   nick;
   email;
   userCheck;
-  private _placeHolderSafe: SafeUrl = '';
+
 
   projects;
   userProjects = false;
@@ -87,39 +90,10 @@ export class ProjectMainComponent implements OnInit {
 
   }
 
-  test(){
-
-
-
-    for (let i = 0; i < 15; i++){
-    var text = "";
-    var possible = "ABCDE FGHIJKL MNOP QRSTU VWXYZabcd efghijklmn opqrstuvwxyz";
   
-    let temp = {
-      func: function(n, q) {
-      for (var i = 0; i < n; i++){
-      text += possible.charAt(Math.floor(Math.random() * q));
-    }
-    return text;
-  }
-  }
-  console.log(temp.func(5, 5));
 
-    let projectEdit: any = {
-      author: this.authService.getNickname(),
-      authorEmail: this.authService.getEmail(),
-      projectName: temp.func(5, 5),
-      image: '',
-      desc: temp.func(500, possible.length),
-      goals: temp.func(123, possible.length),
-      result: temp.func(122, possible.length),
-      budget: 1000,
-      approved: false,
-      status: 'new'
-    }
 
-  }
-  }
+  
 
   ngOnInit() {
     this.projects = this.projectsData.getProjects();
@@ -128,4 +102,5 @@ export class ProjectMainComponent implements OnInit {
     this.nick = this.authService.getNickname();
     this.email = this.authService.getEmail();
   }
+
 }

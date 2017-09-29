@@ -20,6 +20,10 @@ import { AlertModule } from 'ngx-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminAuthGuardService } from './core/admin-auth-guard/admin-auth-guard.service';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { environment } from '../environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +45,9 @@ import { AdminAuthGuardService } from './core/admin-auth-guard/admin-auth-guard.
     AppRoutes,
     FormsModule,
     BrowserAnimationsModule,
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [AdminAuthGuardService],
   bootstrap: [AppComponent]

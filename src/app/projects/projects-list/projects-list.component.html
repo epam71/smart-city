@@ -5,7 +5,7 @@
               <div class="status_block" *ngIf="userProjects">
                 <span class="label" [ngClass]="key.approved ? 'label-success' : 'label-danger'">{{ key.approved ? 'approved' : 'not approved' }}</span>
               </div>
-              <img class="img-responsive" [src]="sanitizer.bypassSecurityTrustResourceUrl(key?.image)" alt="{{key.projectName}}">
+              <img class="img-responsive" src="{{key?.image}}" alt="{{key.projectName}}">
               <div class="projects_date">
                 {{key.date | date:'dd MMMM y' }}
               </div>
