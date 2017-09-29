@@ -17,7 +17,6 @@ import 'rxjs/add/operator/switchMap';
 })
 
 export class ProjectMainComponent implements OnInit {
-  testik;
 
   constructor(private projectsData: ProjectServiceService,
     private authService: AuthService) {}
