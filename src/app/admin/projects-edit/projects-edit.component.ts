@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import {BrowserModule, DomSanitizer} from '@angular/platform-browser'
 import { Project } from '../../models/project.model';
 import { Subscription } from "rxjs/Subscription";
 import { ProjectServiceService } from "../../core/project-service/project-service.service";
@@ -19,23 +20,21 @@ export class ProjectsEditComponent implements OnInit {
   public projects: Project[];
   public projectId: any;
   private editable: boolean = false;
-  private base64textString: string = '';
+  private base64Image: string = '';
 
-  handleFileSelect(evt){
-      var files = evt.target.files;
-      var file = files[0];
-    
-    if (files && file) {
-        var reader = new FileReader();
-        reader.onload =this._handleReaderLoaded.bind(this);
-        reader.readAsBinaryString(file);
-    }
-  }
-  
-  _handleReaderLoaded(readerEvt) {
-    var binaryString = readerEvt.target.result;
-    this.base64textString = btoa(binaryString);
-    }  
+changeListener($event): void {
+   this.readThis($event.target);
+ }
+
+ readThis(inputValue: any): void {
+   var file: File = inputValue.files[0];
+   var myReader: FileReader = new FileReader();
+
+   myReader.onloadend = (e) => {
+     this.base64Image = myReader.result;
+   }
+   myReader.readAsDataURL(file);
+ }
 
   deleteProject() {
     this.projectData.deleteProject(this.projectId.id).subscribe();
@@ -72,7 +71,7 @@ export class ProjectsEditComponent implements OnInit {
 
     let project: Project = {
       projectName: value.projectName,
-      image: this.base64textString,
+      image: this.base64Image || this.project.image,
       desc: value.desc,
       goals: value.goals,
       result: value.result,
@@ -90,11 +89,10 @@ export class ProjectsEditComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private projectData: ProjectServiceService) {
+    private projectData: ProjectServiceService,
+    private sanitizer: DomSanitizer) {
 
-    let myRoutes = route.params;
-
-    let httpResult = myRoutes.switchMap(param => {
+    let httpResult = route.params.switchMap(param => {
       this.projectId = param;
       return this.projectData.getProject(this.projectId.id);
     });

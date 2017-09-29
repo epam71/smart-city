@@ -13,11 +13,15 @@ import 'rxjs/add/operator/switchMap';
 
 export class ProjectsListComponent implements OnInit {
 
-  private showPending: number = 4;
-  private showActive: number = 4;
+  private showPending: number = 3;
+  private showActive: number = 3;
   private prop: string = 'all';
   public projects: Project[];
-
+  public pendingProjects: Project[];
+  public activeProjects: Project[];
+  private showMorePendingButton;
+  private showMoreActiveButton;
+ 
   sortByName() {
     this.prop = 'projectName';
   }
@@ -29,8 +33,14 @@ export class ProjectsListComponent implements OnInit {
   showMore(att) {
     if (att === 'pending') {
       this.showPending += 5;
+      if (this.showPending >= this.pendingProjects.length) {
+        this.showMorePendingButton = false;
+      }
     } else if (att === 'active') {
       this.showActive += 5;
+      if (this.showActive >= this.activeProjects.length) {
+        this.showMoreActiveButton = false;
+      }
     }
   }
 
@@ -38,22 +48,45 @@ export class ProjectsListComponent implements OnInit {
     private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
-    this.projectsData.getProjects().subscribe(
+
+    this.projectsData.getProjectsShort().subscribe(
       (response) => {
-        this.projects = response
+        this.projects = response;
+        this.activeProjects = response.filter(el => {
+          return el.approved === true && el.status !== 'closed';
+        });
+        this.pendingProjects = response.filter(el => {
+          return el.approved === false && el.status !== 'closed';
+        });
+        if (this.pendingProjects.length > this.showPending) {
+          this.showMorePendingButton = true;
+        }
+        if (this.activeProjects.length > this.showActive) {
+          this.showMoreActiveButton = true;
+        }
       },
       (error) => {
         console.log(error)
       });
 
-    let saveData = this.projectsData.look.asObservable();
-
-    let httpResult = saveData.switchMap(srcVal => {
-      return this.projectsData.getProjects();
+    let httpResult = this.projectsData.look.asObservable().switchMap(srcVal => {
+      return this.projectsData.getProjectsShort();
     });
 
     httpResult.subscribe((response) => {
       this.projects = response;
+      this.activeProjects = response.filter(el => {
+        return el.approved === true && el.status !== 'closed';
+      });
+      this.pendingProjects = response.filter(el => {
+        return el.approved === false && el.status !== 'closed';
+      });
+      if (this.pendingProjects.length > this.showPending) {
+        this.showMorePendingButton = true;
+      }
+      if (this.activeProjects.length > this.showActive) {
+        this.showMoreActiveButton = true;
+      }
     });
 
   }

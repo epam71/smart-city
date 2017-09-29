@@ -61,7 +61,6 @@ constructor(private service: NewsServiceService,
     );
       
     this.rForm.reset();
-
     this.showModal = true;
     setTimeout(()=>{    
       this.showModal = false;

@@ -21,13 +21,8 @@
     margin: 5px;
 }
 
-.img_block {
-    margin-top: 10px;
-    margin-bottom: 15px;
-}
-
 .img-fluid {
-    margin: 0 auto; 
+    margin: 10px auto; 
     max-height: 500px;
 }
 
@@ -40,7 +35,7 @@
     width: 85px;
     float: right;
     border-radius: 3px;
-    background-color: #141414;
+    background-color: #202020 ;
 }
 
 .close-project, .approve-project {
@@ -60,7 +55,7 @@ form input, form textarea {
   border-left-color: lightgrey;
 }
 form input.ng-invalid, form textarea.ng-invalid {
-  border-left-color: darkred;
+  border-left-color: #ee3733;
 }
 .ng-valid[required]:focus, .ng-valid.required:focus {
  border: none;
@@ -118,9 +113,9 @@ textarea {
     border-radius: 4px;
     transition: 0.5s;
     margin: 6px 0 6px 6px;
-    border: 2px solid #141414;
+    border: 2px solid #202020 ;
     background: none;
-    color: #141414;
+    color: #202020 ;
   }
  .custom-btn:hover {
     background: #ee3733;

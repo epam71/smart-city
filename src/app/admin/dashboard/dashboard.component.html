@@ -1,0 +1,93 @@
+<div class="container-2 col-xs-12 col-md-8">
+  <div id="page-wrapper">
+    <div class="row"> 
+      <div class="col-xs-12">
+        <div class="page-title">
+          <h2>Dashboard</h2>
+          <ol class="breadcrumb">
+            <li class="active"><i class="fa fa-dashboard"></i> Welcome to Admin Panel! </li>
+            <li class="pull-right">
+              <div id="reportrange" class="btn btn-green btn-square date-picker">
+                <i class="fa fa-calendar"></i>
+                <span class="date-range">{{ today | date }}</span>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 col-sm-12">
+        <div class="circle-tile">
+          <a href="#">
+            <div class="circle-tile-heading dark-blue">
+              <i class="fa fa-users fa-fw fa-3x"></i>
+            </div>
+          </a>
+          <div class="circle-tile-content dark-blue">
+            <div class="circle-tile-description text-faded">
+              Users
+            </div>
+            <div class="circle-tile-number text-faded">
+              165
+              <span id="sparklineA"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12">
+        <div class="circle-tile">
+          <a href="#">
+            <div class="circle-tile-heading green">
+              <i class="fa fa-folder-open fa-fw fa-3x"></i>
+            </div>
+          </a>
+          <div class="circle-tile-content green">
+            <div class="circle-tile-description text-faded">
+              Projects created
+            </div>
+            <div class="circle-tile-number text-faded">
+               {{ projects }} 
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12">
+        <div class="circle-tile">
+          <a href="#">
+            <div class="circle-tile-heading red">
+              <i class="fa fa-folder fa-fw fa-3x"></i>
+            </div>
+          </a>
+          <div class="circle-tile-content red">
+            <div class="circle-tile-description text-faded">
+              News created
+            </div>
+            <div class="circle-tile-number text-faded">
+               {{ totalNews }}
+              <span id="sparklineC"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12">
+        <div class="circle-tile">
+          <a href="#">
+            <div class="circle-tile-heading purple">
+              <i class="fa fa-comments fa-fw fa-3x"></i>
+            </div>
+          </a>
+          <div class="circle-tile-content purple">
+            <div class="circle-tile-description text-faded">
+              Messages
+            </div>
+            <div class="circle-tile-number text-faded">
+              {{ messages }} 
+              <span id="sparklineD"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
+</div> 

@@ -22,14 +22,14 @@
             Active</h3>
         </div>
         <ul class="list-group">
-          <li *ngFor="let key of news | filterApproval:true | slice:0:showActive | sortBy:prop:'normal'; let i=index" class="news_block list-group-item sliding_bg">
+          <li *ngFor="let key of activeNews | slice:0:showActive | sortBy:prop:'normal'; let i=index" class="news_block list-group-item sliding_bg">
             <a [routerLink]="['/admin/news', key._id]">
               <span class="news_name">
                {{key.title }}
                </span>
             </a>
           </li>
-          <button type="button" class="list-group-item more" (click)="showMore('active')">Show more</button>
+          <button *ngIf="showMoreActiveButton" type="button" class="list-group-item more" (click)="showMore('active')">Show more</button>
         </ul>
       </div>
 
@@ -38,13 +38,13 @@
           <h3 class="panel-title">Pending</h3>
         </div>
         <ul class="list-group">
-          <li *ngFor="let key of news | filterApproval:false | slice:0:showPending | sortBy:prop:'normal'; let i=index" class="news_block list-group-item sliding_bg">
+          <li *ngFor="let key of pendingNews | slice:0:showPending | sortBy:prop:'normal'; let i=index" class="news_block list-group-item sliding_bg">
             <a [routerLink]="['/admin/news', key._id]">               
                {{key.title }} 
                <span *ngIf="key.approved === false" class="badge badge-default badge-pill">new</span>              
                </a>
           </li>
-          <button type="button" class="list-group-item more" (click)="showMore('pending')">Show more</button>
+          <button *ngIf="showMorePendingButton" type="button" class="list-group-item more" (click)="showMore('pending')">Show more</button>
         </ul>
       </div>
 
@@ -65,21 +65,13 @@
           <h3 class="panel-title">Search results</h3>
         </div>
         <ul class="list-group">
-          <li *ngFor="let key of news | searchNews:queryString:'projectName'| sortBy:prop:'normal'; let i=index" class="project_block list-group-item">
+          <li *ngFor="let key of news | searchNews:queryString:'title'| sortBy:prop:'normal'; let i=index;" class="project_block list-group-item">
             <a [routerLink]="['/admin/news', key._id]">               
                {{key.title }} 
                <span *ngIf="key.approved === false" class="badge badge-default badge-pill">new</span>              
                </a>
           </li>
         </ul>
-      </div>
-    </div>
-
-    <div class="standard_mes container col-xs-12 col-sm-8" *ngIf="router.url === '/admin/news'">
-      <img class="img-responsive" src="assets/images/welcome.jpg">
-      <div class="welcome">
-        <h3>Welcome to Admin Panel!</h3>
-        <p>Here you can edit and approve projects or news</p>
       </div>
     </div>
     <router-outlet></router-outlet>

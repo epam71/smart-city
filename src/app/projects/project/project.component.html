@@ -33,14 +33,14 @@
     <div class="col-md-8 left_side">
       <div class="project_block">
         <figure class="img_block">
-          <img [src]="sanitizer.bypassSecurityTrustResourceUrl(image)" alt="{{project?.projectName}}">
+          <img src="{{image}}" alt="{{project?.projectName}}">
           <h2 class="project_name">
             {{ (project)?.projectName | uppercase }}
           </h2>
         </figure>
         <section class="project_info">
           <article class="article_header">
-            <span class="glyphicon glyphicon-minus"></span>
+            <span class="glyphicon glyphicon-file"></span>
             <span>Project description</span>
           </article>
           <article class="project_desc">
@@ -49,8 +49,8 @@
         </section>
         <section class="project_info" *ngIf="(project)?.goals">
           <article class="article_header">
-            <span class="glyphicon glyphicon-minus"></span>
-            <span>What is the goal of the project?</span>
+            <span class="glyphicon glyphicon-file"></span>
+            <span>Goal of the project?</span>
           </article>
           <article class="project_desc">
             {{ (project)?.goals }}
@@ -58,8 +58,8 @@
         </section>
         <section class="project_info" *ngIf="(project)?.result">
           <article class="article_header">
-            <span class="glyphicon glyphicon-minus"></span>
-            <span>What is the result of the project? </span>
+            <span class="glyphicon glyphicon-file"></span>
+            <span>Result of the project? </span>
 
           </article>
           <article class="project_desc">
@@ -68,7 +68,7 @@
         </section>
         <section class="project_info" *ngIf="(project)?.budget">
           <article class="article_header">
-            <span class="glyphicon glyphicon-minus"></span>
+            <span class="glyphicon glyphicon-file"></span>
             <span>Finance information</span>
           </article>
           <article class="project_desc">
@@ -101,34 +101,13 @@
     <div class="col-md-4 hidden-sm hidden-xs">
       <div class="projects_list">
         <header><h3>The most popular projects:</h3></header>
-        <article class="project_item_list" *ngFor="let key of projects">
-          <a [routerLink]="['/projects', key._id]" (click)="goProject(key)">
-            <div class="img_block">
-              <img class="img-responsive" [src]="sanitizer.bypassSecurityTrustResourceUrl(key?.image)" alt="{{key.projectName}}">
-              <div class="projects_date">
-                  {{key.date | date:'dd MMMM y' }}
-                </div>
-            </div>
-            <div class="name_list">
-              {{key.projectName | uppercase | shorten:20 }}
-            </div>
-            <div class="desc_list">{{ key.desc | shorten:120 }}</div>
-          </a>
-          <div class="row footer_project_list">
+<div class="project_item_list">
+        <app-projects-list *ngFor="let key of (projects)" [key]="key" [routerLink]="['/projects', key?._id]" 
+        (click)="goProject(key)"></app-projects-list>
+      </div>
 
-              <div class="col-md-3">
-                <div class="likes_block_list">
-                  <rating [ratingObj]="key"></rating>
-                </div>
-              </div>
-              <div class="col-md-3 col-md-push-6 comments_block_main">
-                <span class="comments_block">
-                      <span class="glyphicon glyphicon-comment comments_info"></span>
-                <span class="comments_info_text">{{key.comments.length}}</span>
-                </span>
-              </div>
-          </div>
-        </article>
+
+
       </div>
     </div>
   </div>

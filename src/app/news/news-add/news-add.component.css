@@ -1,20 +1,32 @@
-.back{
-    display: block;
-    width: 200px;
-    padding: 15px;
-    background: #D9D3D3;
-    color: #000;
-    margin-top: 30px;
-    text-align: center;
-    text-transform: uppercase;
+.panel-info>.panel-heading{
+    background-color: #ee3733;
+    color: #fff;
+    font-weight: bold;
 }
 
-.back:hover{
-    background: #E6E2E2; 
+.panel-info {
+    border-color: #F4D3D2;
 }
 
-.add{
-    margin-top: 20px;
+.news-btn{
+    margin: 10px 5px;
+    font-family: "Raleway", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 2px;
+    transition: 0.5s;
+    background: none;
+    border: 1px solid #ccc;
+    color: #777777;
+    box-sizing: border-box;
+}
+
+.news-btn:hover, .cancel-btn{
+    background: #ee3733;
+    border-color: #ee3733;
+    color: #fff;
 }
 
 .ng-valid[required], .ng-valid.required  {
@@ -53,3 +65,28 @@
     left: 0;
     z-index:99999;
 }
+
+
+.image-preview {
+    margin-bottom: 15px;
+}
+
+.image-preview-input input[type=file] {
+	position: absolute;
+	top: 30px;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+.image-preview-input-title {
+    margin-left:2px;
+}
+
+.image-preview-input {
+    margin-left: 15px;
+}
+

@@ -10,7 +10,7 @@
 .main-content {
     max-width: 1200px;
     margin: 10px auto;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.90);
     padding: 20px;
     border-radius: 5px;
 }
@@ -69,11 +69,11 @@
 
 a {
     text-decoration: none;
-    color: #141414;
+    color: #202020 ;
 }
 
 .panel, .panel-heading {
-    border-color: #141414;
+    border-color: #202020 ;
 }
 .panel > .list-group
 {
@@ -88,14 +88,10 @@ a {
     border-width: 1px 0;
     padding: 7px 5px 7px 15px;
 }
-.panel > .list-group .list-group-item:first-child
+
+.panel > .list-group .sliding_bg:first-child
 {
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
-}
-.panel > .list-group .list-group-item:last-child
-{
-    border-bottom: 0;
+    border: none;
 }
 
 .panel a {
@@ -103,7 +99,7 @@ a {
 }
 
 .panel-heading {
-background-color: #141414;
+background-color: #202020 ;
 position: relative;
 }
 
@@ -135,7 +131,7 @@ li.sliding_bg:hover span.badge {
 
 .sort-btn {
     border-radius: 5px;
-    background-color: #141414;
+    background-color: #202020 ;
 }
 
 .sort-btn:hover, .sort-btn:focus {

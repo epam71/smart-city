@@ -15,8 +15,8 @@ import { FormsModule } from '@angular/forms';
 import { MessageStatusPipe } from '../pipes/message-status.pipe';
 import { searchNews } from '../pipes/search-news.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { SetAccesComponent } from './set-acces/set-acces.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -39,8 +39,8 @@ import { NavigationComponent } from './navigation/navigation.component';
     ConfirmComponent,
     SortBy,
     searchNews,
-    SetAccesComponent,
-    NavigationComponent
+    NavigationComponent,
+    DashboardComponent
   ]
 })
 export class AdminModule { }

@@ -11,12 +11,15 @@ import 'rxjs/add/operator/switchMap';
 })
 export class NewsListComponent implements OnInit {
 
-  public news:News[];
+  public news: News[];
+  public activeNews: News[];
+  public pendingNews: News[];
   private prop = 'all';
   private showPending = 3;
   private showActive = 3;
-  private activeLength = 0;
-  private pendingLength = 0;
+  private showMorePendingButton;
+  private showMoreActiveButton;
+
 
   sortByName() {
     this.prop = 'title';
@@ -29,17 +32,13 @@ export class NewsListComponent implements OnInit {
   showMore(att) {
     if (att === 'pending') {
       this.showPending += 5;
+      if(this.showPending >= this.pendingNews.length) {
+        this.showMorePendingButton = false;
+      }
     } else if (att === 'active') {
       this.showActive += 5;
-    }
-  }
-
-  defineLength(data) {
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].approved) {
-        this.activeLength++;
-      } else {
-        this.pendingLength++;
+      if(this.showActive >= this.activeNews.length) {
+        this.showMoreActiveButton = false;
       }
     }
   }
@@ -49,22 +48,44 @@ export class NewsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.newsData.getNews().subscribe(
+    this.newsData.getNewsShort().subscribe(
       (response) => {
-        this.news = response
+        this.news = response;
+        this.activeNews = response.filter(el => {
+          return el.approved === true;
+        });
+        this.pendingNews = response.filter(el => {
+          return el.approved === false;
+        });
+        if(this.pendingNews.length > this.showPending) {
+          this.showMorePendingButton = true;
+        }
+        if(this.activeNews.length > this.showActive) {
+          this.showMoreActiveButton = true;
+        }
       },
       (error) => {
         console.log(error)
       });
 
-    let saveData = this.newsData.look.asObservable();
-
-    let httpResult = saveData.switchMap(srcVal => {
-      return this.newsData.getNews();
+    let httpResult = this.newsData.look.asObservable().switchMap(srcVal => {
+      return this.newsData.getNewsShort();
     });
 
     httpResult.subscribe((response) => {
-      this.news = response;
+        this.news = response;
+        this.activeNews = response.filter(el => {
+          return el.approved === true;
+        });
+        this.pendingNews = response.filter(el => {
+          return el.approved === false;
+        });
+        if(this.pendingNews.length > this.showPending) {
+          this.showMorePendingButton = true;
+        }
+        if(this.activeNews.length > this.showActive) {
+          this.showMoreActiveButton = true;
+        }
     });
   }
 

@@ -10,7 +10,7 @@ import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-news-edit',
-  templateUrl: './news-edit.component.html',
+  templateUrl: './news-edit.component.html', 
   styleUrls: ['./news-edit.component.css']
 })
 export class NewsEditComponent implements OnInit {
@@ -64,7 +64,7 @@ export class NewsEditComponent implements OnInit {
 
     let news: any = {
       title: value.newsTitle,
-      image: this.base64textString,
+      image: this.base64textString || this.news.image,
       desc: value.desc
     }
 
@@ -81,9 +81,7 @@ export class NewsEditComponent implements OnInit {
     private router: Router,
     private newsData: NewsServiceService) {
 
-    let myRoutes = route.params;
-
-    let httpResult = myRoutes.switchMap(param => {
+    let httpResult = route.params.switchMap(param => {
       this.newsId = param;
       return this.newsData.getNewsById(this.newsId.id);
     });

@@ -1,22 +1,49 @@
 <div class="container">
   <div class="row">
-      <button class="btn btn-default pull-left" [routerLink]="['/news']">
+      <button class="back pull-left" [routerLink]="['/news']">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Back to news</button>
   </div>
 </div>
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-10 news-block">
-      <p class="pull-left author">{{ (news)?.author }}</p>
+    <div class="col-sm-8 news-block">
+      <div class="header clearfix">
+      <p class="pull-left author">Written by: {{ (news)?.author }}</p>
       <p class="pull-right date">{{ (news)?.date | date: 'dd/MM/yyyy'}}</p>
-      <img [src]="imagePath" alt="{{ (news)?.title }}">  
+    </div>
+    <div class="img-block">
+      <img [src]="imagePath" alt="{{ (news)?.title }}"> 
+    </div> 
       <h2 class="title">{{ (news)?.title }}</h2>
       <hr>
       <p class="description">{{ (news)?.desc }}</p>
-      <news-like [ratingObj]="news"></news-like>
+      <news-like [ratingObj]="(news)" ></news-like>
       <news-comment [commentsObj]="(news)"></news-comment>
     </div>
+
+    <div class="col-sm-3 pull-right news-list"  >
+      <div class="row">
+       
+      <div class="news-item" *ngFor="let key of (newsList | async)">
+          <a class="read" [routerLink]="['/news', key._id]">
+            <div class="img-block">
+        <img class="img img-responsive" [src]="domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64,' + key?.image)" 
+        alt="{{key.title }}">
+      </div>
+        <h4>{{ key.title }} </h4>
+        <p>{{ key.desc | truncate: [100] }} </p>
+        <div class="footer">
+        <news-like class="list-like pull-left"  [ratingObj]="key"></news-like>
+        <p class="pull-right list-date">{{ key.date | date: 'dd/MM/yyyy'}}</p>
+      </div>
+    
+      </a>
+      </div>
+    </div>
+  </div>
   </div>
 </div>
+
+
 

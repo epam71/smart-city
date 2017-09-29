@@ -1,6 +1,6 @@
 
 #navigation{
-    margin-bottom: 10px;
+    margin-bottom: 0;
 }
   
 header{
@@ -90,6 +90,11 @@ img{
   border-bottom: 2px solid;
 }
 
+.navbar-default .navbar-nav > li.settings:hover > a {
+  border-bottom: none;
+  cursor: pointer; 
+}
+
 .navbar-default .navbar-nav > li:hover > a,
 .navbar-default .navbar-nav > li > a.active {
   color: #ee3733;
@@ -138,8 +143,8 @@ img{
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
-  .navbar-brand>img{
-    margin-left: 15px;
+  a.navbar-brand div.glyphicon-log-out{
+    margin-left: 25px;
   }
   .navbar-default .navbar-nav > li > a {
     text-align: center;
@@ -149,5 +154,11 @@ img{
   }
   .navbar-brand{
     padding: 17px 0;
+  }
+}
+
+@media (max-width: 575px) {
+  a.navbar-brand div.glyphicon-log-out{
+    margin-left: 25px;
   }
 }
