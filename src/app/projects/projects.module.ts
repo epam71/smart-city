@@ -10,7 +10,9 @@ import { SortBy } from '../pipes/sorting.pipe';
 import { FormsModule } from '@angular/forms';
 import { ShortenPipe } from '../pipes/shorten.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PipesModule } from '../pipes/pipes.module';
+import { ProjectMainComponent } from './project-main/main-projects.component';
 
 
 @NgModule({
@@ -19,12 +21,14 @@ import { PipesModule } from '../pipes/pipes.module';
     routing,
     FormsModule,
     NgxPaginationModule,
+    InfiniteScrollModule
   ],
   declarations: [RatingProjectComponent,
     CommentsProjectComponent,
     ProjectsListComponent,
     ProjectComponent,
     ProjectEditComponent,
+    ProjectMainComponent,
     ShortenPipe,
     SortBy,
   ]

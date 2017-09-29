@@ -72,7 +72,6 @@
   text-align: center;
   padding: 10px;
   margin: 0;
-  /* font-size: 25px; */
   font-weight: 700;
 }
 
@@ -82,8 +81,12 @@
 }
 
 .article_header {
+  position: relative;
   padding-left: 20px;
+  margin-bottom: 5px;
   font-size: 20px;
+  font-weight: 700;
+  color: #777777;
 }
 
 .project_desc {
@@ -180,7 +183,6 @@
   padding: 10px;
   margin-top: 5px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #ccc;
 }
 
 .name_list {

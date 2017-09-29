@@ -4,6 +4,7 @@ import { ProjectsListComponent } from './projects-list/projects-list.component';
 
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ProjectMainComponent } from './project-main/main-projects.component';
 
 const routes: Routes = [
     {
@@ -20,8 +21,12 @@ const routes: Routes = [
     },
     {
         path: '',
-        component: ProjectsListComponent
+        component: ProjectMainComponent
     }
+    // {
+    //     path: '',
+    //     component: ProjectsListComponent
+    // }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);
