@@ -13,7 +13,7 @@ import * as firebase from 'firebase';
 @Injectable()
 export class ImageServiceService {
 
-  uploadProgress = 0;
+  uploadProgress: any = 0;
   fileName = '';
   file: File;
   upload: UploadImage;
@@ -39,7 +39,8 @@ export class ImageServiceService {
       (snapshot) => {
 
         let snap = snapshot as firebase.storage.UploadTaskSnapshot
-        this.uploadProgress = (snap.bytesTransferred / snap.totalBytes) * 100;
+        this.uploadProgress = ((snap.bytesTransferred / snap.totalBytes) * 100).toString().split('.')[0];
+
       },
       (error) => {
         console.error(error);
