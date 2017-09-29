@@ -17,9 +17,10 @@ export class NewsCommentComponent implements OnInit {
 
   private rForm: FormGroup;                   
   private message:string = '';
- 
+  private getUserRole;
+  private comment;
 
-constructor(private service: NewsServiceService,
+constructor(private commentService: NewsServiceService,
             private authService: AuthService,
             private fb: FormBuilder) {
               this.rForm = fb.group({
@@ -29,15 +30,15 @@ constructor(private service: NewsServiceService,
           }
 
 addComment(message){
-  let postCommet = this.service.postComment(this.commentsInfo._id, {
-    username: this.authService.getNickname(),
+  let postCommet = this.commentService.postComment(this.commentsInfo._id, {
+    username: this.authService.getEmail(),
     message: message,
-    date: new Date()
+    date: Date.now
 });
   
   postCommet.switchMap(
       event => {
-        return this.service.getNewsById(this.commentsInfo._id);
+        return this.commentService.getNewsById(this.commentsInfo._id);
       }
     )
     .subscribe(
@@ -45,9 +46,22 @@ addComment(message){
       this.commentsInfo = value;
       this.rForm.reset();
     });
-}          
+}  
+
+deleteComment(commentId){
+  let deleteComment = this.commentService.deleteComment(this.commentsInfo._id, commentId.id);
+  deleteComment.switchMap(
+      event => {
+        return this.commentService.getNewsById(this.commentsInfo._id);
+      }
+    )
+    .subscribe(
+    value => {
+      this.commentsInfo = value;
+    });
+} 
 
 ngOnInit() {
-    
+  this.getUserRole = this.authService.getRole();
   }
 }

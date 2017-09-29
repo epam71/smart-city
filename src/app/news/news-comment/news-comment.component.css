@@ -1,12 +1,61 @@
-button{
-    margin: 25px 0;
+.form-group button{
+    margin: 25px 5px 25px 0;
+    font-family: "Raleway", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    display: inline-block;
+    padding: 8px 10px;
+    border-radius: 2px;
+    transition: 0.5s;
+    background: none;
+    border: 1px solid #ccc;
+    color: #777777;
+    box-sizing: border-box;
 }
 
-.comments{
-    
-    margin: 45px 0;
-    padding: 5px 0 20px 0;
+.form-group button:hover, .form-group .cancel-btn{
+    background: #ee3733;
+    border-color: #ee3733;
+    color: #fff;
+}
+
+.comments{  
+    margin: 50px 0;
+    padding-top: 5px;
     border-top: 1px solid #ccc;
+}
+
+form{
+    padding-top: 30px;
+    border-top: 1px solid #ccc; 
+}
+
+.warning{
+    margin-top: 20px;
+    border-top: 2px solid #B3B3B3;
+}
+
+.warning h4{
+    font-weight: 700;
+}
+
+.warning button{
+    font-family: "Raleway", sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
+    padding: 8px 20px;
+    border-radius: 2px;
+    transition: 0.5s;
+    margin:  8px 0 10px 0;
+    border: 0;
+    background: #ee3733;
+    color: #fff;
+}
+
+.warning button:hover{
+    box-shadow: 5px 5px 5px #888888;
 }
 
 .user{
@@ -18,6 +67,5 @@ button{
 }
 
 .date{
-    font-style: italic;
-    
+    font-style: italic; 
 }
