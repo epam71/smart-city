@@ -33,7 +33,7 @@
     <div class="col-md-8 left_side">
       <div class="project_block">
         <figure class="img_block">
-          <img [src]="sanitizer.bypassSecurityTrustResourceUrl(image)" alt="{{project?.projectName}}">
+          <img src="{{image}}" alt="{{project?.projectName}}">
           <h2 class="project_name">
             {{ (project)?.projectName | uppercase }}
           </h2>

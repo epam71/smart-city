@@ -1,68 +1,69 @@
 <div class="container">
-    <div class="nav_block">
-        <button type="submit" class="btn btn-default custom-btn" routerLink="/projects">Back to projects</button>
-    </div>
+  <div class="nav_block">
+    <button type="submit" class="btn btn-default custom-btn" routerLink="/projects">Back to projects</button>
+  </div>
   <form class="form-horizontal" (ngSubmit)="actProject(f)" #f="ngForm">
     <div class="alert alert-danger" *ngIf="errorMessage">
-        {{ errorMessage }}
+      {{ errorMessage }}
     </div>
-      <div class="form-group">
-        <label for="projectName" class="col-sm-2 control-label">Project name</label>
-        <div class="col-sm-10">
-          <input type="text" id="projectName" class="form-control" #projectName="ngModel" [ngModel]="(project)?.projectName"
-          name="projectName" required [pattern]="'^.{0,30}$'">
-          <div [hidden]="projectName.valid || projectName.untouched" class="alert alert-danger">
-              You can write maximum 30 symbols
-          </div>
+    <div class="form-group">
+      <label for="projectName" class="col-sm-2 control-label">Project name</label>
+      <div class="col-sm-10">
+        <input type="text" id="projectName" class="form-control" #projectName="ngModel" [ngModel]="(project)?.projectName" name="projectName"
+          required [pattern]="'^.{0,30}$'">
+        <div [hidden]="projectName.valid || projectName.untouched" class="alert alert-danger">
+          You can write maximum 30 symbols
         </div>
       </div>
+    </div>
 
-      <div class="form-group">
-        <label for="filePicker" class="col-sm-2 control-label">Project image:</label>
-        <div class="col-sm-10">
-          <span class="btn btn-default btn-file"> Choose a file:
-        <input type="file" id="filePicker" accept="image/*" (change)="fileSelect($event)">
+    <div class="form-group">
+      <label for="filePicker" class="col-sm-2 control-label">Project image:</label>
+      <div class="col-sm-10">
+        <span class="btn btn-default btn-file"> Choose a file:
+        <input type="file" id="filePicker" accept="image/*" (change)="pushImage($event)">
       </span>
-        </div>
-    </div>
-          <div class="form-group">
-              <label for="desc" class="col-sm-2 control-label">Full Description</label>
-              <div class="col-sm-10">
-                  <textarea id="desc" class="form-control" rows="5" #desc="ngModel" [ngModel]="(project)?.desc"
-                  name="desc" required [pattern]="'^.{5,}$'"></textarea>
-                  <div [hidden]="desc.valid || desc.untouched" class="alert alert-danger">
-                      Please, write minimum 10 symbols
-                  </div>
-              </div>
-            </div>
-            <div class="form-group">
-                <label for="goals" class="col-sm-2 control-label">Project goals</label>
-                <div class="col-sm-10">
-                    <textarea id="goals" class="form-control" rows="3" [ngModel]="(project)?.goals"
-                    name="goals"></textarea>
-                </div>
-              </div>
-              <div class="form-group">
-                  <label for="result" class="col-sm-2 control-label">Project result</label>
-                  <div class="col-sm-10">
-                      <textarea id="result" class="form-control" rows="3" [ngModel]="(project)?.result"
-                      name="result"></textarea>
-                  </div>
-                </div>
-            <div class="form-group">
-                <label for="budget" class="col-sm-2 control-label">Project Budget</label>
-                <div class="col-sm-10">
-                  <input type="number" id="budget" class="form-control" [ngModel]="(project)?.budget"
-                  name="budget"
-                  [pattern]="'^[0-9]+[0-9]*$'">
-                </div>
-              </div>
-      <div class="form-group buttons_block">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-default custom-btn" [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add' }}</button>
-          <button type="button" class="btn btn-default custom-btn" (click)="clearForm()">Clear</button>
+        <div *ngIf="imageService?.uploadProgress !== 0">
+          <div class="progress">
+            <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': imageService?.uploadProgress + '%' }"></div>
+          </div>
+          Progress: {{imageService?.uploadProgress}}% Complete
         </div>
       </div>
-    </form>
-  
-  </div>
+    </div>
+    <div class="form-group">
+      <label for="desc" class="col-sm-2 control-label">Full Description</label>
+      <div class="col-sm-10">
+        <textarea id="desc" class="form-control" rows="5" #desc="ngModel" [ngModel]="(project)?.desc" name="desc" required [pattern]="'^.{5,}$'"></textarea>
+        <div [hidden]="desc.valid || desc.untouched" class="alert alert-danger">
+          Please, write minimum 10 symbols
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="goals" class="col-sm-2 control-label">Project goals</label>
+      <div class="col-sm-10">
+        <textarea id="goals" class="form-control" rows="3" [ngModel]="(project)?.goals" name="goals"></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="result" class="col-sm-2 control-label">Project result</label>
+      <div class="col-sm-10">
+        <textarea id="result" class="form-control" rows="3" [ngModel]="(project)?.result" name="result"></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="budget" class="col-sm-2 control-label">Project Budget</label>
+      <div class="col-sm-10">
+        <input type="number" id="budget" class="form-control" [ngModel]="(project)?.budget" name="budget" [pattern]="'^[0-9]+[0-9]*$'">
+      </div>
+    </div>
+    <div class="form-group buttons_block">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default custom-btn" [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add' }}</button>
+        <button type="button" class="btn btn-default custom-btn" (click)="clearForm()">Clear</button>
+      </div>
+    </div>
+  </form>
+
+</div>
