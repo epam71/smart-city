@@ -34,23 +34,36 @@ export class ProjectServiceService {
     getProjects(): Observable<Project[]> {
 
         return this.http.get(projects_PATH, this.authService.getAuthHeaderOpt())
+
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
     };
 
-    getCountProjects(): Observable<Project[]> {
-        
-                return this.http.get(projects_PATH + 'count', this.authService.getAuthHeaderOpt())
-                    .map((response: Response) => {
-                        console.log(response.json());
-                        return response.json();
-                    }).catch(this.handleError);
-            };
-
     getApprovedProjects(): Observable<Project[]> {
 
         return this.http.get(projects_PATH + '?query={"approved":"true"}', this.authService.getAuthHeaderOpt())
+            .map((response: Response) => {
+                return response.json();
+            }).catch(this.handleError);
+    };
+
+    getProjectsShort(): Observable<Project[]> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        this.authService.setAuthHeader(headers);
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(projects_PATH + '?select=projectName,_id,status,approved', options)
+            .map((response: Response) => {
+
+                return response.json();
+            }).catch(this.handleError);
+    };
+
+    getProjectsNumber(): Observable<any> {
+
+        return this.http.get(config.PATH + 'projects/' + 'count', this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);

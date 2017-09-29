@@ -28,7 +28,7 @@
     </app-modal>
 
     <div class="card mt-4">
-      <img class="card-img-top img-fluid" alt="No image" src="{{ 'data:image/jpeg;base64,' + project?.image }}" onerror="this.onerror=null;this.src='http://placehold.it/900x400';">
+      <img class="card-img-top img-fluid" alt="No image" [src] = "sanitizer.bypassSecurityTrustResourceUrl(project?.image)" onerror="this.onerror=null;this.src='http://placehold.it/900x400';"G>
       <div *ngIf="!editable" class="card-body">
         <p class="status col-sm-2 col-sm-offset-10 badge badge-default">{{ project?.status }}</p>
         <h3 class="card-title">{{ project?.projectName }}</h3>
@@ -99,7 +99,7 @@
 						<div class="btn btn-default image-preview-input"> 
               <span class="glyphicon glyphicon-folder-open"></span> 
               <span class="image-preview-input-title">Browse</span>
-							<input id="filePicker" type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview" (change)="handleFileSelect($event)"/>
+							<input id="filePicker" type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview" (change)="changeListener($event)"/>
 						</div>         
       </div> 
 

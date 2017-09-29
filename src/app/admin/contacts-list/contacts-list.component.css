@@ -1,5 +1,5 @@
 .content{
-	background-color: #fcfcfc;
+	background-color: rgba(255, 255, 255, 0.70);
 	max-width: 1200px;
 	margin: 10px auto;
 	border-radius: 5px;
@@ -17,7 +17,7 @@
 	:: Table Filter
 	-------------------------------------------------- */
 .panel {
-    background-color: #fcfcfc;
+    background-color: rgba(255, 255, 255, 0.80);
 	width: auto;
 	margin: 15px 0 30px;
 }
@@ -191,9 +191,9 @@ pagination-controls /deep/ a:hover, pagination-controls /deep/ li:hover, paginat
     border-radius: 4px;
     transition: 0.5s;
     margin: 6px 0 6px 6px;
-	border: 2px solid #141414;
+	border: 2px solid #202020 ;
     background: none;
-    color: #141414;
+    color: #202020 ;
   }
 .custom-btn:hover, .selected-btn {
     background: #ee3733;

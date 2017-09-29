@@ -16,25 +16,25 @@ const headers = new Headers({ 'Content-Type': 'application/json' });
 @Injectable()
 export class NewsServiceService {
 
- 
+
   look: Subject<string> = new Subject<string>();
- 
-  constructor(private http: Http, 
+
+  constructor(private http: Http,
     private authService: AuthService) {
-   
+
   }
 
-  private handlError(error: Response){
-   
+  private handlError(error: Response) {
+
 
     let errorMessage = JSON.parse(error['_body']).errorMessage;
-    let message = `Error status ${error.status} at ${error.url}`;         
+    let message = `Error status ${error.status} at ${error.url}`;
     return Observable.throw(errorMessage);
   }
- 
- getNews(): Observable<News[]> {
+
+  getNews(): Observable<News[]> {
     this.authService.setAuthHeader(headers);
-    return this.http.get(HTTP_NEWS, 
+    return this.http.get(HTTP_NEWS,
       new RequestOptions({ headers: headers }))
       .map((response: Response) => {
         return response.json();
@@ -43,7 +43,7 @@ export class NewsServiceService {
 
   postNews(news: any): Observable<News> {
     this.authService.setAuthHeader(headers);
-    return this.http.post(HTTP_NEWS, news, 
+    return this.http.post(HTTP_NEWS, news,
       new RequestOptions({ headers: headers }))
       .map((response: Response) => {
         return <any>response.json();
@@ -51,25 +51,50 @@ export class NewsServiceService {
       .catch(this.handlError);
   };
 
-  getNewsById (id): Observable<News> {
+  getNewsById(id): Observable<News> {
     this.authService.setAuthHeader(headers);
-    return this.http.get(HTTP_NEWS +id, 
-     new RequestOptions({ headers: headers }))
+    return this.http.get(HTTP_NEWS + id,
+      new RequestOptions({ headers: headers }))
       .map((response: Response) => {
-          return response.json();
+        return response.json();
       }).catch(this.handlError);
   };
 
-  updateNews (id, newsEdit): Observable<News> {
+  getNewsShort(): Observable<any> {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
     this.authService.setAuthHeader(headers);
-    return this.http.put(HTTP_NEWS + id, newsEdit, 
-      new RequestOptions({ headers: headers })) 
-    .catch(this.handlError);
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.get(HTTP_NEWS + '?select=title,_id,approved', options)
+      .map((response: Response) => {
+
+        return response.json();
+      }).catch(this.handlError);
+  };
+
+  getNewsNumber(): Observable<any> {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this.authService.setAuthHeader(headers);
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.get(HTTP_NEWS + 'count', options)
+      .map((response: Response) => {
+        return response.json();
+      }).catch(this.handlError);
+  };
+
+  updateNews(id, newsEdit): Observable<News> {
+    this.authService.setAuthHeader(headers);
+    return this.http.put(HTTP_NEWS + id, newsEdit,
+      new RequestOptions({ headers: headers }))
+      .catch(this.handlError);
   };
 
   deleteNews(id): Observable<News> {
     this.authService.setAuthHeader(headers);
-    return this.http.delete(HTTP_NEWS + id, 
+    return this.http.delete(HTTP_NEWS + id,
       new RequestOptions({ headers: headers }))
       .map((response: Response) => {
         return <any>response.json();
@@ -79,19 +104,19 @@ export class NewsServiceService {
 
   postNewsLike(id, user): Observable<News> {
     this.authService.setAuthHeader(headers);
-    return this.http.post(HTTP_NEWS + id + '/likes', user, 
+    return this.http.post(HTTP_NEWS + id + '/likes', user,
       new RequestOptions({ headers: headers }))
       .map((response: Response) => {
-          return <any>response.json();
+        return <any>response.json();
       }).catch(this.handlError);
   };
 
   postComment(id, message: any): Observable<News> {
     this.authService.setAuthHeader(headers);
-    return this.http.post(HTTP_NEWS + id + '/comments', message, 
-    new RequestOptions({ headers: headers }))
+    return this.http.post(HTTP_NEWS + id + '/comments', message,
+      new RequestOptions({ headers: headers }))
       .map((response: Response) => {
-          return <any>response.json();
+        return <any>response.json();
       })
       .catch(this.handlError);
   };
