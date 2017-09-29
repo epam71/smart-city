@@ -26,7 +26,6 @@ export class ProjectEditComponent implements OnInit {
   image = '';
   tempId;
   errorMessage;
-  base64textString: string = '';
 
   progressBar;
 
@@ -38,20 +37,6 @@ export class ProjectEditComponent implements OnInit {
     route.params.subscribe(param => {
       this.tempId = param;
     });
-  }
-
-  fileSelect(event) {
-    this.readThis(event.target);
-  }
-
-  readThis(inputValue: any): void {
-    var file: File = inputValue.files[0];
-    var myReader: FileReader = new FileReader();
-
-    myReader.onloadend = (e) => {
-      this.base64textString = myReader.result;
-    }
-    myReader.readAsDataURL(file);
   }
 
   pushImage() {
@@ -80,7 +65,7 @@ export class ProjectEditComponent implements OnInit {
     let projectTemp: Project = Object.assign({
       author: this.authService.getNickname(),
       authorEmail: this.authService.getEmail(),
-      image: this.base64textString,
+      image: this.imageFire,
       status: 'new',
     }, projectEdit);
 
