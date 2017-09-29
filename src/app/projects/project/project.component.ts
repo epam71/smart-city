@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { ProjectServiceService } from '../../core/project-service/project-service.service';
 import { AuthService } from '../../core/auth-service/auth-service.service';
 import 'rxjs/add/operator/switchMap';
-import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-project',
@@ -21,8 +20,7 @@ export class ProjectComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private projectData: ProjectServiceService,
-    private authService: AuthService,
-    private sanitizer: DomSanitizer) {
+    private authService: AuthService) {
 
 
     route.params.subscribe(param => {

@@ -3,7 +3,6 @@ import { ProjectServiceService } from '../../core/project-service/project-servic
 import { AuthService } from '../../core/auth-service/auth-service.service';
 import { trigger, state, transition, style, animate, group } from '@angular/animations';
 import { Project } from '../../models/project.model';
-import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -15,8 +14,7 @@ import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 export class ProjectsListComponent implements OnInit {
 
   constructor(private projectsData: ProjectServiceService,
-    private authService: AuthService,
-    private sanitizer: DomSanitizer) { }
+    private authService: AuthService) { }
 
     @Input('key') key;
 
