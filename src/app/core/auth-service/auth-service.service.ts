@@ -12,7 +12,7 @@ const ROOT_ROLE = 'root';
 const INVESTOR_ROLE = 'investor';
 const USER_ROLE = 'user'; 
 const GUEST_TOKEN = 'guest';
-const ACCESS_TOKEN = 'access_token'
+const ACCESS_TOKEN = 'access_token';
 const mapKeyToStoreKey = {
   'accessToken': 'access_token',
   'idToken': 'id_token',

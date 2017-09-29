@@ -24,10 +24,10 @@ private log: true;
 
   ngOnInit() {
       this.adminRole = this.authService.isAdmin();
-      this.subscription = this.authService.getEventEmitter().subscribe(() =>
-        this.adminRole = this.authService.isAdmin());
-
-      
+      this.subscription = this.authService.getEventEmitter()
+      .subscribe(() =>
+        this.adminRole = this.authService.isAdmin()
+      );
   }
 
   ngOnDestroy(){

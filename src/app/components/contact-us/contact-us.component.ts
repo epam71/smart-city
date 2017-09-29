@@ -11,13 +11,16 @@ import { ContactServiceService } from '../../core/contact-service/contact-servic
 export class ContactUsComponent implements OnInit {
   @ViewChild('f') sendMesForm: NgForm;
   contactImg: string;
-  
+  formPopup: boolean;
+  public responseMes: string;
   constructor(private emailData: ContactServiceService) {
     this.contactImg = '../assets/images/lviv-contact.jpg'
    }
 
    onSubmit() {
     const value = this.sendMesForm.value;
+    this.formPopup = true;
+    setTimeout(() => { this.formPopup = false}, 3000);
     let message: Messages = {
       author: value.name,
       email: value.email,
@@ -26,10 +29,10 @@ export class ContactUsComponent implements OnInit {
       new: true
     }
 
+
     this.emailData.postMessage(message).subscribe(
-      (response) => {
-        console.log(response);
-      }
+      response => this.responseMes = 'Your message has been sent!',
+      error => this.responseMes = "Error :: Please log in to send a message!"
     );
      
     this.sendMesForm.reset();

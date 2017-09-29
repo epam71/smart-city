@@ -25,9 +25,9 @@
 input#name.form-control,
 input#email.form-control,
 input#subject.form-control{
-    border-radius: 0px;
     margin-bottom: 20px;
-    border: 0px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
     -webkit-box-shadow: none;
     box-shadow: none;
     background: white;
@@ -49,11 +49,27 @@ input#subject.form-control{
 .help-block p{
     color: #ee3733;
 }
-#msgSubmit p{
-    text-align: left;
-    color: lightgray;
-    font-size: 16px;
+.modal-window {
+  position: absolute;
+  margin-left: -100%;
+  top: 50%;
+  left:50%;
+  padding: 20px 40px;
+  text-align: center;
+  color: black;
+  font-size: 1.2em;
+  font-weight: 500;
+  transition: 0.5s;
 }
+
+.modal-content {
+  background: white;
+}
+
+.modal-header {
+  border: none;
+}
+
 .help-block{
     margin: 0;
 }
@@ -114,9 +130,4 @@ input#subject.form-control{
     color: white;
     font-family: 'Open Sans', sans-serif;
 }
-#map {
-    width: 100%;
-    margin: 0;
-    box-shadow: 0px 0px 0px rgba(255, 255, 255, 0);
-    min-height: 300px;
-}
+

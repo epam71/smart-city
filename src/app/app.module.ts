@@ -19,7 +19,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { AlertModule } from 'ngx-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminAuthGuardService } from './core/admin-auth-guard/admin-auth-guard.service';
-
+import { OrderModule } from 'ngx-order-pipe';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,7 @@ import { AdminAuthGuardService } from './core/admin-auth-guard/admin-auth-guard.
     StaticComponent,
     FooterComponent,
     ContactUsComponent,
-    NavigationComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +41,8 @@ import { AdminAuthGuardService } from './core/admin-auth-guard/admin-auth-guard.
     AppRoutes,
     FormsModule,
     BrowserAnimationsModule,
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    OrderModule
   ],
   providers: [AdminAuthGuardService],
   bootstrap: [AppComponent]
