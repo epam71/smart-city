@@ -1,5 +1,18 @@
-<div (click)="increaseLike()" class="rating_block">
-    <span> {{likeInfo?.rating}} </span>
-    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true">
-    </span>
+<div  class="rating_block" [ngClass]="liked === true ? 'liked' : 'not-liked'"
+(click)="increaseLike()">
+        <span> {{likeInfo?.rating}} </span>
+</div>
+
+<div *ngIf="showModal && getUserRole === ''" id="modal" class="modal-dialog ">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" aria-label="Close" (click)="colseModal()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">You need to be signed in to like news</h4>
+        </div>
+        <div class="modal-body">
+            <button class="login" (click)='authService.login()'>Sign in</button>
+        </div>
+    </div>
 </div>

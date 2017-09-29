@@ -1,5 +1,5 @@
-<hr>
-<form class="form-horizontal" [formGroup]="rForm" (ngSubmit)="addComment(message.value)">
+
+<form *ngIf="getUserRole !== ''" class="form-horizontal" [formGroup]="rForm" (ngSubmit)="addComment(message.value)">
   <div class="form-group">
     <label for="message" class="col-sm-2 control-label">Left comment:</label>
       <div class="col-sm-10">
@@ -9,24 +9,27 @@
         <div class="alert" *ngIf="!rForm.controls['message'].valid && 
         rForm.controls['message'].touched">You must specify a comment that's between 5 and 80 characters.
         </div>
-
-        <button type="submit" value="Submit Form" [disabled]="!rForm.valid" class="btn btn-success">Add comment</button>
-        <button type="reset" class="btn btn-danger">Cancel</button>
+        <button type="submit" value="Submit Form" [disabled]="!rForm.valid" class="btn">Add comment</button>
+        <button type="reset" class="btn cancel-btn">Cancel</button>
       </div>
   </div>
 </form>  
-  
-<div *ngFor="let key of commentsInfo.comments">
-       
+
+<div *ngFor="let key of commentsInfo?.comments">
   <div class="comments"  >
-    <div class="col-md-10">
+        <button type="button" class="close" aria-label="Close" (click)="deleteComment(key)">
+            <span aria-hidden="true">&times;</span>
+          </button>
      <p class="user">{{key.username}} </p> 
-      <p class="message"> {{key.message}} </p>
-    </div>
-             
-    <div class=" date pull-right">
-            24/09/2017
+      <p class="message"> {{key.message}} </p>   
+    <p class=" date pull-right">   
       {{key.date | date:'dd MMMM y'}}
-    </div> 
+  </p> 
   </div>
 </div>
+
+<div class="col-md-10 warning" *ngIf="getUserRole === ''">
+    <h4>Join the discussion!</h4>
+    <p>You must be signed in to post a comment.</p>
+    <button (click)='authService.login()'>Sign in</button>
+  </div>
