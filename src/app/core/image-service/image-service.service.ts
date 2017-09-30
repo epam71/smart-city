@@ -13,7 +13,7 @@ import * as firebase from 'firebase';
 @Injectable()
 export class ImageServiceService {
 
-  uploadProgress: any = 0;
+  uploadProgress: string;
   fileName = '';
   file: File;
   upload: UploadImage;

@@ -22,7 +22,7 @@
         <span class="btn btn-default btn-file"> Choose a file:
         <input type="file" id="filePicker" accept="image/*" (change)="pushImage($event)">
       </span>
-        <div *ngIf="imageService?.uploadProgress !== 0">
+        <div *ngIf="imageService?.uploadProgress">
           <div class="progress">
             <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': imageService?.uploadProgress + '%' }"></div>
           </div>
