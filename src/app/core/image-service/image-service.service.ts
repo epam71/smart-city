@@ -14,7 +14,7 @@ import * as firebase from 'firebase';
 export class ImageServiceService {
 
   uploadProgress: string;
-  fileName = '';
+  fileName: string = '';
   file: File;
   upload: UploadImage;
 
@@ -52,6 +52,11 @@ export class ImageServiceService {
         return upload.url;
       }
     );
+  }
+
+  reload(){
+    this.uploadProgress = '';
+    this.fileName = '';
   }
 
 }
