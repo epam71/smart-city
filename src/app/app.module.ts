@@ -19,7 +19,10 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { AlertModule } from 'ngx-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminAuthGuardService } from './core/admin-auth-guard/admin-auth-guard.service';
-
+import { OrderModule } from 'ngx-order-pipe';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { config } from './core/config';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,7 @@ import { AdminAuthGuardService } from './core/admin-auth-guard/admin-auth-guard.
     StaticComponent,
     FooterComponent,
     ContactUsComponent,
-    NavigationComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,10 @@ import { AdminAuthGuardService } from './core/admin-auth-guard/admin-auth-guard.
     AppRoutes,
     FormsModule,
     BrowserAnimationsModule,
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    OrderModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(config.firebase)
   ],
   providers: [AdminAuthGuardService],
   bootstrap: [AppComponent]

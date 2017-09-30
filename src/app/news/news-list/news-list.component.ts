@@ -18,13 +18,14 @@ export class NewsListComponent implements OnInit {
   private sortKey;
   private news;
   private pagination: number[] = [];
-  private email;
+  public email;
   private getUserRole;
+
  
   constructor(private service: NewsServiceService, 
     private authService: AuthService,
     private domSanitizer: DomSanitizer){  }
-  
+
   sortByOldestDate() {
     this.sort = 'date';
     this.sortKey = 'normal';
@@ -39,10 +40,9 @@ export class NewsListComponent implements OnInit {
     this.sort = 'author';
     this.sortKey = 'normal';
   }
-
+ 
   ngOnInit() {
     this.news= this.service.getNews();
-
     this.email = this.authService.getEmail();
     this.getUserRole = this.authService.getRole();
   }

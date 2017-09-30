@@ -17,7 +17,7 @@ export class NavigationComponent implements OnInit {
       this.router.navigate(['../../']);
     }
 
-  ngOnInit() {
+  ngOnInit(){
   }
 
 }

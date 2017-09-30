@@ -1,28 +1,53 @@
 .back{
-    display: block;
-    width: 200px;
-    padding: 15px;
-    background: #D9D3D3;
-    color: #000;
-    margin-top: 50px;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-.author, .date{
-    padding: 10px 5px;
-    color: #000;
-    font-weight: bold;
+    margin: 15px 0;
+    font-family: "Raleway", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    display: inline-block;
+    padding: 8px 10px;
+    border-radius: 2px;
+    transition: 0.5s;
+    border: 1px solid #ccc;
+    color: #777777;
+    background: none;
+    box-sizing: border-box;
 }
 
 .back:hover{
-    background: #E6E2E2; 
+    background: #ee3733;
+    border-color: #ee3733;
+    color: #fff;
+}
+
+.author, .date{
+    padding: 5px;
+    color: #9e9e9e;
+    font-style: italic;
 }
 
 .news-block{
-    border: 1px solid #ADA9A9;
+    border: 1px solid #ccc; 
     border-radius: 5px;
     margin: 20px 0;
+}
+
+.news-block .header{
+    padding-top: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.news-block img{
+    max-width: 100%;
+}
+
+.news-block .img-block{
+    max-height: 200px;
+    overflow: hidden;
+    position: relative;
+    background: url('http://lorempixel.com/750/550/city/');
+    background-size: cover;
+    padding: 0 0 calc(10/16*100%);
+    margin-top: 10px;
 }
 
 .title{
@@ -37,4 +62,57 @@
     padding-bottom: 50px;
     color: #000;
     font-size: 18px;
+}
+
+
+.news-list{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.news-item a{
+    text-decoration: none;
+    color: #333;
+    transition: 0.5s;
+}
+
+.news-item:hover{
+    background-color: #ee3733;
+}
+
+.news-item .img-block{
+    max-height: 200px;
+    overflow: hidden;
+    position: relative;
+    background: url('http://lorempixel.com/400/200/city/');
+    background-size: cover;
+    padding: 0 0 calc(10/16*100%);
+    margin-top: 10px;
+}
+
+.news-item a:hover{
+    color: #fff;
+}
+
+.news-item{
+    border-bottom: 1px solid #ccc; 
+    padding: 15px 10px;
+    transition: 0.5s;   
+}
+
+.news-item:last-child{
+    border-bottom: 0;
+} 
+
+.news-item h4{
+    font-weight: bold;
+}
+
+.footer{
+    padding-bottom: 15px;
+}
+
+.list-date{
+    font-style: italic;
 }
