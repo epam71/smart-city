@@ -31,18 +31,21 @@
                         <a class="pull-left">
                           <img src="https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Cat-512.png" class="media-photo">
                         </a>
-                        <span class="pull-right date-block">{{ key?.date | date:'dd MMM HH:mm' }}</span>
-                        <p class="controls glyphicon glyphicon-share-alt" (click)="chooseMes(key); modal.show()"></p>
-                        <br>
-                        <p class="controls glyphicon glyphicon-trash" (click)="chooseMes(key); confirmation.show()"></p>
-                        <div class="media-body" (click)="onClick(i)" [ngClass]="{'shorten': wasNotClicked !== i }">
-                          <h4 class="author">
-                                    {{ key?.author }}
-                                 </h4>
-                          <span class="email">{{ key?.email }}</span>
-                          <p class="summary">{{ key?.body }}</p>
+                        <div class="controls-wrapping pull-right">
+                          <p class="controls glyphicon glyphicon-share-alt" (click)="chooseMes(key); modal.show()"></p><br>                          
+                          <p class="controls glyphicon glyphicon-trash" (click)="chooseMes(key); confirmation.show()"></p>                      
+                        </div>  
+                        <div class="message-wrapping">
+                          <div class="media-body" (click)="onClick(i)" [ngClass]="{'shorten': wasNotClicked !== i }">
+                            <h4 class="author">
+                                      {{ key?.author }}
+                                  </h4>
+                            <span class="email">{{ key?.email }}</span>
+                            <p class="summary">{{ key?.body }}</p>
                         </div>
+                        </div>                    
                       </div>
+                      <div class="pull-right date-block">{{ key?.date | date:'dd MMM HH:mm' }}</div>
                     </td>
                   </tr>
 

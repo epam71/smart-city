@@ -1,7 +1,4 @@
 
-#navigation{
-    margin-bottom: 0;
-}
   
 header{
   width: 100%;
@@ -140,6 +137,10 @@ img{
 
 .navbar-default .navbar-nav > li > a:after {
     background-color: #ee3733;
+}
+
+a.navbar-brand:hover .glyphicon-log-out, a.navbar-brand:hover .glyphicon-log-out + span {
+  color: #ee3733;
 }
 
 @media (min-width: 576px) and (max-width: 767px) {

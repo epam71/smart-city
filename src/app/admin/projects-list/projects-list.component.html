@@ -8,10 +8,10 @@
       <div class="panel panel-primary ">
         <div class="panel-heading">
           <h3 class="panel-title">
-          <i class="fa fa-bar-chart-o fa-fw"></i>
+          <i class="fa fa-check fa-fw"></i>
           <div class="btn-group pull-right">
             <button class="btn sort-btn dropdown-toggle" data-toggle="dropdown">
-              <span>Sort</span>
+              <span>sort</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-right">
               <li (click)="sortByName()"><a>name</a></li>
@@ -35,7 +35,9 @@
 
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h3 class="panel-title">Pending</h3>
+          <h3 class="panel-title">
+          <i class="fa fa-spinner fa-fw"></i>            
+            Pending</h3>
         </div>
         <ul class="list-group">
           <li *ngFor="let key of pendingProjects | slice:0:showPending | sortBy:prop:'normal'; let i=index" class="project_block list-group-item sliding_bg">

@@ -6,12 +6,9 @@ import { NewsComponent } from './news/news.component';
 import { NewsLikeComponent } from './news-like/news-like.component';
 import { NewsCommentComponent } from './news-comment/news-comment.component';
 import { routing } from './news.routes';
-import { TruncatePipe } from '../pipes/truncate-news.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { searchNews } from '../pipes/search-news.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
-
-import { SortBy } from '../pipes/sorting.pipe';
+import { PipesModule } from '../pipes/pipes.module'
 
 @NgModule({
   imports: [
@@ -19,17 +16,14 @@ import { SortBy } from '../pipes/sorting.pipe';
     routing,
     FormsModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    PipesModule
   ],
   declarations: [NewsListComponent, 
     NewsComponent, 
     NewsAddComponent,
     NewsLikeComponent,
-    NewsCommentComponent, 
-    TruncatePipe,
-    searchNews,
-   
-    SortBy
-  ]
+    NewsCommentComponent 
+ ]
 })
 export class NewsModule { }
