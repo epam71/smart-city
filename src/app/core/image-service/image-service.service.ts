@@ -54,7 +54,7 @@ export class ImageServiceService {
     );
   }
 
-  reload(){
+  resetImage(){
     this.uploadProgress = '';
     this.fileName = '';
   }

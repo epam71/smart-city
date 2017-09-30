@@ -103,7 +103,7 @@ export class ProjectEditComponent implements OnInit {
 
   ngOnInit() {
 
-    this.imageService.reload();
+    this.imageService.resetImage();
 
     if (this.tempId.id != null) {
       this.editMode = true;
