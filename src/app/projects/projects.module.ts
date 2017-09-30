@@ -6,9 +6,7 @@ import { ProjectEditComponent } from './project-edit/project-edit.component';
 import { routing } from './projects.routes';
 import { RatingProjectComponent } from './project-rating/project-rating.component';
 import { CommentsProjectComponent } from './project-comments/project-comments.component';
-import { SortBy } from '../pipes/sorting.pipe';
 import { FormsModule } from '@angular/forms';
-import { ShortenPipe } from '../pipes/shorten.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PipesModule } from '../pipes/pipes.module';
 import { ProjectMainComponent } from './project-main/main-projects.component';
@@ -19,6 +17,7 @@ import { ProjectMainComponent } from './project-main/main-projects.component';
     CommonModule,
     routing,
     FormsModule,
+    PipesModule,
     NgxPaginationModule,
   ],
   declarations: [RatingProjectComponent,
@@ -27,8 +26,6 @@ import { ProjectMainComponent } from './project-main/main-projects.component';
     ProjectComponent,
     ProjectEditComponent,
     ProjectMainComponent,
-    ShortenPipe,
-    SortBy,
   ]
 })
 export class ProjectsModule { }

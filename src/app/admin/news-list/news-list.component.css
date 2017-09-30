@@ -130,7 +130,8 @@ li.sliding_bg:hover span.badge {
 
 .sort-btn {
     border-radius: 5px;
-    background-color: #202020  ;
+    background-color: #202020;
+    font-size: 1.8vh;
 }
 
 .sort-btn:hover, .sort-btn:focus {
@@ -157,4 +158,5 @@ focus-container:focus {
 
 .btn-group.pull-right {
     margin-top: -8px;
+    margin-right: -10px;
 }
