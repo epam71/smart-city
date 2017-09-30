@@ -1,80 +1,83 @@
-<div class="container col-sm-8">
-   <div class="row">
-      <p  class="status col-sm-2 col-sm-offset-10 badge badge-default" *ngIf="(news | async)?.approved === false">NEW</p>
-      <div class="glyphicon glyphicon-trash" (click)="modal.show()"></div>
-      <div *ngIf="!editable" class="edit_block glyphicon glyphicon-pencil" (click)="editNews()"></div>  
-      <div class="news_date">Created at: {{(news | async)?.date | date}}</div>  
-      <button *ngIf="(news | async)?.approved === false" type="button" class="btn btn-success approve-news" (click)="approveNews()">approve</button>
-        
-      <app-modal #modal>
-          <div class="app-modal-header">
-            Admin
-          </div>
-          <div class="app-modal-body">
-            Are you sure you want to permanently delete this post?
-          </div>
-          <div class="app-modal-footer">
-            <button type="button" class="btn btn-default" (click)="modal.hide()">Cancel</button>
-            <button type="button" class="btn btn-primary" (click)="deleteNews()">Delete</button>
-          </div>
-        </app-modal>        
-      
-      <div class="img_block col-sm-12">
-         <img class="img-responsive" src="http://ecdn.eu/wp-content/uploads/2017/07/news-3.jpg" alt="">
+<div class="container col-xs-12 col-md-8">
+  <div class="row">
+
+    <app-modal #modal>
+      <div class="app-modal-header">
+        Admin
       </div>
-      
-      <form class="form-horizontal" *ngIf="editable" (ngSubmit)="saveChanges(form)" #form="ngForm">
+      <div class="app-modal-body">
+        Are you sure you want to permanently delete this post?
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn custom-btn" (click)="modal.hide()">Cancel</button>
+        <button type="button" class="btn custom-btn" (click)="deleteNews()">Delete</button>
+      </div>
+    </app-modal>
+
+    <div class="card mt-4">
+      <img class="card-img-top img-fluid" alt="No image" src="{{ 'data:image/jpeg;base64,' + news?.image }}" onerror="this.onerror=null;this.src='http://placehold.it/900x400';">
+      <div *ngIf="!editable" class="card-body">
+        <h3 class="card-title">{{ news?.title }}</h3>
+        <p class="card-text">Author: {{ news?.author }}</p>
+      </div>
+    </div>
+
+    <div *ngIf="!editable" class="card card-outline-secondary my-4">
+      <div *ngIf="project?.goals" class="card-body">
+        <div class="card-title">
+          Goals:
+        </div>
+        <p class="card-text">{{ news?.goals }}</p>
+      </div>
+      <hr>
+      <div class="card-body">
+        <p class="card-text">{{ news?.desc }}</p>
+        <small class="text-muted">Created on {{ news?.date | date}}</small>
+        <hr>
+        <button *ngIf="news?.approved === false" type="button" class="btn custom-btn approve-news" (click)="approveNews()">Approve</button>
+        <button *ngIf="!editable" type="button" class="btn custom-btn edit-news" (click)="editNews()">Edit</button>
+        <button class="btn custom-btn" (click)="modal.show()">Delete</button>
+      </div>
+    </div>
+
+    <form *ngIf="editable" class="form-horizontal" (ngSubmit)="saveChanges(form)" #form="ngForm">
 
       <div class="form-group">
-         <label for="newsName" class="col-sm-2 control-label">Name</label>
-         <div class="col-sm-10">
-            <input type="text" class="form-control" name="newsTitle" [ngModel]="(news | async)?.title" #newsTitle="ngModel" required>
-         </div>
-      </div>
-
-      <div class="form-group">
-         <label for="newsDesc" class="col-sm-2 control-label">Description</label>
-         <div class="col-sm-10">
-            <textarea class="form-control" rows="7" cols="40" name="desc" [ngModel]="(news | async)?.desc" #desc="ngModel" required></textarea>
-         </div>
-      </div>
-
-      <div class="form-group">
-         <label for="newsAuthor" class="col-sm-2 control-label">Author</label>
-         <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="author" name="newsAuthor" [ngModel]="(news | async)?.author || ''" #newsAuthor="ngModel" disabled>
-         </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-default" [disabled]="!form.valid">Save</button>
-          <button class="btn btn-default" (click)="cancelChanges()">Cancel</button>
+        <label for="newsTitle" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-12">
+          <input type="text" class="form-control" name="newsTitle" [ngModel]="news?.title" #newsTitle="ngModel" required>
         </div>
       </div>
 
-   </form>
-
-<article class="about_news" *ngIf="!editable">
-      <div class="news_title">
-         <span>{{ (news | async)?.title }}</span>
+      <div class="form-group">
+        <label for="newsDesc" class="col-sm-2 control-label">Content</label>
+        <div class="col-sm-12">
+          <textarea class="form-control" rows="7" cols="40" name="desc" [ngModel]="news?.desc" #desc="ngModel" required></textarea>
+        </div>
       </div>
-      <section *ngIf="(news | async)?.desc" class="news_info">
-         <p class="header">
-            <span>Content</span>
-         </p>
-         <p class="news_desc">
-            {{ (news | async)?.desc }}
-         </p>
-      </section>
-      <section *ngIf="(news | async)?.author" class="news_info">
-         <p class="header">
-            <span>Author</span>
-         </p>
-         <p class="news_desc">
-            <span>{{ (news | async)?.author }}</span>
-         </p>
-      </section>
-    </article>
-   </div>
+
+      <div class="form-group">
+        <label for="newsAuthor" class="col-sm-2 control-label">Author</label>
+        <div class="col-sm-12">
+          <input type="text" class="form-control news-author" placeholder="author" name="newsAuthor" [ngModel]="news?.author || ''" #newsAuthor="ngModel" disabled>
+        </div>
+      </div>
+
+      <div class="input-group image-preview">
+         <label for="filePicker" class="col-sm-2 control-label file-label">Image</label><br>
+						<div class="btn btn-default image-preview-input"> 
+              <span class="glyphicon glyphicon-folder-open"></span> 
+              <span class="image-preview-input-title">Browse</span>
+							<input id="filePicker" type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview" (change)="handleFileSelect($event)"/>
+						</div>         
+      </div> 
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <button type="submit" class="btn custom-btn" [ngClass]="{'disabled-state': !form.valid}">Save</button>
+          <button class="btn custom-btn" (click)="cancelChanges()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

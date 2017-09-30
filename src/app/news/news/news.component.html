@@ -1,19 +1,49 @@
 <div class="container">
   <div class="row">
-      <a class="back" routerLink="/news">Back to news-list</a>
+      <button class="back pull-left" [routerLink]="['/news']">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Back to news</button>
   </div>
 </div>
 
 <div class="container">
   <div class="row">
     <div class="col-sm-8 news-block">
-      <p class="pull-left author">{{ (news | async)?.author }}</p>
-      <p class="pull-right date">{{ (news | async)?.date | date: 'dd/MM/yyyy'}}</p>
-      
-      <img class="img img-responsive" src="https://ichef.bbci.co.uk/news/1024/media/images/48351000/gif/_48351569_640x360-news.gif" alt="">
-      <h2 class="title">{{ (news | async)?.title }}</h2>
+      <div class="header clearfix">
+      <p class="pull-left author">Written by: {{ (news)?.author }}</p>
+      <p class="pull-right date">{{ (news)?.date | date: 'dd/MM/yyyy'}}</p>
+    </div>
+    <div class="img-block">
+      <img [src]="imagePath" alt="{{ (news)?.title }}"> 
+    </div> 
+      <h2 class="title">{{ (news)?.title }}</h2>
       <hr>
-      <p class="description">{{ (news | async)?.desc }}</p>
+      <p class="description">{{ (news)?.desc }}</p>
+      <news-like [ratingObj]="(news)" ></news-like>
+      <news-comment [commentsObj]="(news)"></news-comment>
+    </div>
+
+    <div class="col-sm-3 pull-right news-list"  >
+      <div class="row">
+       
+      <div class="news-item" *ngFor="let key of (newsList | async)">
+          <a class="read" [routerLink]="['/news', key._id]">
+            <div class="img-block">
+        <img class="img img-responsive" [src]="domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64,' + key?.image)" 
+        alt="{{key.title }}">
+      </div>
+        <h4>{{ key.title }} </h4>
+        <p>{{ key.desc | truncate: [100] }} </p>
+        <div class="footer">
+        <news-like class="list-like pull-left"  [ratingObj]="key"></news-like>
+        <p class="pull-right list-date">{{ key.date | date: 'dd/MM/yyyy'}}</p>
+      </div>
+    
+      </a>
+      </div>
     </div>
   </div>
+  </div>
 </div>
+
+
+

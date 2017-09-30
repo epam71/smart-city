@@ -1,4 +1,5 @@
 import { ContactsListComponent } from './contacts-list/contacts-list.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewsEditComponent } from './news-edit/news-edit.component';
 import { NewsListComponent } from './news-list/news-list.component';
 import { ProjectsListComponent } from './projects-list/projects-list.component';
@@ -12,10 +13,15 @@ const routes: Routes = [
         path: 'projects',
         component: ProjectsListComponent,
         children: [
+
             {
                 path: ':id',
                 component: ProjectsEditComponent
-            }
+            },
+            {
+                path: '',
+                component: DashboardComponent
+            },
         ]
     },
     {
@@ -29,13 +35,17 @@ const routes: Routes = [
             {
                 path: ':id',
                 component: NewsEditComponent
+            },
+            {
+                path: '',
+                component: DashboardComponent
             }
         ]
     },
     {
         path: '',
         redirectTo: 'projects'
-    }         
+    }          
 ]
 
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);

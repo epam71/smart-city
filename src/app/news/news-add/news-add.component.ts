@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import { NewsServiceService } from '../../core/news-service/news-service.service';
 import { AuthService } from "../../core/auth-service/auth-service.service";
-import { News } from "../models/news.model";
+import { News } from "../../models/news.model";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -12,9 +12,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 
 export class NewsAddComponent implements OnInit {
-  rForm: FormGroup;                   
-  desc:string = '';
-  title:string = '';
+  private rForm: FormGroup;                   
+  private desc:string = '';
+  private title:string = '';
+  private showModal;
+  private base64Image: string;
  
 constructor(private service: NewsServiceService, 
   private router: Router, 
@@ -22,20 +24,30 @@ constructor(private service: NewsServiceService,
   private fb: FormBuilder) { 
     this.rForm = fb.group({
     'title' : [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(30)])],
-    'desc' : [null, Validators.compose([Validators.required, Validators.minLength(30), Validators.maxLength(1000)])],
+    'desc' : [null, Validators.compose([Validators.required, Validators.minLength(150), Validators.maxLength(1500)])],
     'validate' : ''
     });
   }
 
-  reset() {
-    this.rForm.reset(); 
- }
+  changeListener($event): void {
+    this.readThis($event.target);
+  }
 
-  onAddNews( title, image, desc) {
+  readThis(inputValue: any): void {
+    var file: File = inputValue.files[0];
+    var myReader: FileReader = new FileReader();
+
+    myReader.onloadend = (e) => {
+      this.base64Image = myReader.result;
+    }
+    myReader.readAsDataURL(file);
+  }
+
+  onAddNews( title, desc) {
     let newsTemp: News = {  
-     author: this.authService.getName(), 
+     author: this.authService.getNickname(),
       title: title,
-      image: image, 
+      image: this.base64Image, 
       desc: desc, 
       date: Date,
       approved: false,
@@ -44,9 +56,15 @@ constructor(private service: NewsServiceService,
 
     this.service.postNews(newsTemp)
     .subscribe(
-            (response) => console.log(response),
-            (error) => console.log(error)
-      );
+      (response) => console.log(response),
+      (error) => console.log(error)
+    );
+      
+    this.rForm.reset();
+    this.showModal = true;
+    setTimeout(()=>{    
+      this.showModal = false;
+    },6000);
   }
 
   ngOnInit() {}

@@ -13,13 +13,18 @@ import { ProjectsEditComponent } from './projects-edit/projects-edit.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { FormsModule } from '@angular/forms';
 import { MessageStatusPipe } from '../pipes/message-status.pipe';
-import { SetAccesComponent } from './set-acces/set-acces.component';
+import { searchNews } from '../pipes/search-news.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NavigationComponent } from './navigation/navigation.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 
 @NgModule({
   imports: [
     CommonModule,
     routing,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   declarations: [
     ContactsListComponent,
@@ -33,7 +38,9 @@ import { SetAccesComponent } from './set-acces/set-acces.component';
     ProjectsEditComponent,
     ConfirmComponent,
     SortBy,
-    SetAccesComponent
+    searchNews,
+    NavigationComponent,
+    DashboardComponent
   ]
 })
 export class AdminModule { }

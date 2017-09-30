@@ -28,8 +28,9 @@ export class FooterComponent implements OnInit {
         step = Math.round(getElem.getBoundingClientRect().top);
         this.scrollUp;
       }
-    }, 7);
+    }, 10);
   }
+
   constructor() {
    }
 

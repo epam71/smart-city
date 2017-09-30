@@ -1,6 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, OnChanges, EventEmitter } from '@angular/core';
 import { ProjectServiceService } from '../../core/project-service/project-service.service';
 import { AuthService } from '../../core/auth-service/auth-service.service';
+import { NgForm } from '@angular/forms';
+import 'rxjs/add/operator/switchMap';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'comments',
@@ -9,40 +12,66 @@ import { AuthService } from '../../core/auth-service/auth-service.service';
 })
 export class CommentsProjectComponent implements OnInit {
 
-
-  tempId;
-  comments;
   @Input('commentsObj') commentsObjInfo;
+  @Input('userInfo') user;
+
+  @Output() output: EventEmitter<any> = new EventEmitter();
+  @ViewChild('f') slForm: NgForm;
+
+  responseMessage;
 
   constructor(private commentsData: ProjectServiceService,
-              private authService: AuthService) {
+    private authService: AuthService) {
 
   }
 
-  addComment() {
-    console.log(this.commentsObjInfo.comments);
+  addComment(form: NgForm) {
+    const value = form.value;
 
-    let temp = {
-        username: 'fsafsfsa',
-        message: 'sfafsfsa',
-      };
-      console.log(this.commentsObjInfo.comments);
-        this.commentsData.putProject(this.commentsObjInfo._id, this.commentsObjInfo.comments[1] = temp)
-          .subscribe(
-          (response) => {
-            console.log(response);
-          },
-          (error) => {
-            console.error(error);
-          });
+    let postComment = this.commentsData.postComment(this.commentsObjInfo._id, {
+      username: this.authService.getEmail(),
+      message: value.message,
+    });
+
+    let getComments = this.commentsData.getProject(this.commentsObjInfo._id);
+
+    postComment.switchMap(
+      event => {
+        this.output.emit(event)
+        return getComments;
       }
+    )
+      .subscribe(
+      value => {
+        this.commentsObjInfo = value;
+        this.slForm.reset();
+      });
+  }
 
+  clearForm() {
+    this.slForm.reset();
+  }
 
-test(){
-  console.log(this.commentsObjInfo);
-}
+  deleteComment(key: any) {
+
+    let deleteAction = this.commentsData.deleteComment(this.commentsObjInfo._id, key.id);
+    let getCommentsAction = this.commentsData.getProject(this.commentsObjInfo._id);
+
+    deleteAction.switchMap(
+      event => {
+        return getCommentsAction;
+      }
+    )
+      .subscribe(
+      value => {
+        this.commentsObjInfo = value;
+        this.slForm.reset();
+      });
+
+  }
 
   ngOnInit() {
+
   }
 
 }

@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 import { Project } from '../../models/project.model';
 import { AuthService } from '../../core/auth-service/auth-service.service';
 import { NgForm } from '@angular/forms';
+import { ImageServiceService } from '../../core/image-service/image-service.service';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/forkJoin'
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-project-edit',
@@ -15,50 +19,62 @@ export class ProjectEditComponent implements OnInit {
 
   @ViewChild('f') slForm: NgForm;
 
+  imageFire = '';
+
   editMode;
   project;
+  image = '';
   tempId;
   errorMessage;
+
+  progressBar;
 
   constructor(private route: ActivatedRoute,
     private putProject: ProjectServiceService,
     private authService: AuthService,
+    private imageService: ImageServiceService,
     private router: Router) {
     route.params.subscribe(param => {
       this.tempId = param;
     });
   }
 
+  pushImage() {
+    this.imageService.uploadFile(event);
+  }
+
   actProject(form: NgForm) {
+
+    this.imageFire = this.imageService.fileName;
     const value = form.value;
     value.budget = value.budget || 0;
 
-    let projectTemp: Project = {
-      author: this.authService.getNickname(),
-      authorEmail: this.authService.getEmail(),
-      projectName: value.projectName.charAt(0).toUpperCase() + value.projectName.slice(1),
-      image: value.image,
-      desc: value.desc,
-      goals: value.goals,
-      result: value.result,
-      budget: value.budget,
-      status: 'new',
-    };
-
     let projectEdit: Project = {
       projectName: value.projectName.charAt(0).toUpperCase() + value.projectName.slice(1),
-      image: value.image,
+      image: this.imageFire || this.image,
       desc: value.desc,
       goals: value.goals,
       result: value.result,
       budget: value.budget,
+      approved: false,
       status: 'edited'
     }
+
+
+
+    let projectTemp: Project = Object.assign({
+      author: this.authService.getNickname(),
+      authorEmail: this.authService.getEmail(),
+      image: this.imageFire,
+      status: 'new',
+    }, projectEdit);
 
     if (this.tempId.id == null) {
       this.putProject.postProject(projectTemp)
         .subscribe(
         (response) => {
+
+          this.putProject.message = 'new';
           this.router.navigate(['/projects/' + response._id]);
         },
         (error) => {
@@ -69,6 +85,8 @@ export class ProjectEditComponent implements OnInit {
       this.putProject.putProject(this.tempId.id, projectEdit)
         .subscribe(
         (response) => {
+
+          this.putProject.message = 'edit';
           this.router.navigate(['/projects/' + this.tempId.id]);
         },
         (error) => {
@@ -84,12 +102,14 @@ export class ProjectEditComponent implements OnInit {
   }
 
   ngOnInit() {
+
     if (this.tempId.id != null) {
       this.editMode = true;
       this.putProject.getProject(this.tempId.id)
-      .subscribe(
+        .subscribe(
         (response) => {
           this.project = response;
+          this.image = response.image;
         },
         (error) => {
           console.error(error);

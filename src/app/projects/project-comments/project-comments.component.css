@@ -1,0 +1,109 @@
+.add_comment_block {
+  padding: 30px;
+border: 1px solid #ccc;
+}
+
+.not_login_block{
+  text-align: center;
+}
+
+.message_label{
+  text-align: center;
+}
+
+#message {}
+
+.buttons_block{
+text-align: right;
+}
+
+.comments_block {
+  color: #777777;
+  margin-bottom: 25px;
+}
+
+.comment_block {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.comment_block_header {
+  margin-bottom: 5px;
+}
+
+.comment_block_inside {}
+
+.username {
+  font-weight: 700;
+  color: #050033;
+}
+
+.date {
+  font-size: 11px;
+  font-style: italic;
+}
+
+.comment {
+  padding: 0px 20px 10px 20px;
+}
+
+.custom-btn{
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 2px;
+  transition: 0.5s;
+  border: 1px solid #777777;;
+  border-radius: 5px;
+  background: none;
+  color: #777777;;
+}
+
+.custom-btn:hover {
+  color: white;
+  background: #ee3733;
+  border: 1px solid #ee3733;
+}
+
+
+/* pagination */
+
+.pagination_block {
+  padding-top: 50px;
+  text-align: center;
+}
+
+.pagination_block pagination-controls /deep/ .ngx-pagination {
+  background: white;
+  padding: 1px;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.pagination_block pagination-controls /deep/ .ngx-pagination li {
+  border-right: 1px solid #ccc;
+  text-decoration: none;
+  border-radius: 0px;
+}
+
+.pagination_block pagination-controls /deep/ .ngx-pagination li:last-child {
+  border-right: none;
+}
+
+.pagination_block pagination-controls /deep/ .ngx-pagination .disabled {
+  padding: 5px;
+  text-decoration: none;
+}
+
+.pagination_block pagination-controls /deep/ .ngx-pagination a {
+  background: white;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.pagination_block pagination-controls /deep/ .ngx-pagination .current {
+  padding: 5px;
+  background: #ccc;
+}

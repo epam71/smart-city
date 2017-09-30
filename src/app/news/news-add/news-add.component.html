@@ -1,13 +1,14 @@
 <div class="container add">
   <div class="row">
-        <a class="back" routerLink="/news">Back to news</a>
-    <div class="col-md-7 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <button class="btn news-btn pull-left" [routerLink]="['/news']">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Back to news</button>
+    <div class="col-md-9 col-sm-8 col-sm-offset-2">
       <div class="panel panel-info">
         <div class="panel-heading">
           <div class="panel-title">Add news</div>
         </div>
         <div class="panel-body">
-          <form class="form-horizontal" [formGroup]="rForm" (ngSubmit)="onAddNews(title.value, image.value, description.value); rForm.reset()">
+          <form class="form-horizontal" [formGroup]="rForm" (ngSubmit)="onAddNews(title.value, description.value)">
             <div class="form-group">
               <label for="title" class="col-sm-2 control-label">Title</label>
               <div class="col-sm-10">
@@ -17,23 +18,27 @@
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <label for="img" class="col-sm-2 control-label">Image</label>
-              <div class="col-sm-10">
-               <input id="img" class="form-control" placeholder="Image" type="text" #image>
-              </div>
+
+            <div class="form-group ">
+              <label for="filePicker" class="col-sm-2 control-label file-label">Choose image:</label>
+              <label for="filePicker" class="btn btn-default image-preview-input"> 
+                  <span class="glyphicon glyphicon-folder-open"></span> 
+                  <span class="image-preview-input-title">Browse</span>
+                  <span class='label label-info' id="upload-file-info"></span>
+                  <input id="filePicker" type="file" name="input-file-preview" accept="image/*" (change)="changeListener($event)" />
+            </label> 
             </div>
             <div class="form-group">
               <label for="desc" class="col-sm-2 control-label">Description</label>
               <div class="col-sm-10">
                 <textarea class="form-control" formControlName="desc" required id="desc" rows="12" #description> </textarea>
                 <div class="alert" *ngIf="!rForm.controls['desc'].valid && 
-                rForm.controls['desc'].touched">You must specify a description that's between 30 and 1000 characters.
+                rForm.controls['desc'].touched">You must specify a description that's between 150 and 1500 characters.
                 </div>
               </div>
             </div>  
-            <button type="submit" value="Submit Form" [disabled]="!rForm.valid" class="btn btn-success">Add news</button>
-            <button type="reset" class="btn btn-danger">Cancel</button>
+            <button type="submit" value="Submit Form" [disabled]="!rForm.valid" class="btn news-btn">Add news</button>
+            <button type="reset" class="btn news-btn cancel-btn">Cancel</button>
           </form>    
         </div>
       </div> 
@@ -41,7 +46,13 @@
   </div>
 </div>
 
-
-
-
-
+<div *ngIf="showModal" id="modal" class="modal-dialog ">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Thank you!</h4>
+    </div>
+    <div class="modal-body">
+      <p>Your news will be published after our administrator check it!</p>
+    </div>
+  </div>
+</div>

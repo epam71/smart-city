@@ -1,23 +1,18 @@
-body {
-       width: 100%;
-       margin: 0%;    
-}
-
-.content{
-    background:#ffffff url('https://inassets1-internationsgmbh.netdna-ssl.com/image/static_2048_1152/static/bundles/internationsseo/frontend/images/localcommunityHero/250.jpg') no-repeat center center;
-    background-attachment: fixed;
-    min-height: 700px;
-}
 
 .container-fluid {
-    max-width: 1000px;
-    background-color: white;
+    background:#ffffff url('https://rudolfo.com.ua/wp-content/uploads/2016/12/slider-1.jpg') no-repeat center center;
+	background-attachment: fixed;
+	background-size:     cover;
     padding-top: 10px;
     min-height: 650px;
 }
 
 .main-content {
-    margin-top: 20px;
+    max-width: 1200px;
+    margin: 10px auto;
+    background-color: rgba(255, 255, 255, 0.90);
+    padding: 20px;
+    border-radius: 5px;
 }
 
 .project_name {
@@ -28,74 +23,10 @@ body {
     text-align: center;
 }
 
-.sort_section {
-    display: inline-block;
-    border-radius: 4px;
-    background-color: white;
-    border: 1px solid grey;
-    padding: 5px;
-    margin: 5px 1px;
-    width: 48%;
-    max-width: 130px;
-    cursor: pointer;
-    background-color: #f8f8f8;
-    text-align: center;
-}
-
-.sort_section:hover {
-    box-shadow: 0 0 2px lightseagreen;
-}
-
-.sort-section:active {
-    text-shadow: 0 0 2px lightseagreen;
-}
-
-/*list style*/
-ul {
-    list-style: none;
-}
-
-a {
-    text-decoration: none;
-    color: black;
-}
-
-ul.list_part {
-    max-width: 270px;
-    max-height: 210px;
-    overflow:hidden; 
-    overflow-y:auto;
-}
-
-ul.list_part li {
-    height: 38px;
-}
-
-ul.list_part li:hover {
-    background-color: #f7faff;
-}
-
-ul.list_part li:active {
-    background-color: #e5efff;
-}
-
-li a {
-    display: block;
-}
-
-ul.list_part li.pending-projects, ul.list_part li.active-projects {
-    border: 1px solid grey;
-    background-color: grey;
-    color: white;
-    text-align: center;
-}
-
-ul.list_part li.pending-projects:hover, ul.list_part li.active-projects:hover {
-    background-color: grey;
-}
 
 .badge-pill {
-float: right;
+    float: right;
+    background-color: #f1505b;
 }
 
 .new {
@@ -104,6 +35,10 @@ float: right;
 
 .more {
     text-align: center;
+}
+
+.more:focus {
+    outline: none;
 }
 
 
@@ -129,36 +64,98 @@ float: right;
 	background-color: darkgrey;
 }
 
-/*lock*/
 
-.glyphicon-lock{
-	float: right;
-	margin-right: 20px;
-    font-size: 20px;
-    margin-top: 10px;
+/* list */
+
+a {
+    text-decoration: none;
+    color: #202020 ;
 }
 
-.tip {
-    position: relative;
-    display: inline-block;
+.panel, .panel-heading {
+    border-color: #202020 ;
+}
+.panel > .list-group
+{
+    margin-bottom: 0;
+    max-height: 240px;
+    overflow:hidden; 
+    overflow-y:auto;
+
+}
+.panel > .list-group .list-group-item
+{
+    border-width: 1px 0;
+    padding: 7px 5px 7px 15px;
 }
 
-.tip .tiptext {
-    visibility: hidden;
-	width: 110px;
-	font-size: 12px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-
-    /* Position the tooltip */
-	position: absolute;
-	right: 30px;
-    z-index: 1;
+.panel > .list-group .sliding_bg:first-child
+{
+    border: none;
 }
 
-.tip:hover .tiptext {
-    visibility: visible;
+.panel a {
+    display: block;
+}
+
+.panel-heading {
+background-color: #202020 ;
+position: relative;
+}
+
+.panel-heading + .list-group .list-group-item:first-child
+{
+    border-top-width: 0;
+}
+
+.panel-primary .list-group-item.active
+{
+    color: #FFF;
+    background-color: #f1505b;
+    border-color: #f1505b;
+}
+
+li.sliding_bg:hover {
+    background-color: #f1505b;
+    border-color: #f1505b;
+}
+
+li.sliding_bg:hover a {
+    color:white;
+}
+
+li.sliding_bg:hover span.badge {
+    background-color:white;
+    color: #f1505b;
+}
+
+.sort-btn {
+    border-radius: 5px;
+    background-color: #202020 ;
+}
+
+.sort-btn:hover, .sort-btn:focus {
+        background-color: #f1505b;
+        color: white;
+}
+
+/*sorting and search*/
+
+focus-container{
+	height: 5em;
+	max-width: 300px;
+}
+
+focus-container:focus {
+	background-color: blue;	
+}
+
+.search-form {
+	max-width: 300px;
+	margin: 0 auto 15px auto;
+	text-align: center;
+}
+
+.btn-group.pull-right {
+    margin-top: -8px;
 }

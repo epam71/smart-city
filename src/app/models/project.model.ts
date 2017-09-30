@@ -3,12 +3,15 @@ export interface Project {
     author?: string,
     authorEmail?: string,
     projectName: string,
-    image: string,
+    image?: string,
     desc: any,
     goals: string,
     result: string,
     budget: number,
-    status: string,
+    status?: string,
+    comments?: string[],
+    likes?: string[],
     rating?: number,
+    approved?: boolean,
     currentRating?: number
 }

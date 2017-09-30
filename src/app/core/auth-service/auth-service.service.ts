@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Http,
+import {
   Headers, 
   RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import * as auth0 from 'auth0-js';
 
+const STORE_KEY_REDIRECT = 'authRedirectTo';
 const ROOT_ROLE = 'root';
 const INVESTOR_ROLE = 'investor';
 const USER_ROLE = 'user'; 
 const GUEST_TOKEN = 'guest';
-const ACCESS_TOKEN = 'access_token'
+const ACCESS_TOKEN = 'access_token';
 const mapKeyToStoreKey = {
   'accessToken': 'access_token',
   'idToken': 'id_token',
@@ -19,7 +20,10 @@ const mapKeyToStoreKey = {
   'nickname': 'user_nickname',
   'role': 'user_role',
   'email': 'user_email',
+  'expireAt': 'user_expireAt'
 };
+//milliseconds - one day
+const EXPIRATION_INTERVAL = ( 24 * 60 * 60 - 1) * 1000; 
 
 
 @Injectable()
@@ -33,31 +37,38 @@ export class AuthService {
   private role: string = '';
   private idToken: string = '';
   private accessToken: string = '';
+  private expireAt: number;
 
   auth0 = new auth0.WebAuth({
     clientID: 'C6LIYADABj55LTJMlwDjjtfb1147MnKi',
     domain: 'smart-city-lviv.eu.auth0.com',
     responseType: 'token id_token',
     audience: 'https://smart-city-lviv.eu.auth0.com/userinfo',
-    redirectUri: 'http://localhost:4200/auth/callback',
+    redirectUri: `${document.baseURI}auth/callback`,
     scope: 'openid'
   });   
 
-  constructor(private router: Router,
-    private http: Http) {
+  constructor(private router: Router) {
     this.restoreSession();
+    if (this.isExpired()) {
+      this.logout();
+    }
+  }
+
+  isExpired(): boolean {
+    return this.expireAt < Date.now();
   }
 
   isAdmin(): boolean {
-    return this.role === ROOT_ROLE;
+    return this.role === ROOT_ROLE && !this.isExpired();
   }
 
   isInvestor(): boolean {
-    return this.role === INVESTOR_ROLE;
+    return this.role === INVESTOR_ROLE && !this.isExpired();
   }
 
-  isLogedIn() {
-    return this.role !== '';
+  isLogedIn(): boolean {
+    return this.role !== '' && !this.isExpired();
   }
 
   getNickname(): string {
@@ -81,40 +92,46 @@ export class AuthService {
   } 
 
   login(): void {
+    localStorage.setItem(STORE_KEY_REDIRECT, this.router.url);
     this.auth0.authorize();
   }
 
   public handleAuthentication(): void {
-    let selfAuth0 = this.auth0;
-
     this.auth0.parseHash((err, authResult) => {
+      let pathRedirectTo: string;
+
       if (err) {
-        this.router.navigate(['/comp2']);
-        console.log(err);
+        this.router.navigate(['/']);
         return;
       }
       if (authResult && authResult.accessToken && authResult.idToken) {
-        window.location.hash = '';
-        
         this.accessToken = authResult.accessToken;
         this.idToken = authResult.idToken;
         this.name = authResult.idTokenPayload["https://name"];
         this.nickname = authResult.idTokenPayload["https://nickname"];
         this.role = authResult.idTokenPayload["https://role"];
         this.email = authResult.idTokenPayload["https://email"];
+        this.expireAt = Date.now() + EXPIRATION_INTERVAL;
         this.setSession();
         this.changeStatus();
+
+        pathRedirectTo = localStorage.getItem(STORE_KEY_REDIRECT);
+        if (pathRedirectTo) {
+          this.router.navigate([pathRedirectTo]);
+        } else {
+          this.router.navigate(['/']);
+        }
       }
     });
   }     
 
-  private setSession() {
+  private setSession(): void {
     for ( let prop in mapKeyToStoreKey) {
       localStorage.setItem(mapKeyToStoreKey[prop], this[prop]);
     }  
   }
 
-  private restoreSession() {
+  private restoreSession(): void {
     if (localStorage.getItem(ACCESS_TOKEN)) {
       for ( let prop in mapKeyToStoreKey) {
         this[prop] = localStorage.getItem(mapKeyToStoreKey[prop]);
@@ -135,7 +152,7 @@ export class AuthService {
     this.eventEmmiter.next('');
   }
 
-  getEventEmitter() {
+  getEventEmitter(): Observable<string> {
     return this.eventEmmiter.asObservable();
   }
 
@@ -147,13 +164,10 @@ export class AuthService {
     headers.set('Authorization', `Basic ${innerToken}`);    
   }
 
-  testServerAuth(): void {
+  getAuthHeaderOpt(): RequestOptions {
     let headers = new Headers();
-    this.setAuthHeader(headers);        
-    let options = new RequestOptions({ headers: headers });		
-    
-    this.http.get('https://smart-city-lviv.herokuapp.com/api/projects/59bbd7f67ad34b000481c758', options).subscribe(val => {
-      let t = val;
-    });
+
+    this.setAuthHeader(headers);
+    return new RequestOptions({ headers: headers });
   }
 }

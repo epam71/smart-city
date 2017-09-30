@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+
 h1,
 h2,
 h3,
@@ -12,6 +13,9 @@ h6 {
 p {
     padding: 0;
     margin: 0;
+}
+a:hover{
+    text-decoration: none;
 }
 img {
     max-width: 100%;
@@ -52,6 +56,5 @@ header {
     clear: both
 }
 
-a:hover{
-    text-decoration: none;
-}
+
+

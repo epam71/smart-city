@@ -5,5 +5,7 @@ export interface News {
   desc: any,
   date: any,
   approved: boolean,
-  status: string;
+  rating?: number,
+  status: string,
+  currentRating?: number;
 }

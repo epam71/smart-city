@@ -1,80 +1,36 @@
-<div>
-  Nickname: {{nick}}
-  <br> Email: {{email}}
-  <br> Role: {{userCheck}}
-  <br>
-  <button (click)='authService.login()'>Login</button>
-  <button (click)='authService.logout()'>Logout</button>
-</div>
-<div class="container projects_block_main">
-  <div class="row panel_block">
-    <div class="col-lg-4 col-md-4 col-sm-4 projects_panel_left">
-      <span class="my_projects_block" *ngIf="userCheck !== ''">
-        <button type="button" class="btn btn-default" (click)="showUserProjects($event.target.checked)" *ngIf="!userProjects else allProjects">My Projects</button>
-        <ng-template #allProjects>
-          <button type="button" class="btn btn-default" (click)="showUserProjects($event.target.checked)">All Projects</button>
-        </ng-template>
-      </span>
-      <span class="select_block_main">
-        <span class="select_block">
-      <select class="sort_block_select" (change)="selectSort($event.target.value)">
-    <option *ngFor="let key of sortList" >{{key}}</option>
-  </select>
-      </span>
-        <span class="reverse_button" *ngIf="sort !== 'unsorted'">
-          <button class="	glyphicon glyphicon-sort" (click)="sortType($event)"></button>
-      </span>
-      </span>
-    </div>
-    <div class="col-lg-6 col-md-6 col-sm-6 search_block_main">
-
-    </div>
-    <div class="col-lg-2 col-md-2 col-sm-2">
-      <div class="add_block">
-        <button type="submit" class="btn btn-success" routerLink="new">Add Project</button>
-      </div>
-    </div>
-  </div>
-  <div class="projects_block">
-    <div class="row">
-      <div class="col-md-4 col-sm-6 project_block_main" *ngFor="let key of (projects | async) |
-       filterUserProjects:userProjects:approvedStatus | sortBy:sort:sortTypeValue 
-       | paginate: { itemsPerPage: 9, currentPage: p }">
-
         <div class="project_block">
           <a [routerLink]="['/projects', key._id]">
+            <div class="row customBlock">
             <div class="img_block">
               <div class="status_block" *ngIf="userProjects">
-                <span [ngClass]="key.approved ? 'status_text_yes' : 'status_text_no'"> {{ key.approved ? 'approved' : 'not approved' }}</span>
+                <span class="label" [ngClass]="key.approved ? 'label-success' : 'label-danger'">{{ key.approved ? 'approved' : 'not approved' }}</span>
               </div>
-              <img src="http://arenalviv.com.ua/uploads/images/pages/461/750/img_7467small.jpg" alt="{{key.image}}">
+              <img class="img-responsive" src="{{key?.image}}" alt="{{key.projectName}}">
+              <div class="projects_date">
+                {{key.date | date:'dd MMMM y' }}
+              </div>
             </div>
+          </div>
             <div class="info_block">
               <div class="project_name">
-                {{key.approved}} {{key.projectName | uppercase | shorten:20 }}
+                {{key.projectName | uppercase | shorten:20 }}
               </div>
-              <div class="project_desc">{{ key.desc | shorten:60 }}</div>
+              <div class="project_desc">{{ key.desc | shorten:120 }}</div>
             </div>
           </a>
           <div class="project_footer">
             <div class="row">
-              <div class="col-md-3 col-sm-3 col-xs-3 likes_block_main">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 likes_block_main">
                 <div class="likes_block">
                   <rating [ratingObj]="key"></rating>
                 </div>
               </div>
-              <div class="col-md-9 col-sm-9 col-xs-9">
-                <div class="project_date">
-                  date: {{key.date | date:'shortDate' }}
-                </div>
+              <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 comments_block_main">
+                  <span class="comments_block">
+                    <span class="glyphicon glyphicon-comment comments_info"></span>
+                    <span class="comments_info_text">{{key.comments.length}}</span>
+                    </span>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="pagination_block">
-      <pagination-controls class="pagination" (pageChange)="p =$event">></pagination-controls>
-    </div>
-  </div>
-</div>

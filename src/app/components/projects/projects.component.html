@@ -10,70 +10,17 @@
 					<p>We have built an enviable reputation in consumer goods, heavy industry, high-tech, <br>manufacturing, medical, recreational vehicle, and transportation sectors.</p>
 				</div>
 			</div>
-		</div>		
+		</div>
 		<div class="row">
-			<div class="col-md-4 col-sm-6">
+			<div class="col-md-4 col-sm-6" *ngFor="let key of (projectsApproved | async) | slice:0:3 | orderBy: order">
 				<div class="single-our-service">
 					<figure class="img-box">
 						<a href="#"><img [src]="projectImg" width="300" height="200" alt="Awesome Image"></a>
 					</figure>
-					<a href="#"><h4>Agricultural Engineering</h4></a>
-					<p>We develop and design new procedures, tools <br>
-					systems for agricultural products environments. </p>
+					<a href="#"><h4>{{key.projectName }}</h4></a>
+					<p>{{ key.desc }}</p>
 				</div>
 			</div>
-			<div class="col-md-4 col-sm-6">
-				<div class="single-our-service">
-					<figure class="img-box">
-						<a href="#"><img [src]="projectImg" width="300" height="200" alt="Awesome Image"></a>
-					</figure>
-					<a href="#"><h4>Chemical Research Engineering</h4></a>
-					<p>Chemical Research expertise in producing and <br>
-					manipulating chemicals to energy properties.</p>
-				</div>
-			</div>
-			<div class="col-md-4 col-sm-6">
-				<div class="single-our-service">
-					<figure class="img-box">
-						<a href="#"><img [src]="projectImg" width="300" height="200" alt="Awesome Image"></a>
-					</figure>
-					<a href="#"><h4>Material Science and Engineering</h4></a>
-					<p>Materials Engineering should include scientific and <br>
-					engineering strength relationships of materials. </p>
-				</div>
-			</div>
-			<div class="col-md-12"><div class="separet"></div></div>
-			<div class="col-md-4 col-sm-6">
-				<div class="single-our-service">
-					<figure class="img-box">
-						<a href="#"><img [src]="projectImg" width="300" height="200" alt="Awesome Image"></a>
-					</figure>
-					<a href="#"><h4>Mechanical Engineering</h4></a>
-					<p>Creating a dynamic company for the continuous <br>
-					exploration and develop opportunities. </p>
-				</div>
-			</div>
-			<div class="col-md-4 col-sm-6">
-				<div class="single-our-service">
-					<figure class="img-box">
-						<a href="#"><img [src]="projectImg" width="300" height="200" alt="Awesome Image"></a>
-					</figure>
-					<a href="#"><h4>Petroleum and Gas</h4></a>
-					<p>Petroleum Engineers are concerned with the <br>
-					 exploration, discovery and production.</p>
-				</div>
-			</div>
-			<div class="col-md-4 col-sm-6">
-				<div class="single-our-service">
-					<figure class="img-box">
-						<a href="#"><img [src]="projectImg" width="300" height="200" alt="Awesome Image"></a>
-					</figure>
-					<a href="#"><h4>Power and Energy</h4></a>
-					<p>Ensuring high reliability and optimal performance of <br>
-					rotating power equipment.</p>
-				</div>
-			</div>
-
 		</div>
 	</div>
 </section>
