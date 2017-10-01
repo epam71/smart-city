@@ -2,6 +2,7 @@ import { RouterModule } from '@angular/router';
 import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 import { StaticComponent } from './components/static/static.component';
 import { AdminAuthGuardService } from './core/admin-auth-guard/admin-auth-guard.service';
+import { UserAuthGuardService } from './core/admin-auth-guard/user-auth-guard.service';
 
 export const AppRoutes = RouterModule.forRoot([
     {

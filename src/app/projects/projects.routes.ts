@@ -5,11 +5,13 @@ import { ProjectsListComponent } from './projects-list/projects-list.component';
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProjectMainComponent } from './project-main/main-projects.component';
+import { UserAuthGuardService } from '../core/admin-auth-guard/user-auth-guard.service';
 
 const routes: Routes = [
     {
         path: 'new',
-        component: ProjectEditComponent
+        component: ProjectEditComponent,
+        canActivate: [UserAuthGuardService]
     },
     {
         path: ':id',
@@ -17,7 +19,8 @@ const routes: Routes = [
     },
     {
         path: ':id/edit',
-        component: ProjectEditComponent
+        component: ProjectEditComponent,
+        canActivate: [UserAuthGuardService]
     },
     {
         path: '',
