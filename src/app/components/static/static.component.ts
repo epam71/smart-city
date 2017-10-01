@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import Router from '@angular/router';
+
 
 @Component({
   selector: 'app-static',
@@ -18,14 +18,9 @@ export class StaticComponent implements OnInit {
     this.mainVideo = '../assets/media/LvivNightTimelapse.mp4'
   }
 
-  // constructor(private router: Router){
-
-  // }
+  
 
   ngOnInit() {
   }
 
-  // onLoadServers(){
-  //   this.router.navigate(['/news']);
-  // }
 }
