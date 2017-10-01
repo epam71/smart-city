@@ -15,7 +15,7 @@
     </app-modal>
 
     <div class="card mt-4">
-      <img class="card-img-top img-fluid" alt="No image" src="{{ 'data:image/jpeg;base64,' + news?.image }}" onerror="this.onerror=null;this.src='http://placehold.it/900x400';">
+      <img class="card-img-top img-fluid" alt="No image" src="{{ image }}" onerror="this.onerror=null;this.src='http://placehold.it/900x400';">
       <div *ngIf="!editable" class="card-body">
         <h3 class="card-title">{{ news?.title }}</h3>
         <p class="card-text">Author: {{ news?.author }}</p>
@@ -68,9 +68,15 @@
 						<div class="btn btn-default image-preview-input"> 
               <span class="glyphicon glyphicon-folder-open"></span> 
               <span class="image-preview-input-title">Browse</span>
-							<input id="filePicker" type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview" (change)="handleFileSelect($event)"/>
-						</div>         
-      </div> 
+							<input id="filePicker" type="file" accept="image/*" name="input-file-preview" (change)="pushImage($event)"/>
+              <div *ngIf="imageService?.uploadProgress">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': imageService?.uploadProgress + '%' }"></div>
+                </div>
+                Progress: {{imageService?.uploadProgress}}% Complete
+              </div>             
+            </div>            
+      </div>         
 
       <div class="form-group">
         <div class="col-sm-12">

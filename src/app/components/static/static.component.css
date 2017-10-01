@@ -89,8 +89,16 @@ h2 {
 .red_clr{
   color: #ee3733;
 }
+
+.counted{
+  text-align: center;
+}
+.counted h5{
+  font-size: 17px;
+}
+
 .count-text{
-  font-size: 28px;
+  font-size: 40px;
   font-weight: 600;
 }
 
@@ -130,7 +138,6 @@ h2 {
 }
 
 #subscribe .subscribe-btn, .custom-btn{
-  font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   font-weight: 500;
   font-size: 16px;

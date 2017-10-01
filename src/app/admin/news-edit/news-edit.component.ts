@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../core/auth-service/auth-service.service';
+import { ImageServiceService } from '../../core/image-service/image-service.service';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -18,23 +19,9 @@ export class NewsEditComponent implements OnInit {
   public news: News;
   public newsId: any;
   private editable: boolean = false;
-  private base64textString: string = '';
-
-  handleFileSelect(evt){
-      var files = evt.target.files;
-      var file = files[0];
-    
-    if (files && file) {
-        var reader = new FileReader();
-        reader.onload =this._handleReaderLoaded.bind(this);
-        reader.readAsBinaryString(file);
-    }
-  }
-  
-  _handleReaderLoaded(readerEvt) {
-    var binaryString = readerEvt.target.result;
-    this.base64textString = btoa(binaryString);
-    }  
+  private imageFire: string = '';
+  private image: string = '';
+  private progressBar:any;
 
   deleteNews() {
     this.newsData.deleteNews(this.newsId.id).subscribe();
@@ -42,8 +29,13 @@ export class NewsEditComponent implements OnInit {
     this.newsData.look.next('check');
   }
 
+  pushImage() {
+    this.imageService.uploadFile(event);
+  }
+
   cancelChanges() {
     this.editable = false;
+    this.imageService.resetImage();
   }
 
   editNews() {
@@ -61,10 +53,11 @@ export class NewsEditComponent implements OnInit {
 
   saveChanges(form: NgForm) {
     const value = form.value;
+    this.imageFire = this.imageService.fileName;
 
     let news: any = {
       title: value.newsTitle,
-      image: this.base64textString || this.news.image,
+      image: this.imageFire || this.image,
       desc: value.desc
     }
 
@@ -72,14 +65,17 @@ export class NewsEditComponent implements OnInit {
       .subscribe(
       (response) => {
         this.news = response;
+        this.image = response.image;
         this.editable = false;
         this.newsData.look.next('test');
       });
+    this.imageService.resetImage();
   }
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private newsData: NewsServiceService) {
+    private newsData: NewsServiceService,
+    private imageService: ImageServiceService) {
 
     let httpResult = route.params.switchMap(param => {
       this.newsId = param;
@@ -89,6 +85,7 @@ export class NewsEditComponent implements OnInit {
     httpResult.subscribe(
       (response) => {
         this.news = response;
+        this.image = response.image;
       });
   }
 

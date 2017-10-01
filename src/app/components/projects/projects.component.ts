@@ -9,11 +9,9 @@ import { SlicePipe } from '@angular/common';
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
-  projectImg: string;
   projectsApproved;
   order: string = 'date';
   constructor(private projectsData: ProjectServiceService) {
-    this.projectImg = '../assets/images/projects.jpg';
   }
 
   ngOnInit() {

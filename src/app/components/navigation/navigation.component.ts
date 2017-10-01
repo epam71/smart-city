@@ -29,7 +29,6 @@ log;
     .subscribe(() =>
         this.adminRole = this.authService.isAdmin()
     );
-    console.log(this.log);
   }
 
   ngOnDestroy(){

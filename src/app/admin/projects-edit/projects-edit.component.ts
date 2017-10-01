@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../core/auth-service/auth-service.service';
+import { ImageServiceService } from '../../core/image-service/image-service.service';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -20,21 +21,9 @@ export class ProjectsEditComponent implements OnInit {
   public projects: Project[];
   public projectId: any;
   private editable: boolean = false;
-  private base64Image: string = '';
-
-changeListener($event): void {
-   this.readThis($event.target);
- }
-
- readThis(inputValue: any): void {
-   var file: File = inputValue.files[0];
-   var myReader: FileReader = new FileReader();
-
-   myReader.onloadend = (e) => {
-     this.base64Image = myReader.result;
-   }
-   myReader.readAsDataURL(file);
- }
+  private imageFire: string = '';
+  private image: string = '';
+  private progressBar:any;
 
   deleteProject() {
     this.projectData.deleteProject(this.projectId.id).subscribe();
@@ -42,8 +31,13 @@ changeListener($event): void {
     this.projectData.look.next('check');
   }
 
+  pushImage() {
+    this.imageService.uploadFile(event);
+  }
+
   cancelChanges() {
     this.editable = false;
+    this.imageService.resetImage();
   }
 
   editProject() {
@@ -68,29 +62,35 @@ changeListener($event): void {
 
   saveChanges(form: NgForm) {
     const value = form.value;
+    this.imageFire = this.imageService.fileName;
 
     let project: Project = {
       projectName: value.projectName,
-      image: this.base64Image || this.project.image,
+      image: this.imageFire || this.image,
       desc: value.desc,
       goals: value.goals,
       result: value.result,
       budget: value.budget
     }
+    console.log(this.imageFire);
 
     this.projectData.putProject(this.projectId.id, project)
       .subscribe(
       (response) => {
         this.project = response;
+        this.image = response.image;
         this.editable = false;
         this.projectData.look.next('check');
       });
+
+      this.imageService.resetImage();
   }
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private projectData: ProjectServiceService,
-    private sanitizer: DomSanitizer) {
+    private sanitizer: DomSanitizer,
+    private imageService: ImageServiceService) {
 
     let httpResult = route.params.switchMap(param => {
       this.projectId = param;
@@ -100,6 +100,7 @@ changeListener($event): void {
     httpResult.subscribe(
       (response) => {
         this.project = response;
+        this.image = response.image;
       });
   }
 

@@ -22,7 +22,7 @@ import { AdminAuthGuardService } from './core/admin-auth-guard/admin-auth-guard.
 import { OrderModule } from 'ngx-order-pipe';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { environment } from '../environments/environment';
+import { config } from './core/config';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,7 @@ import { environment } from '../environments/environment';
     AlertModule.forRoot(),
     OrderModule,
     AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(config.firebase)
   ],
   providers: [AdminAuthGuardService],
   bootstrap: [AppComponent]
