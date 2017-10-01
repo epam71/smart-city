@@ -33,7 +33,6 @@ input#subject.form-control{
     background: white;
     font-style: italic;
     color: black;
-    font-family: 'Open Sans', sans-serif;
 }
 
 .msg_title h5 {
@@ -42,7 +41,6 @@ input#subject.form-control{
     font-weight: 400;
     padding-bottom: 20px;
     padding-left: 15px;
-    font-family: 'Roboto Slab', serif;
     color: white;
 }
 
@@ -74,7 +72,6 @@ input#subject.form-control{
     margin: 0;
 }
 .custom-btn{
-    font-family: "Raleway", sans-serif;
     text-transform: uppercase;
     font-weight: 500;
     font-size: 16px;
@@ -103,13 +100,11 @@ input#subject.form-control{
     font-weight: 400;
     text-transform: uppercase;
     padding-bottom: 20px;
-    font-family: 'Roboto Slab', serif;
     color: white;
 }
 .office_location i span {
     color: white;
     font-size: 14px;
-    font-family: 'Open Sans', sans-serif;
 }
 .office_location i {
     padding-bottom: 15px;
@@ -123,11 +118,9 @@ input#subject.form-control{
     font-weight: 700;
     text-transform: uppercase;
     color: white;
-    font-family: 'Roboto Slab', serif;
 }
 .contact_area p {
     font-size: 16px;
     color: white;
-    font-family: 'Open Sans', sans-serif;
 }
 
