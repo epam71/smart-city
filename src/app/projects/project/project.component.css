@@ -24,6 +24,7 @@
 }
 
 .project_block_main {
+  margin-top: 100px;
   font-size: 16px;
 }
 
@@ -43,7 +44,15 @@
 .left_side {}
 
 .project_block {
+  margin-top: 10px;
   max-width: 900px;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
 }
 
 .edit_block {}

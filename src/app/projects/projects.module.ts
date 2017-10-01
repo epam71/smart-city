@@ -25,7 +25,7 @@ import { ProjectMainComponent } from './project-main/main-projects.component';
     ProjectsListComponent,
     ProjectComponent,
     ProjectEditComponent,
-    ProjectMainComponent,
+    ProjectMainComponent
   ]
 })
 export class ProjectsModule { }

@@ -75,24 +75,14 @@ export class ProjectMainComponent implements OnInit {
   showUserProjects() {
     if (!this.userProjects) {
       this.userProjects = true;
-      this.projectsData.getUserProjects(this.authService.getNickname())
-      .subscribe((response) => {
-        this.projects = response;
-      });
+      this.projects = this.projectsData.getUserProjects(this.authService.getNickname());
     } else {
       this.userProjects = false;
-      this.projectsData.getApprovedProjects()
-      .subscribe((response) => {
-        this.projects = response;
-      });
+      this.projects = this.projectsData.getApprovedProjects();
     }
 
   }
 
-  
-
-
-  
 
   ngOnInit() {
     this.projects = this.projectsData.getProjects();
