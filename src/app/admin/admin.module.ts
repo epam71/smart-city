@@ -34,5 +34,3 @@ import { PipesModule } from '../pipes/pipes.module'
   ]
 })
 export class AdminModule { }
-
-

@@ -29,7 +29,7 @@
           <p class="news_date ">{{key.date | date:'dd MMMM y'}} </p>
           <p class="author"> Written by: {{key.author}}</p>
           <h3 class="news_title">{{key.title }} </h3>
-          <p class="news_desc">{{ key.desc | truncate: [150]  }}</p>
+          <p class="news_desc">{{ key.desc | truncate: [150] }}</p>
           <a class="read" [routerLink]="['/news', key._id]">Read more 
             <span class="glyphicon glyphicon-menu-right"></span>
           </a>

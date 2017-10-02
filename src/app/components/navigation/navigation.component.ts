@@ -12,7 +12,7 @@ export class NavigationComponent implements OnInit, OnDestroy{
 private adminRole: boolean;
 private subscription: any;
 private adminRoute: boolean;
-private log: true;
+log;
 
   constructor(private authService: AuthService, private router: Router) {
     router.events
@@ -23,11 +23,12 @@ private log: true;
   }
 
   ngOnInit() {
-      this.adminRole = this.authService.isAdmin();
-      this.subscription = this.authService.getEventEmitter()
-      .subscribe(() =>
+    this.log = this.authService.isLogedIn();
+    this.adminRole = this.authService.isAdmin();
+    this.subscription = this.authService.getEventEmitter()
+    .subscribe(() =>
         this.adminRole = this.authService.isAdmin()
-      );
+    );
   }
 
   ngOnDestroy(){

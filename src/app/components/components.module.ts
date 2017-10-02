@@ -9,12 +9,13 @@ import { ProjectsComponent } from './projects/projects.component';
 import { SignupComponent } from './signup/signup.component';
 import { StaticComponent } from './static/static.component';
 import { routing } from './components.routes';
-
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    routing
+    routing,
+    PipesModule
   ],
   declarations: [
       AchivementComponent,

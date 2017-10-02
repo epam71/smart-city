@@ -15,7 +15,9 @@ button:focus {
 
 :host a:hover {}
 
-.projects_block_main {}
+.projects_block_main {
+  margin-top: 50px;
+}
 
 .panel_block {
   background: #FCFCFC;

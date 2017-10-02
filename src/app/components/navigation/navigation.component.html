@@ -21,9 +21,6 @@
               <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions] = "{ exact: true }">Home</a>
             </li>
             <li>
-              <a href="#">About</a>
-            </li>
-            <li>
               <a routerLink="/news" routerLinkActive="active" [routerLinkActiveOptions] = "{ exact: true }">News</a>
             </li>
             <li>
@@ -31,9 +28,9 @@
             </li>
             <li><a href="#">Contacts</a>
             </li>
-            <li *ngIf="log"><a (click)='authService.login(); log = false'>Log In</a>
+            <li *ngIf="!log"><a (click)='authService.login();'>Log In</a>
             </li>
-            <li *ngIf="!log"><a (click)='authService.logout(); log = true'>Log Out</a>
+            <li *ngIf="log"><a (click)='authService.logout();'>Log Out</a>
             </li>
             <li *ngIf="adminRole">
               <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions] = "{ exact: true }">Admin</a>
