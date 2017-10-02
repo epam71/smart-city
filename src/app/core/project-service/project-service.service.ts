@@ -31,18 +31,18 @@ export class ProjectServiceService {
         return Observable.throw(errMessage);
     }
 
-    getProjects(): Observable<Project[]> {
+    getProjects(sortBy='', type = ''): Observable<Project[]> {
 
-        return this.http.get(projects_PATH, this.authService.getAuthHeaderOpt())
+        return this.http.get(projects_PATH  + `?sort=${type}${sortBy}`, this.authService.getAuthHeaderOpt())
 
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
     };
 
-    getApprovedProjects(): Observable<Project[]> {
+    getApprovedProjects(sortBy='', type = ''): Observable<Project[]> {
 
-        return this.http.get(projects_PATH + '?query={"approved":"true"}', this.authService.getAuthHeaderOpt())
+        return this.http.get(projects_PATH + `?sort=${type}${sortBy}` + `&query={"approved":"true"}`, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
@@ -71,9 +71,8 @@ export class ProjectServiceService {
 
     getRatingProjects(): Observable<Project[]> {
 
-        return this.http.get(projects_PATH + '?limit=3&sort=rating', this.authService.getAuthHeaderOpt())
+        return this.http.get(projects_PATH + '?limit=3&sort=-rating', this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
-                console.log(response.json());
                 return response.json();
             }).catch(this.handleError);
     }
@@ -86,15 +85,13 @@ export class ProjectServiceService {
             }).catch(this.handleError);
     };
 
-    searchProjects(keyWord, property): Observable<Project[]> {
+    searchProjects(keyWord): Observable<Project[]> {
 
-        return this.http.get(projects_PATH, this.authService.getAuthHeaderOpt())
-            .map((response: Response) => {
-                return response.json().filter(el => {
-                    return el[property].toLowerCase().indexOf(keyWord.toLowerCase()) > -1;
-                });
-            }).catch(this.handleError);
-    };
+                return this.http.get(projects_PATH + `?query={"projectName":"~^(${keyWord})"}`, this.authService.getAuthHeaderOpt())
+                    .map((response: Response) => {
+                        return response.json();
+                    }).catch(this.handleError);
+            };
 
     getProject(id): Observable<Project> {
 
@@ -107,6 +104,24 @@ export class ProjectServiceService {
     postProject(project: any): Observable<Project> {
 
         return this.http.post(projects_PATH, project, this.authService.getAuthHeaderOpt())
+            .map((response: Response) => {
+                return <any>response.json();
+            })
+            .catch(this.handleError);
+    };
+
+    putProject(id, projectEdit): Observable<Project> {
+
+        return this.http.put(projects_PATH + id, projectEdit, this.authService.getAuthHeaderOpt())
+            .map((response: Response) => {
+                return <any>response.json();
+            })
+            .catch(this.handleError);
+    };
+
+    deleteProject(id): Observable<Project> {
+
+        return this.http.delete(projects_PATH + id, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })
@@ -134,24 +149,6 @@ export class ProjectServiceService {
     deleteComment(projectId, commentId): Observable<Project> {
 
         return this.http.delete(projects_PATH + projectId + '/comments/' + commentId, this.authService.getAuthHeaderOpt())
-            .map((response: Response) => {
-                return <any>response.json();
-            })
-            .catch(this.handleError);
-    };
-
-    putProject(id, projectEdit): Observable<Project> {
-
-        return this.http.put(projects_PATH + id, projectEdit, this.authService.getAuthHeaderOpt())
-            .map((response: Response) => {
-                return <any>response.json();
-            })
-            .catch(this.handleError);
-    };
-
-    deleteProject(id): Observable<Project> {
-
-        return this.http.delete(projects_PATH + id, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })
