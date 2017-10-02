@@ -21,16 +21,16 @@ export class ContactUsComponent implements OnInit {
     const value = this.sendMesForm.value;
     this.formPopup = true;
     setTimeout(() => { this.formPopup = false}, 3000);
-    let message: Messages = {
+    let messages: Messages = {
       author: value.name,
       email: value.email,
       subject: value.subject,
-      text: value.message,
+      body: value.message,
       new: true
     }
 
 
-    this.emailData.postMessage(message).subscribe(
+    this.emailData.postMessage(messages).subscribe(
       response => this.responseMes = 'Your message has been sent!',
       error => this.responseMes = "Error :: Please log in to send a message!"
     );
