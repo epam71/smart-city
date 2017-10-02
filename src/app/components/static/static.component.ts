@@ -12,7 +12,7 @@ export class StaticComponent implements OnInit {
   countersImg: string;
   mainVideo: string;
   aboutImg: string;
-  projects;
+  projects = 0;
   projectsDone = 0;
 
   constructor(private projectsData: ProjectServiceService) {
