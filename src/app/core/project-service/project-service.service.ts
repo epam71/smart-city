@@ -54,7 +54,7 @@ export class ProjectServiceService {
         this.authService.setAuthHeader(headers);
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.get(projects_PATH + '?select=projectName,_id,status,approved', options)
+        return this.http.get(projects_PATH + `?select=projectName,_id,status,approved`, options)
             .map((response: Response) => {
 
                 return response.json();
@@ -63,7 +63,7 @@ export class ProjectServiceService {
 
     getProjectsNumber(): Observable<any> {
 
-        return this.http.get(config.PATH + 'projects/' + 'count', this.authService.getAuthHeaderOpt())
+        return this.http.get(config.PATH + `projects/count`, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
@@ -71,7 +71,7 @@ export class ProjectServiceService {
 
     getRatingProjects(): Observable<Project[]> {
 
-        return this.http.get(projects_PATH + '?limit=3&sort=-rating', this.authService.getAuthHeaderOpt())
+        return this.http.get(projects_PATH + `?limit=3&sort=-rating`, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
@@ -130,7 +130,7 @@ export class ProjectServiceService {
 
     postLikes(id, user: any): Observable<Project> {
 
-        return this.http.post(projects_PATH + id + '/likes', user, this.authService.getAuthHeaderOpt())
+        return this.http.post(projects_PATH + id + `/likes`, user, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })
@@ -139,7 +139,7 @@ export class ProjectServiceService {
 
     postComment(id, message: any): Observable<Project> {
 
-        return this.http.post(projects_PATH + id + '/comments', message, this.authService.getAuthHeaderOpt())
+        return this.http.post(projects_PATH + id + `/comments`, message, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })
@@ -148,7 +148,7 @@ export class ProjectServiceService {
 
     deleteComment(projectId, commentId): Observable<Project> {
 
-        return this.http.delete(projects_PATH + projectId + '/comments/' + commentId, this.authService.getAuthHeaderOpt())
+        return this.http.delete(projects_PATH + projectId + `/comments/` + commentId, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return <any>response.json();
             })

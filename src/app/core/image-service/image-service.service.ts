@@ -47,8 +47,6 @@ export class ImageServiceService {
         upload.url = uploadTask.snapshot.downloadURL;
         upload.name = upload.file.name;
         this.fileName = upload.url;
-        console.log(`${this.basePath}/${upload.file.name}`);
-        console.log(upload);
         return upload.url;
       }
     );
@@ -65,10 +63,8 @@ export class ImageServiceService {
 
     var desertRef = storageRef.child('name');
     desertRef.delete().then(function(response) {
-      console.log(response);
-    }).catch(function(error) {
-      console.log(error);
-    });
+    }).catch(error=>
+    console.error(error));
   }
 
 }
