@@ -12,11 +12,11 @@ export class NewsLikeComponent implements OnInit {
   private userEmail;
   private showModal: boolean = false;
   private getUserRole;
-  liked = false;
+  private liked = false;
 
   @Input('ratingObj') likeInfo;
 
-constructor(private service: NewsServiceService,
+constructor(private newsService: NewsServiceService,
             private authService: AuthService) {}
 
 colseModal(){
@@ -25,17 +25,16 @@ colseModal(){
 
 increaseLike() {
   this.showModal = true;
-  if (this.liked !== true){
-    this.service.postNewsLike(this.likeInfo._id, { email: this.userEmail })
+  if (this.liked !== true && this.getUserRole !== ''){
+    this.newsService.postNewsLike(this.likeInfo._id, { email: this.userEmail })
         .subscribe(
         (response) => {
           this.liked = true;
          return this.likeInfo.rating = response.currentRating;
-        },
-        (error) => {
+        }, (error) => {
         console.error(error);
     });
-}
+  }
 }
 
 ngOnInit() {
@@ -48,9 +47,9 @@ ngOnInit() {
     this.likeInfo.likes.map(element => {
       if (element === this.authService.getEmail()){
         this.liked = true;
-      }
-    });
+        }
+      });
+    }
   }
-}
 
 }

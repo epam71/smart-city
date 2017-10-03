@@ -1,12 +1,10 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NewsServiceService } from '../../core/news-service/news-service.service';
-
 import { News } from "../../models/news.model";
 import 'rxjs/add/operator/switchMap';
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/pluck';
+
 
 @Component({
   selector: 'app-news',
@@ -19,12 +17,10 @@ export class NewsComponent implements OnInit {
   private imagePath = '';
   private safeUrl: SafeUrl;
   private newsList;
-  newsData
-  id$: Observable<string>;
+  private newsData;
  
-  constructor(private service: NewsServiceService,
+  constructor(private newsService: NewsServiceService,
               private route: ActivatedRoute,
-              private router: Router,
               private domSanitizer: DomSanitizer ) {
                 route.params.subscribe(param => {
                   this.newsId = param;
@@ -37,9 +33,8 @@ export class NewsComponent implements OnInit {
   }
             
   ngOnInit(): void {
-   
-    let newsData = this.service.getNewsById(this.newsId.id);
-    this.newsList= this.service.getNewsBlock();
+    let newsData = this.newsService.getNewsById(this.newsId.id);
+    this.newsList= this.newsService.getNewsBlock();
   
     newsData.switchMap(
           response => {
@@ -54,6 +49,4 @@ export class NewsComponent implements OnInit {
             this.newsData = value;
           });
       }
-
-   
 }

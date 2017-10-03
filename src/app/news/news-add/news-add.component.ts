@@ -19,16 +19,15 @@ export class NewsAddComponent implements OnInit {
   private title:string = '';
   private showModal;
   private imageFire = '';
-  progress
  
-constructor(private service: NewsServiceService, 
+constructor(private newsService: NewsServiceService, 
   private router: Router, 
   private authService: AuthService,
   private imageService: ImageServiceService,
   private fb: FormBuilder) { 
     this.rForm = fb.group({
     'title' : [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(30)])],
-    'desc' : [null, Validators.compose([Validators.required, Validators.minLength(150), Validators.maxLength(1500)])],
+    'desc' : [null, Validators.compose([Validators.required, Validators.minLength(150), Validators.maxLength(2500)])],
     'validate' : ''
     });
   }
@@ -40,7 +39,7 @@ constructor(private service: NewsServiceService,
   onAddNews( title, desc) {
     this.imageFire = this.imageService.fileName;
     let newsTemp: News = {  
-     author: this.authService.getNickname(),
+      author: this.authService.getNickname(),
       title: title,
       image: this.imageFire,
       desc: desc, 
@@ -49,10 +48,8 @@ constructor(private service: NewsServiceService,
       status: 'new'
     };
 
-
-    this.service.postNews(newsTemp)
+    this.newsService.postNews(newsTemp)
     .subscribe(
-      (response) => console.log(response),
       (error) => console.log(error)
     );
       
@@ -71,5 +68,4 @@ constructor(private service: NewsServiceService,
   ngOnInit() {
     this.imageService.resetImage();
   }
-
 }
