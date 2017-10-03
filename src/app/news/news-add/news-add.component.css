@@ -1,3 +1,7 @@
+.add{
+    margin-top: 100px;
+}
+
 .panel-info>.panel-heading{
     background-color: #ee3733;
     color: #fff;
@@ -72,8 +76,8 @@
 }
 
 .image-preview-input input[type=file] {
-	position: absolute;
-	top: 30px;
+    width: 1px;
+    height: 2px;
 	right: 0;
 	margin: 0;
 	padding: 0;
@@ -90,3 +94,12 @@
     margin-left: 15px;
 }
 
+.progress{
+margin-bottom: 5px;
+height: 26px;
+}
+
+.progress-bar{
+    background-color: #ee3733;
+    padding: 3px;
+}

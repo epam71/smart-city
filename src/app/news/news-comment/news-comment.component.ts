@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, OnChanges} from '@angular/core';
 import { NewsServiceService } from '../../core/news-service/news-service.service';
 import { News } from '../../models/news.model';
 import { AuthService } from '../../core/auth-service/auth-service.service';
@@ -19,6 +19,7 @@ export class NewsCommentComponent implements OnInit {
   private message:string = '';
   private getUserRole;
   private comment;
+  private removeComment= false;
 
 constructor(private commentService: NewsServiceService,
             private authService: AuthService,
@@ -42,11 +43,14 @@ addComment(message){
       }
     )
     .subscribe(
-    value => {
-      this.commentsInfo = value;
-      this.rForm.reset();
-    });
+      value => {
+        this.removeComment = true;
+        this.rForm.reset();
+       return this.commentsInfo = value;
+      });
+   
 }  
+
 
 deleteComment(commentId){
   let deleteComment = this.commentService.deleteComment(this.commentsInfo._id, commentId.id);
@@ -56,12 +60,14 @@ deleteComment(commentId){
       }
     )
     .subscribe(
-    value => {
-      this.commentsInfo = value;
-    });
+      value => {
+       return this.commentsInfo = value;
+      });
 } 
 
 ngOnInit() {
   this.getUserRole = this.authService.getRole();
   }
+
+
 }

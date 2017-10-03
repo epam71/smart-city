@@ -19,17 +19,19 @@
             <li (click)="sortByAuthor()">Sort by author</li>
           </div>
       </div>
-    </div>
+    </div>  
+
     <ng-container  *ngFor="let key of (news | async) | searchNews: queryString:'title' | sortBy:sort:sortKey | paginate: { itemsPerPage: 10, currentPage: p }">
-      <div class="col-md-4 col-sm-6 service-block" *ngIf="key.approved === false">
+      <div class="col-md-4 col-sm-6 service-block">
         <div class="news_block">
           <div class="news-img">
-          <img class="img img-responsive" [src]="domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64,' + key?.image)" alt="{{key.title }}">
+          <img *ngIf="key.image ===''" class="img img-responsive" src="http://lorempixel.com/400/200/city/" alt="{{key.title }}">
+          <img *ngIf="key.image !==''" class="img img-responsive" src="{{key.image}}" alt="{{key.title }}">
         </div>
           <p class="news_date ">{{key.date | date:'dd MMMM y'}} </p>
           <p class="author"> Written by: {{key.author}}</p>
-          <h3 class="news_title">{{key.title }} </h3>
-          <p class="news_desc">{{ key.desc | truncate: [150] }}</p>
+          <h3 class="news_title">{{key.title | shorten:28 }} </h3>
+          <p class="news_desc">{{ key.desc | shorten:130 }}</p>
           <a class="read" [routerLink]="['/news', key._id]">Read more 
             <span class="glyphicon glyphicon-menu-right"></span>
           </a>
