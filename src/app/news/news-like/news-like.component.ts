@@ -33,7 +33,7 @@ increaseLike() {
          return this.likeInfo.rating = response.currentRating;
         },
         (error) => {
-        console.error('You can not post like twice');
+        console.error(error);
     });
 }
 }

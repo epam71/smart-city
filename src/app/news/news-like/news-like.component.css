@@ -16,40 +16,27 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index:99999;
+    z-index:999999;
 }
 
 .login{
-    margin: 10px auto;
+    display: block;
     font-family: "Raleway", sans-serif;
+    text-transform: uppercase;
     font-weight: 500;
     font-size: 16px;
-    display: block;
+    letter-spacing: 1px;
     padding: 8px 20px;
     border-radius: 2px;
     transition: 0.5s;
-    border: 2px solid #333;
-    background: none;
-    color: #333;
-    box-sizing: border-box;
+    margin:  10px auto;
+    border: 0;
+    background: #ee3733;
+    color: #fff;
 }
 
-.liked{
-    background-image: url('../../../assets/images/likes.png');
-    background-repeat: no-repeat;
-    background-size: auto;
-    background-position: 15px -1px; 
-    width: 33px;
-    height: 22px;  
-}
-
-.not-liked{
-    background-image: url('../../../assets/images/likes.png');
-    background-repeat: no-repeat;
-    background-size: auto;
-    background-position: 15px -32px;
-    width: 33px;
-    height: 22px;
+.login:hover{
+    box-shadow: 5px 5px 5px #888888;
 }
 
 .login:hover{
@@ -58,16 +45,71 @@
     color: #fff;
 }
 
-.rating_block{
-    color: #333;
-    transition: 400ms cubic-bezier(.08,.52,.52,1) filter, 400ms cubic-bezier(.08,.52,.52,1) transform;
-}
-
-.glyphicon{
-    cursor: pointer;
-}
-
 .btn-default{
     border: 0;
 }
+
+.rating_block{
+    margin: 6px 15px 0 0;
+    cursor: pointer;
+}
+
+  .heart{
+    position: relative;
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: #ee3733;
+    border-radius: 0;
+    transform: rotate(-45deg);
+  }
+  
+  .heart::before,
+  .heart::after {
+    position: absolute;
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: #ee3733;
+    border-radius: 50%;
+  }
+  .heart::before {
+    top: -5px;
+    left: 0;
+  }
+  .heart::after {
+    top: 0;
+    right: -5px;
+  }
+  @keyframes pulse {
+    0%, 20% {
+      transform: rotate(-45deg) scale(1);
+    }
+    30% {
+      transform: rotate(-45deg) scale(1.2);
+    }
+    50% {
+      transform: rotate(-45deg) scale(1);
+    }
+  }
+
+  .not-liked .heart {
+    opacity: 0.35;  
+  }
+
+  .not-liked .heart:hover{
+    animation: pulse 1s infinite;
+    opacity: 1;
+  }
+
+  .liked .heart{
+    opacity: 1; 
+  }
+
+  .like-info{
+    float: left;
+    margin: -5px 0 0 20px;
+}
+
+
 

@@ -23,10 +23,21 @@
               <label for="filePicker" class="col-sm-2 control-label file-label">Choose image:</label>
               <label for="filePicker" class="btn btn-default image-preview-input"> 
                   <span class="glyphicon glyphicon-folder-open"></span> 
-                  <span class="image-preview-input-title">Browse</span>
+                  <span class="image-preview-input-title">Upload image</span>
                   <span class='label label-info' id="upload-file-info"></span>
-                  <input id="filePicker" type="file" name="input-file-preview" accept="image/*" (change)="changeListener($event)" />
-            </label> 
+                  <input id="filePicker" type="file" name="input-file-preview" accept="image/*" (change)="pushImage($event)" />
+                  <div *ngIf="imageService?.uploadProgress">
+                  <div class="progress">
+                      <div class="progress-bar progress-bar-striped active" role="progressbar"
+                      aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
+                      style="min-width: 2em;" [ngStyle]="{ 'width': imageService?.uploadProgress + '%' }">
+                      Image uploading:
+                      {{imageService?.uploadProgress}}% 
+                      </div>
+                    </div>
+                  </div>
+                </label> 
+            
             </div>
             <div class="form-group">
               <label for="desc" class="col-sm-2 control-label">Description</label>
@@ -38,7 +49,7 @@
               </div>
             </div>  
             <button type="submit" value="Submit Form" [disabled]="!rForm.valid" class="btn news-btn">Add news</button>
-            <button type="reset" class="btn news-btn cancel-btn">Cancel</button>
+            <button type="reset" (click)="cancel()" class="btn news-btn cancel-btn">Cancel</button>
           </form>    
         </div>
       </div> 

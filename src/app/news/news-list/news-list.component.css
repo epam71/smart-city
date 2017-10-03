@@ -44,7 +44,7 @@
 }
 
 .news-attribute{
-    margin: 30px 0;
+    margin: 110px 0 15px 0;
     padding: 15px ;
     border-radius: 10px; 
     background: #FCFCFC;
@@ -52,7 +52,7 @@
 }
 
 .news-attribute input{
-    padding: 20px 5px;
+    padding: 18px 5px;
 }
 
 input:focus {   
@@ -86,7 +86,7 @@ a{
 }
 
 .service-block {
-    margin: 30px 0px;  
+    margin: 15px 0px;  
 }
 
 .news_block{
@@ -116,28 +116,29 @@ a{
 }
 
 .news-img{
-    max-height: 200px;
     overflow: hidden;
     position: relative;
-    background: url('http://lorempixel.com/400/200/city/');
     background-size: cover;
     padding: 0 0 calc(10/16*100%);
-    margin-top: 10px;
+    padding-top: 10px;
 }
 
 .img{
-    max-height: 300px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 .news_title{
     margin: 20px 0;
-    font-size: 20px;
-    font-weight: 400;
+    font-size: 18px;
+    font-weight: 700;
     text-transform: uppercase;
+    color: #333;
 }
 
-news_desc{
-    font-size: 18px;
+.news_desc{
+    padding-bottom: 5px;
 }
 
 .read{
@@ -201,3 +202,5 @@ news_desc{
 .pagination pagination-controls /deep/ .ngx-pagination .disabled{
     color: #9a9a9a;
 }
+
+

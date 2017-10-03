@@ -10,6 +10,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
+
 @Injectable()
 export class NewsServiceService {
  
@@ -24,8 +25,9 @@ export class NewsServiceService {
     return Observable.throw(errorMessage);
   }
 
-  getNewsBlock(): Observable<News[]> {
-    return this.http.get(config.PATH + 'news/' + '?query={"approved":"false"}&limit=3', 
+
+  getNewsBlock(): Observable<News[]> { 
+    return this.http.get(config.PATH + 'news/' + '?query={"approved":"false"}&limit=3&sort=-rating', 
      this.authService.getAuthHeaderOpt())
       .map((response: Response) => {
         return response.json();
@@ -33,7 +35,7 @@ export class NewsServiceService {
   };
  
  getNews(): Observable<News[]> {
-    return this.http.get(config.PATH + 'news/' , 
+    return this.http.get(config.PATH + 'news/' + '?query={"approved":"false"}&sort=-date' , 
     this.authService.getAuthHeaderOpt())
       .map((response: Response) => {
         return response.json();

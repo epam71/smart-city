@@ -1,11 +1,11 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
-
+import { Observable } from 'rxjs/Observable';
 import { News } from "../../models/news.model";
 import { NewsServiceService } from '../../core/news-service/news-service.service';
 import { AuthService } from "../../core/auth-service/auth-service.service";
-import { DomSanitizer } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-news-list',
@@ -14,17 +14,18 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 
 export class NewsListComponent implements OnInit {
+  
   private sort = 'all';
   private sortKey;
   private news;
-  private pagination: number[] = [];
   public email;
   private getUserRole;
 
  
   constructor(private service: NewsServiceService, 
-    private authService: AuthService,
-    private domSanitizer: DomSanitizer){  }
+    private authService: AuthService){ 
+    
+  }
 
   sortByOldestDate() {
     this.sort = 'date';

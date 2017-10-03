@@ -15,21 +15,78 @@
   </div>
 </form>  
 
-<div *ngFor="let key of commentsInfo?.comments">
-  <div class="comments"  >
-        <button type="button" class="close" aria-label="Close" (click)="deleteComment(key)">
-            <span aria-hidden="true">&times;</span>
-          </button>
-     <p class="user">{{key.username}} </p> 
-      <p class="message"> {{key.message}} </p>   
-    <p class=" date pull-right">   
-      {{key.date | date:'dd MMMM y'}}
-  </p> 
-  </div>
-</div>
-
-<div class="col-md-10 warning" *ngIf="getUserRole === ''">
+<div class="col-md-12 warning" *ngIf="getUserRole === ''">
     <h4>Join the discussion!</h4>
     <p>You must be signed in to post a comment.</p>
     <button (click)='authService.login()'>Sign in</button>
   </div>
+
+
+<div *ngFor="let key of commentsInfo?.comments.reverse() | paginate: { itemsPerPage: 4, currentPage: p }">
+  <div class="comments row"  >
+  
+
+  <div class="col-sm-1 col-xs-3">
+      <div class="thumbnail">
+      <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+      </div>
+      </div>
+      
+      <div class="col-sm-11 col-xs-9">
+      <div class="panel panel-default">
+      <div class="panel-heading">
+          <div *ngIf="removeComment || getUserRole === 'root'">
+              <button type="button" class="close" aria-label="Close" (click)="deleteComment(key)">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div  class=" username">
+                  <i class="glyphicon glyphicon-user"></i> {{key.username}}
+              </div>
+              <div class="date text-muted">
+                  <i  class="glyphicon glyphicon-time"></i> {{key.date | date:'short'}}
+              </div>      
+      
+      </div>
+      <div class="panel-body">
+          {{key.message}}
+      </div>
+      </div>
+      </div>
+      
+  
+
+  </div>
+</div>
+<div class="pagination">
+    <pagination-controls (pageChange)="p = $event" 
+    previousLabel=""
+    nextLabel=""
+    ></pagination-controls>
+  </div>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
