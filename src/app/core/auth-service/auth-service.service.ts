@@ -7,6 +7,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import * as auth0 from 'auth0-js';
+import { config } from "../config";
 
 const USER_INFO_URL = 'https://smart-city-lviv.eu.auth0.com/userinfo';
 const STORE_KEY_REDIRECT = 'authRedirectTo';
@@ -135,7 +136,6 @@ export class AuthService {
     let tempAccessToken = this.decryptToken(localStorage.getItem(mapKeyToStoreKey['accessToken']));
     let headers = new Headers();
     let options;
-        
 
     this.expireAt = +localStorage.getItem(mapKeyToStoreKey['expireAt']);
     if (tempAccessToken && !this.isExpired()) {
@@ -199,9 +199,15 @@ export class AuthService {
     this.setAuthHeader(headers);
     return new RequestOptions({ headers: headers });
   }
+
+  getUserCount(): Observable<any> {
+    return this.http.get(`${config.PATH}users`, this.getAuthHeaderOpt());
+  }
+
   encryptToken(token): string {
     return btoa(token);
   }
+
   decryptToken(encToken): string {
     let res;
     try {
