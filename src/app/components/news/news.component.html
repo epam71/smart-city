@@ -13,7 +13,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let key of (newsAll | async) | slice:0:3 | orderBy: date : true">
+			<div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let key of (newsAll | async) | slice:0:3 ">
 				<div class="blogList_single_post clear_fix wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
 					<div class="img_holder">
 						<img src="{{key?.image}}" alt="{{key.newsAll}}" class="img-responsive">
@@ -25,7 +25,7 @@
 						<div class="text">
 							<p class="author"><a href="#">Written by: {{key.author}}</a></p>
 							<h4><a [routerLink]="['/news', key._id]">{{key.title}}</a></h4>
-							<p>{{ key.desc | truncate: [150] }}</p>
+							<p>{{ key.desc | shorten: [150] }}</p>
 							<div class="link"><a [routerLink]="['/news', key._id]" class="tran3s">Read more</a></div>
 							
 						</div>

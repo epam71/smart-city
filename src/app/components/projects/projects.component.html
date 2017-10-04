@@ -12,12 +12,15 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4 col-sm-6" *ngFor="let key of (projectsApproved | async) | slice:0:3 | orderBy: order">
+			<div class="col-md-4 col-sm-6" *ngFor="let key of (projectsApproved | async) | slice:0:3 | orderBy: date ">
 				<div class="single-our-service">
 					<figure class="img-box">
 						<a href="#"><img src="{{key?.image}}" alt="{{key.projectName}}" width="300" height="200"></a>
 					</figure>
-					<a href="#"><h4>{{key.projectName }}</h4></a>
+					<h4><a href="#" class="proj-name" [routerLink]="['/projects', key._id]">{{key.projectName }}</a></h4>
+					<p class="proj-date">
+						{{key.date | date:'dd MMMM y'}}
+					</p>
 					<p>{{ key.desc }}</p>
 					<div class="link"><a [routerLink]="['/projects', key._id]" class="tran3s">Read more</a></div>
 				</div>

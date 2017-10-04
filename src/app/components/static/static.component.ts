@@ -15,6 +15,7 @@ export class StaticComponent implements OnInit {
   aboutImg: string;
   projects = 0;
   projectsDone = 0;
+  userCount;
 
   constructor(private projectsData: ProjectServiceService, private authService: AuthService) {
     this.subscribeImg = '../assets/images/lviv-city.jpg',
@@ -24,7 +25,7 @@ export class StaticComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.projectsData.getProjects().subscribe(
+    this.projectsData.getApprovedProjects().subscribe(
       (response) => {
           this.projects = response.length;
           response.forEach((el, i) => {
@@ -34,6 +35,11 @@ export class StaticComponent implements OnInit {
           })
       }
     )
+    this.authService.getUserCount().subscribe(
+      (response) => {
+        this.userCount = response.usersCount;
+      }
+    );
   }
 
 }

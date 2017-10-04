@@ -105,6 +105,7 @@ input#subject.form-control{
 .office_location i span {
     color: white;
     font-size: 14px;
+    padding-left: 10px;
 }
 .office_location i {
     padding-bottom: 15px;

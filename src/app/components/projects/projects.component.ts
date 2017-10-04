@@ -10,7 +10,6 @@ import { SlicePipe } from '@angular/common';
 })
 export class ProjectsComponent implements OnInit {
   projectsApproved;
-  order: string = 'date';
   constructor(private projectsData: ProjectServiceService) {
   }
 
