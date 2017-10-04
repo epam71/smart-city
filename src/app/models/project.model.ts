@@ -4,6 +4,7 @@ export interface Project {
     authorEmail?: string,
     projectName: string,
     image?: string,
+    imageKey?: string,
     desc: any,
     goals: string,
     result: string,
