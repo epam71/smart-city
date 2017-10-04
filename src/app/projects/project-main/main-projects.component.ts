@@ -22,15 +22,14 @@ export class ProjectMainComponent implements OnInit {
     private authService: AuthService) {}
 
   searchData = '';
-  nick;
-  email;
-  userCheck;
-
 
   projects;
   userProjects = false;
-  sortTypeValue = 'normal';
   sort = 'unsorted';
+
+  sortMemo = '';
+  sortTypeValue = '';
+
   searchButton = true;
   projectsValues = [{
     key: 'unsorted',
@@ -52,54 +51,43 @@ export class ProjectMainComponent implements OnInit {
 
   valueChange(newValue) {
     this.searchData = newValue;
-    this.projects = this.projectsData.searchProjects(this.searchData, 'projectName');
+    this.projects = this.projectsData.searchProjects(this.searchData);
   }
 
   selectSort(event) {
 
     return this.projectsValues.forEach((el, i) => {
       if (this.projectsValues[i].key === event) {
-        return this.sort = this.projectsValues[i].value;
+        this.sortMemo = this.projectsValues[i].value;
+        return this.projects = this.projectsData.getProjects(this.sortMemo, this.sortTypeValue);
       }
     });
   }
 
   sortType(event) {
-    if (this.sortTypeValue === 'normal') {
-      this.sortTypeValue = 'reverse';
+
+    if (this.sortTypeValue === '') {
+      this.sortTypeValue = '-';
     } else {
-      this.sortTypeValue = 'normal';
+      this.sortTypeValue = '';
     }
+    return this.projects = this.projectsData.getProjects(this.sortMemo, this.sortTypeValue);
   }
 
   showUserProjects() {
     if (!this.userProjects) {
       this.userProjects = true;
-      this.projectsData.getUserProjects(this.authService.getNickname())
-      .subscribe((response) => {
-        this.projects = response;
-      });
+      this.projects = this.projectsData.getUserProjects(this.authService.getNickname());
     } else {
       this.userProjects = false;
-      this.projectsData.getApprovedProjects()
-      .subscribe((response) => {
-        this.projects = response;
-      });
+      this.projects = this.projectsData.getApprovedProjects();
     }
 
   }
 
-  
-
-
-  
 
   ngOnInit() {
     this.projects = this.projectsData.getProjects();
-
-    this.userCheck = this.authService.getRole();
-    this.nick = this.authService.getNickname();
-    this.email = this.authService.getEmail();
   }
 
 }

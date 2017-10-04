@@ -1,12 +1,3 @@
-<div>
-    Nickname: {{nick}}
-    <br> Email: {{email}}
-    <br> Role: {{userCheck}}
-    <br>
-    
-    <button (click)='authService.login()'>Login</button>
-    <button (click)='authService.logout()'>Logout</button>
-  </div>
   <div class="container projects_block_main">
     <div class="row panel_block">
       <div class="col-lg-10 col-md-10 col-sm-10 projects_panel_left">
@@ -22,7 +13,7 @@
       <option *ngFor="let key of projectsValues" >{{key.key}}</option>
     </select>
         </span>
-          <span class="reverse_button" *ngIf="sort !== 'unsorted'">
+          <span class="reverse_button" *ngIf="sortMemo !== ''">
             <button class="glyphicon glyphicon-sort" (click)="sortType($event)"></button>
         </span>
         </span>
@@ -44,7 +35,7 @@
     <div class="projects_block">
         <div class="row">
 <app-projects-list class="col-md-4 col-sm-6 project_block_main" *ngFor="let key of (projects | async)
-| sortBy:sort:sortTypeValue | paginate: { itemsPerPage: 10, currentPage: p }" [key]="key" > </app-projects-list>
+ | paginate: { itemsPerPage: 10, currentPage: p }" [key]="key" > </app-projects-list>
         </div>
     </div>
 

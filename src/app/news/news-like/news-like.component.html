@@ -1,6 +1,6 @@
-<div  class="rating_block" [ngClass]="liked === true ? 'liked' : 'not-liked'"
-(click)="increaseLike()">
-        <span> {{likeInfo?.rating}} </span>
+<div class="rating_block" [ngClass]="liked === true ? 'liked' : 'not-liked'" (click)="increaseLike()">
+    <span class="like-info">{{likeInfo?.rating}}</span>
+    <i class="heart pulse"></i>
 </div>
 
 <div *ngIf="showModal && getUserRole === ''" id="modal" class="modal-dialog ">

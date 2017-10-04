@@ -1,35 +1,52 @@
-
 <form *ngIf="getUserRole !== ''" class="form-horizontal" [formGroup]="rForm" (ngSubmit)="addComment(message.value)">
   <div class="form-group">
-    <label for="message" class="col-sm-2 control-label">Left comment:</label>
+      <label for="message" class="col-sm-2 control-label">Left comment:</label>
       <div class="col-sm-10">
-        <textarea name="message" id="" cols="30" rows="5" class="form-control" 
-                formControlName="message" required id="message" #message>
-        </textarea>
-        <div class="alert" *ngIf="!rForm.controls['message'].valid && 
-        rForm.controls['message'].touched">You must specify a comment that's between 5 and 80 characters.
-        </div>
-        <button type="submit" value="Submit Form" [disabled]="!rForm.valid" class="btn">Add comment</button>
-        <button type="reset" class="btn cancel-btn">Cancel</button>
+          <textarea name="message" id="" cols="30" rows="5" class="form-control" formControlName="message" required id="message" #message>
+          </textarea>
+          <div class="alert" *ngIf="!rForm.controls['message'].valid && 
+      rForm.controls['message'].touched">You must specify a comment that's between 5 and 200 characters.
+          </div>
+          <button type="submit" value="Submit Form" [disabled]="!rForm.valid" class="btn">Add comment</button>
+          <button type="reset" class="btn cancel-btn">Cancel</button>
       </div>
   </div>
-</form>  
-
-<div *ngFor="let key of commentsInfo?.comments">
-  <div class="comments"  >
-        <button type="button" class="close" aria-label="Close" (click)="deleteComment(key)">
-            <span aria-hidden="true">&times;</span>
-          </button>
-     <p class="user">{{key.username}} </p> 
-      <p class="message"> {{key.message}} </p>   
-    <p class=" date pull-right">   
-      {{key.date | date:'dd MMMM y'}}
-  </p> 
-  </div>
+</form>
+<div class="col-md-12 warning" *ngIf="getUserRole === ''">
+  <h4>Join the discussion!</h4>
+  <p>You must be signed in to post a comment.</p>
+  <button (click)='authService.login()'>Sign in</button>
 </div>
 
-<div class="col-md-10 warning" *ngIf="getUserRole === ''">
-    <h4>Join the discussion!</h4>
-    <p>You must be signed in to post a comment.</p>
-    <button (click)='authService.login()'>Sign in</button>
+<div *ngFor="let key of commentsInfo?.comments.reverse() | paginate: { itemsPerPage: 4, currentPage: p }">
+  <div class="comments row">
+      <div class="col-sm-1 col-xs-3">
+          <div class="thumbnail">
+              <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+          </div>
+      </div>
+      <div class="col-sm-11 col-xs-9">
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  <div *ngIf="userEmail === key.username || getUserRole === 'root'">
+                      <button type="button" class="close" aria-label="Close" (click)="deleteComment(key)">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class=" username">
+                      <i class="glyphicon glyphicon-user"></i> {{key.username}}
+                  </div>
+                  <div class="date text-muted">
+                      <i class="glyphicon glyphicon-time"></i> {{key.date | date:'short'}}
+                  </div>
+              </div>
+              <div class="panel-body">
+                  {{key.message}}
+              </div>
+          </div>
+      </div>
   </div>
+</div>
+<div *ngIf="commentsInfo?.comments.length >= 4" class="pagination">
+  <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+</div>

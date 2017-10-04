@@ -23,6 +23,7 @@ import { OrderModule } from 'ngx-order-pipe';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { config } from './core/config';
+import { UserAuthGuardService } from './core/admin-auth-guard/user-auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { config } from './core/config';
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(config.firebase)
   ],
-  providers: [AdminAuthGuardService],
+  providers: [AdminAuthGuardService, UserAuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

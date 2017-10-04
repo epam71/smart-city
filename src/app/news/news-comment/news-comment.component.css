@@ -1,4 +1,4 @@
-.form-group button{
+.form-group button {
     margin: 25px 5px 25px 0;
     font-family: "Raleway", sans-serif;
     font-weight: 500;
@@ -12,34 +12,43 @@
     color: #777777;
     box-sizing: border-box;
 }
-
-.form-group button:hover, .form-group .cancel-btn{
+.form-group button:hover,
+.form-group .cancel-btn {
     background: #ee3733;
     border-color: #ee3733;
     color: #fff;
 }
-
-.comments{  
-    margin: 50px 0;
+.alert {
+    background: #f2edda;
+    padding: 8px;
+    margin: 5px 0;
+    font-size: .9em;
+    animation: 1s alertAnim forwards;
+}
+@keyframes alertAnim {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.comments {
     padding-top: 5px;
-    border-top: 1px solid #ccc;
 }
-
-form{
+form {
     padding-top: 30px;
-    border-top: 1px solid #ccc; 
 }
-
-.warning{
-    margin-top: 20px;
-    border-top: 2px solid #B3B3B3;
+.warning {
+    margin: 40px 0;
+    text-align: center;
 }
-
-.warning h4{
+.warning h4 {
     font-weight: 700;
 }
-
-.warning button{
+.warning button {
     font-family: "Raleway", sans-serif;
     text-transform: uppercase;
     font-weight: 500;
@@ -48,24 +57,93 @@ form{
     padding: 8px 20px;
     border-radius: 2px;
     transition: 0.5s;
-    margin:  8px 0 10px 0;
+    margin: 8px 0 10px 0;
     border: 0;
     background: #ee3733;
     color: #fff;
 }
-
-.warning button:hover{
+.warning button:hover {
     box-shadow: 5px 5px 5px #888888;
 }
-
-.user{
+.user {
     font-weight: bold;
 }
-
-.message{
+.message {
     margin: 8px 0;
 }
-
-.date{
-    font-style: italic; 
+.date {
+    font-size: 11px;
+    font-style: italic;
+}
+.thumbnail {
+    padding: 0px;
+}
+.panel {
+    position: relative;
+}
+.panel>.panel-heading:after,
+.panel>.panel-heading:before {
+    position: absolute;
+    top: 11px;
+    left: -16px;
+    right: 100%;
+    width: 0;
+    height: 0;
+    display: block;
+    content: " ";
+    border-color: transparent;
+    border-style: solid solid outset;
+    pointer-events: none;
+}
+.panel>.panel-heading:after {
+    border-width: 7px;
+    border-right-color: #f7f7f7;
+    margin-top: 1px;
+    margin-left: 2px;
+}
+.panel>.panel-heading:before {
+    border-right-color: #ddd;
+    border-width: 8px;
+}
+.pagination {
+    display: block;
+    text-align: center;
+    margin: 30px auto;
+}
+.pagination pagination-controls /deep/ .ngx-pagination {
+    margin: 0;
+    padding: 0;
+}
+.pagination pagination-controls /deep/ .ngx-pagination li {
+    background: #fff;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    color: #000;
+    cursor: pointer;
+    margin: 0 2px;
+}
+.pagination pagination-controls /deep/ .ngx-pagination li:hover,
+.pagination pagination-controls /deep/ .ngx-pagination a:hover,
+.pagination pagination-controls /deep/ .ngx-pagination button:hover {
+    background: #ee3733;
+    color: #fff;
+}
+.pagination pagination-controls /deep/ .ngx-pagination .current {
+    background: #ee3733;
+    color: #fff;
+}
+.pagination pagination-controls /deep/ .ngx-pagination a,
+.pagination pagination-controls /deep/ .ngx-pagination button {
+    padding: 0;
+}
+.pagination pagination-controls /deep/ .ngx-pagination .pagination-next,
+.pagination pagination-controls /deep/ .ngx-pagination .pagination-previous,
+.pagination pagination-controls /deep/ .ngx-pagination button {
+    padding: 5px;
+    width: 40px;
+    margin: 0;
+}
+.pagination pagination-controls /deep/ .ngx-pagination .disabled {
+    color: #9a9a9a;
 }
