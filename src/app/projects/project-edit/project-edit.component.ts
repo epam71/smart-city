@@ -114,7 +114,7 @@ export class ProjectEditComponent implements OnInit {
         (response) => {
           this.project = response;
           this.image = response.image;
-          // this.imageKey = response.imageKey;
+          this.imageKey = response.imageKey;
         },
         (error) => {
           console.error(error);
