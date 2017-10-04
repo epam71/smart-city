@@ -54,6 +54,13 @@ img{
   -webkit-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
 }
+.navbar-brand{
+  font-size: 24px;
+  font-weight: 500;
+}
+.navbar-brand .logo-reg{
+  color: #ee3733;
+}
 
 .navbar-default .navbar-nav {
   position: relative;

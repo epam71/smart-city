@@ -25,7 +25,7 @@ export class StaticComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.projectsData.getProjects().subscribe(
+    this.projectsData.getApprovedProjects().subscribe(
       (response) => {
           this.projects = response.length;
           response.forEach((el, i) => {
@@ -37,8 +37,7 @@ export class StaticComponent implements OnInit {
     )
     this.authService.getUserCount().subscribe(
       (response) => {
-        this.userCount = response;
-        console.log(this.userCount);
+        this.userCount = response.usersCount;
       }
     );
   }

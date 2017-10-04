@@ -8,6 +8,10 @@
   position: relative;
   padding: 70px 0 30px;
 }
+
+.font-20 p{
+  font-style: italic;
+}
 .news.single_news_page{
   background: #fff;
 }
