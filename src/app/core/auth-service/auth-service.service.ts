@@ -137,6 +137,8 @@ export class AuthService {
     let headers = new Headers();
     let options;
 
+    this.getUserCount().subscribe(res => alert(JSON.stringify(res)));
+
     this.expireAt = +localStorage.getItem(mapKeyToStoreKey['expireAt']);
     if (tempAccessToken && !this.isExpired()) {
       headers.set( 'Authorization', `Bearer ${tempAccessToken}`);
@@ -201,7 +203,8 @@ export class AuthService {
   }
 
   getUserCount(): Observable<any> {
-    return this.http.get(`${config.PATH}users`, this.getAuthHeaderOpt());
+    return this.http.get(`${config.PATH}users`, this.getAuthHeaderOpt())
+      .map( response => response.json());
   }
 
   encryptToken(token): string {
