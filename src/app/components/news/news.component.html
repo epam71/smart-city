@@ -13,7 +13,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let key of (newsAll | async) | slice:0:3">
+			<div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let key of (newsAll | async) | slice:0:3 | orderBy: date : true">
 				<div class="blogList_single_post clear_fix wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
 					<div class="img_holder">
 						<img src="{{key?.image}}" alt="{{key.newsAll}}" class="img-responsive">

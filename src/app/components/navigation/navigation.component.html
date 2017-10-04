@@ -26,7 +26,7 @@
             <li>
               <a routerLink="/projects" routerLinkActive="active" [routerLinkActiveOptions] = "{ exact: true }">Projects</a>
             </li>
-            <li><a href="#">Contacts</a>
+            <li><a href="/contacts">Contacts</a>
             </li>
             <li *ngIf="!log"><a (click)='authService.login();'>Log In</a>
             </li>
