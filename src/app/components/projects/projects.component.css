@@ -28,6 +28,11 @@
     background: #ee3733;
 }
 
+.proj-date {
+  color: #6D6D6D;
+  padding: 7px 0;
+}
+
   .our-services .separet {
     position: relative;
     display: block;
@@ -85,7 +90,13 @@
     line-height: 3;
   }
 
-  .link a:hover {
+  .proj-name{
+    color: #272727;
+    font-weight: 400;
+    font-size: 20px;
+  }
+
+  .link a:hover, .proj-name:hover{
     color: #ee3733;
     transition: .5s ease;
   }

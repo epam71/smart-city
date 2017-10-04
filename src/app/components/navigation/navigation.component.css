@@ -4,7 +4,7 @@
 }
 header{
   width: 100%;
-  z-index: 5;
+  z-index: 999;
 }
 
 .wpb-mobile-menu{
