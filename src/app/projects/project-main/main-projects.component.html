@@ -34,20 +34,19 @@
 
     <div class="projects_block">
         <div class="row">
-<app-projects-list class="col-md-4 col-sm-6 project_block_main" *ngFor="let key of (projects | async)
- | paginate: { itemsPerPage: 10, currentPage: p }" [key]="key" > </app-projects-list>
+<app-projects-list class="col-md-4 col-sm-6 project_block_main" *ngFor="let key of (projects | async)" [key]="key" > </app-projects-list>
         </div>
     </div>
 
 </div>
+
 <div class="pagination_block">
-  <pagination-controls class="pagination" (pageChange)="p = $event"
-  maxSize="9"
-  directionLinks="true"
-  autoHide="true"
-  previousLabel=""
-  nextLabel=""
-  screenReaderPaginationLabel="Pagination"
-  screenReaderPageLabel="page"
-  screenReaderCurrentLabel="You're on page"></pagination-controls>
+<ul class="pagination">
+    <li (click)="prev()" [ngClass]="{disabled: (+currentPage - 1 < 1)}"><a>&laquo;</a></li>
+  <li *ngFor="let key of pages" (click)="paginateFunc($event)" [ngClass]="{active: currentPage == key}">
+      <a>{{key}}</a>
+  </li>
+  <li (click)="next()" [ngClass]="{disabled: (+currentPage - pagesArr.length == 0)}"><a>&raquo;</a></li>
+</ul>
 </div>
+{{pagesArr.length}}

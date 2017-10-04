@@ -1,4 +1,10 @@
-.nav_block {
+.edit_block{
+margin-top: 100px;
+
+}
+  
+  .nav_block {
+    margin-bottom: 10px;
   background: #FCFCFC;
   color: #777777;
   padding: 20px;

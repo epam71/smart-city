@@ -1,3 +1,5 @@
-<div [ngClass]="liked === true ? 'liked_block' : 'unliked_block'" (click)="changeRating()">
-                {{ratingObjInfo?.rating}}
+<div class="rating_block">
+    <div class="rating_block_inside" [ngClass]="liked === true ? 'liked_block' : 'unliked_block'" (click)="changeRating()">
+        {{ratingObjInfo?.rating}}
+    </div>
 </div>
