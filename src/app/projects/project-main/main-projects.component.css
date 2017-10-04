@@ -16,7 +16,8 @@ button:focus {
 :host a:hover {}
 
 .projects_block_main {
-  margin-top: 50px;
+  margin-top: 100px;
+  min-height: 800px;
 }
 
 .panel_block {
@@ -158,40 +159,14 @@ button:focus {
 
 
   .pagination_block {
-    padding-top: 50px;
-    text-align: center;
+   text-align: center;
+   margin: auto;
+   cursor: pointer;
   }
+
+  .pagination_block .pagination .active a{
+    color: white;
+    background: #ee3733;
+    border-color: #ee3733;
+   }
   
-  .pagination_block pagination-controls /deep/ .ngx-pagination {
-    background: white;
-    padding: 1px;
-    text-decoration: none;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .pagination_block pagination-controls /deep/ .ngx-pagination li {
-    border-right: 1px solid #ccc;
-    text-decoration: none;
-    border-radius: 0px;
-  }
-  
-  .pagination_block pagination-controls /deep/ .ngx-pagination li:last-child {
-    border-right: none;
-  }
-  
-  .pagination_block pagination-controls /deep/ .ngx-pagination .disabled {
-    padding: 5px;
-    text-decoration: none;
-  }
-  
-  .pagination_block pagination-controls /deep/ .ngx-pagination a {
-    background: white;
-    text-decoration: none;
-    padding: 5px;
-  }
-  
-  .pagination_block pagination-controls /deep/ .ngx-pagination .current {
-    padding: 5px;
-    background: #ccc;
-  }

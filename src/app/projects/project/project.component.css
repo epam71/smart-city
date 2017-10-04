@@ -41,7 +41,13 @@
   text-align: right;
 }
 
-.left_side {}
+.left_side {
+  margin-top: 7px;
+}
+
+.project_block_header {
+  margin-bottom: 5px;
+}
 
 .project_block {
   margin-top: 10px;
@@ -111,26 +117,29 @@
 }
 
 .likes_block {
-  text-align: left;
+
 }
 
 .date_block {
-  text-align: center;
+
 }
 
 .author_block {
+
+}
+
+.right_footer{
   text-align: right;
 }
 
 @media screen and (max-width: 768px) {
   .likes_block {
-    text-align: center;
   }
   .date_block {
-    text-align: center;
+
   }
   .author_block {
-    text-align: center;
+
   }
 }
 
@@ -156,6 +165,10 @@
   font-weight: 700;
   background: #ee3733;
   border: 2px solid #ee3733;
+}
+
+#myModal{
+  top: 20%;
 }
 
 .modal_window {
