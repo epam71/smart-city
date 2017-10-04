@@ -88,7 +88,6 @@ export class ProjectsEditComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private projectData: ProjectServiceService,
-    private sanitizer: DomSanitizer,
     private imageService: ImageServiceService) {
 
     let httpResult = route.params.switchMap(param => {

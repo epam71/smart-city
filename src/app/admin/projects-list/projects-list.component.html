@@ -62,12 +62,9 @@
         </div>
       </form>
 
-      <div *ngIf="queryString" class="panel panel-primary">
-        <div class="panel-heading search">
-          <h3 class="panel-title">Search results</h3>
-        </div>
+      <div *ngIf="queryString" class="panel panel-primary search-panel">
         <ul class="list-group">
-          <li *ngFor="let key of projects | searchNews:queryString:'projectName'| sortBy:prop:'normal'; let i=index" class="project_block list-group-item">
+          <li *ngFor="let key of projects | searchNews:queryString:'projectName'| sortBy:prop:'normal'; let i=index" class="project_block list-group-item sliding_bg">
             <a [routerLink]="['/admin/projects', key._id]">               
                {{key.projectName }} 
                <span *ngIf="key.status === 'new'" class="badge badge-default badge-pill">new</span>              
