@@ -1,4 +1,4 @@
-import { AchivementComponent } from './achivement/achivement.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { NavigationComponent } from './navigation/navigation.component';
