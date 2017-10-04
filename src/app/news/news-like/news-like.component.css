@@ -1,115 +1,100 @@
 @keyframes alertAnim {
-    from {
-        opacity:0;
-        transform: translateY(-5px);
-    }
-    to {
-        opacity:1;
-        transform: translateY(0);
-    }
-}
-
-#modal{
-    animation: 1s alertAnim forwards;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index:999999;
-}
-
-.login{
-    display: block;
-    font-family: "Raleway", sans-serif;
-    text-transform: uppercase;
-    font-weight: 500;
-    font-size: 16px;
-    letter-spacing: 1px;
-    padding: 8px 20px;
-    border-radius: 2px;
-    transition: 0.5s;
-    margin:  10px auto;
-    border: 0;
-    background: #ee3733;
-    color: #fff;
-}
-
-.login:hover{
-    box-shadow: 5px 5px 5px #888888;
-}
-
-.login:hover{
-    background: #ee3733;
-    border-color: #ee3733;
-    color: #fff;
-}
-
-.btn-default{
-    border: 0;
-}
-
-.rating_block{
-    margin: 6px 15px 0 0;
-    cursor: pointer;
-}
-
-  .heart{
-    position: relative;
-    display: block;
-    width: 10px;
-    height: 10px;
-    background: #ee3733;
-    border-radius: 0;
-    transform: rotate(-45deg);
+  from {
+      opacity: 0;
+      transform: translateY(-5px);
   }
-  
-  .heart::before,
-  .heart::after {
-    position: absolute;
-    content: "";
-    width: 10px;
-    height: 10px;
-    background: #ee3733;
-    border-radius: 50%;
+  to {
+      opacity: 1;
+      transform: translateY(0);
   }
-  .heart::before {
-    top: -5px;
-    left: 0;
-  }
-  .heart::after {
-    top: 0;
-    right: -5px;
-  }
-  @keyframes pulse {
-    0%, 20% {
+}
+#modal {
+  animation: 1s alertAnim forwards;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999999;
+}
+.login {
+  display: block;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  padding: 8px 20px;
+  border-radius: 2px;
+  transition: 0.5s;
+  margin: 10px auto;
+  border: 0;
+  background: #ee3733;
+  color: #fff;
+}
+.login:hover {
+  box-shadow: 5px 5px 5px #888888;
+}
+.login:hover {
+  background: #ee3733;
+  border-color: #ee3733;
+  color: #fff;
+}
+.btn-default {
+  border: 0;
+}
+.rating_block {
+  margin: 6px 15px 0 0;
+  cursor: pointer;
+}
+.heart {
+  position: relative;
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: #ee3733;
+  border-radius: 0;
+  transform: rotate(-45deg);
+}
+.heart::before,
+.heart::after {
+  position: absolute;
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #ee3733;
+  border-radius: 50%;
+}
+.heart::before {
+  top: -5px;
+  left: 0;
+}
+.heart::after {
+  top: 0;
+  right: -5px;
+}
+@keyframes pulse {
+  0%, 20% {
       transform: rotate(-45deg) scale(1);
-    }
-    30% {
+  }
+  30% {
       transform: rotate(-45deg) scale(1.2);
-    }
-    50% {
+  }
+  50% {
       transform: rotate(-45deg) scale(1);
-    }
   }
-
-  .not-liked .heart {
-    opacity: 0.35;  
-  }
-
-  .not-liked .heart:hover{
-    animation: pulse 1s infinite;
-    opacity: 1;
-  }
-
-  .liked .heart{
-    opacity: 1; 
-  }
-
-  .like-info{
-    float: left;
-    margin: -5px 0 0 20px;
 }
-
-
-
+.not-liked .heart {
+  opacity: 0.35;
+}
+.not-liked .heart:hover {
+  animation: pulse 1s infinite;
+  opacity: 1;
+}
+.liked .heart {
+  opacity: 1;
+}
+.like-info {
+  float: left;
+  margin: -5px 0 0 20px;
+}

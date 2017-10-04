@@ -1,18 +1,15 @@
-.add{
+.add {
     margin-top: 100px;
 }
-
-.panel-info>.panel-heading{
+.panel-info>.panel-heading {
     background-color: #ee3733;
     color: #fff;
     font-weight: bold;
 }
-
 .panel-info {
     border-color: #F4D3D2;
 }
-
-.news-btn{
+.news-btn {
     margin: 10px 5px;
     font-family: "Raleway", sans-serif;
     font-weight: 500;
@@ -26,21 +23,20 @@
     color: #777777;
     box-sizing: border-box;
 }
-
-.news-btn:hover, .cancel-btn{
+.news-btn:hover,
+.cancel-btn {
     background: #ee3733;
     border-color: #ee3733;
     color: #fff;
 }
-
-.ng-valid[required], .ng-valid.required  {
-    border-left: 5px solid #42A948; 
-  }
-  .ng-invalid:not(form)  {
-    border-left: 5px solid #a94442; 
-  }
-
-  .alert {
+.ng-valid[required],
+.ng-valid.required {
+    border-left: 5px solid #42A948;
+}
+.ng-invalid:not(form) {
+    border-left: 5px solid #a94442;
+}
+.alert {
     background: #f2edda;
     padding: 8px;
     margin: 5px 0;
@@ -48,58 +44,50 @@
     display: inline-block;
     animation: 1s alertAnim forwards;
 }
-
 @keyframes alertAnim {
     from {
-        opacity:0;
+        opacity: 0;
         transform: translateY(-5px);
     }
     to {
-        opacity:1;
+        opacity: 1;
         transform: translateY(0);
     }
 }
-
-#modal{
+#modal {
     animation: 1s alertAnim forwards;
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    z-index:99999;
+    z-index: 99999;
 }
-
-
 .image-preview {
     margin-bottom: 15px;
 }
-
 .image-preview-input input[type=file] {
     width: 1px;
     height: 2px;
-	right: 0;
-	margin: 0;
-	padding: 0;
-	font-size: 20px;
-	cursor: pointer;
-	opacity: 0;
-	filter: alpha(opacity=0);
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
 }
 .image-preview-input-title {
-    margin-left:2px;
+    margin-left: 2px;
 }
-
 .image-preview-input {
     margin-left: 15px;
 }
-
-.progress{
-margin-bottom: 5px;
-height: 26px;
+.progress {
+    margin-bottom: 5px;
+    height: 26px;
 }
-
-.progress-bar{
+.progress-bar {
     background-color: #ee3733;
     padding: 3px;
 }
