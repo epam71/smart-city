@@ -201,7 +201,8 @@ export class AuthService {
   }
 
   getUserCount(): Observable<any> {
-    return this.http.get(`${config.PATH}users`, this.getAuthHeaderOpt());
+    return this.http.get(`${config.PATH}users`, this.getAuthHeaderOpt())
+      .map( response => response.json());
   }
 
   encryptToken(token): string {

@@ -12,6 +12,7 @@ import * as firebase from 'firebase';
 export class ImageServiceService {
 
   uploadProgress: string;
+  imageKey: string = '';
   fileName: string = '';
   file: File;
   upload: UploadImage;
@@ -47,7 +48,7 @@ export class ImageServiceService {
         upload.url = uploadTask.snapshot.downloadURL;
         upload.name = upload.file.name;
         this.fileName = upload.url;
-        return upload.url;
+        this.imageKey = upload.name;
       }
     );
   }

@@ -45,6 +45,8 @@ this.userEmail = this.authService.getEmail();
     this.ratingObjInfo.likes.forEach((el, i) => {
       if (el === this.authService.getEmail()){
         this.liked = true;
+      } else {
+        this.liked = false;
       }
     })
   }

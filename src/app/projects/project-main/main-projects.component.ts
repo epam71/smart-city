@@ -19,7 +19,7 @@ import 'rxjs/add/operator/switchMap';
 export class ProjectMainComponent implements OnInit {
 
   constructor(private projectsData: ProjectServiceService,
-    private authService: AuthService) {}
+    private authService: AuthService) { }
 
   searchData = '';
 
@@ -45,6 +45,12 @@ export class ProjectMainComponent implements OnInit {
     value: 'date'
   }];
 
+  pagesArr = [];
+  pages = [];
+  limit: any = '9';
+  skip: any = this.limit;
+  currentPage: any = '1';
+
   searchProject(event) {
     this.searchButton = false;
   }
@@ -59,7 +65,7 @@ export class ProjectMainComponent implements OnInit {
     return this.projectsValues.forEach((el, i) => {
       if (this.projectsValues[i].key === event) {
         this.sortMemo = this.projectsValues[i].value;
-        return this.projects = this.projectsData.getProjects(this.sortMemo, this.sortTypeValue);
+        return this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue);
       }
     });
   }
@@ -71,7 +77,7 @@ export class ProjectMainComponent implements OnInit {
     } else {
       this.sortTypeValue = '';
     }
-    return this.projects = this.projectsData.getProjects(this.sortMemo, this.sortTypeValue);
+    return this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue);
   }
 
   showUserProjects() {
@@ -82,12 +88,64 @@ export class ProjectMainComponent implements OnInit {
       this.userProjects = false;
       this.projects = this.projectsData.getApprovedProjects();
     }
+  }
 
+  checkPagination() {
+    if (this.currentPage - 2 > 0) {
+
+      this.pages = this.pagesArr.slice(+this.currentPage - 3, +this.currentPage + 2);
+
+    } else if (this.currentPage - 1 > 0) {
+
+      this.pages = this.pagesArr.slice(+this.currentPage - 2, +this.currentPage + 2);
+    }
+  }
+
+  paginateFunc(event) {
+
+    this.skip = event.target.innerText * this.limit;
+    if (this.currentPage != event.target.innerText) {
+      this.currentPage = event.target.innerText;
+      this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue);
+    }
+
+    this.checkPagination();
+  }
+
+  prev() {
+    if (!(this.currentPage - 1 < 1)) {
+      --this.currentPage;
+      this.skip = this.currentPage * this.limit;
+      this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue);
+    }
+
+    this.checkPagination();
+  }
+
+  next() {
+
+    if (!(+this.currentPage + 1 > this.pagesArr.length)) {
+
+      ++this.currentPage;
+      this.skip = this.currentPage * this.limit;
+      this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue);
+    }
+
+    this.checkPagination();
   }
 
 
   ngOnInit() {
-    this.projects = this.projectsData.getProjects();
-  }
+    this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue);
+    this.projectsData.getProjectsNumber()
+      .subscribe(response => {
+        let totalPages = Math.ceil(response.count / this.limit);
+        for (let i = 0; i < totalPages; i++) {
+          this.pagesArr.push(i + 1);
+        }
+        this.pages = this.pagesArr.slice(0, 5);
 
+      }, error => console.error(error))
+
+  }
 }
