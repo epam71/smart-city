@@ -137,8 +137,6 @@ export class AuthService {
     let headers = new Headers();
     let options;
 
-    this.getUserCount().subscribe(res => alert(JSON.stringify(res)));
-
     this.expireAt = +localStorage.getItem(mapKeyToStoreKey['expireAt']);
     if (tempAccessToken && !this.isExpired()) {
       headers.set( 'Authorization', `Bearer ${tempAccessToken}`);
