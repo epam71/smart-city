@@ -1,11 +1,10 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
-
+import { Observable } from 'rxjs/Observable';
 import { News } from "../../models/news.model";
 import { NewsServiceService } from '../../core/news-service/news-service.service';
 import { AuthService } from "../../core/auth-service/auth-service.service";
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-news-list',
@@ -14,37 +13,37 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 
 export class NewsListComponent implements OnInit {
-  private sort = 'all';
   private sortKey;
   private news;
-  private pagination: number[] = [];
-  public email;
   private getUserRole;
+  private sorting;
+  private inputValue;
+  
+  sortObj = [
+    {sorting: 'date', name: 'Oldest'}, 
+    {sorting: '-date', name: 'Latest'}, 
+    {sorting: '-rating', name: 'Popular'},
+    {sorting: 'author', name: 'Author'}
+  ];
 
- 
-  constructor(private service: NewsServiceService, 
-    private authService: AuthService,
-    private domSanitizer: DomSanitizer){  }
+  selectedObj= this.sortObj[1];
 
-  sortByOldestDate() {
-    this.sort = 'date';
-    this.sortKey = 'normal';
+  constructor(private newsService: NewsServiceService, 
+    private authService: AuthService){ 
+  }
+  
+  onChangeValue(value) {
+    this.inputValue = value;
+    this.news = this.newsService.searchNews(this.inputValue);
   }
 
-  sortByLatestDate() {
-    this.sort = 'date';
-    this.sortKey = 'reverse';
-  }
-
-  sortByAuthor() {
-    this.sort = 'author';
-    this.sortKey = 'normal';
+  onChangeObj(value) {
+    this.sorting= value
+    this.news= this.newsService.sortNews(this.sorting);
   }
  
   ngOnInit() {
-    this.news= this.service.getNews();
-    this.email = this.authService.getEmail();
+    this.news= this.newsService.getNews();
     this.getUserRole = this.authService.getRole();
   }
-
 }

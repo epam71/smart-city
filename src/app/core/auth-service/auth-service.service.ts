@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {
+  Http,
   Headers, 
   RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import * as auth0 from 'auth0-js';
+import { config } from "../config";
 
+const USER_INFO_URL = 'https://smart-city-lviv.eu.auth0.com/userinfo';
 const STORE_KEY_REDIRECT = 'authRedirectTo';
 const ROOT_ROLE = 'root';
 const INVESTOR_ROLE = 'investor';
@@ -15,11 +18,6 @@ const GUEST_TOKEN = 'guest';
 const ACCESS_TOKEN = 'access_token';
 const mapKeyToStoreKey = {
   'accessToken': 'access_token',
-  'idToken': 'id_token',
-  'name': 'user_name',
-  'nickname': 'user_nickname',
-  'role': 'user_role',
-  'email': 'user_email',
   'expireAt': 'user_expireAt'
 };
 //milliseconds - one day
@@ -48,11 +46,11 @@ export class AuthService {
     scope: 'openid'
   });   
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private http: Http
+    ) {
     this.restoreSession();
-    if (this.isExpired()) {
-      this.logout();
-    }
   }
 
   isExpired(): boolean {
@@ -96,6 +94,13 @@ export class AuthService {
     this.auth0.authorize();
   }
 
+  fillUserInfo(authResult: any) {
+    this.name = authResult["https://name"];
+    this.nickname = authResult["https://nickname"];
+    this.role = authResult["https://role"];
+    this.email = authResult["https://email"];
+  }
+
   public handleAuthentication(): void {
     this.auth0.parseHash((err, authResult) => {
       let pathRedirectTo: string;
@@ -106,11 +111,8 @@ export class AuthService {
       }
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.accessToken = authResult.accessToken;
-        this.idToken = authResult.idToken;
-        this.name = authResult.idTokenPayload["https://name"];
-        this.nickname = authResult.idTokenPayload["https://nickname"];
-        this.role = authResult.idTokenPayload["https://role"];
-        this.email = authResult.idTokenPayload["https://email"];
+        this.idToken = authResult.idToken;            
+        this.fillUserInfo(authResult.idTokenPayload);
         this.expireAt = Date.now() + EXPIRATION_INTERVAL;
         this.setSession();
         this.changeStatus();
@@ -126,25 +128,52 @@ export class AuthService {
   }     
 
   private setSession(): void {
-    for ( let prop in mapKeyToStoreKey) {
-      localStorage.setItem(mapKeyToStoreKey[prop], this[prop]);
-    }  
+    localStorage.setItem(mapKeyToStoreKey['accessToken'], this.encryptToken(this['accessToken']));
+    localStorage.setItem(mapKeyToStoreKey['expireAt'], '' + this['expireAt']);
   }
 
   private restoreSession(): void {
-    if (localStorage.getItem(ACCESS_TOKEN)) {
-      for ( let prop in mapKeyToStoreKey) {
-        this[prop] = localStorage.getItem(mapKeyToStoreKey[prop]);
-      }
-      this.changeStatus();
+    let tempAccessToken = this.decryptToken(localStorage.getItem(mapKeyToStoreKey['accessToken']));
+    let headers = new Headers();
+    let options;
+
+    this.expireAt = +localStorage.getItem(mapKeyToStoreKey['expireAt']);
+    if (tempAccessToken && !this.isExpired()) {
+      headers.set( 'Authorization', `Bearer ${tempAccessToken}`);
+      options = new RequestOptions({ headers: headers });
+      this.http.get(USER_INFO_URL, options)
+        .catch( (err: Response) => {
+          this.cleanLocalStorage();
+          return Observable.throw(err);
+        } )      
+        .subscribe(
+          response => {
+            try {
+              let userInfo = JSON.parse(response._body);
+
+              if (userInfo['https://role']) {
+                this.accessToken = tempAccessToken;
+                this.fillUserInfo(userInfo);
+                this.changeStatus();  
+              }
+            } catch (err) {
+              //autologin data corrupted
+              this.cleanLocalStorage();
+            }          
+          }
+        );
     }
   }
 
-  logout(): void {
+  cleanLocalStorage() {
     for ( let prop in mapKeyToStoreKey) {
       this[prop] = '';
       localStorage.removeItem(mapKeyToStoreKey[prop]);
     }
+  }
+
+  logout(): void {
+    this.cleanLocalStorage();
     this.changeStatus();
   }
 
@@ -169,5 +198,24 @@ export class AuthService {
 
     this.setAuthHeader(headers);
     return new RequestOptions({ headers: headers });
+  }
+
+  getUserCount(): Observable<any> {
+    return this.http.get(`${config.PATH}users`, this.getAuthHeaderOpt())
+      .map( response => response.json());
+  }
+
+  encryptToken(token): string {
+    return btoa(token);
+  }
+
+  decryptToken(encToken): string {
+    let res;
+    try {
+      res = encToken ? atob(encToken): '';
+    } catch(err) {
+      res = '';
+    }  
+    return res;
   }
 }

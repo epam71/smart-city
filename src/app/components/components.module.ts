@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AchivementComponent } from './achivement/achivement.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -18,7 +18,7 @@ import { PipesModule } from '../pipes/pipes.module';
     PipesModule
   ],
   declarations: [
-      AchivementComponent,
+    PageNotFoundComponent,
       AuthCallbackComponent,
       ContactUsComponent,
       NavigationComponent,
@@ -28,4 +28,4 @@ import { PipesModule } from '../pipes/pipes.module';
       StaticComponent
     ]
 })
-export class ComponentModule { }
+export class ComponentsModule { }

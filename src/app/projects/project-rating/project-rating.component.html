@@ -1,6 +1,5 @@
-<div [ngStyle]="{color: liked ? 'black' : '#ccc'}">
-        <button type="button" class="btn btn-default btn-sm rating_info" [ngClass]="liked === true ? 'liked_block' : 'unliked_block'"
-                (click)="changeRating()">
-                <span class="glyphicon glyphicon-thumbs-up rating_icon"></span> {{ratingObjInfo?.rating}} Like
-        </button>
+<div class="rating_block">
+    <div class="rating_block_inside" [ngClass]="liked === true ? 'liked_block' : 'unliked_block'" (click)="changeRating()">
+        {{ratingObjInfo?.rating}}
+    </div>
 </div>

@@ -3,9 +3,7 @@ import { NewsServiceService } from '../../core/news-service/news-service.service
 import { News } from '../../models/news.model';
 import { AuthService } from '../../core/auth-service/auth-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import 'rxjs/add/operator/switchMap';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'news-comment',
@@ -19,49 +17,53 @@ export class NewsCommentComponent implements OnInit {
   private message:string = '';
   private getUserRole;
   private comment;
+  private userEmail;
 
 constructor(private commentService: NewsServiceService,
             private authService: AuthService,
             private fb: FormBuilder) {
               this.rForm = fb.group({
-                'message' : [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(80)])],
+                'message' : [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(200)])],
                 'validate' : ''
             });
           }
 
-addComment(message){
-  let postCommet = this.commentService.postComment(this.commentsInfo._id, {
-    username: this.authService.getEmail(),
-    message: message,
-    date: Date.now
-});
-  
+  addComment(message){
+    let postCommet = this.commentService.postComment(this.commentsInfo._id, {
+      username: this.authService.getEmail(),
+      message: message,
+      date: Date.now
+  });
+
   postCommet.switchMap(
-      event => {
-        return this.commentService.getNewsById(this.commentsInfo._id);
-      }
-    )
-    .subscribe(
+    event => {
+      return this.commentService.getNewsById(this.commentsInfo._id);
+    }
+  )
+  .subscribe(
     value => {
-      this.commentsInfo = value;
       this.rForm.reset();
+      return this.commentsInfo = value;
     });
-}  
+  }  
 
-deleteComment(commentId){
-  let deleteComment = this.commentService.deleteComment(this.commentsInfo._id, commentId.id);
-  deleteComment.switchMap(
+  deleteComment(commentId){
+    let deleteComment = this.commentService.deleteComment(this.commentsInfo._id, commentId.id);
+
+    deleteComment.switchMap(
       event => {
         return this.commentService.getNewsById(this.commentsInfo._id);
       }
     )
     .subscribe(
-    value => {
-      this.commentsInfo = value;
+      value => {
+       return this.commentsInfo = value;
     });
-} 
+  } 
 
-ngOnInit() {
-  this.getUserRole = this.authService.getRole();
+  ngOnInit() {
+    this.userEmail = this.authService.getEmail();
+    this.getUserRole = this.authService.getRole();
   }
+
 }

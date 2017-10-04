@@ -4,6 +4,8 @@ import { NewsServiceService } from '../../core/news-service/news-service.service
 import { AuthService } from "../../core/auth-service/auth-service.service";
 import { News } from "../../models/news.model";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UploadImage } from '../../models/image-models/image-upload';
+import { ImageServiceService } from '../../core/image-service/image-service.service';
 
 @Component({
   selector: 'news-add',
@@ -16,57 +18,54 @@ export class NewsAddComponent implements OnInit {
   private desc:string = '';
   private title:string = '';
   private showModal;
-  private base64Image: string;
+  private imageFire = '';
  
-constructor(private service: NewsServiceService, 
+constructor(private newsService: NewsServiceService, 
   private router: Router, 
   private authService: AuthService,
+  private imageService: ImageServiceService,
   private fb: FormBuilder) { 
     this.rForm = fb.group({
     'title' : [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(30)])],
-    'desc' : [null, Validators.compose([Validators.required, Validators.minLength(150), Validators.maxLength(1500)])],
+    'desc' : [null, Validators.compose([Validators.required, Validators.minLength(150), Validators.maxLength(2500)])],
     'validate' : ''
     });
   }
 
-  changeListener($event): void {
-    this.readThis($event.target);
-  }
-
-  readThis(inputValue: any): void {
-    var file: File = inputValue.files[0];
-    var myReader: FileReader = new FileReader();
-
-    myReader.onloadend = (e) => {
-      this.base64Image = myReader.result;
-    }
-    myReader.readAsDataURL(file);
+  pushImage() {
+    this.imageService.uploadFile(event);
   }
 
   onAddNews( title, desc) {
+    this.imageFire = this.imageService.fileName;
     let newsTemp: News = {  
-     author: this.authService.getNickname(),
+      author: this.authService.getNickname(),
       title: title,
-      image: this.base64Image, 
+      image: this.imageFire,
       desc: desc, 
       date: Date,
       approved: false,
       status: 'new'
     };
 
-    this.service.postNews(newsTemp)
+    this.newsService.postNews(newsTemp)
     .subscribe(
-      (response) => console.log(response),
       (error) => console.log(error)
     );
       
     this.rForm.reset();
+    this.imageService.resetImage();
     this.showModal = true;
     setTimeout(()=>{    
       this.showModal = false;
     },6000);
   }
 
-  ngOnInit() {}
+  cancel(){
+    this.imageService.resetImage();
+  }
 
+  ngOnInit() {
+    this.imageService.resetImage();
+  }
 }

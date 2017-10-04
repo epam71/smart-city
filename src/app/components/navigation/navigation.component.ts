@@ -10,9 +10,10 @@ import 'rxjs/add/operator/filter';
 })
 export class NavigationComponent implements OnInit, OnDestroy{
 private adminRole: boolean;
-private subscription: any;
+private subsAdmin: any;
+private subsLoging: any;
 private adminRoute: boolean;
-log;
+private log: boolean;
 
   constructor(private authService: AuthService, private router: Router) {
     router.events
@@ -23,17 +24,22 @@ log;
   }
 
   ngOnInit() {
-    this.log = this.authService.isLogedIn();
-    this.adminRole = this.authService.isAdmin();
-    this.subscription = this.authService.getEventEmitter()
+    
+    this.subsAdmin = this.authService.getEventEmitter()
     .subscribe(() =>
-        this.adminRole = this.authService.isAdmin()
+      this.adminRole = this.authService.isAdmin()
     );
+
+    this.subsLoging = this.authService.getEventEmitter()
+    .subscribe(() =>
+      this.log = this.authService.isLogedIn()
+    );
+    
   }
 
   ngOnDestroy(){
-    this.subscription.unsubscribe();
-    
+    this.subsAdmin.unsubscribe();
+    this.subsLoging.unsubscribe();
   }
 
 }

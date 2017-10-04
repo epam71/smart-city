@@ -1,14 +1,41 @@
 .rating_block {
   font-family: sans-serif;
-  color: #ccc;
+  color: #8F8F8F;
   cursor: pointer;
+  padding: 5px;
+  font-weight: 700;
 }
 
-.liked_block {
-  color: white;
-  font-weight: 700;
-  background: #ee3733;
-  border: 1px solid #ee3733;
+.rating_block_inside{
+  padding: 1px;
+}
+
+
+.liked_block{
+  background-image: url('../../../assets/images/likes.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: 15px -1px; 
+  width: 33px;
+  height: 22px;  
+}
+
+.unliked_block{
+  background-image: url('../../../assets/images/likes.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: 15px -32px;
+  width: 33px;
+  height: 22px;
+}
+
+.unliked_block:hover{
+  background-image: url('../../../assets/images/likes.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: 15px -1px; 
+  width: 33px;
+  height: 22px;  
 }
 
 
@@ -24,22 +51,4 @@
 
 .rating_icon{
 
-}
-
-.unliked_block{
-  font-family: "Raleway", sans-serif;
-  font-weight: 700;
-  font-size: 12px;
-  border-radius: 2px;
-  transition: 0.5s;
-  border: 1px solid white;
-  border-radius: 5px;
-  background: none;
-  color: #777777;;
-}
-
-.unliked_block:hover {
-  color: white;
-  background: #ee3733;
-  border: 1px solid #ee3733;
 }

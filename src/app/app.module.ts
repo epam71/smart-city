@@ -8,7 +8,7 @@ import { PipesModule } from './pipes/pipes.module';
 import { StaticComponent } from './components/static/static.component';
 import { AppComponent } from './app.component';
 import { NewsComponent } from './components/news/news.component';
-import { AchivementComponent } from './components/achivement/achivement.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -29,7 +29,7 @@ import { UserAuthGuardService } from './core/admin-auth-guard/user-auth-guard.se
   declarations: [
     AppComponent,
     NewsComponent,
-    AchivementComponent,
+    PageNotFoundComponent,
     ProjectsComponent,
     SignupComponent,
     AuthCallbackComponent,

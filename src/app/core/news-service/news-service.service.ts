@@ -10,6 +10,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
+
 @Injectable()
 export class NewsServiceService {
  
@@ -24,8 +25,9 @@ export class NewsServiceService {
     return Observable.throw(errorMessage);
   }
 
-  getNewsBlock(): Observable<News[]> {
-    return this.http.get(config.PATH + 'news/' + '?query={"approved":"false"}&limit=3', 
+
+  getNewsBlock(): Observable<News[]> { 
+    return this.http.get(config.PATH + 'news/' + '?query={"approved":"true"}&limit=3&sort=-rating', 
      this.authService.getAuthHeaderOpt())
       .map((response: Response) => {
         return response.json();
@@ -33,7 +35,15 @@ export class NewsServiceService {
   };
  
  getNews(): Observable<News[]> {
-    return this.http.get(config.PATH + 'news/' , 
+    return this.http.get(config.PATH + 'news/' + `?query={"approved":"true"}&sort=-date` , 
+    this.authService.getAuthHeaderOpt())
+      .map((response: Response) => {
+        return response.json();
+      }).catch(this.handlError);
+  };
+
+  sortNews(sortValue: string): Observable<News[]> {
+    return this.http.get(config.PATH + 'news/' + `?query={"approved":"true"}&sort=${sortValue}` , 
     this.authService.getAuthHeaderOpt())
       .map((response: Response) => {
         return response.json();
@@ -89,6 +99,16 @@ export class NewsServiceService {
         return <any>response.json();
       })
       .catch(this.handlError);
+  };
+
+  searchNews(keyWord): Observable<News[]> {
+    return this.http.get(config.PATH + 'news/', 
+    this.authService.getAuthHeaderOpt())
+      .map((response: Response) => {
+          return response.json().filter(el => {
+              return el.title.toLowerCase().indexOf(keyWord.toLowerCase()) > -1;
+          });
+    }).catch(this.handlError);
   };
 
   postNewsLike(id, user:any): Observable<News> {
