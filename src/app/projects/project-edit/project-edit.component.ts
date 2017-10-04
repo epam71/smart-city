@@ -20,10 +20,12 @@ export class ProjectEditComponent implements OnInit {
   @ViewChild('f') slForm: NgForm;
 
   imageFire = '';
+  imageFireKey = '';
 
   editMode;
   project;
   image = '';
+  imageKey = '';
   tempId;
   errorMessage;
 
@@ -45,6 +47,7 @@ export class ProjectEditComponent implements OnInit {
 
   actProject(form: NgForm) {
 
+    this.imageFireKey = this.imageService.imageKey;
     this.imageFire = this.imageService.fileName;
     const value = form.value;
     value.budget = value.budget || 0;
@@ -52,6 +55,7 @@ export class ProjectEditComponent implements OnInit {
     let projectEdit: Project = {
       projectName: value.projectName.charAt(0).toUpperCase() + value.projectName.slice(1),
       image: this.imageFire || this.image,
+      imageKey: this.imageFireKey || this.imageKey,
       desc: value.desc,
       goals: value.goals,
       result: value.result,
@@ -60,12 +64,11 @@ export class ProjectEditComponent implements OnInit {
       status: 'edited'
     }
 
-
-
     let projectTemp: Project = Object.assign({
       author: this.authService.getNickname(),
       authorEmail: this.authService.getEmail(),
       image: this.imageFire,
+      imageKey: this.imageFireKey,
       status: 'new',
     }, projectEdit);
 
@@ -73,7 +76,6 @@ export class ProjectEditComponent implements OnInit {
       this.putProject.postProject(projectTemp)
         .subscribe(
         (response) => {
-
           this.putProject.message = 'new';
           this.router.navigate(['/projects/' + response._id]);
         },
@@ -112,6 +114,7 @@ export class ProjectEditComponent implements OnInit {
         (response) => {
           this.project = response;
           this.image = response.image;
+          // this.imageKey = response.imageKey;
         },
         (error) => {
           console.error(error);
