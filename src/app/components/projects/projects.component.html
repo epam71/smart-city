@@ -19,7 +19,7 @@
 					</figure>
 					<h4><a href="#" class="proj-name" [routerLink]="['/projects', key._id]">{{key.projectName }}</a></h4>
 					<p class="proj-date">
-						{{key.date | date:'dd MMMM y'}}
+						Written by <span>{{key.author}}</span> on {{key.date | date:'dd MMMM y'}}
 					</p>
 					<p>{{ key.desc }}</p>
 					<div class="link"><a [routerLink]="['/projects', key._id]" class="tran3s">Read more</a></div>

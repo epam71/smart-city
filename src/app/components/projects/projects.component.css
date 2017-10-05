@@ -31,6 +31,10 @@
 .proj-date {
   color: #6D6D6D;
   padding: 7px 0;
+  font-style: italic;
+}
+.proj-date span{
+  color: black;
 }
 
 .font-20 p{

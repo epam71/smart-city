@@ -17,22 +17,20 @@
         <div class="navbar-collapse collapse">
           <!-- Start Navigation List -->
           <ul class="nav navbar-nav navbar-right">
-            <li>
+            <li data-toggle="collapse" data-target=".navbar-collapse">
               <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions] = "{ exact: true }">Home</a>
             </li>
-            <li>
+            <li  data-toggle="collapse" data-target=".navbar-collapse">
               <a routerLink="/news" routerLinkActive="active" [routerLinkActiveOptions] = "{ exact: true }">News</a>
             </li>
-            <li>
+            <li  data-toggle="collapse" data-target=".navbar-collapse">
               <a routerLink="/projects" routerLinkActive="active" [routerLinkActiveOptions] = "{ exact: true }">Projects</a>
             </li>
-            <li><a href="/contacts">Contacts</a>
+            <li *ngIf="!log"  data-toggle="collapse" data-target=".navbar-collapse"><a (click)='authService.login();'>Log In</a>
             </li>
-            <li *ngIf="!log"><a (click)='authService.login();'>Log In</a>
+            <li *ngIf="log"  data-toggle="collapse" data-target=".navbar-collapse"><a (click)='authService.logout();'>Log Out</a>
             </li>
-            <li *ngIf="log"><a (click)='authService.logout();'>Log Out</a>
-            </li>
-            <li *ngIf="adminRole">
+            <li *ngIf="adminRole"  data-toggle="collapse" data-target=".navbar-collapse">
               <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions] = "{ exact: true }">Admin</a>
             </li>
           </ul>
