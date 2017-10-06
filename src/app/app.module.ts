@@ -11,7 +11,6 @@ import { NewsComponent } from './components/news/news.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { SignupComponent } from './components/signup/signup.component';
 import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 import { AppRoutes } from './app.routes';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
@@ -31,7 +30,6 @@ import { UserAuthGuardService } from './core/admin-auth-guard/user-auth-guard.se
     NewsComponent,
     PageNotFoundComponent,
     ProjectsComponent,
-    SignupComponent,
     AuthCallbackComponent,
     StaticComponent,
     FooterComponent,

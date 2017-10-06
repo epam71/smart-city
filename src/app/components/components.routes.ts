@@ -4,7 +4,6 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { NewsComponent } from './news/news.component';
 import { ProjectsComponent } from './projects/projects.component';
-import { SignupComponent } from './signup/signup.component';
 import { StaticComponent } from './static/static.component';
 
 import { ModuleWithProviders } from '@angular/core';
