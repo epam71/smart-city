@@ -26,14 +26,21 @@ export class ImageServiceService {
   }
 
 
-  uploadFile(event): any {
-
+  uploadFile(event): Observable<any>{
+    
     const storageRef = firebase.storage().ref();
+        this.file = event.target.files.item(0);
+        
+        if (this.file.type.split('/')[0] !== 'image'){
+          return Observable.throw('Please, choose image');
+        } else {
+          const upload = new UploadImage(this.file);
+          const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
+      return Observable.fromPromise(uploadTask.then(this.uploadToDB(uploadTask, upload)));
+        }
+  }
 
-    this.file = event.target.files.item(0);
-    const upload = new UploadImage(this.file);
-
-    const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
+  uploadToDB(uploadTask, upload): any {
 
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) => {
@@ -51,6 +58,7 @@ export class ImageServiceService {
         this.imageKey = upload.name;
       }
     );
+
   }
 
   resetImage(){
@@ -62,7 +70,7 @@ export class ImageServiceService {
 
     const storageRef = firebase.storage().ref();
 
-    var desertRef = storageRef.child('name');
+    var desertRef = storageRef.child('uploads/' + key);
     desertRef.delete().then(function(response) {
     }).catch(error=>
     console.error(error));
