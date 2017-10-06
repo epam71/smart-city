@@ -104,7 +104,7 @@ input#subject.form-control{
 }
 .office_location i span {
     color: white;
-    font-size: 14px;
+    font-size: 16px;
     padding-left: 10px;
 }
 .office_location i {
@@ -125,3 +125,9 @@ input#subject.form-control{
     color: white;
 }
 
+@media(max-width: 767px)
+{
+#contact .row{
+    padding: 0;
+  }
+}
