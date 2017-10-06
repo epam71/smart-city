@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import * as auth0 from 'auth0-js';
 import { config } from "../config";
+import 'rxjs/add/observable/of';
 
 const USER_INFO_URL = 'https://smart-city-lviv.eu.auth0.com/userinfo';
 const STORE_KEY_REDIRECT = 'authRedirectTo';
@@ -58,11 +59,12 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
+    console.log(this.role);
     return this.role === ROOT_ROLE && !this.isExpired();
   }
 
   isInvestor(): boolean {
-    return this.role === INVESTOR_ROLE && !this.isExpired();
+    return this.role === INVESTOR_ROLE && !this.isExpired()
   }
 
   isLogedIn(): boolean {

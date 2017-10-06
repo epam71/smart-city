@@ -11,6 +11,11 @@
     border: none;
 }
 
+h2 {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
 .date-picker{    
     border-color: #252652;
     color: #fff;

@@ -15,8 +15,17 @@
     </app-modal>
 
     <div class="card mt-4">
-      <img class="card-img-top img-fluid" alt="No image" src="{{ image }}" onerror="this.onerror=null;this.src='http://placehold.it/900x400';">
+      <img class="card-img-top img-fluid" alt="No image" src="{{ image }}" onerror="this.onerror=null;this.src='../../../assets/images/no_image.jpg';">
       <div *ngIf="!editable" class="card-body">
+        <div class="col-sm-2 pull-right likes">
+          <div class="fa fa-heart fa-fw"></div>
+          <span>{{ news?.likes.length }}</span>
+          <ul *ngIf="news?.likes.length" class="people-liked">
+              <li *ngFor="let key of news?.likes">
+                {{ key }}
+              </li>
+          </ul>
+        </div>
         <h3 class="card-title">{{ news?.title }}</h3>
         <p class="card-text">Author: {{ news?.author }}</p>
       </div>

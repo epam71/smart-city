@@ -6,7 +6,7 @@
 }
 
 .container-fluid {
-	background:#ffffff url('https://rudolfo.com.ua/wp-content/uploads/2016/12/slider-1.jpg') no-repeat center center;
+	background:#ffffff url('../../../assets/images/admin_back.jpg') no-repeat center center;
 	background-attachment: fixed;
 	background-size:     cover;
 	min-height: 1000px;
@@ -169,6 +169,10 @@ focus-container:focus {
 	margin: 0 auto 15px auto;
 	text-align: center;
 }
+
+.input-group-btn button {
+    height: 34px;
+} 
 
 /*pagination*/
 

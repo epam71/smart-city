@@ -28,8 +28,17 @@
     </app-modal>
 
     <div class="card mt-4">
-      <img class="card-img-top img-fluid" alt="No image" src="{{ image }}" onerror="this.onerror=null;this.src='http://placehold.it/900x400';">
+      <img class="card-img-top img-fluid" alt="No image" src="{{ image }}" onerror="this.onerror=null;this.src='../../../assets/images/no_image.jpg';">
       <div *ngIf="!editable" class="card-body">
+        <div class="col-sm-2 pull-right likes">
+          <div class="fa fa-heart fa-fw"></div>
+          <span>{{ project?.likes.length }}</span>
+          <ul *ngIf="project?.likes.length" class="people-liked">
+              <li *ngFor="let key of project?.likes">
+                {{ key }}
+              </li>
+          </ul>
+        </div>
         <p class="status col-sm-2 col-sm-offset-10 badge badge-default">{{ project?.status }}</p>
         <h3 class="card-title">{{ project?.projectName }}</h3>
         <h4>Budget: {{ project?.budget }} UAH</h4>

@@ -13,15 +13,19 @@ import 'rxjs/add/operator/switchMap';
 
 export class ProjectsListComponent implements OnInit {
 
+  constructor(private projectsData: ProjectServiceService,
+    private router: Router, private authService: AuthService) { }
+
   private showPending: number = 3;
   private showActive: number = 3;
   private prop: string = 'all';
   public projects: Project[];
   public pendingProjects: Project[];
   public activeProjects: Project[];
-  private showMorePendingButton;
-  private showMoreActiveButton;
- 
+  private showMorePendingButton: boolean;
+  private showMoreActiveButton: boolean;
+  private searchData: string = ''; 
+
   sortByName() {
     this.prop = 'projectName';
   }
@@ -43,9 +47,6 @@ export class ProjectsListComponent implements OnInit {
       }
     }
   }
-
-  constructor(private projectsData: ProjectServiceService,
-    private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
 

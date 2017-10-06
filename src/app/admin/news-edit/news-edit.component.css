@@ -124,3 +124,31 @@ textarea {
 .app-modal-footer button {
 	margin: 0 auto;
 }
+
+.likes {
+    float: right;
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.likes:hover {
+    cursor: pointer;
+}
+
+.likes:hover .people-liked {
+    visibility: visible;
+}
+
+.people-liked {
+    list-style: none;
+    position: absolute;
+    top: -100px;
+    right: 20px;
+    z-index: 100;
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.73);
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    padding: 10px;
+}

@@ -23,7 +23,8 @@ export class ProjectsEditComponent implements OnInit {
   private editable: boolean = false;
   private imageFire: string = '';
   private image: string = '';
-
+  private likes: number;
+  
   deleteProject() {
     this.projectData.deleteProject(this.projectId.id).subscribe();
     this.router.navigate(['/admin/projects']);

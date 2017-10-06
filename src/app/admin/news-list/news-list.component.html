@@ -63,11 +63,8 @@
       </form>
 
       <div *ngIf="queryString" class="panel panel-primary">
-        <div class="panel-heading search">
-          <h3 class="panel-title">Search results</h3>
-        </div>
         <ul class="list-group">
-          <li *ngFor="let key of news | searchNews:queryString:'title'| sortBy:prop:'normal'; let i=index;" class="project_block list-group-item">
+          <li *ngFor="let key of news | searchNews:queryString:'title'| sortBy:prop:'normal'; let i=index;" class="project_block list-group-item sliding_bg">
             <a [routerLink]="['/admin/news', key._id]">               
                {{key.title }} 
                <span *ngIf="key.approved === false" class="badge badge-default badge-pill">new</span>              
