@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectServiceService } from '../../core/project-service/project-service.service';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: './project-edit.component.html',
   styleUrls: ['./project-edit.component.css']
 })
-export class ProjectEditComponent implements OnInit {
+export class ProjectEditComponent implements OnInit, OnDestroy {
 
   @ViewChild('f') slForm: NgForm;
 
@@ -29,6 +29,7 @@ export class ProjectEditComponent implements OnInit {
   tempId;
   errorMessage;
 
+  done: boolean = false;
   progressBar;
 
   constructor(private route: ActivatedRoute,
@@ -41,16 +42,27 @@ export class ProjectEditComponent implements OnInit {
     });
   }
 
-  pushImage() {
-    this.imageService.uploadFile(event);
+  
+
+  pushImage(event) {
+
+    this.imageService.uploadFile(event)
+    .subscribe(res => {
+      this.imageFire = this.imageService.fileName;
+      this.imageFireKey = this.imageService.imageKey;
+    },
+    (error) => {
+      console.error(error);
+      this.errorMessage = error;
+    }
+  );
   }
 
   actProject(form: NgForm) {
 
-    this.imageFireKey = this.imageService.imageKey;
-    this.imageFire = this.imageService.fileName;
     const value = form.value;
     value.budget = value.budget || 0;
+    this.done = true;
 
     let projectEdit: Project = {
       projectName: value.projectName.charAt(0).toUpperCase() + value.projectName.slice(1),
@@ -101,6 +113,11 @@ export class ProjectEditComponent implements OnInit {
   clearForm() {
     this.slForm.reset();
     this.editMode = false;
+    if (this.imageFireKey !== ''){
+      this.imageService.resetImage();
+      this.imageService.deleteImage(this.imageFireKey);
+      this.imageFireKey = '';
+   }
   }
 
   ngOnInit() {
@@ -120,6 +137,12 @@ export class ProjectEditComponent implements OnInit {
           console.error(error);
         });
     }
+  }
+
+  ngOnDestroy(): void {
+   if (!this.done){
+      this.imageService.deleteImage(this.imageFireKey);
+   }
   }
 
 }

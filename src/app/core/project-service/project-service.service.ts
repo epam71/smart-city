@@ -40,7 +40,7 @@ export class ProjectServiceService {
             }).catch(this.handleError);
     };
 
-    getApprovedProjects(sortBy='', type = ''): Observable<Project[]> {
+    getApprovedProjects(sortBy='date', type = '-'): Observable<Project[]> {
 
         return this.http.get(projects_PATH + `?sort=${type}${sortBy}&query={"approved":"true"}`, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
@@ -48,7 +48,7 @@ export class ProjectServiceService {
             }).catch(this.handleError);
     };
 
-    getPaginateProjects(limit='', skip = '', sortBy='', type = ''): Observable<Project[]> {
+    getPaginateProjects(limit='', skip = '', sortBy='date', type = ''): Observable<Project[]> {
         
                 return this.http.get(projects_PATH  + `?limit=${limit}&skip=${+skip - +limit}&sort=${type}${sortBy}`, this.authService.getAuthHeaderOpt())
         

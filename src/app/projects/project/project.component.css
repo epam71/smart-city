@@ -10,11 +10,9 @@
   border-radius: 2px;
   transition: 0.5s;
   border: 1px solid #ccc;
-  ;
   border-radius: 5px;
   background: none;
   color: #777777;
-  ;
 }
 
 .customs-btn:hover {
@@ -52,12 +50,6 @@
 .project_block {
   margin-top: 10px;
   max-width: 900px;
-  padding: 10px;
-  border-top: 1px solid #ccc;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
 
 }
 
@@ -97,7 +89,6 @@
 
 .article_header {
   position: relative;
-  padding-left: 20px;
   margin-bottom: 5px;
   font-size: 20px;
   font-weight: 700;
@@ -106,18 +97,19 @@
 
 .project_desc {
   color: #777777;
+  padding-left: 10px;
 }
 
 .project_footer {
   color: #ccc;
-  font-size: 16px;
-  margin: 25px 0 50px 0;
+  font-size: 14px;
+  margin: 25px 0 15px 0;
   padding-top: 25px;
-  border-top: 1px solid #ccc;
+  border-bottom: 2px solid #ccc;
 }
 
 .likes_block {
-
+  padding-top: 10px;
 }
 
 .date_block {

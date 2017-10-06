@@ -1,3 +1,7 @@
+:host{
+  font-family: 'Montserrat', sans-serif;
+}
+
 button,
 button:active,
 button:focus {
@@ -58,17 +62,7 @@ button:focus {
 }
 
 .projects_date {
-  position: absolute;
-  left: -7px;
-  bottom: 10px;
-  font-weight: 700;
-  background: #ee3733;
-  padding: 6px 10px;
-  text-transform: uppercase;
-  font-size: 12px;
-  color: #fff;
-  z-index: 5;
-  font-family: 'Montserrat', sans-serif;
+
 }
 
 .info_block {
@@ -93,6 +87,10 @@ button:focus {
   margin-top: 2px;
   padding-top: 8px;
   border-top: 1px solid #ccc;
+}
+
+.project_footer_inside{
+  margin-bottom: -15px;
 }
 
 .likes_block_main {}
@@ -134,7 +132,7 @@ button:focus {
   font-size: 14px;
   font-weight: 700;
   font-size: 15px;
-  z-index: 5;
+  z-index: 3;
 }
 
 .status_prop {
