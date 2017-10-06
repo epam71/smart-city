@@ -24,6 +24,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { config } from './core/config';
 import { UserAuthGuardService } from './core/admin-auth-guard/user-auth-guard.service';
 
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +48,10 @@ import { UserAuthGuardService } from './core/admin-auth-guard/user-auth-guard.se
     AlertModule.forRoot(),
     OrderModule,
     AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(config.firebase)
+    AngularFireModule.initializeApp(config.firebase),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAtF0RX2wWBCdg0UtiW1ItUywkvJaZjqqo'
+    })
   ],
   providers: [AdminAuthGuardService, UserAuthGuardService],
   bootstrap: [AppComponent]
