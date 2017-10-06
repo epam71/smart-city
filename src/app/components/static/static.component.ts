@@ -13,15 +13,18 @@ export class StaticComponent implements OnInit {
   countersImg: string;
   mainVideo: string;
   aboutImg: string;
+  innerWidth: any;
   projects = 0;
   projectsDone = 0;
   userCount;
 
   constructor(private projectsData: ProjectServiceService, private authService: AuthService) {
-    this.subscribeImg = '../assets/images/lviv-city.jpg',
-    this.countersImg = '../assets/images/airport_panorama.jpg',
-    this.aboutImg = '../assets/images/content_about.jpg',
-    this.mainVideo = '../assets/media/LvivNightTimelapse.mp4'
+    this.subscribeImg = '../assets/images/lviv-city.jpg';
+    this.countersImg = '../assets/images/airport_panorama.jpg';
+    this.aboutImg = '../assets/images/content_about.jpg';
+    this.mainVideo = '../assets/media/LvivNightTimelapse.mp4';
+
+    this.innerWidth = (window.screen.width);
   }
 
   ngOnInit() {

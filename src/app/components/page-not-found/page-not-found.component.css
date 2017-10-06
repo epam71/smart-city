@@ -53,11 +53,7 @@
     border-bottom: 15px solid transparent;
 }
 
-
-.error .container-error-404
-{
-    /* margin-top: 10%;
-    position: relative; */
+.error .container-error-404{
     padding-top: 19%;
 }
 .error .container-error-404 .clip
@@ -128,6 +124,9 @@
 @media(max-width: 767px)
 {
 /* Error Page */
+.error .container-error-404{
+    padding-top: 15%;
+}
         .error .clip .shadow
         {
             height: 100px;  /*Contrall*/
@@ -168,9 +167,6 @@
             border-top: 8px solid transparent;
             border-bottom: 8px solid transparent;
         }
-.error .container-error-404
-{
-height: 150px;
-}
+
     /* Error Page */
 }

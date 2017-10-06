@@ -11,7 +11,6 @@ import { NewsComponent } from './components/news/news.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { SignupComponent } from './components/signup/signup.component';
 import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 import { AppRoutes } from './app.routes';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
@@ -25,13 +24,14 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { config } from './core/config';
 import { UserAuthGuardService } from './core/admin-auth-guard/user-auth-guard.service';
 
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
   declarations: [
     AppComponent,
     NewsComponent,
     PageNotFoundComponent,
     ProjectsComponent,
-    SignupComponent,
     AuthCallbackComponent,
     StaticComponent,
     FooterComponent,
@@ -48,7 +48,10 @@ import { UserAuthGuardService } from './core/admin-auth-guard/user-auth-guard.se
     AlertModule.forRoot(),
     OrderModule,
     AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(config.firebase)
+    AngularFireModule.initializeApp(config.firebase),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAtF0RX2wWBCdg0UtiW1ItUywkvJaZjqqo'
+    })
   ],
   providers: [AdminAuthGuardService, UserAuthGuardService],
   bootstrap: [AppComponent]

@@ -9,6 +9,10 @@ import { ContactServiceService } from '../../core/contact-service/contact-servic
   styleUrls: ['./contact-us.component.css']
 })
 export class ContactUsComponent implements OnInit {
+  lat: number = 49.842790;
+  lng: number = 23.999577
+  zoom: number = 17;
+  
   @ViewChild('f') sendMesForm: NgForm;
   contactImg: string;
   formPopup: boolean;

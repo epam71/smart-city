@@ -2,24 +2,24 @@
 	<div class="container">
 		<div class="section-title">
 			<div class="row">
-				<div class="col-md-4 col-sm-5 col-xs-12">
+				<div class="col-md-6 col-sm-6 col-xs-12">
 					<h2>Our Projects</h2>
 					<span class="decor"></span>
 				</div>
-				<div class="col-md-8 col-sm-7 col-xs-12 font-20">
+				<div class="col-md-6 col-sm-6 col-xs-12 font-20">
 					<p>We have built an enviable reputation in consumer goods, heavy industry, high-tech, <br>manufacturing, medical, recreational vehicle, and transportation sectors.</p>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4 col-sm-6" *ngFor="let key of (projectsApproved | async) | slice:0:3 | orderBy: date ">
+			<div class="col-md-4 col-sm-6 proj-box" *ngFor="let key of (projectsApproved | async) | slice:0:6 | orderBy: date ">
 				<div class="single-our-service">
 					<figure class="img-box">
-						<a href="#"><img src="{{key?.image}}" alt="{{key.projectName}}" width="300" height="200"></a>
+						<a href="#"><img class="image-responsive" src="{{key?.image.replace('?alt=media&', '_thumb.jpg?alt=media&')}}" alt="{{key.projectName}}"></a>
 					</figure>
 					<h4><a href="#" class="proj-name" [routerLink]="['/projects', key._id]">{{key.projectName }}</a></h4>
 					<p class="proj-date">
-						{{key.date | date:'dd MMMM y'}}
+						Written by <span>{{key.author}}</span> on {{key.date | date:'dd MMMM y'}}
 					</p>
 					<p>{{ key.desc }}</p>
 					<div class="link"><a [routerLink]="['/projects', key._id]" class="tran3s">Read more</a></div>

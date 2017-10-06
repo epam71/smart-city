@@ -3,9 +3,12 @@
   <div class="row">
     <div class="col-lg-12" id="video-block">
       <div id="video">
-         <video id="my-video" width="320" height="240" loop autoplay muted plays-inline>
+         <video *ngIf="innerWidth > 425" id="my-video" width="320" height="240" loop autoplay muted plays-inline>
             <source [src]="mainVideo" type="video/mp4">
-          </video>
+					</video>
+					<div class="mobileImg image-responsive" *ngIf="innerWidth < 426">
+						<img src="../../assets/images/mainLviv.jpg" alt="lviv" class="img-responsive">
+					</div>
           <div class="text-center">
                 <h2 class="animated2">
                   <span>Welcome to <strong>Lviv Smart City</strong></span>
