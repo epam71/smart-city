@@ -13,6 +13,9 @@
                         <div id="map"></div>
                     </div>
                 </div>
+                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+                    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                </agm-map>
             </div>
             <div class="col-md-6 col-sm-12">
                 <div class="msg">
