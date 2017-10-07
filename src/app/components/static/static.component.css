@@ -117,10 +117,6 @@ h2 {
   font-weight: 600;
 }
 
-.counters-section .container{
-  margin: 0;
-  width: 100%;
-}
 .counters-section .container .row{
   margin: 0;
 }
@@ -131,7 +127,7 @@ h2 {
   background-size: cover;
 }
 
-#subscribe .subscribe-shadow, .counters-section .container{
+#subscribe .subscribe-shadow, .counters-section .counters-shadow{
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
     background-size: cover;
     padding: 80px 0;
