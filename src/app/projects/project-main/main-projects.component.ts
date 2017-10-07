@@ -22,27 +22,24 @@ export class ProjectMainComponent implements OnInit {
     private authService: AuthService) { }
 
   searchData = '';
+  userCheck = '';
 
   projects;
   userProjects = false;
-  sort = 'unsorted';
 
-  sortMemo = '';
-  sortTypeValue = '';
+  sortMemo = 'date';
+  sortTypeValue = '-';
 
   searchButton = true;
   projectsValues = [{
-    key: 'unsorted',
-    value: 'unsorted'
+    key: 'date',
+    value: 'date'
   }, {
     key: 'name',
     value: 'projectName'
   }, {
     key: 'rating',
     value: 'rating'
-  }, {
-    key: 'date',
-    value: 'date'
   }];
 
   pagesArr = [];
@@ -136,6 +133,8 @@ export class ProjectMainComponent implements OnInit {
 
 
   ngOnInit() {
+    this.userCheck = this.authService.getRole();
+
     this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue);
     this.projectsData.getProjectsNumber()
       .subscribe(response => {

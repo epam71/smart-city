@@ -21,7 +21,7 @@
 					<p class="proj-date">
 						Written by <span>{{key.author}}</span> on {{key.date | date:'dd MMMM y'}}
 					</p>
-					<p>{{ key.desc }}</p>
+					<p>{{ key.desc | shorten: [150] }}</p>
 					<div class="link"><a [routerLink]="['/projects', key._id]" class="tran3s">Read more</a></div>
 				</div>
 			</div>

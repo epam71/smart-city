@@ -1,3 +1,7 @@
+:host{
+  font-family: 'Montserrat', sans-serif;
+}
+
 button,
 button:active,
 button:focus {
@@ -23,11 +27,10 @@ button:focus {
 .project_block {
   width: 96%;
   overflow: hidden;
-  padding: 15px;
   min-width: 250px;
   margin-bottom: 10px;
   margin: 5px;
-  box-shadow: 0 0 3px rgba(107, 107, 107, 0.9);
+  box-shadow: 0 0 5px rgba(107, 107, 107, 0.7);
   float: left;
 }
 
@@ -58,23 +61,16 @@ button:focus {
 }
 
 .projects_date {
-  position: absolute;
-  left: -7px;
-  bottom: 10px;
-  font-weight: 700;
-  background: #ee3733;
-  padding: 6px 10px;
-  text-transform: uppercase;
-  font-size: 12px;
-  color: #fff;
-  z-index: 5;
-  font-family: 'Montserrat', sans-serif;
+padding: 5px 0 5px 0;
+font-style: italic;
+}
+
+.projects_date span{
+  color: #ee3733;
 }
 
 .info_block {
-  margin-top: 10px;
-  min-height: 110px;
-  max-height: 90px;
+  padding: 15px;
   overflow: hidden;
 }
 
@@ -84,15 +80,20 @@ button:focus {
 }
 
 .project_desc {
-  font-size: 12px;
+  display: flex;
+  font-size: 13px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .project_footer {
   margin-top: 2px;
-  padding-top: 8px;
+  padding: 8px 15px 15px 15px;
   border-top: 1px solid #ccc;
+}
+
+.project_footer_inside{
+  margin-bottom: -15px;
 }
 
 .likes_block_main {}
@@ -134,7 +135,7 @@ button:focus {
   font-size: 14px;
   font-weight: 700;
   font-size: 15px;
-  z-index: 5;
+  z-index: 3;
 }
 
 .status_prop {
