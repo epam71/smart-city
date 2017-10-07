@@ -75,7 +75,7 @@
             <span>Project budget: {{ (project)?.budget }} UAH</span>
           </article>
         </section>
-        <div class="project_footer">
+        <div class="row project_footer">
 
               <div class="col-md-2 col-sm-2 col-xs-2">
               <div class="likes_block">
@@ -83,12 +83,12 @@
               </div>
             </div>
             <div class="col-md-10 col-sm-10 col-xs-10 right_footer">
+                <div class="author_block">
+                    Author: {{ (project)?.author }}
+                </div>
               <div class="date_block">
                 Date: {{ (project)?.date | date:'short' }}
               </div>
-              <div class="author_block">
-                Author: {{ (project)?.author }}
-            </div>
           </div>
 
         </div>

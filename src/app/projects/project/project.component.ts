@@ -17,6 +17,7 @@ export class ProjectComponent implements OnInit {
   private tempId;
   private user;
   private image = '';
+  private smallImage = '';
 
   constructor(private route: ActivatedRoute,
     private projectData: ProjectServiceService,
@@ -47,7 +48,8 @@ export class ProjectComponent implements OnInit {
       response => {
         this.user = this.authService.getEmail();
         this.project = response;
-        this.image = this.project.image
+        this.image = response.image
+        this.smallImage = this.image.replace('?alt=media&', '_thumb.jpg?alt=media&');
         return getProjectsData;
       }
     )
