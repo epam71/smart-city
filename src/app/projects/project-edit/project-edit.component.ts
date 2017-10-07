@@ -47,21 +47,19 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
   pushImage(event) {
 
     this.imageService.uploadFile(event)
-    .subscribe(res => {
-      this.imageFire = this.imageService.fileName;
-      this.imageFireKey = this.imageService.imageKey;
-    },
+    .subscribe(res => {},
     (error) => {
       console.error(error);
       this.errorMessage = error;
-    }
-  );
+    });
   }
 
   actProject(form: NgForm) {
 
     const value = form.value;
     value.budget = value.budget || 0;
+    this.imageFire = this.imageService.fileName;
+    this.imageFireKey = this.imageService.imageKey;
     this.done = true;
 
     let projectEdit: Project = {

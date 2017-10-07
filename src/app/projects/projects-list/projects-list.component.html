@@ -1,4 +1,4 @@
-        <div class="project_block">
+       <div class="project_block">
           <a [routerLink]="['/projects', key._id]">
             <div class="row customBlock">
             <div class="img_block">
@@ -13,7 +13,7 @@
                 {{key.projectName | uppercase | shorten:20 }}
               </div>
               <div class="projects_date">
-                  {{key.date | date:'dd MMMM y' }}
+                Written by <span>{{key.author}}</span> on {{key.date | date:'dd MMMM y' }}
                 </div>
               <div class="project_desc">{{ key.desc | shorten:200 }}</div>
             </div>

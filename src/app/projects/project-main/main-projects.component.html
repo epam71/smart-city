@@ -33,7 +33,7 @@
     </div>
 
     <div class="projects_block">
-        <div class="row">
+        <div class="row" myMatchHeight="info_block">
 <app-projects-list class="col-md-4 col-sm-6 project_block_main" *ngFor="let key of (projects | async)" [key]="key" > </app-projects-list>
         </div>
     </div>
@@ -49,4 +49,3 @@
   <li (click)="next()" [ngClass]="{disabled: (+currentPage - pagesArr.length == 0)}"><a>&raquo;</a></li>
 </ul>
 </div>
-{{pagesArr.length}}
