@@ -14,7 +14,14 @@ export class AdminAuthGuardService implements CanLoad {
     private router: Router) { }
 
   canLoad() {
-  return this.authService.isAdmin();
+    if (!this.authService.isLogedIn()) {
+      this.authService.getEventEmitter().subscribe((val)=>{
+        if(val === 'autologin') {
+          this.router.navigate(['/admin/projects']);
+        } 
+      });
+    }
+    return this.authService.isAdmin();
   }
 }
 

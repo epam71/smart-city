@@ -156,7 +156,7 @@ export class AuthService {
               if (userInfo['https://role']) {
                 this.accessToken = tempAccessToken;
                 this.fillUserInfo(userInfo);
-                this.changeStatus();  
+                this.changeStatus('autologin');  
               }
             } catch (err) {
               //autologin data corrupted
@@ -179,8 +179,8 @@ export class AuthService {
     this.changeStatus();
   }
 
-  private changeStatus(): void {
-    this.eventEmmiter.next('');
+  private changeStatus(val = ''): void {
+    this.eventEmmiter.next(val);
   }
 
   getEventEmitter(): Observable<string> {

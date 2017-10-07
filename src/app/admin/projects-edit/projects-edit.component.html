@@ -1,11 +1,11 @@
 <div class="container col-xs-12 col-md-8">
   <div class="row">
 
-    <app-modal #modal>
+    <app-modal #modal role="alertdialog" aria-describedby="dialog2Desc" tabindex="1">
       <div class="app-modal-header">
         Admin
       </div>
-      <div class="app-modal-body">
+      <div class="app-modal-body" id="dialog2Desc">
         Are you sure you want to permanently delete this project?
       </div>
       <div class="app-modal-footer">
@@ -14,11 +14,11 @@
       </div>
     </app-modal>
 
-    <app-modal #modalClose>
+    <app-modal #modalClose role="alertdialog" aria-describedby="dialog1Desc">
       <div class="app-modal-header">
         Admin
       </div>
-      <div class="app-modal-body">
+      <div class="app-modal-body" id="dialog1Desc">
         Are you sure you want to permanently close this project? It cannot be reopened.
       </div>
       <div class="app-modal-footer">
@@ -26,10 +26,11 @@
         <button type="button" class="btn custom-btn" (click)="closeProject()">Close</button>
       </div>
     </app-modal>
-
+    
+    <article role="main">
     <div class="card mt-4">
-      <img class="card-img-top img-fluid" alt="No image" src="{{ image }}" onerror="this.onerror=null;this.src='../../../assets/images/no_image.jpg';">
-      <div *ngIf="!editable" class="card-body">
+      <img class="card-img-top img-fluid" alt="Project image" src="{{ image }}" onerror="this.onerror=null;this.src='../../../assets/images/no_image.jpg';">
+      <section *ngIf="!editable" class="card-body">
         <div class="col-sm-2 pull-right likes">
           <div class="fa fa-heart fa-fw"></div>
           <span>{{ project?.likes.length }}</span>
@@ -43,18 +44,18 @@
         <h3 class="card-title">{{ project?.projectName }}</h3>
         <h4>Budget: {{ project?.budget }} UAH</h4>
         <p class="card-text">Author: {{ project?.author }}</p>
-      </div>
+      </section>
     </div>
 
-    <div *ngIf="!editable" class="card card-outline-secondary my-4">
+    <section *ngIf="!editable" class="card card-outline-secondary my-4">
       <div *ngIf="project?.goals" class="card-body">
-        <div class="card-title">
+        <h3 class="card-title">
           Goals:
-        </div>
+        </h3>
         <p class="card-text">{{ project?.goals }}</p>
       </div>
       <hr>
-      <div class="card-header">Description:</div>
+      <h3 class="card-header">Description:</h3>
       <div class="card-body">
         <p class="card-text">{{ project?.desc }}</p>
         <small class="text-muted">Created on {{ project?.date | date}}</small>
@@ -64,43 +65,44 @@
         <button *ngIf="!editable" type="button" class="btn custom-btn approve-projectedit-project" (click)="editProject()">Edit</button>
         <button class="btn custom-btn" (click)="modal.show()">Delete</button>
       </div>
-    </div>
-
+    </section>
+</article>
+  
     <form *ngIf="editable" class="form-horizontal" (ngSubmit)="saveChanges(form)" #form="ngForm">
 
       <div class="form-group">
         <label for="projectName" class="col-sm-2 control-label">Name</label>
-        <div class="col-sm-12">
+        <p class="col-sm-12">
           <input type="text" class="form-control" name="projectName" [ngModel]="project?.projectName" #projectName="ngModel" required>
-        </div>
+        </p>
       </div>
 
       <div class="form-group">
         <label for="projectDesc" class="col-sm-2 control-label">Description</label>
-        <div class="col-sm-12">
+        <p class="col-sm-12">
           <textarea class="form-control" rows="7" cols="40" name="desc" [ngModel]="project?.desc" #desc="ngModel" required></textarea>
-        </div>
+        </p>
       </div>
 
       <div class="form-group">
         <label for="projectGoals" class="col-sm-2 control-label">Goals</label>
-        <div class="col-sm-12">
+        <p class="col-sm-12">
           <textarea rows="4" cols="40" class="form-control" name="goals" [ngModel]="project?.goals || ''" #goals="ngModel" required></textarea>
-        </div>
+        </p>
       </div>
 
       <div class="form-group">
         <label for="projectAuthor" class="col-sm-2 control-label">Author</label>
-        <div class="col-sm-12">
+        <p class="col-sm-12">
           <input type="text" class="form-control project-author" placeholder="author" name="projectAuthor" [ngModel]="project?.author || ''" #projectAuthor="ngModel" disabled>
-        </div>
+        </p>
       </div>
 
       <div class="form-group">
         <label for="projectBudget" class="col-sm-2 control-label">Budget</label>
-        <div class="col-sm-12">
+        <p class="col-sm-12">
           <input type="text" class="form-control" placeholder="budget" name="budget" [ngModel]="project?.budget || ''" #budget="ngModel" required>
-        </div>
+        </p>
       </div>
 
       <div class="input-group image-preview">

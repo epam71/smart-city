@@ -3,26 +3,26 @@
 <div class="container-fluid">
   <div class="row main-content">
 
-    <div class="col-md-4">
+    <main class="col-md-4">
 
-      <div class="panel panel-primary ">
-        <div class="panel-heading">
+      <section *ngIf="activeProjects?.length" class="panel panel-primary ">
+        <div class="panel-heading" tabindex="0">
           <h3 class="panel-title">
           <i class="fa fa-check fa-fw"></i>
           <div class="btn-group pull-right">
-            <button class="btn sort-btn dropdown-toggle" data-toggle="dropdown">
+            <button class="btn sort-btn dropdown-toggle" data-toggle="dropdown" role="toolbar" aria-label="sorting options" aria-haspopup="true">
               <span>sort</span>
             </button>
-            <ul class="dropdown-menu dropdown-menu-right">
-              <li (click)="sortByName()"><a>name</a></li>
+            <ul class="dropdown-menu dropdown-menu-right" aria-label="submenu">
+              <li (click)="sortByName()" (keyup.enter)="sortByName()" tabindex="0" role="button"><a>name</a></li>
               <li class="divider"></li>
-              <li (click)="sortByDate()"><a>date</a></li>
+              <li (click)="sortByDate()" (keyup.enter)="sortByDate()" tabindex="0" role="button"><a>date</a></li>
             </ul>
           </div>
             Active</h3>
         </div>
-        <ul class="list-group">
-          <li *ngFor="let key of activeProjects | slice:0:showActive | sortBy:prop:'normal'; let i=index" class="project_block list-group-item sliding_bg">
+        <ul class="list-group" id="sortable" role="listbox">
+          <li *ngFor="let key of activeProjects | slice:0:showActive | sortBy:prop:'normal'; let i=index" class="project_block list-group-item sliding_bg" role="option">
             <a [routerLink]="['/admin/projects', key._id]">
               <span class="project_name">
                {{key.projectName }}
@@ -31,16 +31,16 @@
           </li>
           <button *ngIf="showMoreActiveButton" type="button" class="list-group-item more" (click)="showMore('active')">Show more</button>
         </ul>
-      </div>
+      </section>
 
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <section *ngIf="pendingProjects?.length" class="panel panel-primary">
+        <div class="panel-heading" tabindex="0">
           <h3 class="panel-title">
           <i class="fa fa-spinner fa-fw"></i>            
             Pending</h3>
         </div>
-        <ul class="list-group">
-          <li *ngFor="let key of pendingProjects | slice:0:showPending | sortBy:prop:'normal'; let i=index" class="project_block list-group-item sliding_bg">
+        <ul class="list-group" id="sortable" role="listbox">
+          <li *ngFor="let key of pendingProjects | slice:0:showPending | sortBy:prop:'normal'; let i=index" class="project_block list-group-item sliding_bg" role="option">
             <a [routerLink]="['/admin/projects', key._id]">               
                {{key.projectName }} 
                <span *ngIf="key.status === 'new'" class="badge badge-default badge-pill">new</span>              
@@ -48,31 +48,31 @@
           </li>
           <button *ngIf="showMorePendingButton" type="button" class="list-group-item more" (click)="showMore('pending')">Show more</button>
         </ul>
-      </div>
+      </section>
 
       <form class="navbar-form search-form" role="search">
         <div class="focus-container" tabindex="-1">
           <div class="input-group add-on">
             <input type="search" results="0" class="form-control" placeholder="Search" name="srch-term" id="srch-term" [(ngModel)]="queryString">
             <div class="input-group-btn">
-              <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i>
+              <button class="btn btn-default" tabindex="-1"><i class="glyphicon glyphicon-search"></i>
               </button>
             </div>
           </div>
         </div>
       </form>
 
-      <div *ngIf="queryString" class="panel panel-primary search-panel">
-        <ul class="list-group">
-          <li *ngFor="let key of projects | searchNews:queryString:'projectName'| sortBy:prop:'normal'; let i=index" class="project_block list-group-item sliding_bg">
+      <section *ngIf="queryString" class="panel panel-primary search-panel">
+        <ul class="list-group" aria-live="assertive" role="listbox">
+          <li *ngFor="let key of projects | searchNews:queryString:'projectName'| sortBy:prop:'normal'; let i=index" class="project_block list-group-item sliding_bg" role="listitem">
             <a [routerLink]="['/admin/projects', key._id]">               
                {{key.projectName }} 
                <span *ngIf="key.status === 'new'" class="badge badge-default badge-pill">new</span>              
                </a>
           </li>
         </ul>
-      </div>
-    </div>
+      </section>
+    </main>
 
     <router-outlet></router-outlet>
 

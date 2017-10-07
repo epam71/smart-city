@@ -105,7 +105,7 @@ export class ProjectsEditComponent implements OnInit {
 
   ngOnInit(): void {
 
-  }
+   }
 
 }
 

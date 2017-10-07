@@ -10,7 +10,7 @@
             <i class="fa fa-bars"></i>
           </button>
           <!-- End Toggle Nav Link For Mobiles -->
-          <a class="navbar-brand" (click)="logOut()">
+          <a class="navbar-brand" (click)="logOut()" tabindex="0">
             <div class="glyphicon glyphicon-log-out"></div>
             <span>log out</span>
           </a>
@@ -18,16 +18,16 @@
         <div class="navbar-collapse collapse">
           <!-- Start Navigation List -->
           <ul class="nav navbar-nav navbar-right">
-            <li>
+            <li role="presentation">
               <a routerLink="../projects" routerLinkActive="active">Projects</a>
             </li>
-            <li>
+            <li role="presentation">
               <a routerLink="../news" routerLinkActive="active">News</a>
             </li>
             <li>
               <a routerLink="../contacts" routerLinkActive="active">Contacts</a>
             </li>
-            <li>
+            <li role="presentation">
               <a routerLink="../../">Main</a>
             </li>
           </ul>
