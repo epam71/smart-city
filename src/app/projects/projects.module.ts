@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PipesModule } from '../pipes/pipes.module';
 import { ProjectMainComponent } from './project-main/main-projects.component';
+import { MatchHeightDirective } from '../directives/same-height.directive';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ProjectMainComponent } from './project-main/main-projects.component';
     ProjectsListComponent,
     ProjectComponent,
     ProjectEditComponent,
-    ProjectMainComponent
+    ProjectMainComponent,
+    MatchHeightDirective
   ]
 })
 export class ProjectsModule { }

@@ -18,5 +18,6 @@ export class ProjectsListComponent implements OnInit {
 
     @Input('key') key;
 
+
   ngOnInit() {}
 }
