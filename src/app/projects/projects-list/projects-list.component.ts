@@ -18,6 +18,11 @@ export class ProjectsListComponent implements OnInit {
 
   @Input('key') key;
   @Input('ownProjects') ownProjects = '';
+  modalLogIn = false;
+
+  modalResponse(event) {
+    this.modalLogIn = event;
+  }
 
   ngOnInit() { }
 }
