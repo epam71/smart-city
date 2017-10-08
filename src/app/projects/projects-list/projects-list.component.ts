@@ -16,8 +16,8 @@ export class ProjectsListComponent implements OnInit {
   constructor(private projectsData: ProjectServiceService,
     private authService: AuthService) { }
 
-    @Input('key') key;
-    @Input('ownProjects') ownProjects = '';
+  @Input('key') key;
+  @Input('ownProjects') ownProjects = '';
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

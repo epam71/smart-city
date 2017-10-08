@@ -26,18 +26,18 @@ export class ImageServiceService {
   }
 
 
-  uploadFile(event): Observable<any>{
-    
+  uploadFile(event): Observable<any> {
+
     const storageRef = firebase.storage().ref();
-        this.file = event.target.files.item(0);
-        
-        if (this.file.type.split('/')[0] !== 'image'){
-          return Observable.throw('Please, choose image');
-        } else {
-          const upload = new UploadImage(this.file);
-          const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
+    this.file = event.target.files.item(0);
+
+    if (this.file.type.split('/')[0] !== 'image') {
+      return Observable.throw('Please, choose image');
+    } else {
+      const upload = new UploadImage(this.file);
+      const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
       return Observable.fromPromise(uploadTask.then(this.uploadToDB(uploadTask, upload)));
-        }
+    }
   }
 
   uploadToDB(uploadTask, upload): any {
@@ -61,19 +61,19 @@ export class ImageServiceService {
 
   }
 
-  resetImage(){
+  resetImage() {
     this.uploadProgress = '';
     this.fileName = '';
   }
 
-  deleteImage(key){
+  deleteImage(key) {
 
     const storageRef = firebase.storage().ref();
 
     var desertRef = storageRef.child('uploads/' + key);
-    desertRef.delete().then(function(response) {
-    }).catch(error=>
-    console.error(error));
+    desertRef.delete().then(function (response) {
+    }).catch(error =>
+      console.error(error));
   }
 
 }

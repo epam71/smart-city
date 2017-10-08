@@ -12,9 +12,7 @@
   vertical-align: bottom;
 }
 
-.heart_block{
-
-}
+.heart_block {}
 
 .heart {
   position: relative;
@@ -27,6 +25,7 @@
   border-radius: 0;
   transform: rotate(-45deg);
 }
+
 .heart::before,
 .heart::after {
   position: absolute;
@@ -36,32 +35,39 @@
   background: #ee3733;
   border-radius: 50%;
 }
+
 .heart::before {
   top: -5px;
   left: 0;
 }
+
 .heart::after {
   top: 0;
   right: -5px;
 }
+
 @keyframes pulse {
-  0%, 20% {
-      transform: rotate(-45deg) scale(1);
+  0%,
+  20% {
+    transform: rotate(-45deg) scale(1);
   }
   30% {
-      transform: rotate(-45deg) scale(1.2);
+    transform: rotate(-45deg) scale(1.2);
   }
   50% {
-      transform: rotate(-45deg) scale(1);
+    transform: rotate(-45deg) scale(1);
   }
 }
+
 .unliked_block .heart {
   opacity: 0.35;
 }
+
 .unliked_block .heart:hover {
   animation: pulse 1s infinite;
   opacity: 1;
 }
+
 .liked_block .heart {
   opacity: 1;
 }

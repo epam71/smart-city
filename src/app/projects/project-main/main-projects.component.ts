@@ -19,9 +19,9 @@ import 'rxjs/add/operator/switchMap';
 export class ProjectMainComponent implements OnInit, DoCheck {
 
   constructor(public projectsData: ProjectServiceService,
-    public authService: AuthService) { 
+    public authService: AuthService) {
 
-    }
+  }
 
   private searchData = '';
   private userCheck: boolean;
@@ -58,9 +58,9 @@ export class ProjectMainComponent implements OnInit, DoCheck {
     this.searchData = newValue;
     this.projects = this.projectsData.searchProjects(this.searchData, this.userProjects);
   }
-test(){
-  console.log('safsa');
-}
+  test() {
+    console.log('safsa');
+  }
   selectSort(event) {
 
     return this.projectsValues.forEach((el, i) => {
@@ -87,28 +87,28 @@ test(){
     if (!this.userProjects) {
       this.pagesArr = [];
       this.projectsData.getUserProjectsNumber(this.authService.getEmail())
-      .subscribe(response => {
-        let totalPages = Math.ceil(response.count / this.limit);
-        for (let i = 0; i < totalPages; i++) {
-          this.pagesArr.push(i + 1);
-        }
-        this.pages = this.pagesArr.slice(0, 5);
+        .subscribe(response => {
+          let totalPages = Math.ceil(response.count / this.limit);
+          for (let i = 0; i < totalPages; i++) {
+            this.pagesArr.push(i + 1);
+          }
+          this.pages = this.pagesArr.slice(0, 5);
 
-      }, error => console.error(error))
+        }, error => console.error(error))
       this.userProjects = this.authService.getEmail();
       this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip,
-         this.sortMemo, this.sortTypeValue, this.userProjects);
+        this.sortMemo, this.sortTypeValue, this.userProjects);
     } else {
       this.pagesArr = [];
       this.projectsData.getProjectsNumber()
-      .subscribe(response => {
-        let totalPages = Math.ceil(response.count / this.limit);
-        for (let i = 0; i < totalPages; i++) {
-          this.pagesArr.push(i + 1);
-        }
-        this.pages = this.pagesArr.slice(0, 5);
+        .subscribe(response => {
+          let totalPages = Math.ceil(response.count / this.limit);
+          for (let i = 0; i < totalPages; i++) {
+            this.pagesArr.push(i + 1);
+          }
+          this.pages = this.pagesArr.slice(0, 5);
 
-      }, error => console.error(error))
+        }, error => console.error(error))
       this.userProjects = '';
       this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip,
         this.sortMemo, this.sortTypeValue, this.userProjects);
@@ -175,7 +175,7 @@ test(){
 
   }
 
-  ngDoCheck(){
+  ngDoCheck() {
     this.userCheck = this.authService.isLogedIn();
   }
 }

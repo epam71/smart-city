@@ -10,8 +10,8 @@ import { AuthService } from '../../core/auth-service/auth-service.service';
 })
 export class RatingProjectComponent implements OnInit {
 
-userEmail;
-liked = false;
+  userEmail;
+  liked = false;
 
   @Input('ratingObj') ratingObjInfo;
 
@@ -20,13 +20,13 @@ liked = false;
 
   changeRating() {
 
-    if (this.liked === true){
+    if (this.liked === true) {
       this.liked = false;
     } else {
       this.liked = true;
     }
 
-      this.ratingData.postLikes(this.ratingObjInfo._id, { email: this.userEmail })
+    this.ratingData.postLikes(this.ratingObjInfo._id, { email: this.userEmail })
       .subscribe(
       (response) => {
         return this.ratingObjInfo.rating = response.currentRating;
@@ -38,20 +38,20 @@ liked = false;
   }
 
   ngOnInit() {
-this.userEmail = this.authService.getEmail();
+    this.userEmail = this.authService.getEmail();
 
   }
 
-  ngOnChanges(){
-    if (this.ratingObjInfo != null){
+  ngOnChanges() {
+    if (this.ratingObjInfo != null) {
 
-    this.ratingObjInfo.likes.forEach((el, i) => {
-      if (el === this.authService.getEmail()){
-        this.liked = true;
-      } else {
-        this.liked = false;
-      }
-    })
+      this.ratingObjInfo.likes.forEach((el, i) => {
+        if (el === this.authService.getEmail()) {
+          this.liked = true;
+        } else {
+          this.liked = false;
+        }
+      })
+    }
   }
-}
 }
