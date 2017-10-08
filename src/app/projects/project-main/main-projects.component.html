@@ -1,7 +1,7 @@
-  <div class="container projects_block_main">
-    <div class="row panel_block">
-      <div class="col-lg-10 col-md-10 col-sm-10 projects_panel_left">
-        <span class="my_projects_block" *ngIf="userCheck">
+<div class="container projects_block_main">
+  <div class="row panel_block">
+    <div class="col-lg-10 col-md-10 col-sm-10 projects_panel_left">
+      <span class="my_projects_block" *ngIf="userCheck">
           <button type="button" class="btn btn-default custom-btn" 
           (click)="showUserProjects($event.target.checked)" *ngIf="!userProjects else allProjects">My Projects</button>
           <ng-template #allProjects>
@@ -9,47 +9,47 @@
             (click)="showUserProjects($event.target.checked)">All Projects</button>
           </ng-template>
         </span>
-        <span class="select_block_main">
+      <span class="select_block_main">
           <span class="select_block">
         <select class="sort_block_select" (change)="selectSort($event.target.value)">
       <option *ngFor="let key of projectsValues" >{{key.key}}</option>
     </select>
         </span>
-          <span class="reverse_button">
+      <span class="reverse_button">
             <button class="glyphicon glyphicon-sort" (click)="sortType($event)"></button>
         </span>
-        </span>
-  
-        <span class="search_block_main">
+      </span>
+
+      <span class="search_block_main">
             <button class="glyphicon glyphicon-search" *ngIf="searchButton" (click)="searchProject($event)"></button>
           <input id="searchInput" class="form-control" type="text" placeholder="search" 
           *ngIf="!searchButton" (blur)="searchButton = true"
           [(ngModel)]="searchData" (ngModelChange)="valueChange($event)">
         </span>
-      </div>
-  
-      <div class="col-lg-2 col-md-2 col-sm-2">
-        <div class="add_block" *ngIf="userCheck">
-          <button type="submit" class="btn btn-success custom-btn" routerLink="new">Add Project</button>
-        </div>
-      </div>
     </div>
 
-    <div class="projects_block">
-        <div class="row" myMatchHeight="info_block">
-<app-projects-list class="col-md-4 col-sm-6 project_block_main" 
-*ngFor="let key of (projects | async)" [key]="key" [ownProjects]="userProjects"> </app-projects-list>
-        </div>
+    <div class="col-lg-2 col-md-2 col-sm-2">
+      <div class="add_block" *ngIf="userCheck">
+        <button type="submit" class="btn btn-success custom-btn" routerLink="new">Add Project</button>
+      </div>
     </div>
+  </div>
+
+  <div class="projects_block">
+    <div class="row" myMatchHeight="info_block">
+      <app-projects-list class="col-md-4 col-sm-6 project_block_main" *ngFor="let key of (projects | async)" [key]="key" [ownProjects]="userProjects">
+      </app-projects-list>
+    </div>
+  </div>
 
 </div>
 
 <div class="pagination_block">
-<ul class="pagination">
+  <ul class="pagination">
     <li (click)="prev()" [ngClass]="{disabled: (+currentPage - 1 < 1)}"><a>&laquo;</a></li>
-  <li *ngFor="let key of pages" (click)="paginateFunc($event)" [ngClass]="{active: currentPage == key}">
+    <li *ngFor="let key of pages" (click)="paginateFunc($event)" [ngClass]="{active: currentPage == key}">
       <a>{{key}}</a>
-  </li>
-  <li (click)="next()" [ngClass]="{disabled: (+currentPage - pagesArr.length == 0)}"><a>&raquo;</a></li>
-</ul>
+    </li>
+    <li (click)="next()" [ngClass]="{disabled: (+currentPage - pagesArr.length == 0)}"><a>&raquo;</a></li>
+  </ul>
 </div>
