@@ -8,19 +8,15 @@
     border-radius: 2px;
     cursor: pointer;
 }
-
-.form-group{
+.form-group {
     margin: 0;
 }
-
-.form-group label{
+.form-group label {
     color: #777777;
 }
-
 .selectpicker option {
     cursor: pointer;
 }
-
 .news-attribute {
     margin: 110px 0 15px 0;
     padding: 15px;
@@ -29,13 +25,15 @@
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
 }
 .news-attribute input {
-    padding: 18px 5px;
+    padding: 17px 5px;
 }
-input:focus {
+.input-group {
+    padding-right: 15px;
+}
+input:focus,
+.selectpicker:focus {
     border-color: rgba(238, 55, 51, 0.86);
-    ;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(238, 55, 51, 0.47);
-    ;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(238, 55, 51, 0.27);
     outline: 0 none;
 }
 .add-btn {
@@ -43,7 +41,7 @@ input:focus {
     font-weight: 500;
     font-size: 16px;
     display: inline-block;
-    padding: 8px 10px;
+    padding: 6px 10px;
     border-radius: 2px;
     transition: 0.5s;
     border: 1px solid #ccc;
@@ -72,7 +70,7 @@ a {
 .news_date {
     position: absolute;
     left: 20px;
-    margin-top: -40px;
+    margin-top: -55px;
     font-weight: 700;
     background: #ee3733;
     padding: 6px 10px;
@@ -159,4 +157,41 @@ a {
 }
 .pagination pagination-controls /deep/ .ngx-pagination .disabled {
     color: #9a9a9a;
+}
+@media (max-width: 465px) {
+    .news-attribute input {
+        padding: 15px 5px;
+        font-size: 11px;
+    }
+    .input-group-addon {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+    .add-btn {
+        font-size: 14px;
+        padding: 5px 6px;
+    }
+    .selectpicker {
+        padding: 6px 6px;
+    }
+}
+@media (max-width: 390px) {
+    .news-attribute input {
+        padding: 14px 5px;
+        max-height: 11px;
+    }
+    .input-group-addon {
+        padding: 5px 2px;
+        font-size: 10px;
+    }
+    .form-group label {
+        font-size: 12px;
+    }
+    .selectpicker {
+        padding: 6px 0px;
+    }
+    .add-btn {
+        font-size: 12px;
+        padding: 6px 6px;
+    }
 }

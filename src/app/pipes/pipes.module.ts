@@ -6,7 +6,6 @@ import { FilterStatusPipe } from "./filter-status.pipe";
 import { ShortenPipe } from './shorten.pipe';
 import { MessageStatusPipe } from './message-status.pipe';
 import { searchNews } from './search-news.pipe';
-import { TruncatePipe } from './truncate-news.pipe';
 
 @NgModule({
   imports: [
@@ -18,8 +17,7 @@ import { TruncatePipe } from './truncate-news.pipe';
     FilterStatusPipe,
     ShortenPipe,
     MessageStatusPipe,
-    searchNews,
-    TruncatePipe
+    searchNews
   ],
   exports: [
     SortBy,
@@ -27,8 +25,7 @@ import { TruncatePipe } from './truncate-news.pipe';
     FilterStatusPipe,
     ShortenPipe,
     MessageStatusPipe,
-    searchNews,
-    TruncatePipe
+    searchNews
   ]
 })
 export class PipesModule { }

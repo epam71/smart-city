@@ -3,6 +3,8 @@ import { NewsComponent } from './news/news.component';
 import { NewsAddComponent } from './news-add/news-add.component';
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { UserAuthGuardService } from '../core/admin-auth-guard/user-auth-guard.service';
+
 
 const routes: Routes = [
     {
@@ -11,7 +13,8 @@ const routes: Routes = [
     }, 
     {
         path: 'add',
-        component: NewsAddComponent
+        component: NewsAddComponent,
+        canActivate: [UserAuthGuardService]
     },
     {
         path: ':id',

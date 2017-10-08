@@ -8,48 +8,45 @@ import { News } from '../../models/news.model';
   templateUrl: './news-like.component.html',
   styleUrls: ['./news-like.component.css']
 })
-export class NewsLikeComponent implements OnInit {
-  private userEmail;
-  private showModal: boolean = false;
-  private getUserRole;
-  private liked = false;
 
+export class NewsLikeComponent implements OnInit {
+  public userEmail;
+  public showModal: boolean = false;
+  public liked = false;
   @Input('ratingObj') likeInfo;
 
-constructor(private newsService: NewsServiceService,
+  constructor(private newsService: NewsServiceService,
             private authService: AuthService) {}
 
-colseModal(){
-  this.showModal = false;
-}
-
-increaseLike() {
-  this.showModal = true;
-  if (this.liked !== true && this.getUserRole !== ''){
-    this.newsService.postNewsLike(this.likeInfo._id, { email: this.userEmail })
-        .subscribe(
-        (response) => {
-          this.liked = true;
-         return this.likeInfo.rating = response.currentRating;
-        }, (error) => {
-        console.error(error);
-    });
+  colseModal(){
+    this.showModal = false;
   }
-}
 
-ngOnInit() {
-  this.getUserRole = this.authService.getRole();
-  this.userEmail = this.authService.getEmail();
+  increaseLike() {
+    this.showModal = true;
+    if (this.liked !== true && this.authService.isLogedIn()){
+      this.newsService.postNewsLike(this.likeInfo._id, { email: this.userEmail })
+        .subscribe(
+          (response) => {
+          this.liked = true;
+          return this.likeInfo.rating = response.currentRating;
+          }, (error) => {
+          console.error(error);
+        });
+    }
+  }
+
+  ngOnInit() {
+    this.userEmail = this.authService.getEmail();
   }
 
   ngOnChanges(){
     if (this.likeInfo != null){
-    this.likeInfo.likes.map(element => {
-      if (element === this.authService.getEmail()){
-        this.liked = true;
+      this.likeInfo.likes.map(element => {
+        if (element === this.authService.getEmail()){
+          this.liked = true;
         }
       });
     }
   }
-
 }

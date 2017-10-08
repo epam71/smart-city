@@ -8,7 +8,8 @@ import { NewsCommentComponent } from './news-comment/news-comment.component';
 import { routing } from './news.routes';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { PipesModule } from '../pipes/pipes.module'
+import { PipesModule } from '../pipes/pipes.module';
+import { DirectivesModule } from '../directives/directives.module';
 
 @NgModule({
   imports: [
@@ -17,13 +18,14 @@ import { PipesModule } from '../pipes/pipes.module'
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    PipesModule
+    PipesModule,
+    DirectivesModule
   ],
   declarations: [NewsListComponent, 
     NewsComponent, 
     NewsAddComponent,
     NewsLikeComponent,
-    NewsCommentComponent 
+    NewsCommentComponent
  ]
 })
 export class NewsModule { }

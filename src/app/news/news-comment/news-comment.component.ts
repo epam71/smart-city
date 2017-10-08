@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NewsServiceService } from '../../core/news-service/news-service.service';
 import { News } from '../../models/news.model';
 import { AuthService } from '../../core/auth-service/auth-service.service';
@@ -13,11 +13,11 @@ import 'rxjs/add/operator/switchMap';
 export class NewsCommentComponent implements OnInit {
   @Input('commentsObj') commentsInfo;
 
-  private rForm: FormGroup;                   
-  private message:string = '';
-  private getUserRole;
-  private comment;
-  private userEmail;
+  public rForm: FormGroup;                   
+  public message:string = '';
+  public comment;
+  public userEmail;
+  public p;
 
 constructor(private commentService: NewsServiceService,
             private authService: AuthService,
@@ -27,7 +27,7 @@ constructor(private commentService: NewsServiceService,
                 'validate' : ''
             });
           }
-
+  
   addComment(message){
     let postCommet = this.commentService.postComment(this.commentsInfo._id, {
       username: this.authService.getEmail(),
@@ -49,7 +49,6 @@ constructor(private commentService: NewsServiceService,
 
   deleteComment(commentId){
     let deleteComment = this.commentService.deleteComment(this.commentsInfo._id, commentId.id);
-
     deleteComment.switchMap(
       event => {
         return this.commentService.getNewsById(this.commentsInfo._id);
@@ -63,7 +62,6 @@ constructor(private commentService: NewsServiceService,
 
   ngOnInit() {
     this.userEmail = this.authService.getEmail();
-    this.getUserRole = this.authService.getRole();
   }
 
 }

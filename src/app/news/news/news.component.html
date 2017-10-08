@@ -1,48 +1,49 @@
-<div class="container">
-  <div class="row">
-      <button class="back pull-left" [routerLink]="['/news']">
+<section class="container">
+    <button class="back pull-left" [routerLink]="['/news']">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Back to news</button>
-  </div>
-</div>
+</section>
 
-<div class="container">
-  <div class="row">
-      <div class="col-sm-8 news-block">
-          <div class="img-block">
-              <img [src]="imagePath" onerror="this.onerror=null;this.src='http://lorempixel.com/750/550/city/';" alt="{{ (news)?.title }}">
-          </div>
-          <h2 class="title">{{ (news)?.title }}</h2>
-          <hr>
-          <p class="description">{{ (news)?.desc }}</p>
-          <div class="footer clearfix">
-              <div class="col-md-4 ">
-                  <news-like [ratingObj]="(news)"></news-like>
-              </div>
-              <div class="col-md-4 ">
-                  <p class=" author">Written by: {{ (news)?.author }}</p>
-              </div>
-              <div class="col-md-4 ">
-                  <p class="pull-right date">Posted: {{ (news)?.date | date: 'dd/MM/yyyy'}}</p>
-              </div>
-          </div>
-          <news-comment [commentsObj]="(news)"></news-comment>
-      </div>
-
-      <div class="col-md-4  news-list">
-          <h3>The most popular news!</h3>
-          <span class="decor"></span>
-          <div class="news-item" *ngFor="let key of (newsList | async)">
-              <div class="img-block">
-                  <img class="img img-responsive" [src]="domSanitizer.bypassSecurityTrustResourceUrl(key?.image)" onerror="this.onerror=null;this.src='http://lorempixel.com/400/200/city/';" alt="{{key.title }}" alt="{{key.title }}">
-              </div>
-              <p class="list-date ">{{ key.date | date:'dd MMMM y' }} </p>
-              <h4>{{ key.title | shorten:28 }} </h4>
-              <p class="list-desc">{{ key.desc | shorten:130 }} </p>
-              <a class="read" [routerLink]="['/news', key._id]" (click)="goNews(key)">Read more 
-            <span class="glyphicon glyphicon-menu-right"></span>
-          </a>
-              <news-like class="list-like pull-right" [ratingObj]="key"></news-like>
-          </div>
-      </div>
-  </div>
-</div>
+<section class="container">
+    <div class="row">
+        <figure class="col-md-8 col-sm-12 news-block">
+            <div class="img-block">
+                <img src="{{ (news)?.image }}" onerror="this.onerror=null;this.src='http://lorempixel.com/750/550/city/';" alt="{{ (news)?.title }}">
+            </div>
+            <figcaption>
+                <h2 class="title">{{ (news)?.title }}</h2>
+                <hr>
+                <p class="description">{{ (news)?.desc }}</p>
+                <footer class="footer clearfix">
+                    <div class="col-sm-4 col-xs-2 like-block">
+                        <news-like [ratingObj]="(news)"></news-like>
+                    </div>
+                    <div class="col-sm-4 col-xs-5 author-block">
+                        <p class=" author">Author: {{ (news)?.author }}</p>
+                    </div>
+                    <time class="col-sm-4 col-xs-5 date-block">
+                        <p class="pull-right date">Posted: {{ (news)?.date | date: 'dd/MM/yyyy'}}</p>
+                    </time>
+                </footer>
+                <news-comment [commentsObj]="(news)"></news-comment>
+            </figcaption>
+        </figure>
+        <aside class="col-md-4 col-sm-12  news-list">
+            <h3>The most popular news!</h3>
+            <span class="decor"></span>
+            <figure class="news-item" *ngFor="let key of (newsList | async)">
+                <div class="img-block">
+                    <img class="img img-responsive" src="{{key?.image.replace('?alt=media&', '_thumb.jpg?alt=media&')}}" onerror="this.onerror=null;this.src='http://lorempixel.com/400/200/city/';" alt="{{key.title }}" alt="{{key.title }}">
+                </div>
+                <figcaption>
+                    <p class="list-date ">{{ key.date | date:'dd MMMM y' }} </p>
+                    <h4>{{ key.title | shorten:28 }} </h4>
+                    <p class="list-desc">{{ key.desc | shorten:130 }} </p>
+                    <a class="read" [routerLink]="['/news', key._id]" (click)="goNews(key)">Read more 
+                        <span class="glyphicon glyphicon-menu-right"></span>
+                    </a>
+                    <news-like class="list-like pull-right" [ratingObj]="key"></news-like>
+                </figcaption>
+            </figure>
+        </aside>
+    </div>
+</section>
