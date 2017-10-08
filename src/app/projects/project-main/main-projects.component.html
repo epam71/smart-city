@@ -22,7 +22,8 @@
   
         <span class="search_block_main">
             <button class="glyphicon glyphicon-search" *ngIf="searchButton" (click)="searchProject($event)"></button>
-          <input id="searchInput" type="text" placeholder="search" *ngIf="!searchButton" 
+          <input id="searchInput" class="form-control" type="text" placeholder="search" 
+          *ngIf="!searchButton" (blur)="searchButton = true"
           [(ngModel)]="searchData" (ngModelChange)="valueChange($event)">
         </span>
       </div>
@@ -36,7 +37,8 @@
 
     <div class="projects_block">
         <div class="row" myMatchHeight="info_block">
-<app-projects-list class="col-md-4 col-sm-6 project_block_main" *ngFor="let key of (projects | async)" [key]="key" [ownProjects]="userProjects"> </app-projects-list>
+<app-projects-list class="col-md-4 col-sm-6 project_block_main" 
+*ngFor="let key of (projects | async)" [key]="key" [ownProjects]="userProjects"> </app-projects-list>
         </div>
     </div>
 

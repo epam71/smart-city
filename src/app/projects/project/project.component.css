@@ -3,26 +3,9 @@
   text-decoration: none;
 }
 
-.customs-btn {
-  font-family: "Raleway", sans-serif;
-  font-weight: 500;
-  font-size: 14px;
-  border-radius: 2px;
-  transition: 0.5s;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background: none;
-  color: #777777;
-}
-
-.customs-btn:hover {
-  color: white;
-  background: #ee3733;
-  border: 1px solid #ee3733;
-}
-
 .project_block_main {
   margin-top: 100px;
+  min-width: 290px;
   font-size: 16px;
 }
 
@@ -50,7 +33,6 @@
 .project_block {
   margin-top: 10px;
   max-width: 900px;
-
 }
 
 .edit_block {}
@@ -71,6 +53,7 @@
 
 .project_name {
   position: absolute;
+  font-size: 32px;
   color: white;
   background: rgba(0, 0, 0, 0.7);
   width: 100%;
@@ -112,54 +95,33 @@
   padding-top: 10px;
 }
 
-.date_block {
+.date_block {}
 
-}
+.author_block {}
 
-.author_block {
-
-}
-
-.right_footer{
+.right_footer {
   text-align: right;
-}
-
-@media screen and (max-width: 768px) {
-  .likes_block {
-  }
-  .date_block {
-
-  }
-  .author_block {
-
-  }
 }
 
 .custom-btn {
   font-family: "Raleway", sans-serif;
-  text-transform: uppercase;
+  padding: 7px;
   font-weight: 500;
-  font-size: 16px;
-  letter-spacing: 1px;
-  display: inline-block;
-  padding: 8px 20px;
+  font-size: 14px;
   border-radius: 2px;
   transition: 0.5s;
-  margin: 10px;
-  border: 2px solid black;
-  border-radius: 5px;
+  border: 1px solid #ccc;
   background: none;
-  color: black;
+  color: #777777;
 }
 
 .custom-btn:hover {
   color: white;
-  font-weight: 700;
   background: #ee3733;
-  border: 2px solid #ee3733;
+  border: 1px solid #ee3733;
 }
 
-#myModal{
+#myModal {
   top: 20%;
 }
 
@@ -184,8 +146,7 @@
 
 /* list of project block */
 
-.projects_list {
-}
+.projects_list {}
 
 .projects_list header {
   text-align: center;
@@ -231,3 +192,53 @@
 }
 
 .comments_block {}
+
+@media screen and (max-width: 1200px) {
+  .project_name {
+    font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .project_name {
+    font-size: 27px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .project_block_main {
+    font-size: 12px;
+  }
+  .article_header {
+    font-size: 16px;
+  }
+  .project_name {
+    font-size: 23px;
+  }
+}
+
+@media screen and (max-width: 557px) {
+  .project_name {
+    font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 427px) {
+  .project_name {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 357px) {
+  .project_name {
+    font-size: 12px;
+  }
+  .nav_block {
+    width: 100%;
+    padding: 5px;
+  }
+  .custom-btn {
+    font-size: 14px;
+    width: 100%;
+  }
+}
