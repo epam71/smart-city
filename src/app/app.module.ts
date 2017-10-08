@@ -16,7 +16,6 @@ import { AppRoutes } from './app.routes';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { AlertModule } from 'ngx-bootstrap';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminAuthGuardService } from './core/admin-auth-guard/admin-auth-guard.service';
 import { OrderModule } from 'ngx-order-pipe';
 import { AngularFireModule } from 'angularfire2';
@@ -44,7 +43,6 @@ import { AgmCoreModule } from '@agm/core';
     PipesModule,
     AppRoutes,
     FormsModule,
-    BrowserAnimationsModule,
     AlertModule.forRoot(),
     OrderModule,
     AngularFireDatabaseModule,

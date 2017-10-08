@@ -13,7 +13,7 @@ import 'rxjs/add/operator/switchMap';
 export class ProjectComponent implements OnInit {
 
   private projects;
-  private project;
+  project;
   private tempId;
   private user;
   private image = '';

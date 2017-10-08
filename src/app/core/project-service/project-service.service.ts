@@ -48,9 +48,15 @@ export class ProjectServiceService {
             }).catch(this.handleError);
     };
 
-    getPaginateProjects(limit='', skip = '', sortBy='date', type = ''): Observable<Project[]> {
+    getPaginateProjects(limit='', skip = '', sortBy='date', type = '', author=''): Observable<Project[]> {
+
+        if(author !== ''){
+            author = `&query={"author": "${author}"}`
+        }
         
-                return this.http.get(projects_PATH  + `?limit=${limit}&skip=${+skip - +limit}&sort=${type}${sortBy}`, this.authService.getAuthHeaderOpt())
+                return this.http.get(projects_PATH  
+                    + `?limit=${limit}&skip=${+skip - +limit}&sort=${type}${sortBy}${author}`,
+                     this.authService.getAuthHeaderOpt())
         
                     .map((response: Response) => {
                         return response.json();
@@ -71,12 +77,20 @@ export class ProjectServiceService {
     };
 
     getProjectsNumber(): Observable<any> {
+        
+                return this.http.get(config.PATH + `projects/count`, this.authService.getAuthHeaderOpt())
+                    .map((response: Response) => {
+                        return response.json();
+                    }).catch(this.handleError);
+            };
 
-        return this.http.get(config.PATH + `projects/count`, this.authService.getAuthHeaderOpt())
-            .map((response: Response) => {
-                return response.json();
-            }).catch(this.handleError);
-    };
+            getUserProjectsNumber(username): Observable<any> {
+                
+                        return this.http.get(config.PATH + `projects/count?query={"author": "${username}"}`, this.authService.getAuthHeaderOpt())
+                            .map((response: Response) => {
+                                return response.json();
+                            }).catch(this.handleError);
+                    };
 
     getRatingProjects(): Observable<Project[]> {
 
@@ -94,9 +108,13 @@ export class ProjectServiceService {
             }).catch(this.handleError);
     };
 
-    searchProjects(keyWord): Observable<Project[]> {
+    searchProjects(keyWord, author=''): Observable<Project[]> {
 
-                return this.http.get(projects_PATH + `?query={"projectName":"~^(${keyWord})"}`, this.authService.getAuthHeaderOpt())
+        if(author !== ''){
+            author = `, "author": "${author}"`
+        }
+
+                return this.http.get(projects_PATH + `?query={"projectName":"~^(${keyWord})"${author}}`, this.authService.getAuthHeaderOpt())
                     .map((response: Response) => {
                         return response.json();
                     }).catch(this.handleError);

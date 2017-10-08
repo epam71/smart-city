@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
 import { ProjectServiceService } from '../../core/project-service/project-service.service';
 import { AuthService } from '../../core/auth-service/auth-service.service';
 import { trigger, state, transition, style, animate, group } from '@angular/animations';
@@ -16,16 +16,18 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['./main-projects.component.css'],
 })
 
-export class ProjectMainComponent implements OnInit {
+export class ProjectMainComponent implements OnInit, DoCheck {
 
   constructor(private projectsData: ProjectServiceService,
-    private authService: AuthService) { }
+    private authService: AuthService) { 
+
+    }
 
   searchData = '';
-  userCheck = '';
+  userCheck: boolean;
 
   projects;
-  userProjects = false;
+  userProjects = '';
 
   sortMemo = 'date';
   sortTypeValue = '-';
@@ -54,7 +56,7 @@ export class ProjectMainComponent implements OnInit {
 
   valueChange(newValue) {
     this.searchData = newValue;
-    this.projects = this.projectsData.searchProjects(this.searchData);
+    this.projects = this.projectsData.searchProjects(this.searchData, this.userProjects);
   }
 
   selectSort(event) {
@@ -62,7 +64,7 @@ export class ProjectMainComponent implements OnInit {
     return this.projectsValues.forEach((el, i) => {
       if (this.projectsValues[i].key === event) {
         this.sortMemo = this.projectsValues[i].value;
-        return this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue);
+        return this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue, this.userProjects);
       }
     });
   }
@@ -74,16 +76,40 @@ export class ProjectMainComponent implements OnInit {
     } else {
       this.sortTypeValue = '';
     }
-    return this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue);
+    return this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue, this.userProjects);
   }
 
   showUserProjects() {
+    this.currentPage = '1';
+    this.skip = this.limit;
     if (!this.userProjects) {
-      this.userProjects = true;
-      this.projects = this.projectsData.getUserProjects(this.authService.getNickname());
+      this.pagesArr = [];
+      this.projectsData.getUserProjectsNumber(this.authService.getNickname())
+      .subscribe(response => {
+        let totalPages = Math.ceil(response.count / this.limit);
+        for (let i = 0; i < totalPages; i++) {
+          this.pagesArr.push(i + 1);
+        }
+        this.pages = this.pagesArr.slice(0, 5);
+
+      }, error => console.error(error))
+      this.userProjects = this.authService.getNickname();
+      this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip,
+         this.sortMemo, this.sortTypeValue, this.userProjects);
     } else {
-      this.userProjects = false;
-      this.projects = this.projectsData.getApprovedProjects();
+      this.pagesArr = [];
+      this.projectsData.getProjectsNumber()
+      .subscribe(response => {
+        let totalPages = Math.ceil(response.count / this.limit);
+        for (let i = 0; i < totalPages; i++) {
+          this.pagesArr.push(i + 1);
+        }
+        this.pages = this.pagesArr.slice(0, 5);
+
+      }, error => console.error(error))
+      this.userProjects = '';
+      this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip,
+        this.sortMemo, this.sortTypeValue, this.userProjects);
     }
   }
 
@@ -103,7 +129,7 @@ export class ProjectMainComponent implements OnInit {
     this.skip = event.target.innerText * this.limit;
     if (this.currentPage != event.target.innerText) {
       this.currentPage = event.target.innerText;
-      this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue);
+      this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue, this.userProjects);
     }
 
     this.checkPagination();
@@ -113,7 +139,7 @@ export class ProjectMainComponent implements OnInit {
     if (!(this.currentPage - 1 < 1)) {
       --this.currentPage;
       this.skip = this.currentPage * this.limit;
-      this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue);
+      this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue, this.userProjects);
     }
 
     this.checkPagination();
@@ -125,7 +151,7 @@ export class ProjectMainComponent implements OnInit {
 
       ++this.currentPage;
       this.skip = this.currentPage * this.limit;
-      this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue);
+      this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue, this.userProjects);
     }
 
     this.checkPagination();
@@ -133,9 +159,8 @@ export class ProjectMainComponent implements OnInit {
 
 
   ngOnInit() {
-    this.userCheck = this.authService.getRole();
 
-    this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue);
+    this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue, this.userProjects);
     this.projectsData.getProjectsNumber()
       .subscribe(response => {
         let totalPages = Math.ceil(response.count / this.limit);
@@ -146,5 +171,9 @@ export class ProjectMainComponent implements OnInit {
 
       }, error => console.error(error))
 
+  }
+
+  ngDoCheck(){
+    this.userCheck = this.authService.isLogedIn();
   }
 }

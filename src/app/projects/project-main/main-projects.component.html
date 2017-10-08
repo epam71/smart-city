@@ -1,7 +1,7 @@
   <div class="container projects_block_main">
     <div class="row panel_block">
       <div class="col-lg-10 col-md-10 col-sm-10 projects_panel_left">
-        <span class="my_projects_block" *ngIf="userCheck !== ''">
+        <span class="my_projects_block" *ngIf="userCheck">
           <button type="button" class="btn btn-default custom-btn" (click)="showUserProjects($event.target.checked)" *ngIf="!userProjects else allProjects">My Projects</button>
           <ng-template #allProjects>
             <button type="button" class="btn btn-default custom-btn" (click)="showUserProjects($event.target.checked)">All Projects</button>
@@ -26,7 +26,7 @@
       </div>
   
       <div class="col-lg-2 col-md-2 col-sm-2">
-        <div class="add_block" *ngIf="userCheck !== ''">
+        <div class="add_block" *ngIf="userCheck">
           <button type="submit" class="btn btn-success custom-btn" routerLink="new">Add Project</button>
         </div>
       </div>
