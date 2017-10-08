@@ -42,7 +42,8 @@
     <div class="col-sm-11 col-xs-12">
         <div class="comment_block">
         <div class="modal-header comment_block_header">
-            <button type="button" class="close modal_close" data-dismiss="modal" aria-hidden="true" (click)="deleteComment(key)">&times;</button>
+            <button type="button" class="close modal_close" *ngIf="key.username === user.email || user.isAdmin === true"
+            data-dismiss="modal" aria-hidden="true" (click)="deleteComment(key)">&times;</button>
 
             <div class="username">
                 <i class="glyphicon glyphicon-user"></i> {{key.username}}

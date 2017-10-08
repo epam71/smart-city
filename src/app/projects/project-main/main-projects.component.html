@@ -2,9 +2,11 @@
     <div class="row panel_block">
       <div class="col-lg-10 col-md-10 col-sm-10 projects_panel_left">
         <span class="my_projects_block" *ngIf="userCheck">
-          <button type="button" class="btn btn-default custom-btn" (click)="showUserProjects($event.target.checked)" *ngIf="!userProjects else allProjects">My Projects</button>
+          <button type="button" class="btn btn-default custom-btn" 
+          (click)="showUserProjects($event.target.checked)" *ngIf="!userProjects else allProjects">My Projects</button>
           <ng-template #allProjects>
-            <button type="button" class="btn btn-default custom-btn" (click)="showUserProjects($event.target.checked)">All Projects</button>
+            <button type="button" class="btn btn-default custom-btn" 
+            (click)="showUserProjects($event.target.checked)">All Projects</button>
           </ng-template>
         </span>
         <span class="select_block_main">

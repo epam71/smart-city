@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, Output, OnChanges, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ProjectServiceService } from '../../core/project-service/project-service.service';
 import { AuthService } from '../../core/auth-service/auth-service.service';
 import { NgForm } from '@angular/forms';
@@ -74,5 +74,4 @@ export class CommentsProjectComponent implements OnInit {
   ngOnInit() {
 
   }
-
 }

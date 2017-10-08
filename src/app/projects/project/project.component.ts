@@ -46,7 +46,10 @@ export class ProjectComponent implements OnInit {
 
     getProjectData.switchMap(
       response => {
-        this.user = this.authService.getEmail();
+        this.user = {
+          email: this.authService.getEmail(),
+          isAdmin: this.authService.isAdmin()
+        }
         this.project = response;
         this.image = response.image
         this.smallImage = this.image.replace('?alt=media&', '_thumb.jpg?alt=media&');
