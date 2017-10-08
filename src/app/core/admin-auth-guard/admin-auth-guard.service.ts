@@ -21,7 +21,12 @@ export class AdminAuthGuardService implements CanLoad {
         } 
       });
     }
-    return this.authService.isAdmin();
+    if(this.authService.isAdmin()){
+      return true;
+    } else {
+      this.router.navigate(['/redirectToRoot']);
+      return false;
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 .container-fluid {
-    background:#ffffff url('../../../assets/images/admin_back.jpg') no-repeat center center;
+    background:#ffffff url('../../../assets/images/admin_back2.png') no-repeat center center;
 	background-attachment: fixed;
 	background-size:     cover;
     padding-top: 10px;
@@ -41,25 +41,25 @@
 ::-webkit-scrollbar
 {
 	width: 8px;
-	background-color: #202020;
+	background-color: #26263a;
 }
 
 ::-webkit-scrollbar-thumb
 {
 	border-radius: 2px;
 	box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #202020;
+	background-color: #26263a;
 }
 
 /* list */
 
 a {
     text-decoration: none;
-    color: #202020 ;
+    color: #26263a ;
 }
 
 .panel, .panel-heading {
-    border-color: #202020;
+    border-color: #26263a;
 }
 
 .panel.search-panel .list-group-item, .panel.search-panel {
@@ -80,7 +80,7 @@ a {
 
 .panel > .list-group .list-group-item {
     padding: 7px 5px 7px 15px;
-    background-color: #FDFAFF;
+    background-color: none;
 }
 
 .panel > .list-group .sliding_bg:first-child {
@@ -92,7 +92,7 @@ a {
 }
 
 .panel-heading {
-    background-color: #202020 ;
+    background-color: #26263a ;
     position: relative;
 }
 
@@ -118,7 +118,7 @@ li.sliding_bg:hover span.badge {
 
 .sort-btn {
     border-radius: 5px;
-    background-color: #202020;
+    background-color: #26263a;
     font-size: 1.8vh;
 }
 
@@ -148,3 +148,11 @@ focus-container {
 .input-group-btn button {
     height: 34px;
 } 
+
+.screenReaders {
+    text-indent: -10000px;
+    z-index: -1;
+    max-height: 200px;
+    position: absolute;
+}
+

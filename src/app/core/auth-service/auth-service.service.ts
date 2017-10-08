@@ -59,7 +59,6 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    console.log(this.role);
     return this.role === ROOT_ROLE && !this.isExpired();
   }
 

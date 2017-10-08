@@ -6,7 +6,7 @@
 }
 
 .container-fluid {
-	background:#ffffff url('../../../assets/images/admin_back.jpg') no-repeat center center;
+	background:#ffffff url('../../../assets/images/admin_back2.png') no-repeat center center;
 	background-attachment: fixed;
 	background-size:     cover;
 	min-height: 1000px;
@@ -208,9 +208,9 @@ pagination-controls /deep/ a:hover, pagination-controls /deep/ li:hover, paginat
     border-radius: 4px;
     transition: 0.5s;
     margin: 6px 0 6px 6px;
-	border: 2px solid #202020 ;
+	border: 2px solid #26263a ;
     background: none;
-    color: #202020 ;
+    color: #26263a ;
   }
 .custom-btn:hover, .selected-btn {
     background: #ee3733;
@@ -224,10 +224,6 @@ pagination-controls /deep/ a:hover, pagination-controls /deep/ li:hover, paginat
 
 .btn-group {
 	margin: 0 auto 20px auto;
-}
-
-.btn:focus {
-  outline: none;
 }
 
 .app-modal-footer {
@@ -250,4 +246,15 @@ pagination-controls /deep/ a:hover, pagination-controls /deep/ li:hover, paginat
 
 span.email {
 	color: #4C867A;
+}
+
+.focus--mouse {
+	outline: none;
+}
+
+.screenReaders {
+    text-indent: -10000px;
+    z-index: -1;
+    max-height: 200px;
+    position: absolute;
 }
