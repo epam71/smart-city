@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PipesModule } from '../pipes/pipes.module';
 import { ProjectMainComponent } from './project-main/main-projects.component';
-import { MatchHeightDirective } from '../directives/same-height.directive';
+import { DirectivesModule } from '../directives/directives.module';
 
 
 @NgModule({
@@ -21,14 +21,14 @@ import { MatchHeightDirective } from '../directives/same-height.directive';
     ReactiveFormsModule,
     PipesModule,
     NgxPaginationModule,
+    DirectivesModule
   ],
   declarations: [RatingProjectComponent,
     CommentsProjectComponent,
     ProjectsListComponent,
     ProjectComponent,
     ProjectEditComponent,
-    ProjectMainComponent,
-    MatchHeightDirective
+    ProjectMainComponent
   ]
 })
 export class ProjectsModule { }
