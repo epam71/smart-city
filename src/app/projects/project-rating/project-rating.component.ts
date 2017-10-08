@@ -14,26 +14,31 @@ export class RatingProjectComponent implements OnInit {
   liked = false;
 
   @Input('ratingObj') ratingObjInfo;
+  @Output() modalShow: EventEmitter<any> = new EventEmitter();
 
   constructor(private ratingData: ProjectServiceService,
     private authService: AuthService) { }
 
   changeRating() {
 
-    if (this.liked === true) {
-      this.liked = false;
-    } else {
-      this.liked = true;
-    }
+    if (this.authService.isLogedIn()) {
 
-    this.ratingData.postLikes(this.ratingObjInfo._id, { email: this.userEmail })
-      .subscribe(
-      (response) => {
-        return this.ratingObjInfo.rating = response.currentRating;
-      },
-      (error) => {
-        console.error(error);
-      });
+      this.ratingData.postLikes(this.ratingObjInfo._id, { email: this.userEmail })
+        .subscribe(
+        (response) => {
+          if (this.liked === true) {
+            this.liked = false;
+          } else {
+            this.liked = true;
+          }
+          return this.ratingObjInfo.rating = response.currentRating;
+        },
+        (error) => {
+          console.error(error);
+        });
+    } else {
+      this.modalShow.emit(true);
+    }
 
   }
 

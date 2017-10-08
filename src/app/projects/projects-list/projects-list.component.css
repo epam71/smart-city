@@ -163,3 +163,43 @@ button:focus {
   }
 }
 
+
+/* Modal */
+
+.modal-content {
+  box-shadow: 0 10px 10px rgba(0, 0, 0, .08);
+  border: none;
+}
+
+#myModal {
+  top: 20%;
+  animation: 1s alertAnim forwards;
+}
+
+.modal_window {
+  color: #777777;
+  background: #FFFFFF;
+  border: 1px solid #ccc;
+}
+
+.modal_close {
+  color: #777777;
+}
+
+.modal_msg{
+  text-align: center;
+}
+
+.custom-modal-btn {
+  font-family: "Raleway", sans-serif;
+  padding: 10px 15px;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 2px;
+  transition: 0.5s;
+  border: none;
+  background: #ee3733;
+  font-weight: 500;
+  font-size: 17px;
+  color: white;
+}

@@ -1,3 +1,18 @@
+<div id="myModal" class="modal show" *ngIf="modalLogIn" (click)="modalLogIn = false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header modal_window">
+        <button type="button" class="close modal_close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">You need to be signed in to liked it</h4>
+      </div>
+      <div class="modal-body modal_msg">
+        <button class="custom-modal-btn" (click)='authService.login()'>SIGN IN</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="project_block">
   <a [routerLink]="['/projects', key._id]">
     <div class="row customBlock">
@@ -23,7 +38,7 @@
     <div class="row project_footer_inside">
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 likes_block_main">
         <div class="likes_block">
-          <rating [ratingObj]="key"></rating>
+          <rating [ratingObj]="key" (modalShow)="modalResponse($event)"></rating>
         </div>
       </div>
       <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 comments_block_main">
