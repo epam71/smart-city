@@ -29,7 +29,7 @@
     
     <article role="main">
     <div class="card mt-4">
-      <img class="card-img-top img-fluid" alt="{{ project?.projectName }} image" src="{{ image }}">
+      <img class="card-img-top img-fluid" alt="{{ project?.projectName }} image" src="{{ image.replace('?alt=media&', '_thumb.jpg?alt=media&') }}">
       <section *ngIf="!editable" class="card-body">
         <div class="col-sm-2 pull-right likes">
           <div class="fa fa-heart fa-fw"></div>

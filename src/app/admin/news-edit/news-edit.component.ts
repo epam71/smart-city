@@ -18,10 +18,10 @@ export class NewsEditComponent implements OnInit {
 
   public news: News;
   public newsId: any;
-  private editable: boolean = false;
+  public editable: boolean = false;
   private imageFire: string = '';
-  private image: string = '';
-  private progressBar: any;
+  public image: string = '';
+  public progressBar: any;
 
   deleteNews() {
     this.newsData.deleteNews(this.newsId.id).subscribe();

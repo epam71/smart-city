@@ -14,11 +14,12 @@ export class NewsListComponent implements OnInit {
   public news: News[];
   public activeNews: News[];
   public pendingNews: News[];
-  private prop = 'all';
-  private showPending = 3;
-  private showActive = 3;
-  private showMorePendingButton;
-  private showMoreActiveButton;
+  public prop = 'all';
+  public showPending = 3;
+  public showActive = 3;
+  public showMorePendingButton;
+  public showMoreActiveButton;
+  public queryString: string;
 
 
   sortByName() {

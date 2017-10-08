@@ -25,6 +25,7 @@ export class ProjectsListComponent implements OnInit {
   public showMorePendingButton: boolean;
   public showMoreActiveButton: boolean;
   public searchData: string = '';
+  public queryString: string;
 
   sortByName() {
     this.prop = 'projectName';

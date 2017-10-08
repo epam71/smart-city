@@ -16,11 +16,11 @@ import { ContactServiceService } from "../../core/contact-service/contact-servic
 })
 export class DashboardComponent implements OnInit {
 
-  private projects: number;
-  private totalNews: number;
-  private today = Date.now();
-  private messages: number;
-  private users: number;
+  public projects: number;
+  public totalNews: number;
+  public today = Date.now();
+  public messages: number;
+  public users: number;
 
   constructor(private projectsData: ProjectServiceService,
     private newsData: NewsServiceService,

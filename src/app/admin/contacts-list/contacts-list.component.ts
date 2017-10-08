@@ -16,10 +16,12 @@ export class ContactsListComponent implements OnInit {
 
   public messages;
   public message;
-  private wasNotClicked: any;
-  private fullList = false;
+  public wasNotClicked: any;
+  public fullList = false;
   public messageId;
-  private myParam = 'body';
+  public myParam = 'body';
+  public p:any;
+  public queryString: string;
 
   showAll() {
     this.fullList = true;
