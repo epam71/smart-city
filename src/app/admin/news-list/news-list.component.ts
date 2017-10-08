@@ -14,11 +14,12 @@ export class NewsListComponent implements OnInit {
   public news: News[];
   public activeNews: News[];
   public pendingNews: News[];
-  private prop = 'all';
-  private showPending = 3;
-  private showActive = 3;
-  private showMorePendingButton;
-  private showMoreActiveButton;
+  public prop = 'all';
+  public showPending = 3;
+  public showActive = 3;
+  public showMorePendingButton;
+  public showMoreActiveButton;
+  public queryString: string;
 
 
   sortByName() {
@@ -32,12 +33,12 @@ export class NewsListComponent implements OnInit {
   showMore(att) {
     if (att === 'pending') {
       this.showPending += 5;
-      if(this.showPending >= this.pendingNews.length) {
+      if (this.showPending >= this.pendingNews.length) {
         this.showMorePendingButton = false;
       }
     } else if (att === 'active') {
       this.showActive += 5;
-      if(this.showActive >= this.activeNews.length) {
+      if (this.showActive >= this.activeNews.length) {
         this.showMoreActiveButton = false;
       }
     }
@@ -48,6 +49,9 @@ export class NewsListComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    window.scrollTo(0, 0);
+
     this.newsData.getNewsShort().subscribe(
       (response) => {
         this.news = response;
@@ -57,10 +61,10 @@ export class NewsListComponent implements OnInit {
         this.pendingNews = response.filter(el => {
           return el.approved === false;
         });
-        if(this.pendingNews.length > this.showPending) {
+        if (this.pendingNews.length > this.showPending) {
           this.showMorePendingButton = true;
         }
-        if(this.activeNews.length > this.showActive) {
+        if (this.activeNews.length > this.showActive) {
           this.showMoreActiveButton = true;
         }
       },
@@ -73,19 +77,19 @@ export class NewsListComponent implements OnInit {
     });
 
     httpResult.subscribe((response) => {
-        this.news = response;
-        this.activeNews = response.filter(el => {
-          return el.approved === true;
-        });
-        this.pendingNews = response.filter(el => {
-          return el.approved === false;
-        });
-        if(this.pendingNews.length > this.showPending) {
-          this.showMorePendingButton = true;
-        }
-        if(this.activeNews.length > this.showActive) {
-          this.showMoreActiveButton = true;
-        }
+      this.news = response;
+      this.activeNews = response.filter(el => {
+        return el.approved === true;
+      });
+      this.pendingNews = response.filter(el => {
+        return el.approved === false;
+      });
+      if (this.pendingNews.length > this.showPending) {
+        this.showMorePendingButton = true;
+      }
+      if (this.activeNews.length > this.showActive) {
+        this.showMoreActiveButton = true;
+      }
     });
   }
 

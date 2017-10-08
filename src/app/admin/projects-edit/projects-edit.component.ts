@@ -18,13 +18,13 @@ import 'rxjs/add/operator/switchMap';
 export class ProjectsEditComponent implements OnInit {
 
   public project: Project;
-  public projects: Project[];
+  private projects: Project[];
   public projectId: any;
-  private editable: boolean = false;
+  public editable: boolean = false;
   private imageFire: string = '';
-  private image: string = '';
-  private progressBar:any;
-
+  public image: string = '';
+  public likes: number;
+  
   deleteProject() {
     this.projectData.deleteProject(this.projectId.id).subscribe();
     this.router.navigate(['/admin/projects']);
@@ -32,7 +32,11 @@ export class ProjectsEditComponent implements OnInit {
   }
 
   pushImage() {
-    this.imageService.uploadFile(event);
+    this.imageService.uploadFile(event)
+    .subscribe(res => {},
+    (error) => {
+      console.error(error);
+    });
   }
 
   cancelChanges() {
@@ -89,7 +93,6 @@ export class ProjectsEditComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private projectData: ProjectServiceService,
-    private sanitizer: DomSanitizer,
     private imageService: ImageServiceService) {
 
     let httpResult = route.params.switchMap(param => {
@@ -105,8 +108,8 @@ export class ProjectsEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-  }
+    this.imageService.resetImage();
+   }
 
 }
 

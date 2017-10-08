@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectServiceService } from "../../core/project-service/project-service.service";
 import { AuthService } from '../../core/auth-service/auth-service.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { Project } from '../../models/project.model';
 import 'rxjs/add/operator/switchMap';
 
@@ -13,15 +13,20 @@ import 'rxjs/add/operator/switchMap';
 
 export class ProjectsListComponent implements OnInit {
 
-  private showPending: number = 3;
-  private showActive: number = 3;
-  private prop: string = 'all';
+  constructor(private projectsData: ProjectServiceService,
+    private router: Router, private authService: AuthService) { }
+
+  public showPending: number = 3;
+  public showActive: number = 3;
+  public prop: string = 'all';
   public projects: Project[];
   public pendingProjects: Project[];
   public activeProjects: Project[];
-  private showMorePendingButton;
-  private showMoreActiveButton;
- 
+  public showMorePendingButton: boolean;
+  public showMoreActiveButton: boolean;
+  public searchData: string = '';
+  public queryString: string;
+
   sortByName() {
     this.prop = 'projectName';
   }
@@ -44,10 +49,9 @@ export class ProjectsListComponent implements OnInit {
     }
   }
 
-  constructor(private projectsData: ProjectServiceService,
-    private router: Router, private authService: AuthService) { }
-
   ngOnInit() {
+
+    window.scrollTo(0, 0);
 
     this.projectsData.getProjectsShort().subscribe(
       (response) => {

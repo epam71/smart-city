@@ -1,11 +1,11 @@
 <div class="container col-xs-12 col-md-8">
   <div class="row">
 
-    <app-modal #modal>
+    <app-modal #modal role="alertdialog" aria-describedby="dialogDesc">
       <div class="app-modal-header">
         Admin
       </div>
-      <div class="app-modal-body">
+      <div class="app-modal-body" id="dialogDesc">
         Are you sure you want to permanently delete this post?
       </div>
       <div class="app-modal-footer">
@@ -14,31 +14,37 @@
       </div>
     </app-modal>
 
+    <article role="main">
     <div class="card mt-4">
-      <img class="card-img-top img-fluid" alt="No image" src="{{ image }}" onerror="this.onerror=null;this.src='http://placehold.it/900x400';">
-      <div *ngIf="!editable" class="card-body">
+      <img class="card-img-top img-fluid" alt="image for {{ title }}" src="{{ image.replace('?alt=media&', '_thumb.jpg?alt=media&')}}">
+      <section *ngIf="!editable" class="card-body">
+        <div class="col-sm-2 pull-right likes">
+          <div class="fa fa-heart fa-fw"></div>
+          <span>{{ news?.likes.length }}</span>
+          <ul *ngIf="news?.likes.length" class="people-liked">
+              <li *ngFor="let key of news?.likes">
+                {{ key }}
+              </li>
+          </ul>
+        </div>
         <h3 class="card-title">{{ news?.title }}</h3>
         <p class="card-text">Author: {{ news?.author }}</p>
-      </div>
+      </section>
     </div>
 
-    <div *ngIf="!editable" class="card card-outline-secondary my-4">
-      <div *ngIf="project?.goals" class="card-body">
-        <div class="card-title">
-          Goals:
-        </div>
-        <p class="card-text">{{ news?.goals }}</p>
-      </div>
-      <hr>
+    <hr>
+          
+    <section *ngIf="!editable" class="card card-outline-secondary my-4">
       <div class="card-body">
         <p class="card-text">{{ news?.desc }}</p>
         <small class="text-muted">Created on {{ news?.date | date}}</small>
         <hr>
-        <button *ngIf="news?.approved === false" type="button" class="btn custom-btn approve-news" (click)="approveNews()">Approve</button>
-        <button *ngIf="!editable" type="button" class="btn custom-btn edit-news" (click)="editNews()">Edit</button>
-        <button class="btn custom-btn" (click)="modal.show()">Delete</button>
+        <button *ngIf="news?.approved === false" type="button" class="btn custom-btn approve" (click)="approveNews()">Approve</button>
+        <button *ngIf="!editable" type="button" class="btn custom-btn edit" (click)="editNews()">Edit</button>
+        <button class="btn custom-btn delete" (click)="modal.show()">Delete</button>
       </div>
-    </div>
+    </section>
+    </article>
 
     <form *ngIf="editable" class="form-horizontal" (ngSubmit)="saveChanges(form)" #form="ngForm">
 
@@ -49,10 +55,10 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="newsDesc" class="col-sm-2 control-label">Content</label>
+      <div class="form-group" aria-labelledby="descLabel" aria-describedby="desc">
+        <label for="newsDesc" class="col-sm-2 control-label" id="descLabel">Content</label>
         <div class="col-sm-12">
-          <textarea class="form-control" rows="7" cols="40" name="desc" [ngModel]="news?.desc" #desc="ngModel" required></textarea>
+          <textarea class="form-control" rows="7" cols="40" name="desc" [ngModel]="news?.desc" #desc="ngModel" required id="desc"></textarea>
         </div>
       </div>
 

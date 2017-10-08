@@ -49,7 +49,7 @@ export class ContactServiceService {
 
     getMessagesNumber(): Observable<any> {
 
-        return this.http.get(config.PATH + 'messages/' + 'count/', this.auth.getAuthHeaderOpt())
+        return this.http.get(config.PATH + 'messages/' + 'count', this.auth.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);

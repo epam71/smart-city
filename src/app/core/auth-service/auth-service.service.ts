@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import * as auth0 from 'auth0-js';
 import { config } from "../config";
+import 'rxjs/add/observable/of';
 
 const USER_INFO_URL = 'https://smart-city-lviv.eu.auth0.com/userinfo';
 const STORE_KEY_REDIRECT = 'authRedirectTo';
@@ -62,7 +63,7 @@ export class AuthService {
   }
 
   isInvestor(): boolean {
-    return this.role === INVESTOR_ROLE && !this.isExpired();
+    return this.role === INVESTOR_ROLE && !this.isExpired()
   }
 
   isLogedIn(): boolean {
@@ -154,7 +155,7 @@ export class AuthService {
               if (userInfo['https://role']) {
                 this.accessToken = tempAccessToken;
                 this.fillUserInfo(userInfo);
-                this.changeStatus();  
+                this.changeStatus('autologin');  
               }
             } catch (err) {
               //autologin data corrupted
@@ -177,8 +178,8 @@ export class AuthService {
     this.changeStatus();
   }
 
-  private changeStatus(): void {
-    this.eventEmmiter.next('');
+  private changeStatus(val = ''): void {
+    this.eventEmmiter.next(val);
   }
 
   getEventEmitter(): Observable<string> {

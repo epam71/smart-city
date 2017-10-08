@@ -1,11 +1,11 @@
 <div class="container col-xs-12 col-md-8">
   <div class="row">
 
-    <app-modal #modal>
+    <app-modal #modal role="alertdialog" aria-describedby="dialog2Desc">
       <div class="app-modal-header">
         Admin
       </div>
-      <div class="app-modal-body">
+      <div class="app-modal-body" id="dialog2Desc">
         Are you sure you want to permanently delete this project?
       </div>
       <div class="app-modal-footer">
@@ -14,11 +14,11 @@
       </div>
     </app-modal>
 
-    <app-modal #modalClose>
+    <app-modal #modalClose role="alertdialog" aria-describedby="dialog1Desc">
       <div class="app-modal-header">
         Admin
       </div>
-      <div class="app-modal-body">
+      <div class="app-modal-body" id="dialog1Desc">
         Are you sure you want to permanently close this project? It cannot be reopened.
       </div>
       <div class="app-modal-footer">
@@ -26,72 +26,83 @@
         <button type="button" class="btn custom-btn" (click)="closeProject()">Close</button>
       </div>
     </app-modal>
-
+    
+    <article role="main">
     <div class="card mt-4">
-      <img class="card-img-top img-fluid" alt="No image" src="{{ image }}" onerror="this.onerror=null;this.src='http://placehold.it/900x400';">
-      <div *ngIf="!editable" class="card-body">
+      <img class="card-img-top img-fluid" alt="{{ project?.projectName }} image" src="{{ image.replace('?alt=media&', '_thumb.jpg?alt=media&') }}">
+      <section *ngIf="!editable" class="card-body">
+        <div class="col-sm-2 pull-right likes">
+          <div class="fa fa-heart fa-fw"></div>
+          <span>{{ project?.likes.length }}</span>
+          <ul *ngIf="project?.likes.length" class="people-liked">
+              <li *ngFor="let key of project?.likes">
+                {{ key }}
+              </li>
+          </ul>
+        </div>
         <p class="status col-sm-2 col-sm-offset-10 badge badge-default">{{ project?.status }}</p>
         <h3 class="card-title">{{ project?.projectName }}</h3>
-        <h4>Budget: {{ project?.budget }} UAH</h4>
-        <p class="card-text">Author: {{ project?.author }}</p>
-      </div>
+        <h4 class="card-title">Budget: {{ project?.budget }} UAH</h4>
+        <h4 class="card-text">Author: {{ project?.author }}</h4>
+      </section>
     </div>
 
-    <div *ngIf="!editable" class="card card-outline-secondary my-4">
-      <div *ngIf="project?.goals" class="card-body">
-        <div class="card-title">
+    <section *ngIf="!editable" class="card card-outline-secondary my-4">
+      <div *ngIf="project?.goals" class="card-body" aria-labelledby="projectGoalsFullLabel" aria-describedby="projectGoalsFull">
+        <h4 class="card-title" id="projectGoalsFullLabel">
           Goals:
-        </div>
-        <p class="card-text">{{ project?.goals }}</p>
+        </h4>
+        <p class="card-text" id="projectGoalsFull">{{ project?.goals }}</p>
       </div>
       <hr>
-      <div class="card-header">Description:</div>
-      <div class="card-body">
-        <p class="card-text">{{ project?.desc }}</p>
+      <div class="card-body" aria-labelledby="projectDescriptionLabel" aria-describedby="projectDescription">
+        <h4 class="card-header" id="projectDescriptionLabel">Description:</h4>
+        <p class="card-text" id="projectDescription">{{ project?.desc }}</p>
         <small class="text-muted">Created on {{ project?.date | date}}</small>
         <hr>
-        <button *ngIf="project?.approved === false" type="button" class="btn custom-btn approve-project" (click)="approveProject()">Approve</button>
-        <button *ngIf="project?.approved" type="button" class="btn custom-btn close-project" (click)="modalClose.show()">Close</button>
-        <button *ngIf="!editable" type="button" class="btn custom-btn approve-projectedit-project" (click)="editProject()">Edit</button>
-        <button class="btn custom-btn" (click)="modal.show()">Delete</button>
+        <button *ngIf="project?.approved === false" type="button" class="col-xs-12 col-sm-2 btn custom-btn approve" (click)="approveProject()">Approve</button>
+        <button *ngIf="project?.approved" type="button" class="col-xs-12 col-sm-2 btn custom-btn close" (click)="modalClose.show()">Close</button>
+        <button *ngIf="!editable" type="button" class="col-xs-12 col-sm-2 btn custom-btn edit" (click)="editProject()">Edit</button>
+        <button class="col-xs-12 col-sm-2 btn custom-btn delete" (click)="modal.show()">Delete</button>
       </div>
-    </div>
-
+    </section>
+</article>
+  
     <form *ngIf="editable" class="form-horizontal" (ngSubmit)="saveChanges(form)" #form="ngForm">
 
       <div class="form-group">
         <label for="projectName" class="col-sm-2 control-label">Name</label>
-        <div class="col-sm-12">
+        <p class="col-sm-12">
           <input type="text" class="form-control" name="projectName" [ngModel]="project?.projectName" #projectName="ngModel" required>
-        </div>
+        </p>
       </div>
 
-      <div class="form-group">
-        <label for="projectDesc" class="col-sm-2 control-label">Description</label>
-        <div class="col-sm-12">
-          <textarea class="form-control" rows="7" cols="40" name="desc" [ngModel]="project?.desc" #desc="ngModel" required></textarea>
-        </div>
+      <div class="form-group" aria-labelledby="projectDescLabel" aria-describedby="projectDesc">
+        <label for="projectDesc" class="col-sm-2 control-label" id="projectDescLabel">Description</label>
+        <p class="col-sm-12">
+          <textarea class="form-control" rows="7" cols="40" name="desc" id="projectDesc" [ngModel]="project?.desc" #desc="ngModel" required></textarea>
+        </p>
       </div>
 
-      <div class="form-group">
-        <label for="projectGoals" class="col-sm-2 control-label">Goals</label>
-        <div class="col-sm-12">
-          <textarea rows="4" cols="40" class="form-control" name="goals" [ngModel]="project?.goals || ''" #goals="ngModel" required></textarea>
-        </div>
+      <div class="form-group" aria-labelledby="projectGoalsLabel" aria-describedby="projectGoals">
+        <label for="projectGoals" id="projectGoalsLabel" class="col-sm-2 control-label">Goals</label>
+        <p class="col-sm-12">
+          <textarea rows="4" cols="40" id="projectGoals" class="form-control" name="goals" [ngModel]="project?.goals || ''" #goals="ngModel" required></textarea>
+        </p>
       </div>
 
       <div class="form-group">
         <label for="projectAuthor" class="col-sm-2 control-label">Author</label>
-        <div class="col-sm-12">
+        <p class="col-sm-12">
           <input type="text" class="form-control project-author" placeholder="author" name="projectAuthor" [ngModel]="project?.author || ''" #projectAuthor="ngModel" disabled>
-        </div>
+        </p>
       </div>
 
-      <div class="form-group">
-        <label for="projectBudget" class="col-sm-2 control-label">Budget</label>
-        <div class="col-sm-12">
-          <input type="text" class="form-control" placeholder="budget" name="budget" [ngModel]="project?.budget || ''" #budget="ngModel" required>
-        </div>
+      <div class="form-group" aria-labelledby="projectBudgetLabel" aria-describedby="projectBudget">
+        <label for="projectBudget" id="projectBudgetLabel" class="col-sm-2 control-label">Budget</label>
+        <p class="col-sm-12">
+          <input type="text" class="form-control" id="projectBudget" placeholder="budget" name="budget" [ngModel]="project?.budget || ''" #budget="ngModel" required>
+        </p>
       </div>
 
       <div class="input-group image-preview">
@@ -102,7 +113,7 @@
 							<input id="filePicker" type="file" accept="image/*" name="input-file-preview" (change)="pushImage($event)"/>
               <div *ngIf="imageService?.uploadProgress">
                 <div class="progress">
-                  <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': imageService?.uploadProgress + '%' }"></div>
+                  <div class="progress_block col-md-11 col-xs-10" [ngStyle]="{ 'width': imageService?.uploadProgress + '%' }"></div>
                 </div>
                 Progress: {{imageService?.uploadProgress}}% Complete
               </div>             

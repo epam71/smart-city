@@ -9,28 +9,32 @@ export const AppRoutes = RouterModule.forRoot([
     {
         path: '',
         component: StaticComponent
-},
+    },
     {
         path: 'admin',
         loadChildren: './admin/admin.module#AdminModule',
         canLoad: [AdminAuthGuardService]
-},
+    },
     {
         path: 'projects',
         loadChildren: './projects/projects.module#ProjectsModule'
-},
+    },
     {
         path: 'news',
         loadChildren: './news/news.module#NewsModule'
-},
+    },
     {
         path: 'auth/callback',
         component: AuthCallbackComponent
-},
+    },
     {
-        path: 'not-found', 
+        path: 'not-found',
         component: PageNotFoundComponent
-},
+    },
+    {
+        path: 'redirectToRoot',
+        redirectTo: '/'
+    },
     {
         path: '**',
         redirectTo: 'not-found'

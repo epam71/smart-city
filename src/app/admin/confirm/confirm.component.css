@@ -1,6 +1,7 @@
 .modal {
   background: rgba(0,0,0,0.6);
   border-radius: 5px;
+  margin-top: 90px;
 }
 
 .modal-header {
@@ -8,3 +9,4 @@
   color: white;
   text-align: center; 
 }
+

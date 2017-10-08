@@ -11,17 +11,17 @@ import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-news-edit',
-  templateUrl: './news-edit.component.html', 
+  templateUrl: './news-edit.component.html',
   styleUrls: ['./news-edit.component.css']
 })
 export class NewsEditComponent implements OnInit {
 
   public news: News;
   public newsId: any;
-  private editable: boolean = false;
+  public editable: boolean = false;
   private imageFire: string = '';
-  private image: string = '';
-  private progressBar:any;
+  public image: string = '';
+  public progressBar: any;
 
   deleteNews() {
     this.newsData.deleteNews(this.newsId.id).subscribe();
@@ -30,7 +30,11 @@ export class NewsEditComponent implements OnInit {
   }
 
   pushImage() {
-    this.imageService.uploadFile(event);
+    this.imageService.uploadFile(event)
+      .subscribe(res => { },
+      (error) => {
+        console.error(error);
+      });
   }
 
   cancelChanges() {
@@ -90,7 +94,7 @@ export class NewsEditComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.imageService.resetImage();
   }
 
 }
