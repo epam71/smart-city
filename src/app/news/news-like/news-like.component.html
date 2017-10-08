@@ -3,7 +3,7 @@
     <i class="heart pulse"></i>
 </div>
 
-<div *ngIf="showModal && getUserRole === ''" id="modal" class="modal-dialog ">
+<div *ngIf="showModal && !authService.isLogedIn()" id="modal" class="modal-dialog ">
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" aria-label="Close" (click)="colseModal()">

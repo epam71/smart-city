@@ -1,44 +1,48 @@
-<div class="container">
-  <div class="row">
-      <div class="col-md-12 news-attribute">
-          <div class="col-md-3 pull-left ">
-              <div class="input-group ">
-                  <input type="text" [ngModel]="inputValue" (ngModelChange)="onChangeValue($event)" class="form-control" placeholder="Search news" />
-                  <span class="input-group-addon">
-            <span class="glyphicon glyphicon-search"></span>
-                  </span>
-              </div>
-          </div>
-          <button class="btn add-btn pull-right" *ngIf="getUserRole !== ''" [routerLink]="['add']">Add news</button>
-          <div class="form-group">
-              <label for="sort">Sort by:  
-              <select id="sort" class="selectpicker" [ngModel]="sorting" (ngModelChange)="onChangeObj($event)" >
-                  <option [ngValue]="key.sorting" *ngFor="let key of sortObj">{{key.name}}</option>             
-              </select>
-            </label>
-          </div>
-      </div>
-
-      <ng-container *ngFor="let key of (news | async) | paginate: { itemsPerPage: 10, currentPage: p }">
-          <div class="col-md-4 col-sm-6 service-block">
-              <div class="news_block">
-                  <div class="news-img">
-
-                      <img class="img img-responsive" src="{{ key.image }}" onerror="this.onerror=null;this.src='http://lorempixel.com/400/200/city/';" alt="{{key.title }}">
-                  </div>
-                  <p class="news_date ">{{key.date | date:'dd MMMM y'}} </p>
-                  <p class="author"> Written by: {{key.author}}</p>
-                  <h3 class="news_title">{{key.title | shorten:28 }} </h3>
-                  <p class="news_desc">{{ key.desc | shorten:130 }}</p>
-                  <a class="read" [routerLink]="['/news', key._id]">Read more 
-          <span class="glyphicon glyphicon-menu-right"></span>
-        </a>
-                  <news-like class="pull-right" [ratingObj]="key"></news-like>
-              </div>
-          </div>
-      </ng-container>
-  </div>
-</div>
-<div class="pagination">
-  <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
-</div>
+<section class="container">
+    <div class="row">
+        <header class="col-md-12 news-attribute">
+            <div class="col-sm-3 col-xs-4 pull-left ">
+                <div class="row">
+                    <div class="input-group ">
+                        <input type="text" [ngModel]="inputValue" (ngModelChange)="onChangeValue($event)" class="form-control" placeholder="Search news" />
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-search"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <button class="btn add-btn pull-right" *ngIf="authService.isLogedIn()" [routerLink]="['add']">Add news</button>
+            <div class="form-group">
+                <label for="sort">Sort by:
+                    <select id="sort" class="selectpicker" [(ngModel)]="sorting" (ngModelChange)="onChangeObj($event)">
+                        <option [ngValue]="key.sorting" *ngFor="let key of sortObj">{{key.name}}</option>
+                    </select>
+                </label>
+            </div>
+        </header>
+        <div myMatchHeight="info">
+            <ng-container *ngFor="let key of (news | async) | paginate: { itemsPerPage: 10, currentPage: p }">
+                <article class="col-lg-4 col-md-6 col-sm-6 service-block">
+                    <figure class="news_block">
+                        <div class="news-img">
+                            <img class="img img-responsive" src="{{key?.image.replace('?alt=media&', '_thumb.jpg?alt=media&')}}" onerror="this.onerror=null;this.src='http://lorempixel.com/400/200/city/';" alt="{{key.title }}">
+                        </div>
+                        <figcaption class="info">
+                            <p class="news_date ">{{key.date | date:'dd MMMM y'}} </p>
+                            <p class="author"> Written by: {{key.author}}</p>
+                            <h3 class="news_title">{{key.title | shorten:28 }} </h3>
+                            <p class="news_desc">{{ key.desc | shorten:150 }}</p>
+                        </figcaption>
+                        <a class="read" [routerLink]="['/news', key._id]">Read more 
+                        <span class="glyphicon glyphicon-menu-right"></span>
+                        </a>
+                        <news-like class="pull-right" [ratingObj]="key"></news-like>
+                    </figure>
+                </article>
+            </ng-container>
+        </div>
+    </div>
+</section>
+<footer class="pagination">
+    <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+</footer>

@@ -147,3 +147,14 @@ form {
 .pagination pagination-controls /deep/ .ngx-pagination .disabled {
     color: #9a9a9a;
 }
+@media (max-width: 767px) {
+    .thumbnail {
+        display: none;
+    }
+    .panel>.panel-heading:after {
+        display: none;
+    }
+    .panel>.panel-heading:before {
+        display: none;
+    }
+}

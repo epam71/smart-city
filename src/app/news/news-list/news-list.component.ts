@@ -13,15 +13,14 @@ import { AuthService } from "../../core/auth-service/auth-service.service";
 })
 
 export class NewsListComponent implements OnInit {
-  private sortKey;
-  private news;
-  private getUserRole;
-  private sorting;
-  private inputValue;
+  public news;
+  public sorting;
+  public inputValue;
+  public p;
   
   sortObj = [
-    {sorting: 'date', name: 'Oldest'}, 
-    {sorting: '-date', name: 'Latest'}, 
+    {sorting: '-date', name: 'Latest'},
+    {sorting: 'date', name: 'Oldest'},  
     {sorting: '-rating', name: 'Popular'},
     {sorting: 'author', name: 'Author'}
   ];
@@ -44,6 +43,6 @@ export class NewsListComponent implements OnInit {
  
   ngOnInit() {
     this.news= this.newsService.getNews();
-    this.getUserRole = this.authService.getRole();
   }
+
 }

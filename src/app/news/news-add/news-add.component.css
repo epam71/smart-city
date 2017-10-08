@@ -10,7 +10,7 @@
     border-color: #F4D3D2;
 }
 .news-btn {
-    margin: 10px 5px;
+    margin: 0px 0 20px 0;
     font-family: "Raleway", sans-serif;
     font-weight: 500;
     font-size: 16px;
@@ -61,7 +61,14 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 99999;
+    z-index: 999999;
+}
+.error {
+    padding: 5px;
+    border: 1px solid #ebccd1;
+    color: #a94442;
+    background-color: #f2dede;
+    border-radius: 5px;
 }
 .image-preview {
     margin-bottom: 15px;
@@ -90,4 +97,10 @@
 .progress-bar {
     background-color: #ee3733;
     padding: 3px;
+}
+@media (max-width: 420px) {
+    .news-btn {
+        font-size: 15px;
+        padding: 8px 15px;
+    }
 }

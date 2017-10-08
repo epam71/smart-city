@@ -14,11 +14,13 @@ import { ImageServiceService } from '../../core/image-service/image-service.serv
 })
 
 export class NewsAddComponent implements OnInit {
-  private rForm: FormGroup;                   
-  private desc:string = '';
-  private title:string = '';
-  private showModal;
-  private imageFire = '';
+  public rForm: FormGroup;                   
+  public desc:string = '';
+  public title:string = '';
+  public showModal;
+  public imageFire = '';
+  public imageFireKey = '';
+  public showError;
  
 constructor(private newsService: NewsServiceService, 
   private router: Router, 
@@ -33,7 +35,16 @@ constructor(private newsService: NewsServiceService,
   }
 
   pushImage() {
-    this.imageService.uploadFile(event);
+    this.imageService.uploadFile(event)
+      .subscribe(res => {
+        this.imageFire = this.imageService.fileName;
+        this.imageFireKey = this.imageService.imageKey;
+      },
+      (error) => {
+        console.error(error);
+        this.showError= error; 
+      }
+    );
   }
 
   onAddNews( title, desc) {
@@ -63,6 +74,7 @@ constructor(private newsService: NewsServiceService,
 
   cancel(){
     this.imageService.resetImage();
+    this.imageService.deleteImage(this.imageFireKey);
   }
 
   ngOnInit() {
