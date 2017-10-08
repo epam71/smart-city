@@ -1,8 +1,11 @@
-<div class="container edit_block">
-    <div class="nav_block">
-        <button type="submit" class="btn btn-default custom-btn" routerLink="/projects">Back to projects</button>
+<div class="container edit_block_main">
+    <div class="row nav_block">
+      <h3 class="col-md-10 col-sm-9 col-xs-12">Project Form</h3>
+        <button type="submit" class="col-md-2 col-sm-3 col-xs-12 btn btn-default custom-btn" routerLink="/projects">Back to projects</button>
       </div>
-    <div class="modal-header comment_block_header">
+
+
+      <div class="edit_block">
   <form class="form-horizontal" (ngSubmit)="actProject()" [formGroup]="prForm">
     <div class="alert alert-danger" *ngIf="errorMessage">
       {{ errorMessage }}
@@ -62,7 +65,7 @@
     <div class="form-group buttons_block">
       <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-default custom-btn" [disabled]="!prForm.valid">{{ editMode ? 'Update' : 'Add' }}</button>
-        <button type="button" class="btn btn-default custom-btn" (click)="clearForm()">Clear</button>
+        <button type="button" class="btn btn-default custom-btn cancel-btn" (click)="clearForm()">Clear</button>
       </div>
     </div>
   </form>

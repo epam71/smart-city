@@ -1,4 +1,4 @@
-.edit_block {
+.edit_block_main {
   margin-top: 100px;
   min-width: 400px;
 }
@@ -9,7 +9,30 @@
   color: #777777;
   padding: 20px;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
-  text-align: right;
+}
+
+.nav_block h3{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.nav_block button{
+  float: right;
+}
+
+.edit_block{
+  margin-bottom: 10px;
+  background: #FCFCFC;
+  color: #777777;
+  padding: 20px;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+}
+
+.edit_block_header{
+    color: #777777;
+  margin-bottom: 25px;
+  width: 100%;
+  font-size: 14px;
 }
 
 .btn-file {
@@ -67,19 +90,23 @@
 
 .custom-btn {
   font-family: "Raleway", sans-serif;
+  padding: 10px;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
   border-radius: 2px;
   transition: 0.5s;
-  border: 1px solid #777777;
-  ;
-  border-radius: 5px;
+  border: 1px solid #ccc;
   background: none;
   color: #777777;
-  ;
 }
 
 .custom-btn:hover {
+  color: white;
+  background: #ee3733;
+  border: 1px solid #ee3733;
+}
+
+.cancel-btn{
   color: white;
   background: #ee3733;
   border: 1px solid #ee3733;

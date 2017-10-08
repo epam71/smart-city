@@ -20,17 +20,20 @@ liked = false;
 
   changeRating() {
 
-    if (this.liked !== true){
+    if (this.liked === true){
+      this.liked = false;
+    } else {
+      this.liked = true;
+    }
+
       this.ratingData.postLikes(this.ratingObjInfo._id, { email: this.userEmail })
       .subscribe(
       (response) => {
-        this.liked = true;
         return this.ratingObjInfo.rating = response.currentRating;
       },
       (error) => {
         console.error(error);
       });
-    }
 
   }
 

@@ -29,13 +29,15 @@ button:focus {
   overflow: hidden;
   min-width: 250px;
   margin: 0 5px 20px 5px;
-  box-shadow: 0 0 5px rgba(107, 107, 107, 0.7);
+  box-shadow: 0 10px 10px rgba(0,0,0,.08);
+  transition: all 250ms cubic-bezier(.02, .01, .47, 1);
   float: left;
 }
 
-.project_block:hover {
+.project_block:hover{
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 40px 40px rgba(0,0,0,.16);
+  transform: translate(0,-15px);
 }
 
 .img_block {
