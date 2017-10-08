@@ -48,14 +48,14 @@ export class ProjectServiceService {
             }).catch(this.handleError);
     };
 
-    getPaginateProjects(limit='', skip = '', sortBy='date', type = '', author=''): Observable<Project[]> {
+    getPaginateProjects(limit='', skip = '', sortBy='date', type = '', userEmail=''): Observable<Project[]> {
 
-        if(author !== ''){
-            author = `&query={"author": "${author}"}`
+        if(userEmail !== ''){
+            userEmail = `&query={"authorEmail": "${userEmail}"}`
         }
         
                 return this.http.get(projects_PATH  
-                    + `?limit=${limit}&skip=${+skip - +limit}&sort=${type}${sortBy}${author}`,
+                    + `?limit=${limit}&skip=${+skip - +limit}&sort=${type}${sortBy}${userEmail}`,
                      this.authService.getAuthHeaderOpt())
         
                     .map((response: Response) => {
@@ -84,9 +84,9 @@ export class ProjectServiceService {
                     }).catch(this.handleError);
             };
 
-            getUserProjectsNumber(username): Observable<any> {
+            getUserProjectsNumber(userEmail): Observable<any> {
                 
-                        return this.http.get(config.PATH + `projects/count?query={"author": "${username}"}`, this.authService.getAuthHeaderOpt())
+                        return this.http.get(config.PATH + `projects/count?query={"authorEmail": "${userEmail}"}`, this.authService.getAuthHeaderOpt())
                             .map((response: Response) => {
                                 return response.json();
                             }).catch(this.handleError);
@@ -100,9 +100,9 @@ export class ProjectServiceService {
             }).catch(this.handleError);
     }
 
-    getUserProjects(username): Observable<Project[]> {
+    getUserProjects(userEmail): Observable<Project[]> {
 
-        return this.http.get(projects_PATH + `?query={"author": "${username}"}`, this.authService.getAuthHeaderOpt())
+        return this.http.get(projects_PATH + `?query={"author": "${userEmail}"}`, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);

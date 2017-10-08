@@ -2,10 +2,10 @@
           <a [routerLink]="['/projects', key._id]">
             <div class="row customBlock">
             <div class="img_block">
-              <div class="status_block" *ngIf="userProjects">
+              <div class="status_block" *ngIf="ownProjects">
                 <span class="label" [ngClass]="key.approved ? 'label-success' : 'label-danger'">{{ key.approved ? 'approved' : 'not approved' }}</span>
               </div>
-              <img class="img-responsive" src="{{key?.image.replace('?alt=media&', '_thumb.jpg?alt=media&')}}" alt="{{project?.projectName}}}}" alt="{{key.projectName}}">
+              <img class="img-responsive" src="{{key?.image.replace('?alt=media&', '_thumb.jpg?alt=media&')}}" alt="{{key.projectName}}}}" alt="{{key.projectName}}">
             </div>
           </div>
             <div class="info_block">

@@ -18,22 +18,22 @@ import 'rxjs/add/operator/switchMap';
 
 export class ProjectMainComponent implements OnInit, DoCheck {
 
-  constructor(private projectsData: ProjectServiceService,
-    private authService: AuthService) { 
+  constructor(public projectsData: ProjectServiceService,
+    public authService: AuthService) { 
 
     }
 
-  searchData = '';
-  userCheck: boolean;
+  private searchData = '';
+  private userCheck: boolean;
 
-  projects;
-  userProjects = '';
+  private projects;
+  private userProjects = '';
 
-  sortMemo = 'date';
-  sortTypeValue = '-';
+  private sortMemo = 'date';
+  private sortTypeValue = '-';
 
-  searchButton = true;
-  projectsValues = [{
+  private searchButton = true;
+  private projectsValues = [{
     key: 'date',
     value: 'date'
   }, {
@@ -44,11 +44,11 @@ export class ProjectMainComponent implements OnInit, DoCheck {
     value: 'rating'
   }];
 
-  pagesArr = [];
-  pages = [];
-  limit: any = '9';
-  skip: any = this.limit;
-  currentPage: any = '1';
+  private pagesArr = [];
+  private pages = [];
+  private limit: any = '9';
+  private skip: any = this.limit;
+  private currentPage: any = '1';
 
   searchProject(event) {
     this.searchButton = false;
@@ -84,7 +84,7 @@ export class ProjectMainComponent implements OnInit, DoCheck {
     this.skip = this.limit;
     if (!this.userProjects) {
       this.pagesArr = [];
-      this.projectsData.getUserProjectsNumber(this.authService.getNickname())
+      this.projectsData.getUserProjectsNumber(this.authService.getEmail())
       .subscribe(response => {
         let totalPages = Math.ceil(response.count / this.limit);
         for (let i = 0; i < totalPages; i++) {
@@ -93,7 +93,7 @@ export class ProjectMainComponent implements OnInit, DoCheck {
         this.pages = this.pagesArr.slice(0, 5);
 
       }, error => console.error(error))
-      this.userProjects = this.authService.getNickname();
+      this.userProjects = this.authService.getEmail();
       this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip,
          this.sortMemo, this.sortTypeValue, this.userProjects);
     } else {

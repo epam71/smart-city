@@ -19,9 +19,10 @@ export class CommentsProjectComponent implements OnInit {
   @ViewChild('f') slForm: NgForm;
 
   responseMessage;
+  p;
 
-  constructor(private commentsData: ProjectServiceService,
-    private authService: AuthService) {
+  constructor(public commentsData: ProjectServiceService,
+    public authService: AuthService) {
 
   }
 
