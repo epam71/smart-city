@@ -1,4 +1,4 @@
-:host{
+:host {
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -27,16 +27,16 @@ button:focus {
 .project_block {
   width: 96%;
   overflow: hidden;
-  min-width: 250px;
-  margin-bottom: 10px;
-  margin: 5px;
-  box-shadow: 0 0 5px rgba(107, 107, 107, 0.7);
+  margin: 0 5px 20px 5px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, .08);
+  transition: all 250ms cubic-bezier(.02, .01, .47, 1);
   float: left;
 }
 
 .project_block:hover {
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 40px 40px rgba(0, 0, 0, .16);
+  transform: translate(0, -15px);
 }
 
 .img_block {
@@ -61,11 +61,11 @@ button:focus {
 }
 
 .projects_date {
-padding: 5px 0 5px 0;
-font-style: italic;
+  padding: 5px 0 5px 0;
+  font-style: italic;
 }
 
-.projects_date span{
+.projects_date span {
   color: #ee3733;
 }
 
@@ -92,7 +92,7 @@ font-style: italic;
   border-top: 1px solid #ccc;
 }
 
-.project_footer_inside{
+.project_footer_inside {
   margin-bottom: -15px;
 }
 
@@ -150,4 +150,16 @@ font-style: italic;
   font-weight: 700;
 }
 
+@media screen and (max-width: 350px) {
+  .project_block {
+    font-size: 12px;
+  }
+  .projects_date {
+    padding: 5px 0 5px 0;
+    font-style: italic;
+  }
+  .project_name {
+    font-size: 12px;
+  }
+}
 

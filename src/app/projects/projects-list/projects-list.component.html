@@ -1,36 +1,37 @@
-       <div class="project_block">
-          <a [routerLink]="['/projects', key._id]">
-            <div class="row customBlock">
-            <div class="img_block">
-              <div class="status_block" *ngIf="userProjects">
-                <span class="label" [ngClass]="key.approved ? 'label-success' : 'label-danger'">{{ key.approved ? 'approved' : 'not approved' }}</span>
-              </div>
-              <img class="img-responsive" src="{{key?.image.replace('?alt=media&', '_thumb.jpg?alt=media&')}}" alt="{{project?.projectName}}}}" alt="{{key.projectName}}">
-            </div>
-          </div>
-            <div class="info_block">
-              <div class="project_name">
-                {{key.projectName | uppercase | shorten:20 }}
-              </div>
-              <div class="projects_date">
-                Written by <span>{{key.author}}</span> on {{key.date | date:'dd MMMM y' }}
-                </div>
-              <div class="project_desc">{{ key.desc | shorten:200 }}</div>
-            </div>
-          </a>
-          <div class="project_footer">
-            <div class="row project_footer_inside">
-              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 likes_block_main">
-                <div class="likes_block">
-                  <rating [ratingObj]="key"></rating>
-                </div>
-              </div>
-              <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 comments_block_main">
-                  <span class="comments_block">
-                    <span class="glyphicon glyphicon-comment comments_info"></span>
-                    <span class="comments_info_text">{{key.comments.length}}</span>
-                    </span>
-              </div>
-            </div>
-          </div>
+<div class="project_block">
+  <a [routerLink]="['/projects', key._id]">
+    <div class="row customBlock">
+      <div class="img_block">
+        <div class="status_block" *ngIf="ownProjects">
+          <span class="label" [ngClass]="key.approved ? 'label-success' : 'label-danger'">{{ key.approved ? 'approved' : 'not approved' }}</span>
         </div>
+        <img class="img-responsive" src="{{key?.image.replace('?alt=media&', '_thumb.jpg?alt=media&')}}" alt="{{key.projectName}}}}"
+          alt="{{key.projectName}}">
+      </div>
+    </div>
+    <div class="info_block">
+      <div class="project_name">
+        {{key.projectName | uppercase | shorten:27 }}
+      </div>
+      <div class="projects_date">
+        Written by <span>{{key.author}}</span> on {{key.date | date:'dd MMMM y' }}
+      </div>
+      <div class="project_desc">{{ key.desc | shorten:210 }}</div>
+    </div>
+  </a>
+  <div class="project_footer">
+    <div class="row project_footer_inside">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 likes_block_main">
+        <div class="likes_block">
+          <rating [ratingObj]="key"></rating>
+        </div>
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 comments_block_main">
+        <span class="comments_block">
+                    <span class="glyphicon glyphicon-comment comments_info"></span>
+        <span class="comments_info_text">{{key.comments.length}}</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

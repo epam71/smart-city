@@ -18,6 +18,7 @@ button:focus {
 .projects_block_main {
   margin-top: 100px;
   min-height: 800px;
+  min-width: 290px;
 }
 
 .panel_block {
@@ -36,9 +37,9 @@ button:focus {
 .select_block {}
 
 .sort_block_select {
+  font-family: "Raleway", sans-serif;
   -webkit-appearance: button;
   -webkit-border-radius: 2px;
-  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
   -webkit-padding-end: 20px;
   -webkit-padding-start: 2px;
   -webkit-user-select: none;
@@ -46,15 +47,15 @@ button:focus {
   background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(white, white 40%, white);
   background-position: 90% center;
   background-repeat: no-repeat;
-  border: 1px solid #AAA;
-  border-radius: 5px;
-  color: #555;
+  border: 1px solid #ccc;
+  color: #777777;
   font-size: inherit;
   overflow: hidden;
-  padding: 5px 10px;
+  padding: 7px 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 110px;
+  cursor: pointer;
 }
 
 .sort_block_select:focus {
@@ -68,20 +69,19 @@ button:focus {
 .reverse_button button {
   -webkit-appearance: button;
   -webkit-border-radius: 2px;
-  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
   -webkit-padding-end: 20px;
   -webkit-padding-start: 2px;
   -webkit-user-select: none;
-  vertical-align: top;
+  vertical-align: middle;
   background: -webkit-linear-gradient(white, white 40%, white);
   background-position: 90% center;
   background-repeat: no-repeat;
-  border: 1px solid #AAA;
-  border-radius: 5px;
+  border: 1px solid #ccc;
   color: #555;
   font-size: inherit;
   overflow: hidden;
-  padding: 8px 10px;
+  margin: -2px 0 0 5px;
+  padding: 10px 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -96,22 +96,27 @@ button:focus {
 .search_block_main button {
   -webkit-appearance: button;
   -webkit-border-radius: 2px;
-  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
   -webkit-padding-end: 20px;
   -webkit-padding-start: 2px;
   -webkit-user-select: none;
-  vertical-align: top;
+  vertical-align: middle;
   background: -webkit-linear-gradient(white, white 40%, white);
   background-position: 90% center;
   background-repeat: no-repeat;
-  border: 1px solid #AAA;
-  border-radius: 5px;
+  border: 1px solid #ccc;
   color: #555;
   font-size: inherit;
   overflow: hidden;
-  padding: 8px 10px;
+  margin: -5px 0 0 0;
+  padding: 10px 10px;
   text-overflow: ellipsis;
+  box-sizing: border-box;
   white-space: nowrap;
+}
+
+.search_block_main .form-control {
+  display: inline-block;
+  max-width: 200px;
 }
 
 .add_block {
@@ -120,16 +125,14 @@ button:focus {
 
 .custom-btn {
   font-family: "Raleway", sans-serif;
-  font-weight: 700;
-  font-size: 12px;
+  padding: 7px;
+  font-weight: 500;
+  font-size: 14px;
   border-radius: 2px;
   transition: 0.5s;
   border: 1px solid #ccc;
-  ;
-  border-radius: 5px;
   background: none;
   color: #777777;
-  ;
 }
 
 .custom-btn:hover {
@@ -138,35 +141,67 @@ button:focus {
   border: 1px solid #ee3733;
 }
 
+.projects_block {
+  padding: 30px 10px 10px 10px;
+}
+
+.project_block_main {
+  padding: 0;
+}
+
+.pagination_block {
+  text-align: center;
+  margin: auto;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.pagination_block .pagination .active a {
+  color: white;
+  background: #ee3733;
+  border-color: #ee3733;
+}
+
 @media screen and (max-width: 768px) {
   .projects_panel_left {
     text-align: center;
   }
-  .add_block {
+  .add_block .custom-btn {
     text-align: center;
+    width: 100%;
+  }
+  .projects_panel_left {
+    margin-bottom: 5px;
+  }
+  .search_block_main .form-control {
+    margin-top: 5px;
   }
 }
 
-
-.projects_block {
-    padding: 50px;
+@media screen and (max-width: 385px) {
+  .panel_block {
+    padding: 5px;
   }
-  
-  .project_block_main {
+  .reverse_button button {
+    margin: -2px 0 0 5px;
+    padding: 10px 10px;
+  }
+  .projects_panel_left {
+    box-sizing: border-box;
+    padding: 0px;
+  }
+  .search_block_main {
+    margin: 0;
     padding: 0;
   }
-
-
-
-  .pagination_block {
-   text-align: center;
-   margin: auto;
-   cursor: pointer;
+  .search_block_main button {
+    margin: 5px 10px;
+    padding: 10px 10px;
+    width: 90%;
   }
+  .search_block_main .form-control {
+    display: inline-block;
+    margin: 12px 0 8px 0;
+  }
+}
 
-  .pagination_block .pagination .active a{
-    color: white;
-    background: #ee3733;
-    border-color: #ee3733;
-   }
-  

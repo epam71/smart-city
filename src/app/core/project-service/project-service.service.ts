@@ -31,16 +31,16 @@ export class ProjectServiceService {
         return Observable.throw(errMessage);
     }
 
-    getProjects(sortBy='', type = ''): Observable<Project[]> {
+    getProjects(sortBy = '', type = ''): Observable<Project[]> {
 
-        return this.http.get(projects_PATH  + `?sort=${type}${sortBy}`, this.authService.getAuthHeaderOpt())
+        return this.http.get(projects_PATH + `?sort=${type}${sortBy}`, this.authService.getAuthHeaderOpt())
 
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
     };
 
-    getApprovedProjects(sortBy='date', type = '-'): Observable<Project[]> {
+    getApprovedProjects(sortBy = 'date', type = '-'): Observable<Project[]> {
 
         return this.http.get(projects_PATH + `?sort=${type}${sortBy}&query={"approved":"true"}`, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
@@ -48,14 +48,20 @@ export class ProjectServiceService {
             }).catch(this.handleError);
     };
 
-    getPaginateProjects(limit='', skip = '', sortBy='date', type = ''): Observable<Project[]> {
-        
-                return this.http.get(projects_PATH  + `?limit=${limit}&skip=${+skip - +limit}&sort=${type}${sortBy}`, this.authService.getAuthHeaderOpt())
-        
-                    .map((response: Response) => {
-                        return response.json();
-                    }).catch(this.handleError);
-            };
+    getPaginateProjects(limit = '', skip = '', sortBy = 'date', type = '', userEmail = ''): Observable<Project[]> {
+
+        if (userEmail !== '') {
+            userEmail = `&query={"authorEmail": "${userEmail}"}`
+        }
+
+        return this.http.get(projects_PATH
+            + `?limit=${limit}&skip=${+skip - +limit}&sort=${type}${sortBy}${userEmail}`,
+            this.authService.getAuthHeaderOpt())
+
+            .map((response: Response) => {
+                return response.json();
+            }).catch(this.handleError);
+    };
 
     getProjectsShort(): Observable<Project[]> {
         let headers = new Headers();
@@ -78,6 +84,14 @@ export class ProjectServiceService {
             }).catch(this.handleError);
     };
 
+    getUserProjectsNumber(userEmail): Observable<any> {
+
+        return this.http.get(config.PATH + `projects/count?query={"authorEmail": "${userEmail}"}`, this.authService.getAuthHeaderOpt())
+            .map((response: Response) => {
+                return response.json();
+            }).catch(this.handleError);
+    };
+
     getRatingProjects(): Observable<Project[]> {
 
         return this.http.get(projects_PATH + `?limit=3&sort=-rating`, this.authService.getAuthHeaderOpt())
@@ -86,21 +100,25 @@ export class ProjectServiceService {
             }).catch(this.handleError);
     }
 
-    getUserProjects(username): Observable<Project[]> {
+    getUserProjects(userEmail): Observable<Project[]> {
 
-        return this.http.get(projects_PATH + `?query={"author": "${username}"}`, this.authService.getAuthHeaderOpt())
+        return this.http.get(projects_PATH + `?query={"author": "${userEmail}"}`, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
     };
 
-    searchProjects(keyWord): Observable<Project[]> {
+    searchProjects(keyWord, userEmail = ''): Observable<Project[]> {
 
-                return this.http.get(projects_PATH + `?query={"projectName":"~^(${keyWord})"}`, this.authService.getAuthHeaderOpt())
-                    .map((response: Response) => {
-                        return response.json();
-                    }).catch(this.handleError);
-            };
+        if (userEmail !== '') {
+            userEmail = `, "authorEmail": "${userEmail}"`
+        }
+
+        return this.http.get(projects_PATH + `?query={"projectName":"~^(${keyWord})"${userEmail}}`, this.authService.getAuthHeaderOpt())
+            .map((response: Response) => {
+                return response.json();
+            }).catch(this.handleError);
+    };
 
     getProject(id): Observable<Project> {
 

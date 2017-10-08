@@ -12,16 +12,16 @@ import 'rxjs/add/operator/switchMap';
 })
 export class ProjectComponent implements OnInit {
 
-  private projects;
-  private project;
-  private tempId;
-  private user;
+  public projects;
+  public project;
+  public tempId;
+  public user;
   private image = '';
   private smallImage = '';
 
   constructor(private route: ActivatedRoute,
-    private projectData: ProjectServiceService,
-    private authService: AuthService) {
+    public projectData: ProjectServiceService,
+    public authService: AuthService) {
 
 
     route.params.subscribe(param => {
@@ -46,7 +46,10 @@ export class ProjectComponent implements OnInit {
 
     getProjectData.switchMap(
       response => {
-        this.user = this.authService.getEmail();
+        this.user = {
+          email: this.authService.getEmail(),
+          isAdmin: this.authService.isAdmin()
+        }
         this.project = response;
         this.image = response.image
         this.smallImage = this.image.replace('?alt=media&', '_thumb.jpg?alt=media&');
