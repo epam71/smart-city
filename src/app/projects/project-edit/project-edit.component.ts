@@ -4,7 +4,7 @@ import { ProjectServiceService } from '../../core/project-service/project-servic
 import { Router } from '@angular/router';
 import { Project } from '../../models/project.model';
 import { AuthService } from '../../core/auth-service/auth-service.service';
-import { NgForm } from '@angular/forms';
+import { NgForm, Validators, FormGroup, FormControl } from '@angular/forms';
 import { ImageServiceService } from '../../core/image-service/image-service.service';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/forkJoin'
@@ -17,10 +17,12 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ProjectEditComponent implements OnInit, OnDestroy {
 
-  @ViewChild('f') slForm: NgForm;
-
   imageFire = '';
   imageFireKey = '';
+
+  private prForm: FormGroup;
+  private desc: string = '';
+  private projectName: string = '';
 
   editMode;
   project;
@@ -29,38 +31,47 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
   tempId;
   errorMessage;
 
-  done: boolean = false;
+  done: string = '';
   progressBar;
 
   constructor(private route: ActivatedRoute,
     private putProject: ProjectServiceService,
     private authService: AuthService,
-    private imageService: ImageServiceService,
+    public imageService: ImageServiceService,
     private router: Router) {
+    this.prForm = new FormGroup({
+      'projectName': new FormControl(null, [Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(30)])]),
+      'desc': new FormControl(null, [Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(2500)])]),
+      'goals': new FormControl(null),
+      'result': new FormControl(null),
+      'budget': new FormControl(null)
+    });
     route.params.subscribe(param => {
       this.tempId = param;
     });
   }
 
-  
+
 
   pushImage(event) {
 
     this.imageService.uploadFile(event)
-    .subscribe(res => {},
-    (error) => {
-      console.error(error);
-      this.errorMessage = error;
-    });
+      .subscribe(res => {
+        this.imageFire = this.imageService.fileName;
+        this.imageFireKey = this.imageService.imageKey;
+        this.done = 'added';
+      },
+      (error) => {
+        console.error(error);
+        this.errorMessage = error;
+      });
   }
 
-  actProject(form: NgForm) {
+  actProject() {
 
-    const value = form.value;
+    const value = this.prForm.value;
     value.budget = value.budget || 0;
-    this.imageFire = this.imageService.fileName;
-    this.imageFireKey = this.imageService.imageKey;
-    this.done = true;
+    this.done = 'done';
 
     let projectEdit: Project = {
       projectName: value.projectName.charAt(0).toUpperCase() + value.projectName.slice(1),
@@ -109,13 +120,13 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
   }
 
   clearForm() {
-    this.slForm.reset();
+    this.prForm.reset();
     this.editMode = false;
-    if (this.imageFireKey !== ''){
+    if (this.imageFireKey !== '') {
       this.imageService.resetImage();
       this.imageService.deleteImage(this.imageFireKey);
       this.imageFireKey = '';
-   }
+    }
   }
 
   ngOnInit() {
@@ -138,9 +149,9 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-   if (!this.done){
+    if (this.done === 'added') {
       this.imageService.deleteImage(this.imageFireKey);
-   }
+    }
   }
 
 }

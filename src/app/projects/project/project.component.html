@@ -23,8 +23,7 @@
   <div class="row">
     <div class="nav_block">
       <button type="submit" class="btn btn-default customs-btn" routerLink="/projects">Back to projects</button>
-      <button type="submit" class="btn btn-default customs-btn" routerLink="edit" *ngIf="authService.getEmail() === project?.authorEmail">Edit Project</button>
-      <button type="submit" class="btn btn-default customs-btn" routerLink="edit">Dev Edit</button>
+      <button type="submit" class="btn btn-default customs-btn" routerLink="edit" *ngIf="authService.getEmail() === project?.authorEmail || authService.isAdmin() == true">Edit Project</button>
       <button type="submit" class="btn btn-default customs-btn" routerLink="/projects/new" *ngIf="authService.getRole() !== ''">Add Project</button>
     </div>
   </div>
@@ -77,18 +76,18 @@
         </section>
         <div class="row project_footer">
 
-              <div class="col-md-2 col-sm-2 col-xs-2">
-              <div class="likes_block">
-                <rating [ratingObj]="(project)" (outputRating)="getRatingInfo($event)"></rating>
-              </div>
+          <div class="col-md-2 col-sm-2 col-xs-2">
+            <div class="likes_block">
+              <rating [ratingObj]="(project)"></rating>
             </div>
-            <div class="col-md-10 col-sm-10 col-xs-10 right_footer">
-                <div class="author_block">
-                    Author: {{ (project)?.author }}
-                </div>
-              <div class="date_block">
-                Date: {{ (project)?.date | date:'short' }}
-              </div>
+          </div>
+          <div class="col-md-10 col-sm-10 col-xs-10 right_footer">
+            <div class="author_block">
+              Author: {{ (project)?.author }}
+            </div>
+            <div class="date_block">
+              Date: {{ (project)?.date | date:'short' }}
+            </div>
           </div>
 
         </div>
@@ -98,11 +97,12 @@
 
     <div class="col-md-4 hidden-sm hidden-xs">
       <div class="projects_list">
-        <header><h3>The most popular projects:</h3></header>
-<div class="project_item_list">
-        <app-projects-list *ngFor="let key of (projects)" [key]="key" [routerLink]="['/projects', key?._id]" 
-        (click)="goProject(key)"></app-projects-list>
-      </div>
+        <header>
+          <h3>The most popular projects:</h3>
+        </header>
+        <div class="project_item_list">
+          <app-projects-list *ngFor="let key of (projects)" [key]="key" [routerLink]="['/projects', key?._id]" (click)="goProject(key)"></app-projects-list>
+        </div>
 
 
 

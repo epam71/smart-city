@@ -6,7 +6,7 @@ import { ProjectEditComponent } from './project-edit/project-edit.component';
 import { routing } from './projects.routes';
 import { RatingProjectComponent } from './project-rating/project-rating.component';
 import { CommentsProjectComponent } from './project-comments/project-comments.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PipesModule } from '../pipes/pipes.module';
 import { ProjectMainComponent } from './project-main/main-projects.component';
@@ -18,6 +18,7 @@ import { MatchHeightDirective } from '../directives/same-height.directive';
     CommonModule,
     routing,
     FormsModule,
+    ReactiveFormsModule,
     PipesModule,
     NgxPaginationModule,
   ],

@@ -17,7 +17,7 @@ export class ProjectsListComponent implements OnInit {
     private authService: AuthService) { }
 
     @Input('key') key;
-
+    @Input('ownProjects') ownProjects = '';
 
   ngOnInit() {}
 }
