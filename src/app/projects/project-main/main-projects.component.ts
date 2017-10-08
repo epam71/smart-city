@@ -58,7 +58,9 @@ export class ProjectMainComponent implements OnInit, DoCheck {
     this.searchData = newValue;
     this.projects = this.projectsData.searchProjects(this.searchData, this.userProjects);
   }
-
+test(){
+  console.log('safsa');
+}
   selectSort(event) {
 
     return this.projectsValues.forEach((el, i) => {

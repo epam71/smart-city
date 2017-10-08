@@ -108,13 +108,13 @@ export class ProjectServiceService {
             }).catch(this.handleError);
     };
 
-    searchProjects(keyWord, author=''): Observable<Project[]> {
+    searchProjects(keyWord, userEmail=''): Observable<Project[]> {
 
-        if(author !== ''){
-            author = `, "author": "${author}"`
+        if(userEmail !== ''){
+            userEmail = `, "authorEmail": "${userEmail}"`
         }
 
-                return this.http.get(projects_PATH + `?query={"projectName":"~^(${keyWord})"${author}}`, this.authService.getAuthHeaderOpt())
+                return this.http.get(projects_PATH + `?query={"projectName":"~^(${keyWord})"${userEmail}}`, this.authService.getAuthHeaderOpt())
                     .map((response: Response) => {
                         return response.json();
                     }).catch(this.handleError);
