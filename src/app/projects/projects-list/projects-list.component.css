@@ -1,5 +1,6 @@
 :host {
   font-family: 'Montserrat', sans-serif;
+  margin-bottom: 20px;
 }
 
 button,
@@ -71,6 +72,7 @@ button:focus {
 
 .info_block {
   padding: 15px;
+  text-align: justify;
   overflow: hidden;
 }
 
@@ -129,13 +131,17 @@ button:focus {
 .status_block {
   position: absolute;
   color: white;
-  top: -8px;
-  right: -6px;
-  padding: 5px;
+  top: -3px;
+  right: -1px;
+  padding: 0px;
   font-size: 14px;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 16px;
   z-index: 3;
+}
+
+.status_block .label{
+  margin: 0;
 }
 
 .status_prop {

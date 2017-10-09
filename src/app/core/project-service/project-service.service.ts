@@ -50,12 +50,18 @@ export class ProjectServiceService {
 
     getPaginateProjects(limit = '', skip = '',
         sortBy = 'date', type = '', userEmail = '', keyWord = ''): Observable<Project[]> {
+
         let query = `&query={"approved":"true"}`;
+
         if (userEmail !== '') {
             query = `&query={"authorEmail": "~^${userEmail}"}`
         }
 
-        if (keyWord !== '') {
+        if (keyWord !== '' && userEmail === '') {
+            query = `&query={"authorEmail": "~^${userEmail}",
+                             "projectName":"~^(${keyWord})",
+                             "approved":"true"}`
+        } else if (keyWord !== '') {
             query = `&query={"authorEmail": "~^${userEmail}",
             "projectName":"~^(${keyWord})"}`
         }

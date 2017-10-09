@@ -32,7 +32,7 @@
             <span class="decor"></span>
             <figure class="news-item" *ngFor="let key of (newsList | async)">
                 <div class="img-block">
-                    <img class="img img-responsive" src="{{key?.image.replace('?alt=media&', '_thumb.jpg?alt=media&')}}" onerror="this.onerror=null;this.src='http://lorempixel.com/400/200/city/';" alt="{{key.title }}" alt="{{key.title }}">
+                    <img class="img img-responsive" src="{{ key?.image.replace('?alt=media&', '_thumb.jpg?alt=media&') }}" onerror="this.onerror=null;this.src='http://lorempixel.com/400/200/city/';" alt="{{ key.title }}">
                 </div>
                 <figcaption>
                     <p class="list-date ">{{ key.date | date:'dd MMMM y' }} </p>

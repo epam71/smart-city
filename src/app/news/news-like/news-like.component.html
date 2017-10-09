@@ -1,5 +1,5 @@
-<div class="rating_block" [ngClass]="authService.isLogedIn() && liked === true ? 'liked' : 'not-liked'" (click)="increaseLike()">
-    <span class="like-info">{{likeInfo?.rating}}</span>
+<div class="rating_block" [ngClass]="(authService.isLogedIn() && liked === true) ? 'liked' : 'not-liked'" (click)="increaseLike()">
+    <span class="like-info">{{ likeInfo?.rating }}</span>
     <i class="heart pulse"></i>
 </div>
 

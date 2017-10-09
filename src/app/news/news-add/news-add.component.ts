@@ -30,7 +30,7 @@ constructor(private newsService: NewsServiceService,
   private fb: FormBuilder) { 
     this.rForm = fb.group({
     'title' : [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(80)])],
-    'desc' : [null, Validators.compose([Validators.required, Validators.minLength(150), Validators.maxLength(3000)])],
+    'desc' : [null, Validators.compose([Validators.required, Validators.minLength(50), Validators.maxLength(3000)])],
     'validate' : ''
     });
   }

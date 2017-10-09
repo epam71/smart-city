@@ -46,7 +46,7 @@ export class ProjectMainComponent implements OnInit, DoCheck {
 
   private pagesArr = [];
   private pages = [];
-  private limit: any = '9';
+  private limit: any = '6';
   private skip: any = this.limit;
   private currentPage: any = '1';
   public paginationShow = true;
@@ -61,10 +61,10 @@ export class ProjectMainComponent implements OnInit, DoCheck {
     this.currentPage = '1';
     this.searchData = newValue;
     this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip,
-       this.sortMemo, this.sortTypeValue, this.userProjects, this.searchData);
+      this.sortMemo, this.sortTypeValue, this.userProjects, this.searchData);
   }
 
-  closeSearch(){
+  closeSearch() {
     this.valueChange('');
     this.searchButton = true;
     this.paginationShow = true;
@@ -170,7 +170,7 @@ export class ProjectMainComponent implements OnInit, DoCheck {
 
 
   ngOnInit() {
-
+    window.scrollTo(0, 0);
     this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue, this.userProjects);
     this.projectsData.getApprovedProjectsNumber()
       .subscribe(response => {
@@ -179,7 +179,6 @@ export class ProjectMainComponent implements OnInit, DoCheck {
           this.pagesArr.push(i + 1);
         }
         this.pages = this.pagesArr.slice(0, 5);
-
       }, error => console.error(error))
 
   }
