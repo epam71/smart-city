@@ -1,4 +1,4 @@
-<div class="rating_block" [ngClass]="liked === true ? 'liked_block' : 'unliked_block'" (click)="changeRating()">
+<div class="rating_block" [ngClass]="authService.isLogedIn() && liked === true ? 'liked_block' : 'unliked_block'" (click)="changeRating()">
     <span class="rating_info">{{ratingObjInfo?.rating}}</span>
     <span class="heart_block">
         <i class="heart pulse"></i>
