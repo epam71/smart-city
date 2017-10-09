@@ -90,9 +90,9 @@
 
 .custom-btn {
   font-family: "Raleway", sans-serif;
-  padding: 7px;
+  padding: 7px 10px;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 17px;
   border-radius: 2px;
   transition: 0.5s;
   border: 1px solid #ccc;

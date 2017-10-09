@@ -224,9 +224,17 @@
   }
 }
 
-@media screen and (max-width: 427px) {
+@media screen and (max-width: 455px) {
   .project_name {
     font-size: 14px;
+  }
+  .nav_block {
+    width: 100%;
+    padding: 5px;
+  }
+  .custom-btn {
+    font-size: 14px;
+    width: 100%;
   }
 }
 
