@@ -10,7 +10,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
-
 @Injectable()
 export class NewsServiceService {
  
@@ -24,7 +23,6 @@ export class NewsServiceService {
     let message = `Error status ${error.status} at ${error.url}`;         
     return Observable.throw(errorMessage);
   }
-
 
   getNewsBlock(): Observable<News[]> { 
     return this.http.get(config.PATH + 'news/' + '?query={"approved":"true"}&limit=3&sort=-rating', 

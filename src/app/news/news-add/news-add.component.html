@@ -15,7 +15,7 @@
                             <div class="col-sm-10">
                                 <input class="form-control" formControlName="title" required id="title" placeholder="Title" type="text" #title>
                                 <div class="alert" *ngIf="!rForm.controls['title'].valid && 
-                                rForm.controls['title'].touched">You must specify a title that's between 5 and 30 characters.
+                                rForm.controls['title'].touched">You must specify a title that's between 5 and 80 characters.
                                 </div>
                             </div>
                         </div>
@@ -29,7 +29,7 @@
                                 <input id="filePicker" type="file" name="input-file-preview" accept="image/*" (change)="pushImage($event)" />
                                 <div *ngIf="imageService?.uploadProgress">
                                     <div class="progress">
-                                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;" [ngStyle]="{ 'width': imageService?.uploadProgress + '%' }">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;" [ngStyle]="{ 'width': imageService?.uploadProgress + '%' }">
                                             Image uploading: {{imageService?.uploadProgress}}%
                                         </div>
                                     </div>
@@ -42,7 +42,7 @@
                             <div class="col-sm-10">
                                 <textarea class="form-control" formControlName="desc" required id="desc" rows="12" #description> </textarea>
                                 <div class="alert" *ngIf="!rForm.controls['desc'].valid && 
-                                rForm.controls['desc'].touched">You must specify a description that's between 150 and 2500 characters.
+                                rForm.controls['desc'].touched">You must specify a description that's between 150 and 3000 characters.
                                 </div>
                             </div>
                         </div>

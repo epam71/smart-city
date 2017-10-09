@@ -48,16 +48,18 @@ constructor(private commentService: NewsServiceService,
   }  
 
   deleteComment(commentId){
-    let deleteComment = this.commentService.deleteComment(this.commentsInfo._id, commentId.id);
-    deleteComment.switchMap(
-      event => {
-        return this.commentService.getNewsById(this.commentsInfo._id);
-      }
-    )
-    .subscribe(
-      value => {
-       return this.commentsInfo = value;
-    });
+    if(confirm('Do you really want to delete this comment?')){
+      let deleteComment = this.commentService.deleteComment(this.commentsInfo._id, commentId.id);
+      deleteComment.switchMap(
+        event => {
+          return this.commentService.getNewsById(this.commentsInfo._id);
+        }
+      )
+      .subscribe(
+        value => {
+        return this.commentsInfo = value;
+      });
+    }
   } 
 
   ngOnInit() {

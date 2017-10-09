@@ -16,7 +16,7 @@ export class NewsLikeComponent implements OnInit {
   @Input('ratingObj') likeInfo;
 
   constructor(private newsService: NewsServiceService,
-            private authService: AuthService) {}
+              private authService: AuthService) {}
 
   colseModal(){
     this.showModal = false;
@@ -24,11 +24,11 @@ export class NewsLikeComponent implements OnInit {
 
   increaseLike() {
     this.showModal = true;
-    if (this.liked !== true && this.authService.isLogedIn()){
+    if ( this.authService.isLogedIn()){
+      this.liked === true ?  this.liked = false : this.liked = true;
       this.newsService.postNewsLike(this.likeInfo._id, { email: this.userEmail })
         .subscribe(
           (response) => {
-          this.liked = true;
           return this.likeInfo.rating = response.currentRating;
           }, (error) => {
           console.error(error);
@@ -43,9 +43,7 @@ export class NewsLikeComponent implements OnInit {
   ngOnChanges(){
     if (this.likeInfo != null){
       this.likeInfo.likes.map(element => {
-        if (element === this.authService.getEmail()){
-          this.liked = true;
-        }
+        element === this.authService.getEmail() ? this.liked = true : this.liked = false;
       });
     }
   }
