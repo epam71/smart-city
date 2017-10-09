@@ -23,7 +23,7 @@
       <span class="search_block_main">
             <button class="glyphicon glyphicon-search" *ngIf="searchButton" (click)="searchProject($event)"></button>
           <input id="searchInput" class="form-control" type="text" placeholder="search" 
-          *ngIf="!searchButton" (blur)="searchButton = true"
+          *ngIf="!searchButton" (blur)="closeSearch()"
           [(ngModel)]="searchData" (ngModelChange)="valueChange($event)">
         </span>
     </div>
@@ -44,7 +44,7 @@
 
 </div>
 
-<div class="pagination_block" *ngIf="pagesArr.length > 1">
+<div class="pagination_block" *ngIf="pagesArr.length > 1 && paginationShow">
   <ul class="pagination">
     <li (click)="prev()" [ngClass]="{disabled: (+currentPage - 1 < 1)}"><a>&laquo;</a></li>
     <li *ngFor="let key of pages" (click)="paginateFunc($event)" [ngClass]="{active: currentPage == key}">
