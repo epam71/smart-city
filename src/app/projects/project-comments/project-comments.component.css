@@ -92,6 +92,7 @@
 .comment {
   border: 1px solid #ddd;
   border-top: none;
+  text-align: justify;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   padding: 10px 20px 15px 20px;
