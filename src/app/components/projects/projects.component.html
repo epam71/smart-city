@@ -15,7 +15,7 @@
 			<div class="col-md-4 col-sm-6 proj-box" *ngFor="let key of (projectsApproved | async) | slice:0:6 | orderBy: date ">
 				<div class="single-our-service">
 					<figure class="img-box">
-						<a href="#"><img class="image-responsive" src="{{key?.image.replace('?alt=media&', '_thumb.jpg?alt=media&')}}" alt="{{key.projectName}}"></a>
+						<img class="image-responsive" src="{{key?.image.replace('?alt=media&', '_thumb.jpg?alt=media&')}}" alt="{{key.projectName}}">
 					</figure>
 					<h4><a href="#" class="proj-name" [routerLink]="['/projects', key._id]">{{key.projectName }}</a></h4>
 					<p class="proj-date">

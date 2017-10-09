@@ -1,0 +1,124 @@
+
+.carousel.slide {
+    padding-top: 50px;
+    overflow: hidden;
+    height: 500px;
+    width: 500px;
+    box-sizing: border-box;
+}
+.carousel.slide a {
+    color: #ACABAB;
+    position: absolute;
+    font-size: 22px;
+    outline: 0;
+    width: 50px;
+    display: block;
+    height: 50px;
+    transition: all .2s;
+}
+
+.carousel.slide nav {
+    position: absolute;
+    top: 47%;
+    width: 100%;
+    z-index: 2;
+}
+.prev a, .next a{
+    color: #ACABAB;
+    position: absolute;
+    font-size: 22px;
+    outline: 0;
+    width: 50px;
+    display: block;
+    height: 50px;
+}
+
+a.next .icon-wrap {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.carousel.slide a.prev {
+    left: 0;
+}
+
+.carousel.slide a.next {
+    right: 0;
+}
+.carousel.slide a:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #fff;
+    content: '';
+    opacity: 0;
+    -webkit-transition: -webkit-transform .3s,opacity .3s;
+    transition: transform .3s,opacity .3s;
+    -webkit-transform: scale(.9);
+    transform: scale(.9);
+}
+.carousel.slide a .icon-wrap {
+    position: relative;
+    display: block;
+    margin: 10% 0 0 10%;
+    width: 80%;
+    height: 80%;
+    
+}
+.carousel.slide a .icon-wrap:before {
+    position: absolute;
+    left: 25%;
+    width: 3px;
+    height: 50%;
+    background: #fff;
+    content: '';
+    -webkit-transition: -webkit-transform .3s,background-color .3s;
+    transition: transform .3s,background-color .3s;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateX(-50%) rotate(30deg);
+    transform: translateX(-50%) rotate(30deg);
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+}
+.carousel.slide a .icon-wrap:after {
+    position: absolute;
+    left: 25%;
+    width: 3px;
+    height: 50%;
+    background: #fff;
+    content: '';
+    -webkit-transition: -webkit-transform .3s,background-color .3s;
+    transition: transform .3s,background-color .3s;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    top: 50%;
+    -webkit-transform: translateX(-50%) rotate(-30deg);
+    transform: translateX(-50%) rotate(-30deg);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+.carousel.slide nav .icon-wrap:after {
+    -webkit-transform: translateX(-50%) rotate(-45deg);
+    transform: translateX(-50%) rotate(-45deg);
+}
+.carousel.slide nav a:hover:before {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+.carousel.slide nav a:hover .icon-wrap:before {
+    -webkit-transform: translateX(-50%) rotate(45deg);
+    transform: translateX(-50%) rotate(45deg);
+}
+
+.carousel.slide nav a:hover .icon-wrap:after {
+    -webkit-transform: translateX(-50%) rotate(-45deg);
+    transform: translateX(-50%) rotate(-45deg);
+}
+.carousel.slide nav a:hover .icon-wrap:after, .carousel.slide nav a:hover .icon-wrap:before {
+    background: #ee3733;
+}

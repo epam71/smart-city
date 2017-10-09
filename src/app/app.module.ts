@@ -7,6 +7,9 @@ import { PipesModule } from './pipes/pipes.module';
 
 import { StaticComponent } from './components/static/static.component';
 import { AppComponent } from './app.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
+import { Slide } from './components/about-us/slide.component';
 import { NewsComponent } from './components/news/news.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ProjectsComponent } from './components/projects/projects.component';
@@ -29,6 +32,9 @@ import { AgmCoreModule } from '@agm/core';
   declarations: [
     AppComponent,
     NewsComponent,
+    AboutUsComponent,
+    CarouselComponent,
+    Slide,
     PageNotFoundComponent,
     ProjectsComponent,
     AuthCallbackComponent,

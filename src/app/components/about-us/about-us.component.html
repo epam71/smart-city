@@ -1,0 +1,41 @@
+<!-- About Us -->
+  <div class="about-us">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>
+              We organize impact on urban innovation.
+            </h1>
+            <p>Lviv Smart City (LSC) is your innovation platform for a future proof city. 
+              LSC is constantly challenging businesses, residents, the municipality and knowledge institutions to test innovative ideas & solutions for urban issues. 
+              We connect these smart city innovators to help set-up innovative projects and solutions in Lviv and beyond. 
+            </p>
+<!-- Slider -->
+
+          </div>
+          <div class="col-md-7">  
+            <app-carousel id="carouselSlidesOnly" [interval]="NextPhotoInterval" [noWrap]="noLoopSlides">  
+              <slide *ngFor="let slidez of slides; let i = index"
+                   [active]="slidez.active" >
+                <img [src]="slidez.image" class="image-responsive">
+              </slide>
+            </app-carousel>
+          </div>
+          <div class="col-md-5">
+            <p class="main-text">Lviv Smart City has the ambition to become the largest smart city innovation platform in Lviv. It is our goal to create an overview of what is happening in Lviv on these themes.
+                This will help us to connect the right people to accelerate the start of projects and tackle the challenges our city is facing. 
+                 Lviv Smart City creates the overview of the ecosystem, connects communities to share expertise and kickstarts, accelerates and strengthens new projects that make the city futureproof!
+                 By challenging parties to submit and execute innovative solutions to urban issues, LSC connects the right stakeholders and accelerates this progress. This advances the development of new markets and profits for innovative solutions.
+                  Where possible, these solutions are replicated elsewhere in the city.
+                 </p>
+          </div>
+          <div class="col-md-12 quote">
+              <blockquote>
+              <p>Lviv Smart City works with everyone who has the energy and ambitions to improve the liveability in the city. These can be companies, governments, knowledge institutions and citizens.
+                <br>Join largest and most ambitious infrastructure projects of Lviv today!</p></blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <app-contact-us></app-contact-us>
