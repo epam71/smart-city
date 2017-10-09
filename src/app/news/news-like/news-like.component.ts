@@ -23,7 +23,6 @@ export class NewsLikeComponent implements OnInit {
   }
 
   increaseLike() {
-    this.showModal = true;
     if ( this.authService.isLogedIn()){
       this.liked === true ?  this.liked = false : this.liked = true;
       this.newsService.postNewsLike(this.likeInfo._id, { email: this.userEmail })
@@ -33,6 +32,8 @@ export class NewsLikeComponent implements OnInit {
           }, (error) => {
           console.error(error);
         });
+    } else {
+      this.showModal = true;
     }
   }
 
