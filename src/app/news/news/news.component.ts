@@ -28,6 +28,7 @@ export class NewsComponent implements OnInit {
   }
             
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     let newsData = this.newsService.getNewsById(this.newsId.id);
     this.newsList= this.newsService.getNewsBlock();
   

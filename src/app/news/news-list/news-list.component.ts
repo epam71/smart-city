@@ -43,6 +43,7 @@ export class NewsListComponent implements OnInit {
  
   ngOnInit() {
     this.news= this.newsService.getNews();
+    window.scrollTo(0, 0);
   }
 
 }
