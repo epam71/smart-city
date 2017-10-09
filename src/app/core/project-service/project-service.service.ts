@@ -48,14 +48,20 @@ export class ProjectServiceService {
             }).catch(this.handleError);
     };
 
-    getPaginateProjects(limit = '', skip = '', sortBy = 'date', type = '', userEmail = ''): Observable<Project[]> {
-
+    getPaginateProjects(limit = '', skip = '',
+        sortBy = 'date', type = '', userEmail = '', keyWord = ''): Observable<Project[]> {
+        let query = `&query={"approved":"true"}`;
         if (userEmail !== '') {
-            userEmail = `&query={"authorEmail": "${userEmail}"}`
+            query = `&query={"authorEmail": "~^${userEmail}"}`
+        }
+
+        if (keyWord !== '') {
+            query = `&query={"authorEmail": "~^${userEmail}",
+            "projectName":"~^(${keyWord})"}`
         }
 
         return this.http.get(projects_PATH
-            + `?limit=${limit}&skip=${+skip - +limit}&sort=${type}${sortBy}${userEmail}`,
+            + `?limit=${limit}&skip=${+skip - +limit}&sort=${type}${sortBy}${query}`,
             this.authService.getAuthHeaderOpt())
 
             .map((response: Response) => {
@@ -78,7 +84,15 @@ export class ProjectServiceService {
 
     getProjectsNumber(): Observable<any> {
 
-        return this.http.get(config.PATH + `projects/count`, this.authService.getAuthHeaderOpt())
+        return this.http.get(projects_PATH + `count`, this.authService.getAuthHeaderOpt())
+            .map((response: Response) => {
+                return response.json();
+            }).catch(this.handleError);
+    };
+
+    getApprovedProjectsNumber(): Observable<any> {
+
+        return this.http.get(projects_PATH + `count?query={"approved":"true"}`, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);
@@ -86,7 +100,7 @@ export class ProjectServiceService {
 
     getUserProjectsNumber(userEmail): Observable<any> {
 
-        return this.http.get(config.PATH + `projects/count?query={"authorEmail": "${userEmail}"}`, this.authService.getAuthHeaderOpt())
+        return this.http.get(projects_PATH + `count?query={"authorEmail": "${userEmail}"}`, this.authService.getAuthHeaderOpt())
             .map((response: Response) => {
                 return response.json();
             }).catch(this.handleError);

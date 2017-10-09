@@ -40,8 +40,8 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
     public imageService: ImageServiceService,
     private router: Router) {
     this.prForm = new FormGroup({
-      'projectName': new FormControl(null, [Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(30)])]),
-      'desc': new FormControl(null, [Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(2500)])]),
+      'projectName': new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(30)]),
+      'desc': new FormControl(null, [Validators.required, Validators.minLength(50)]),
       'goals': new FormControl(null),
       'result': new FormControl(null),
       'budget': new FormControl(null)

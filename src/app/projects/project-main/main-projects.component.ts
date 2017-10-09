@@ -49,18 +49,27 @@ export class ProjectMainComponent implements OnInit, DoCheck {
   private limit: any = '9';
   private skip: any = this.limit;
   private currentPage: any = '1';
+  public paginationShow = true;
 
   searchProject(event) {
     this.searchButton = false;
   }
 
   valueChange(newValue) {
+    this.paginationShow = false;
+    this.skip = this.limit;
+    this.currentPage = '1';
     this.searchData = newValue;
-    this.projects = this.projectsData.searchProjects(this.searchData, this.userProjects);
+    this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip,
+       this.sortMemo, this.sortTypeValue, this.userProjects, this.searchData);
   }
-  test() {
-    console.log('safsa');
+
+  closeSearch(){
+    this.valueChange('');
+    this.searchButton = true;
+    this.paginationShow = true;
   }
+
   selectSort(event) {
 
     return this.projectsValues.forEach((el, i) => {
@@ -100,7 +109,7 @@ export class ProjectMainComponent implements OnInit, DoCheck {
         this.sortMemo, this.sortTypeValue, this.userProjects);
     } else {
       this.pagesArr = [];
-      this.projectsData.getProjectsNumber()
+      this.projectsData.getApprovedProjectsNumber()
         .subscribe(response => {
           let totalPages = Math.ceil(response.count / this.limit);
           for (let i = 0; i < totalPages; i++) {
@@ -163,7 +172,7 @@ export class ProjectMainComponent implements OnInit, DoCheck {
   ngOnInit() {
 
     this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip, this.sortMemo, this.sortTypeValue, this.userProjects);
-    this.projectsData.getProjectsNumber()
+    this.projectsData.getApprovedProjectsNumber()
       .subscribe(response => {
         let totalPages = Math.ceil(response.count / this.limit);
         for (let i = 0; i < totalPages; i++) {
