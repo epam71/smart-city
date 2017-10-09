@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label for="sort">Sort by:
                     <select id="sort" class="selectpicker" [(ngModel)]="sorting" (ngModelChange)="onChangeObj($event)">
-                        <option [ngValue]="key.sorting" *ngFor="let key of sortObj">{{key.name}}</option>
+                        <option [ngValue]="key.sorting" *ngFor="let key of sortObj">{{ key.name }}</option>
                     </select>
                 </label>
             </div>
@@ -25,12 +25,12 @@
                 <article class="col-lg-4 col-md-6 col-sm-6 service-block">
                     <figure class="news_block">
                         <div class="news-img">
-                            <img class="img img-responsive" src="{{key?.image.replace('?alt=media&', '_thumb.jpg?alt=media&')}}" onerror="this.onerror=null;this.src='http://lorempixel.com/400/200/city/';" alt="{{key.title }}">
+                            <img class="img img-responsive" src="{{ key?.image.replace('?alt=media&', '_thumb.jpg?alt=media&') }}" onerror="this.onerror=null;this.src='http://lorempixel.com/400/200/city/';" alt="{{ key.title }}">
                         </div>
                         <figcaption class="info">
-                            <p class="news_date ">{{key.date | date:'dd MMMM y'}} </p>
-                            <p class="author"> Written by: {{key.author}}</p>
-                            <h3 class="news_title">{{key.title | shorten:28 }} </h3>
+                            <p class="news_date ">{{ key.date | date:'dd MMMM y' }} </p>
+                            <p class="author"> Written by: {{ key.author }}</p>
+                            <h3 class="news_title">{{ key.title | shorten:28 }} </h3>
                             <p class="news_desc">{{ key.desc | shorten:150 }}</p>
                         </figcaption>
                         <a class="read" [routerLink]="['/news', key._id]">Read more 
