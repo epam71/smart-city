@@ -9,6 +9,9 @@ import { ProjectsComponent } from './projects/projects.component';
 import { StaticComponent } from './static/static.component';
 import { routing } from './components.routes';
 import { PipesModule } from '../pipes/pipes.module';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { CarouselComponent } from './carousel/carousel.component';
+import { Slide } from './about-us/slide.component';
 
 @NgModule({
   imports: [
@@ -23,7 +26,8 @@ import { PipesModule } from '../pipes/pipes.module';
       NavigationComponent,
       NewsComponent,
       ProjectsComponent,
-      StaticComponent
+      StaticComponent,
+      AboutUsComponent
     ]
 })
 export class ComponentsModule { }
