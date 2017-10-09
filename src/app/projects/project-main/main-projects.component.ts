@@ -61,10 +61,10 @@ export class ProjectMainComponent implements OnInit, DoCheck {
     this.currentPage = '1';
     this.searchData = newValue;
     this.projects = this.projectsData.getPaginateProjects(this.limit, this.skip,
-       this.sortMemo, this.sortTypeValue, this.userProjects, this.searchData);
+      this.sortMemo, this.sortTypeValue, this.userProjects, this.searchData);
   }
 
-  closeSearch(){
+  closeSearch() {
     this.valueChange('');
     this.searchButton = true;
     this.paginationShow = true;
@@ -179,7 +179,6 @@ export class ProjectMainComponent implements OnInit, DoCheck {
           this.pagesArr.push(i + 1);
         }
         this.pages = this.pagesArr.slice(0, 5);
-
       }, error => console.error(error))
 
   }
