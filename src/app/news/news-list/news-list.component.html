@@ -21,7 +21,7 @@
             </div>
         </header>
         <div myMatchHeight="info">
-            <ng-container *ngFor="let key of (news | async) | paginate: { itemsPerPage: 10, currentPage: p }">
+            <ng-container *ngFor="let key of (news | async) | paginate: { itemsPerPage: 6, currentPage: p }">
                 <article class="col-lg-4 col-md-6 col-sm-6 service-block">
                     <figure class="news_block">
                         <div class="news-img">

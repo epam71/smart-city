@@ -18,9 +18,10 @@
     cursor: pointer;
 }
 .news-attribute {
+    z-index: 1;
     margin: 110px 0 15px 0;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 5px;
     background: #FCFCFC;
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
 }

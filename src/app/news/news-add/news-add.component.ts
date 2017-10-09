@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NewsServiceService } from '../../core/news-service/news-service.service';
 import { AuthService } from "../../core/auth-service/auth-service.service";
 import { News } from "../../models/news.model";
@@ -20,16 +20,17 @@ export class NewsAddComponent implements OnInit {
   public showModal;
   public imageFire = '';
   public imageFireKey = '';
+  public imageKey = '';
   public showError;
- 
+
 constructor(private newsService: NewsServiceService, 
   private router: Router, 
   private authService: AuthService,
   private imageService: ImageServiceService,
   private fb: FormBuilder) { 
     this.rForm = fb.group({
-    'title' : [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(30)])],
-    'desc' : [null, Validators.compose([Validators.required, Validators.minLength(150), Validators.maxLength(2500)])],
+    'title' : [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(80)])],
+    'desc' : [null, Validators.compose([Validators.required, Validators.minLength(150), Validators.maxLength(3000)])],
     'validate' : ''
     });
   }
@@ -53,6 +54,7 @@ constructor(private newsService: NewsServiceService,
       author: this.authService.getNickname(),
       title: title,
       image: this.imageFire,
+      imageKey: this.imageFireKey || this.imageKey,
       desc: desc, 
       date: Date,
       approved: false,
