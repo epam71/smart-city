@@ -21,6 +21,10 @@
     margin: 5px;
 }
 
+.name {
+    text-align: center;
+}
+
 .img-fluid {
     margin: 10px auto; 
     max-height: 500px;
@@ -147,6 +151,25 @@ textarea {
     .close, .approve {
         float: none;
     }
+    .status, .name {
+        text-align: center;
+    }
+    .container {
+        font-size: 12px;
+        padding: 0 20px 10px 20px;
+    }
+    .card {
+        font-size: 10px;
+    }
+    h3 {
+        font-size: 15px
+    }
+    h4 {
+        font-size: 13px;
+    }
+    .likes, .status {
+        float: none;
+    }
 }
 
   .disabled-state, .project-author, .image-preview-filename {
@@ -191,10 +214,6 @@ textarea {
 section:focus {
     outline: none; 
     border: none;
-}
-
-app-modal { 
-    z-index: 3; 
 }
 
 article.main, form { 

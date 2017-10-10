@@ -31,7 +31,9 @@
     <div class="card mt-4">
       <img class="card-img-top img-fluid" alt="{{ project?.projectName }} image" src="{{ image.replace('?alt=media&', '_thumb.jpg?alt=media&') }}">
       <section *ngIf="!editable" class="card-body">
-        <div class="col-sm-2 pull-right likes">
+                <div class="status col-xs-12 col-sm-2 pull-right badge badge-default">{{ project?.status }}</div>
+
+        <div class="col-sm-2 pull-right likes col-xs-12">
           <div class="fa fa-heart fa-fw"></div>
           <span>{{ project?.likes.length }}</span>
           <ul *ngIf="project?.likes.length" class="people-liked">
@@ -40,14 +42,13 @@
               </li>
           </ul>
         </div>
-        <p class="status col-sm-2 col-sm-offset-10 badge badge-default">{{ project?.status }}</p>
-        <h3 class="card-title">{{ project?.projectName }}</h3>
-        <h4 class="card-title">Budget: {{ project?.budget }} UAH</h4>
-        <h4 class="card-text">Author: {{ project?.author }}</h4>
+        <div><h3 class="card-title col-xs-12 name">{{ project?.projectName }}</h3></div>
+        <h4 class="col-xs-12 card-title" >Budget: {{ project?.budget }} UAH</h4><br>
+        <h4 class="col-xs-12 card-text">Author: {{ project?.author }}</h4>
       </section>
     </div>
 
-    <section *ngIf="!editable" class="card card-outline-secondary my-4">
+    <section *ngIf="!editable" class="card card-outline-secondary my-4 col-xs-12">
       <div *ngIf="project?.goals" class="card-body" aria-labelledby="projectGoalsFullLabel" aria-describedby="projectGoalsFull">
         <h4 class="card-title" id="projectGoalsFullLabel">
           Goals:
