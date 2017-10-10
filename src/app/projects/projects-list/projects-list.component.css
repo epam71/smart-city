@@ -72,7 +72,6 @@ button:focus {
 
 .info_block {
   padding: 15px;
-  text-align: justify;
   overflow: hidden;
 }
 
@@ -82,7 +81,7 @@ button:focus {
 }
 
 .project_desc {
-  display: flex;
+  text-align: justify;
   font-size: 13px;
   overflow: hidden;
   text-overflow: ellipsis;
