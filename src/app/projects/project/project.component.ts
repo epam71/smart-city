@@ -16,7 +16,7 @@ export class ProjectComponent implements OnInit {
   public project;
   public tempId;
   public user;
-  private image = '';
+  public image = '';
   private smallImage = '';
 
   constructor(private route: ActivatedRoute,

@@ -28,7 +28,7 @@ export class NewsListComponent implements OnInit {
   selectedObj= this.sortObj[1];
 
   constructor(private newsService: NewsServiceService, 
-    private authService: AuthService){ 
+    public authService: AuthService){ 
   }
   
   onChangeValue(value) {

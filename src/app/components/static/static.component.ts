@@ -18,7 +18,7 @@ export class StaticComponent implements OnInit {
   projectsDone = 0;
   userCount;
 
-  constructor(private projectsData: ProjectServiceService, private authService: AuthService) {
+  constructor(private projectsData: ProjectServiceService, public authService: AuthService) {
     this.subscribeImg = '../assets/images/lviv-city.jpg';
     this.countersImg = '../assets/images/airport_panorama.jpg';
     this.aboutImg = '../assets/images/content_about.jpg';

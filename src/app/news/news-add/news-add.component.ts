@@ -26,7 +26,7 @@ export class NewsAddComponent implements OnInit {
 constructor(private newsService: NewsServiceService, 
   private router: Router, 
   private authService: AuthService,
-  private imageService: ImageServiceService,
+  public imageService: ImageServiceService,
   private fb: FormBuilder) { 
     this.rForm = fb.group({
     'title' : [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(80)])],
@@ -35,7 +35,7 @@ constructor(private newsService: NewsServiceService,
     });
   }
 
-  pushImage() {
+  pushImage(event) {
     this.imageService.uploadFile(event)
       .subscribe(res => {
         this.imageFire = this.imageService.fileName;

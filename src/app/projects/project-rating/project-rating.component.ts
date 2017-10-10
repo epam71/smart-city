@@ -17,7 +17,7 @@ export class RatingProjectComponent implements OnInit {
   @Output() modalShow: EventEmitter<any> = new EventEmitter();
 
   constructor(private ratingData: ProjectServiceService,
-    private authService: AuthService) { }
+    public authService: AuthService) { }
 
   changeRating() {
 

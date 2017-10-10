@@ -24,16 +24,16 @@ export class ProjectMainComponent implements OnInit, DoCheck {
   }
 
   private searchData = '';
-  private userCheck: boolean;
+  public userCheck: boolean;
 
-  private projects;
+  public projects;
   private userProjects = '';
 
   private sortMemo = 'date';
   private sortTypeValue = '-';
 
-  private searchButton = true;
-  private projectsValues = [{
+  public searchButton = true;
+  public projectsValues = [{
     key: 'date',
     value: 'date'
   }, {
@@ -44,7 +44,7 @@ export class ProjectMainComponent implements OnInit, DoCheck {
     value: 'rating'
   }];
 
-  private pagesArr = [];
+  public pagesArr = [];
   private pages = [];
   private limit: any = '6';
   private skip: any = this.limit;

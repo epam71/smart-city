@@ -16,6 +16,7 @@ export class ContactUsComponent implements OnInit {
   @ViewChild('f') sendMesForm: NgForm;
   contactImg: string;
   formPopup: boolean;
+  login;
   public responseMes: string;
   constructor(private emailData: ContactServiceService) {
     this.contactImg = '../assets/images/lviv-contact.jpg'

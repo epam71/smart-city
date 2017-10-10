@@ -91,6 +91,21 @@ h2 {
 .about_proj h5{
   padding: 10px 0;
 }
+.link a {
+  font-size: 14px;
+  color: #333;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 15px;
+  transition: .5s ease;
+  line-height: 4;
+  padding: 0 20px;
+}
+
+.link a:hover{
+  color: #ee3733;
+  transition: .5s ease;
+}
 .base-header h3{
   color: white;
   padding-left: 30px;
