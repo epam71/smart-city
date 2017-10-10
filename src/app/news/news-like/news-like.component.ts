@@ -16,7 +16,7 @@ export class NewsLikeComponent implements OnInit {
   @Input('ratingObj') likeInfo;
 
   constructor(private newsService: NewsServiceService,
-              private authService: AuthService) {}
+    public authService: AuthService) {}
 
   colseModal(){
     this.showModal = false;

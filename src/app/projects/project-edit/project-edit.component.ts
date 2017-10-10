@@ -20,7 +20,7 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
   imageFire = '';
   imageFireKey = '';
 
-  private prForm: FormGroup;
+  public prForm: FormGroup;
   private desc: string = '';
   private projectName: string = '';
 

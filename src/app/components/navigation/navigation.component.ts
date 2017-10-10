@@ -12,7 +12,7 @@ export class NavigationComponent implements OnInit, OnDestroy{
 private adminRole: boolean;
 private subsAdmin: any;
 private subsLoging: any;
-private adminRoute: boolean;
+public adminRoute: boolean;
 private log: boolean;
 
   constructor(private authService: AuthService, private router: Router) {

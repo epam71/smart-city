@@ -9,11 +9,11 @@ import { Project } from '../../models/project.model';
 })
 export class AboutUsComponent implements OnInit {
   projectsApproved;
-  private NextPhotoInterval:number = 3000;
+  public NextPhotoInterval:number = 3000;
   //Looping or not
-  private noLoopSlides:boolean = false;
+  public noLoopSlides:boolean = false;
   //images
-  private slides:Array<any> = [];
+  public slides:Array<any> = [];
 
   constructor(private projectsData: ProjectServiceService) {
     this.addNewSlide();

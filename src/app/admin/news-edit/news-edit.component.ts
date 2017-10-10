@@ -22,6 +22,7 @@ export class NewsEditComponent implements OnInit {
   private imageFire: string = '';
   public image: string = '';
   public progressBar: any;
+  public title;
 
   deleteNews() {
     this.newsData.deleteNews(this.newsId.id).subscribe();

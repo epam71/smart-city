@@ -20,7 +20,7 @@ export class NewsCommentComponent implements OnInit {
   public p;
 
 constructor(private commentService: NewsServiceService,
-            private authService: AuthService,
+            public authService: AuthService,
             private fb: FormBuilder) {
               this.rForm = fb.group({
                 'message' : [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(200)])],
