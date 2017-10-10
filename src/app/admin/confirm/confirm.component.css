@@ -1,12 +1,16 @@
 .modal {
   background: rgba(0,0,0,0.6);
   border-radius: 5px;
-  margin-top: 90px;
 }
 
 .modal-header {
   background-color: #ee3733;
   color: white;
   text-align: center; 
+}
+
+.modal-dialog { 
+    z-index: 3;
+    margin-top: 100px; 
 }
 

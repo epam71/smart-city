@@ -139,3 +139,13 @@ h2 {
     overflow: hidden;
     color: #fff;
 }
+
+
+@media (max-width: 767px) {
+    .page-title {
+        font-size: 12px;
+    }
+    .date-range {
+        font-size: 12px;
+    }
+}

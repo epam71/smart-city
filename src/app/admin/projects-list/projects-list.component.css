@@ -156,3 +156,8 @@ focus-container {
     position: absolute;
 }
 
+@media (max-width: 767px) {
+    section {
+        font-size: 13px;
+    }
+}
