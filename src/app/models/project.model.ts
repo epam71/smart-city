@@ -9,6 +9,7 @@ export interface Project {
     goals: string,
     result: string,
     budget: number,
+    date?: string,
     status?: string,
     comments?: string[],
     likes?: string[],
